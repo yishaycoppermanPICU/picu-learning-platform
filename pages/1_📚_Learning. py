@@ -2,249 +2,294 @@ import streamlit as st
 import json
 from datetime import datetime
 
+try:
+    from utils.database import (
+        init_supabase,
+        get_topics,
+        get_learning_content,
+        mark_content_as_completed,
+        get_user_progress,
+        DB_CONNECTED
+    )
+except: 
+    DB_CONNECTED = False
+
 st.set_page_config(page_title="למידה", page_icon="📚", layout="wide")
 
-# CSS לעברית
+# CSS
 st.markdown("""
 <style>
-    . stApp {
+    .stApp {
         direction: rtl;
     }
-    .topic-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 1.5rem;
+    .progress-bar {
+        background-color: #f0f0f0;
         border-radius: 10px;
-        margin: 1rem 0;
+        padding: 3px;
+        margin: 10px 0;
     }
-    .content-box {
-        background: #f7f7f7;
-        padding: 1.5rem;
-        border-radius: 8px;
-        margin:  1rem 0;
-        border-left: 4px solid #667eea;
+    .progress-fill {
+        background:  linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        height: 20px;
+        border-radius: 7px;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+    }
+    .topic-card {
+        padding: 1. 5rem;
+        border-radius: 10px;
+        background:  white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+    .topic-card:hover {
+        transform: translateY(-5px);
+        box-shadow:  0 5px 15px rgba(0,0,0,0.2);
+    }
+    .completed {
+        background: linear-gradient(45deg, #d4edda 0%, #c3e6cb 100%);
     }
 </style>
 """, unsafe_allow_html=True)
 
-st.title("📚 מרכז הלמידה")
-st.markdown("---")
+# בדיקת התחברות
+if not st.session_state.get('logged_in', False):
+    st.error("יש להתחבר כדי לגשת לחומרי הלמידה")
+    st.stop()
 
-# רשימת נושאים
-topics = {
-    "החייאה - BLS & PALS": {
-        "icon": "🚨",
-        "description": "פרוטוקולי החייאה מתקדמים לילדים",
-        "subtopics": ["אלגוריתם PALS", "תרופות בהחייאה", "דפיברילציה", "Post-Arrest Care"]
-    },
-    "הנשמה מכנית":  {
-        "icon": "💨",
-        "description": "אסטרטגיות הנשמה בטיפול נמרץ ילדים",
-        "subtopics": ["מודים של הנשמה", "PEEP", "גמילה מהנשמה", "NIV"]
-    },
-    "תרופות בטיפול נמרץ": {
-        "icon": "💊",
-        "description": "תרופות קריטיות ומינונים",
-        "subtopics": ["אינוטרופים", "סדציה", "אנטיביוטיקה", "אלקטרוליטים"]
-    },
-    "הלם ספטי": {
-        "icon":  "🦠",
-        "description": "זיהוי וטיפול בספסיס בילדים",
-        "subtopics": ["Golden Hour", "החייאת נוזלים", "ואזופרסורים", "Score Systems"]
-    },
-    "טראומה בילדים": {
-        "icon": "🚑",
-        "description": "גישה לילד הפצוע",
-        "subtopics": ["Primary Survey", "Secondary Survey", "פגיעות ראש", "פגיעות בטן"]
-    }
-}
+user = st.session_state.get('user', {})
+user_id = user.get('id')
 
-# בחירת נושא
-col1, col2 = st. columns([1, 2])
+st.title("📚 חומרי למידה")
 
-with col1:
-    st. subheader("📑 נושאי למידה")
-    selected_topic = st.radio(
-        "בחר נושא:",
-        list(topics.keys()),
-        label_visibility="collapsed"
-    )
-
-with col2:
-    if selected_topic:
-        topic_info = topics[selected_topic]
-        
-        # כותרת הנושא
-        st.markdown(f"""
-        <div class="topic-card">
-            <h2>{topic_info['icon']} {selected_topic}</h2>
-            <p>{topic_info['description']}</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # תתי נושאים
-        st.subheader("תתי נושאים:")
-        tabs = st.tabs(topic_info['subtopics'])
-        
-        # תוכן לדוגמה - החייאה
-        if selected_topic == "החייאה - BLS & PALS": 
-            with tabs[0]:  # אלגוריתם PALS
-                st.markdown("""
-                ### אלגוריתם PALS 2020
-                
-                #### 1️⃣ הערכה ראשונית
-                - **בדיקת תגובתיות** - נגיעה וקריאה
-                - **קריאה לעזרה** - הפעלת קוד 
-                - **בדיקת CAB** - Circulation, Airway, Breathing
-                
-                #### 2️⃣ החייאה בסיסית
-                """)
-                
-                col1, col2 = st. columns(2)
-                with col1:
-                    st. info("""
-                    **מטפל יחיד:**
-                    - יחס 30:2
-                    - 100-120 לחיצות/דקה
-                    - עומק:  1/3 מעומק החזה
-                    """)
-                
-                with col2:
-                    st.success("""
-                    **שני מטפלים:**
-                    - יחס 15:2
-                    - החלפה כל 2 דקות
-                    - מינימום הפסקות
-                    """)
-                
-                #### 3️⃣ הערכת קצב
-                st.warning("""
-                **קצבים הדורשים דפיברילציה:**
-                - VF - Ventricular Fibrillation
-                - Pulseless VT
-                
-                **אנרגיה:**
-                - ראשון: 2 J/kg
-                - שני ומעלה: 4 J/kg
-                """)
-                
-            with tabs[1]:  # תרופות
-                st.markdown("""
-                ### תרופות בהחייאה
-                """)
-                
-                # טבלת תרופות
-                drug_data = {
-                    "תרופה": ["אפינפרין", "אמיודרון", "לידוקאין", "סידן כלוריד", "נתרן ביקרבונט"],
-                    "מינון": [
-                        "0.01 מג/קג IV/IO",
-                        "5 מג/קג בולוס",
-                        "1 מג/קג",
-                        "20 מג/קג",
-                        "1 mEq/kg"
-                    ],
-                    "הערות": [
-                        "כל 3-5 דקות",
-                        "ב-VF/VT, ניתן לחזור פעמיים",
-                        "חלופה לאמיודרון",
-                        "רק באינדיקציות ספציפיות",
-                        "בחמצת מטבולית קשה"
-                    ]
-                }
-                
-                st.table(drug_data)
-                
-            with tabs[2]:  # דפיברילציה
-                st.markdown("""
-                ### דפיברילציה בילדים
-                
-                #### מתי לבצע דפיברילציה? 
-                - VF או Pulseless VT
-                - מיד עם זיהוי הקצב
-                
-                #### מינון אנרגיה:
-                1. **מנה ראשונה:** 2 J/kg
-                2. **מנות נוספות:** 4 J/kg (מקסימום 10 J/kg או מבוגר)
-                
-                #### טכניקה:
-                """)
-                
-                col1, col2 = st.columns(2)
-                with col1:
-                    st.info("""
-                    **מיקום הפדלים:**
-                    - פדל אחד:  ימין סטרנום עליון
-                    - פדל שני: שמאל אפקס
-                    - או:  קדמי-אחורי בתינוקות
-                    """)
-                
-                with col2:
-                    st.warning("""
-                    **בטיחות:**
-                    - ודא שאף אחד לא נוגע
-                    - הסר חמצן
-                    - יבש את החזה
-                    - הסר מדבקות תרופתיות
-                    """)
-                    
-            with tabs[3]:  # Post-Arrest
-                st.markdown("""
-                ### טיפול לאחר החייאה מוצלחת
-                
-                #### 🎯 יעדים מיידיים:
-                1. **אופטימיזציה המודינמית**
-                   - לחץ דם תקין לגיל
-                   - תפוקת שתן >1 מל/קג/שעה
-                   
-                2. **הנשמה**
-                   - נורמוקפניה (PaCO2 35-45)
-                   - SpO2 94-98%
-                   
-                3. **נוירופרוטקציה**
-                   - מנע היפרתרמיה
-                   - שקול היפותרמיה טיפולית
-                   - מנע היפוגליקמיה והיפרגליקמיה
-                   
-                4. **חיפוש הסיבה**
-                   - 4H's: Hypoxia, Hypovolemia, Hypo/Hyperkalemia, Hypothermia
-                   - 4T's: Tension pneumothorax, Tamponade, Toxins, Thrombosis
-                """)
-
-# פאנל צדדי - התקדמות
+# תפריט צד - בחירת נושא
 with st.sidebar:
-    st.subheader("📊 ההתקדמות שלך")
+    st. subheader("🎯 בחר נושא ללמידה")
     
-    if 'completed_topics' not in st.session_state:
-        st.session_state.completed_topics = []
-    
-    progress = len(st.session_state. completed_topics) / len(topics)
-    st.progress(progress)
-    st.write(f"השלמת {len(st. session_state.completed_topics)} מתוך {len(topics)} נושאים")
-    
-    if st.button("✅ סמן נושא זה כהושלם"):
-        if selected_topic not in st.session_state.completed_topics:
-            st.session_state.completed_topics.append(selected_topic)
-            st.success("נושא סומן כהושלם!")
-            st.rerun()
-    
-    st.divider()
-    
-    # טיפ יומי
-    st.info("""
-    💡 **טיפ היום:**
-    
-    זכור את ה-ABCDE approach:
-    - Airway
-    - Breathing  
-    - Circulation
-    - Disability
-    - Exposure
-    """)
+    if DB_CONNECTED:
+        topics = get_topics()
+        
+        if topics:
+            # חישוב אחוז התקדמות לכל נושא
+            for topic in topics:
+                if user_id:
+                    progress = get_user_progress(user_id, topic['id'])
+                    topic['progress'] = progress. get('percentage', 0) if progress else 0
+                else:
+                    topic['progress'] = 0
+            
+            # הצגת נושאים עם התקדמות
+            selected_topic_id = None
+            for topic in topics:
+                col1, col2 = st. columns([3, 1])
+                with col1:
+                    if st.button(
+                        f"{topic. get('icon', '📚')} {topic['title']}", 
+                        key=f"topic_{topic['id']}",
+                        use_container_width=True
+                    ):
+                        selected_topic_id = topic['id']
+                        st.session_state.selected_topic = topic
+                with col2:
+                    if topic['progress'] > 0:
+                        st.progress(topic['progress'] / 100)
+                        st.caption(f"{topic['progress']:.0f}%")
+                    else:
+                        st.caption("0%")
+        else:
+            st.info("אין נושאים זמינים")
+    else:
+        st.warning("מצב דמו - אין חיבור למסד נתונים")
 
-# כפתורי ניווט
-st.divider()
-col1, col2, col3 = st.columns(3)
+# תצוגה ראשית
+if 'selected_topic' in st.session_state:
+    topic = st.session_state. selected_topic
+    
+    # כותרת הנושא
+    st.header(f"{topic.get('icon', '📚')} {topic['title']}")
+    st.info(topic. get('description', ''))
+    
+    # סרגל התקדמות כללי
+    progress = topic.get('progress', 0)
+    st.markdown(f"""
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: {progress}%;">
+            {progress:. 0f}% הושלם
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # תפריט פעולות
+    tab1, tab2, tab3 = st.tabs(["📖 חומר למידה", "✅ התקדמות", "📝 תרגול"])
+    
+    with tab1:
+        st.subheader("חומרי למידה בנושא")
+        
+        if DB_CONNECTED and user_id:
+            # טעינת תכני למידה
+            contents = get_learning_content(topic['id'])
+            
+            if contents:
+                for i, content in enumerate(contents, 1):
+                    # בדיקה אם הושלם
+                    completed = content.get('completed', False)
+                    
+                    with st. expander(
+                        f"{'✅' if completed else '📄'} {i}. {content['title']}",
+                        expanded=not completed
+                    ):
+                        # הצגת התוכן
+                        if content['content_type'] == 'text': 
+                            st.markdown(content['content'])
+                        elif content['content_type'] == 'video':
+                            st.video(content['content'])
+                        elif content['content_type'] == 'image':
+                            st.image(content['content'])
+                        
+                        # כפתור סימון השלמה
+                        col1, col2, col3 = st.columns([1, 1, 3])
+                        with col1:
+                            if not completed:
+                                if st. button(f"✅ סמן כהושלם", key=f"complete_{content['id']}"):
+                                    if mark_content_as_completed(user_id, topic['id'], content['id']):
+                                        st.success("סומן כהושלם!")
+                                        st.rerun()
+                            else: 
+                                st.success("הושלם ✅")
+                        
+                        with col2:
+                            if completed:
+                                if st.button(f"↩️ בטל סימון", key=f"uncomplete_{content['id']}"):
+                                    # פונקציה לביטול סימון
+                                    st.info("בוטל")
+                                    st.rerun()
+            else:
+                st.info("אין תכנים זמינים עדיין בנושא זה")
+        else:
+            # תוכן דמו
+            st.markdown("""
+            ### 1. מבוא לנושא
+            זהו תוכן לדוגמה.  במצב מלא, כאן יופיעו חומרי הלמידה המלאים. 
+            
+            ### 2. עקרונות בסיסיים
+            - נקודה ראשונה
+            - נקודה שנייה
+            - נקודה שלישית
+            
+            ### 3. יישום קליני
+            דוגמאות מעשיות ומקרים קליניים
+            """)
+            
+            if st.button("✅ סמן פרק זה כהושלם"):
+                st.success("סומן כהושלם!  (Demo)")
+    
+    with tab2:
+        st.subheader("📊 סטטוס ההתקדמות שלך")
+        
+        if DB_CONNECTED and user_id: 
+            progress_data = get_user_progress(user_id, topic['id'])
+            
+            if progress_data:
+                col1, col2, col3 = st.columns(3)
+                
+                with col1:
+                    st.metric("פרקים שהושלמו", f"{progress_data.get('completed', 0)}/{progress_data.get('total', 0)}")
+                
+                with col2:
+                    st.metric("אחוז השלמה", f"{progress_data.get('percentage', 0):.0f}%")
+                
+                with col3:
+                    last_activity = progress_data.get('last_activity')
+                    if last_activity:
+                        st. metric("פעילות אחרונה", last_activity)
+                    else: 
+                        st.metric("פעילות אחרונה", "—")
+                
+                # רשימת פרקים עם סטטוס
+                st. markdown("### 📋 פירוט פרקים:")
+                
+                contents = get_learning_content(topic['id'])
+                for content in contents:
+                    if content.get('completed'):
+                        st.markdown(f"✅ ~~{content['title']}~~")
+                    else:
+                        st.markdown(f"⬜ {content['title']}")
+            else:
+                st.info("התחל ללמוד כדי לראות את ההתקדמות שלך")
+        else:
+            # Demo progress
+            st.metric("התקדמות", "40%")
+            st.progress(0.4)
+            st.markdown("""
+            ✅ פרק 1: מבוא  
+            ✅ פרק 2: עקרונות  
+            ⬜ פרק 3: יישום  
+            ⬜ פרק 4: תרגול  
+            """)
+    
+    with tab3:
+        st.subheader("📝 תרגול ממוקד")
+        
+        st.info("בחר על מה תרצה להיבחן:")
+        
+        col1, col2 = st. columns(2)
+        
+        with col1:
+            if st.button("📝 מבחן על כל הנושא", use_container_width=True):
+                st.session_state.quiz_topic = topic['id']
+                st.session_state.quiz_type = 'full'
+                st.switch_page("pages/2_📝_Quizzes.py")
+        
+        with col2:
+            if st.button("🎯 רק על מה שלמדתי", use_container_width=True):
+                st.session_state.quiz_topic = topic['id']
+                st.session_state.quiz_type = 'learned_only'
+                st.switch_page("pages/2_📝_Quizzes.py")
+        
+        st.divider()
+        
+        # אפשרויות נוספות
+        st.markdown("### ⚙️ הגדרות תרגול מתקדמות:")
+        
+        num_questions = st.slider("מספר שאלות", 5, 50, 10)
+        difficulty = st.select_slider(
+            "רמת קושי",
+            options=["קל", "בינוני", "קשה", "מעורב"],
+            value="מעורב"
+        )
+        
+        if st.button("🚀 התחל תרגול מותאם אישית", type="primary"):
+            st.session_state.quiz_settings = {
+                'topic':  topic['id'],
+                'num_questions': num_questions,
+                'difficulty': difficulty
+            }
+            st.switch_page("pages/2_📝_Quizzes.py")
 
-with col2:
-    if st.button("📝 עבור למבחן על הנושא", type="primary", use_container_width=True):
-        st.switch_page("pages/2_📝_Quiz.py")
+else:
+    # אם לא נבחר נושא
+    st.info("👈 בחר נושא מהתפריט הצדדי כדי להתחיל ללמוד")
+    
+    # הצגת כל הנושאים ככרטיסים
+    st.subheader("🎯 נושאי למידה זמינים:")
+    
+    if DB_CONNECTED:
+        topics = get_topics()
+        if topics:
+            cols = st.columns(3)
+            for i, topic in enumerate(topics):
+                with cols[i % 3]:
+                    st.markdown(f"""
+                    <div class="topic-card">
+                        <h3>{topic. get('icon', '📚')} {topic['title']}</h3>
+                        <p>{topic.get('description', '')}</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: {topic. get('progress', 0)}%;">
+                                {topic.get('progress', 0)}%
+                            </div>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
