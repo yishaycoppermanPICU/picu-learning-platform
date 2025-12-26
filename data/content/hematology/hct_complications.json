@@ -1,0 +1,161 @@
+{
+  "id": "hct_complications",
+  "title": "סיבוכי השתלת מח עצם (HCT)",
+  "description": "סקירת סיבוכים מוקדמים ומאוחרים לאחר השתלה.",
+  "category": "hematology",
+  "difficulty": "advanced",
+  "order": 8,
+  "tags": ["השתלה", "GVHD", "סיבוכים", "BMT", "HCT", "מח עצם"],
+  "content": [
+    {
+      "type": "definition",
+      "title": "רקע",
+      "text": "השתלת מח עצם (Hematopoietic Cell Transplant - HCT) היא טיפול מציל חיים במחלות המטולוגיות, אונקולוגיות וחיסוניות. הסיבוכים מתחלקים לטווח קצר (עד 100 יום) וטווח ארוך [cite: 119-130]."
+    },
+    {
+      "type": "section",
+      "title": "סיבוכים בטווח הקצר (<100 יום)",
+      "items": [
+        {
+          "name": "SOS / VOD (Sinusoidal Obstruction Syndrome)",
+          "description": "Hepatic Sinusoidal Obstruction Syndrome - חסימת ורידים בכבד.",
+          "pathophysiology": "פגיעה בכלי דם בכבד עקב הכימותרפיה ההכנה.",
+          "signs": ["צהבת (bilirubin > 2)", "כבד מוגדל וכואב", "עלייה במשקל (>5%) עקב נוזלים", "אסציטס"],
+          "diagnosis": "קריטריונים קליניים + אקו דופלר (הפחתת זרימה בוורידי כבד)",
+          "treatment": ["Defibrotide (תרופה ספציפית)", "תמיכה בנוזלים זהירה", "דיורטיקה"]
+        },
+        {
+          "name": "TMA (Transplant-associated Thrombotic Microangiopathy)",
+          "description": "מיקרואנגיופתיה פקקתית הקשורה להשתלה.",
+          "signs": ["אנמיה המוליטית", "טרומבוציטופניה", "אי ספיקת כליות", "יתר לחץ דם"],
+          "diagnosis": "שברי תאים (schistocytes) במריחת דם, LDH מוגבר, המוגלובין נמוך",
+          "treatment": ["הפסקת תרופות מעכבות חיסון (Calcineurin inhibitors)", "פלזמפרזיס במקרים קשים", "Eculizumab (אנטי-C5)"]
+        },
+        {
+          "name": "Acute GVHD (Graft vs Host Disease)",
+          "description": "מחלת השתל נגד המאכסן - תאי תורם תוקפים את רקמות המטופל [cite: 125-126].",
+          "timing": "ימים 14-100 לאחר השתלה",
+          "target_organs": [
+            "עור - פריחה מקולופאפולרית (כף יד/כף רגל לפני התפשטות)",
+            "מערכת עיכול - שלשולים, כאבי בטן, דימום GI",
+            "כבד - עליית בילירובין, ALT/AST"
+          ],
+          "grading": "Grade I (עור בלבד) → Grade IV (רב-מערכתי קשה)",
+          "treatment": [
+            "קו ראשון: מתילפרדניזולון (Methylprednisolone) 2 mg/kg/day",
+            "קו שני: ATG, Infliximab, Ruxolitinib"
+          ]
+        },
+        {
+          "name": "זיהומים",
+          "description": "סיכון גבוה לזיהומים עקב דיכוי חיסוני.",
+          "phases": [
+            {
+              "period": "Pre-engraftment (0-30 יום)",
+              "risk": "חיידקים גרם שליליים, פטריות (Candida)",
+              "prevention": "אנטיביוטיקה פרופילקטית רחבה"
+            },
+            {
+              "period": "Post-engraftment (30-100 יום)",
+              "risk": "CMV, EBV, Adenovirus, Aspergillus",
+              "prevention": "מעקב PCR ויראלי, Valganciclovir לCMV"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "סיבוכים בטווח הארוך (>100 יום)",
+      "items": [
+        {
+          "name": "Chronic GVHD",
+          "description": "מחלה כרונית רב-מערכתית דומה למחלות אוטואימוניות [cite: 127-128].",
+          "manifestations": [
+            "עור - סקלרודרמה, הפרכרטוזיס",
+            "פה - יובש, כיבים, ליכן פלנוס",
+            "עיניים - יובש חמור (sicca syndrome)",
+            "ריאות - ברונכיוליטיס אובליטרנס (BOS)",
+            "כבד - כולסטזיס כרונית"
+          ],
+          "treatment": "טיפול חיסוני ממושך (סטרואידים, MMF, Tacrolimus)"
+        },
+        {
+          "name": "הפרעות אנדוקריניות",
+          "description": "פגיעה בגדילה, פוריות, בלוטת התריס עקב הכימותרפיה וההקרנה.",
+          "complications": [
+            "פגיעה בגדילה (Growth Hormone deficiency)",
+            "אי פוריות (Gonadal failure)",
+            "היפותירואידיזם",
+            "אוסטיאופורוזיס",
+            "תת תזונה כרונית"
+          ],
+          "management": "מעקב אנדוקרינולוגי רב-שנתי, טיפולי החלפה הורמונליים"
+        },
+        {
+          "name": "ממאירות משנית (Secondary Malignancy)",
+          "description": "התפתחות סרטן חדש עקב הטיפול הקודם.",
+          "types": ["MDS/AML משני", "לימפומות (EBV-driven PTLD)", "גידולים מוצקים"],
+          "risk_factors": "הקרנה, גיל צעיר בזמן ההשתלה",
+          "prevention": "מעקב ממושך, הימנעות מחשיפה נוספת להקרנה"
+        },
+        {
+          "name": "זיהומים ויראליים כרוניים",
+          "description": "זיהומים מתמשכים או חוזרים.",
+          "pathogens": [
+            "CMV - עלול לגרום לרטיניטיס, קוליטיס",
+            "EBV - PTLD (Post-transplant lymphoproliferative disorder)",
+            "Adenovirus - דלקת מעיים, דלקת כבד, דלקת שלפוחית",
+            "BK Virus - דלקת שלפוחית המורגית, נפרופתיה"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "monitoring",
+      "title": "מעקב לאחר השתלה",
+      "items": [
+        {
+          "parameter": "זיהומים ויראליים",
+          "test": "PCR כמותי",
+          "pathogens": ["CMV", "EBV", "Adenovirus", "BK Virus"],
+          "frequency": "PCR תקופתי בדם/שתן פעם בשבוע בחודשים הראשונים [cite: 129]."
+        },
+        {
+          "parameter": "GVHD",
+          "monitoring": "בדיקה קלינית שוטפת (עור, מעיים, כבד)",
+          "frequency": "יומי בטווח הקצר, חודשי בטווח הארוך"
+        },
+        {
+          "parameter": "Chimerism (כימריזם)",
+          "test": "בדיקת DNA לזיהוי תאי תורם vs מקבל",
+          "frequency": "חודשי - לאיתור דחייה או הישנות"
+        },
+        {
+          "parameter": "תפקודי כבד וכליות",
+          "tests": ["בילירובין, ALT/AST", "קריאטינין, BUN"],
+          "frequency": "שבועי בטווח הקצר"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "VOD/SOS: צהבת + הפטומגליה + עלייה במשקל → טיפול Defibrotide.",
+    "Acute GVHD: עור (פריחה) + מעיים (שלשולים) + כבד (צהבת) → סטרואידים.",
+    "TMA: המוליזה + טרומבוציטופניה + אי ספיקת כליות.",
+    "זיהומים: CMV/EBV/Adenovirus דורשים מעקב PCR קבוע.",
+    "Chronic GVHD: מחלה רב-מערכתית הדורשת טיפול חיסוני ממושך."
+  ],
+  "critical_alerts": [
+    "⚠️ VOD/SOS הוא סיבוך מסכן חיים - זיהוי מוקדם חיוני (צהבת + כבד מוגדל + עלייה במשקל).",
+    "⚠️ GVHD Grade III-IV דורש טיפול אגרסיבי מיידי בסטרואידים במינון גבוה.",
+    "⚠️ CMV/EBV יכולים לגרום למחלה מסכנת חיים - מעקב PCR תקופתי חובה.",
+    "⚠️ TMA דורש הפסקת Calcineurin inhibitors (Tacrolimus/Cyclosporine)."
+  ],
+  "references": [
+    "מצבים מייצגים בטיפול נמרץ ילדים - עמוד 3 [cite: 119-130]"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team",
+  "version": "1.0"
+}
