@@ -82,40 +82,44 @@ def get_medal(rank):
 
 df['מקום'] = df['דירוג'].apply(get_medal)
 
-# הפדיום
-st.subheader("🏆 הפודיום 🏆")
-col1, col2, col3 = st.columns(3)
+# הפודיום - תיקון היישור
+st.subheader("הפודיום 🏆")
+
+# שינוי הסדר - מקום שני, ראשון, שלישי
+col1, col2, col3 = st.columns([1, 1, 1])
 
 with col2:  # מקום ראשון במרכז
     st.markdown("""
-    <div style='text-align: center; padding: 20px; background: linear-gradient(135deg, #FFD700, #FFA500); border-radius: 10px;'>
-        <h2 style='color: white;'>🥇</h2>
-        <h3 style='color: white;'>מקום ראשון</h3>
-        <h4 style='color: white;'>{}</h4>
-        <p style='color: white;'>ציון ממוצע: {:.1f}%<br>משתתפים: {}</p>
+    <div style='text-align: center; padding:  20px; background:  linear-gradient(135deg, #FFD700, #FFA500); border-radius: 10px; margin: 0 5px;'>
+        <h2 style='color: white; margin: 0;'>🥇</h2>
+        <h3 style='color: white; margin: 10px 0;'>מקום ראשון</h3>
+        <h4 style='color: white; margin: 10px 0;'>{}</h4>
+        <p style='color: white; margin: 0;'>ציון ממוצע: {:.1f}%</p>
+        <p style='color: white; margin: 0;'>משתתפים: {}</p>
     </div>
-    """.format(df.iloc[0]['מוסד'], df.iloc[0]['ציון ממוצע'], df.iloc[0]['משתתפים']), unsafe_allow_html=True)
+    """. format(df.iloc[0]['מוסד'], df.iloc[0]['ציון ממוצע'], df.iloc[0]['משתתפים']), unsafe_allow_html=True)
 
-with col1:  # מקום שני
+with col1:  # מקום שני משמאל
     st.markdown("""
-    <div style='text-align:  center; padding: 20px; background: linear-gradient(135deg, #C0C0C0, #808080); border-radius: 10px; margin-top: 40px;'>
-        <h2 style='color: white;'>🥈</h2>
-        <h3 style='color: white;'>מקום שני</h3>
-        <h4 style='color: white;'>{}</h4>
-        <p style='color: white;'>ציון ממוצע: {:.1f}%<br>משתתפים: {}</p>
+    <div style='text-align: center; padding: 20px; background: linear-gradient(135deg, #C0C0C0, #808080); border-radius: 10px; margin-top: 40px; margin-left: 5px;'>
+        <h2 style='color: white; margin: 0;'>🥈</h2>
+        <h3 style='color: white; margin:  10px 0;'>מקום שני</h3>
+        <h4 style='color: white; margin: 10px 0;'>{}</h4>
+        <p style='color: white; margin: 0;'>ציון ממוצע: {:.1f}%</p>
+        <p style='color: white; margin:  0;'>משתתפים: {}</p>
     </div>
-    """.format(df.iloc[1]['מוסד'], df. iloc[1]['ציון ממוצע'], df.iloc[1]['משתתפים']), unsafe_allow_html=True)
+    """.format(df.iloc[1]['מוסד'], df.iloc[1]['ציון ממוצע'], df.iloc[1]['משתתפים']), unsafe_allow_html=True)
 
-with col3:  # מקום שלישי
+with col3:  # מקום שלישי מימין
     st.markdown("""
-    <div style='text-align: center; padding: 20px; background: linear-gradient(135deg, #CD7F32, #8B4513); border-radius: 10px; margin-top: 60px;'>
-        <h2 style='color: white;'>🥉</h2>
-        <h3 style='color: white;'>מקום שלישי</h3>
-        <h4 style='color: white;'>{}</h4>
-        <p style='color: white;'>ציון ממוצע: {:.1f}%<br>משתתפים: {}</p>
+    <div style='text-align: center; padding: 20px; background: linear-gradient(135deg, #CD7F32, #8B4513); border-radius: 10px; margin-top: 60px; margin-right: 5px;'>
+        <h2 style='color: white; margin: 0;'>🥉</h2>
+        <h3 style='color: white; margin: 10px 0;'>מקום שלישי</h3>
+        <h4 style='color: white; margin: 10px 0;'>{}</h4>
+        <p style='color: white; margin: 0;'>ציון ממוצע: {:.1f}%</p>
+        <p style='color:  white; margin: 0;'>משתתפים: {}</p>
     </div>
-    """.format(df.iloc[2]['מוסד'], df. iloc[2]['ציון ממוצע'], df.iloc[2]['משתתפים']), unsafe_allow_html=True)
-
+    """.format(df.iloc[2]['מוסד'], df.iloc[2]['ציון ממוצע'], df.iloc[2]['משתתפים']), unsafe_allow_html=True)
 st.divider()
 
 # טבלה מלאה
