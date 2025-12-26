@@ -15,7 +15,7 @@ try:
         get_leaderboard
     )
     DB_CONNECTED = True
-except Exception as e: 
+except Exception as e:
     DB_CONNECTED = False
     print(f"Database connection error: {e}")
 
@@ -30,16 +30,19 @@ st.set_page_config(
 # CSS חזק ומקיף - תיקון אמיתי
 st.markdown("""
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap');
+    
     /* יישור גלובלי לימין - חזק */
     * {
         direction: rtl ! important;
         text-align:  right !important;
+        font-family: 'Heebo', sans-serif ! important;
     }
     
     /* תיקון כל הקונטיינרים */
-    .main, .block-container, .element-container, .stApp {
-        direction: rtl !important;
-        text-align: right !important;
+    . main, .block-container, .element-container, . stApp {
+        direction: rtl ! important;
+        text-align:  right !important;
     }
     
     /* הסרגל הצדדי - העברה לימין */
@@ -56,12 +59,12 @@ st.markdown("""
     }
     
     /* תיקון טאבים - מימין לשמאל */
-    . stTabs [data-baseweb="tab-list"] {
+    .stTabs [data-baseweb="tab-list"] {
         direction: rtl !important;
         flex-direction: row-reverse !important;
     }
     
-    . stTabs [data-baseweb="tab"] {
+    .stTabs [data-baseweb="tab"] {
         direction: rtl ! important;
     }
     
@@ -80,6 +83,7 @@ st.markdown("""
     /* תיקון כפתורים */
     . stButton > button {
         direction: rtl !important;
+        width: 100%;
     }
     
     /* תיקון שדות טקסט */
@@ -88,16 +92,32 @@ st.markdown("""
         text-align: right !important;
     }
     
-    . stSelectbox label,
+    .stSelectbox label,
     .stTextInput label,
     .stTextArea label {
         direction: rtl !important;
         text-align: right !important;
     }
     
+    /* תיקון checkbox */
+    .stCheckbox {
+        direction: rtl !important;
+        text-align: right !important;
+    }
+    
+    . stCheckbox > label {
+        flex-direction: row-reverse !important;
+    }
+    
     /* תיקון metrics */
     [data-testid="metric-container"] {
         text-align: center !important;
+    }
+    
+    /* תיקון expander */
+    .streamlit-expanderHeader {
+        direction: rtl !important;
+        flex-direction: row-reverse !important;
     }
     
     /* כותרת ראשית */
@@ -106,18 +126,28 @@ st.markdown("""
         padding: 2rem;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border-radius: 10px;
-        margin-bottom: 2rem;
+        margin-bottom:  2rem;
         direction: rtl !important;
     }
     
     . main-header h1, .main-header p {
-        direction: rtl !important;
+        direction: rtl ! important;
+        color: white;
+    }
+    
+    /* כרטיסיות */
+    .feature-card {
+        padding: 1.5rem;
+        border-radius: 10px;
+        text-align: center;
+        color: white;
+        height: 100%;
     }
 </style>
 """, unsafe_allow_html=True)
 
 # JavaScript חזק לתיקון נוסף
-import streamlit.components.v1 as components
+import streamlit. components.v1 as components
 components.html("""
 <script>
 // המתן לטעינת הדף
@@ -155,8 +185,8 @@ if 'user_scores' not in st.session_state:
 # כותרת ראשית - אימוג'י בסוף! 
 st.markdown("""
 <div class="main-header">
-    <h1 style="color: white;">פלטפורמת למידה PICU 🏥</h1>
-    <p style="color: #f0f0f0;">פלטפורמת למידה מתקדמת לטיפול נמרץ ילדים</p>
+    <h1>פלטפורמת למידה PICU 🏥</h1>
+    <p>פלטפורמת למידה מתקדמת לטיפול נמרץ ילדים</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -188,7 +218,15 @@ with st.sidebar:
                 except:
                     inst_names = []
             else:
-                inst_names = ["שיבא - תל השומר", "איכילוב - תל אביב", "רמב״ם - חיפה"]
+                inst_names = [
+                    "שיבא - תל השומר",
+                    "איכילוב - תל אביב", 
+                    "רמב״ם - חיפה",
+                    "הדסה עין כרם - ירושלים",
+                    "סורוקה - באר שבע",
+                    "מרכז שניידר לרפואת ילדים",
+                    "בלינסון - פתח תקווה"
+                ]
             
             if inst_names:
                 institution = st.selectbox("בחר מוסד רפואי:", [""] + sorted(inst_names) + ["אחר ➕"])
@@ -203,9 +241,9 @@ with st.sidebar:
             # כפתור - אימוג'י בסוף
             submitted = st.form_submit_button("התחבר למערכת ◀", type="primary", use_container_width=True)
             
-            if submitted: 
-                if full_name and email and institution and agree:
-                    username = email.split('@')[0].replace('.', '_')
+            if submitted:
+                if full_name and email and institution and institution != "" and agree:
+                    username = email.split('@')[0].replace('.', '_').replace('-', '_')
                     
                     if DB_CONNECTED:
                         try:
@@ -214,7 +252,7 @@ with st.sidebar:
                                 st.session_state.logged_in = True
                                 st.session_state.user = existing
                                 st.success(f"ברוך שובך, {existing['full_name']} 👋")
-                                st.rerun()
+                                st. rerun()
                             else: 
                                 new_user = create_user(username, email, full_name, institution)
                                 if new_user: 
@@ -222,9 +260,9 @@ with st.sidebar:
                                     st.session_state. user = new_user
                                     st.success(f"ברוך הבא, {full_name} 🎉")
                                     st.balloons()
-                                    st. rerun()
+                                    st.rerun()
                         except Exception as e:
-                            st. error(f"שגיאה:  {e}")
+                            st.error(f"שגיאה: {e}")
                     else:
                         st.session_state.logged_in = True
                         st.session_state.user = {
@@ -237,6 +275,16 @@ with st.sidebar:
                         st.rerun()
                 else:
                     st.error("נא למלא את כל השדות ❌")
+        
+        st.divider()
+        
+        with st.expander("למה כניסה בלי סיסמה?  ❓"):
+            st.info("""
+            • ללא צורך בסיסמה מסובכת
+            • גישה מיידית לתוכן
+            • המידע נשמר לפי המייל שלך
+            • אפשרות לכניסה עם Google בקרוב
+            """)
     
     else:
         # משתמש מחובר
@@ -244,7 +292,7 @@ with st.sidebar:
         st.success(f"מחובר:  {user. get('full_name', 'משתמש')} ✓")
         
         if 'institutions' in user and user['institutions']:
-            st.info(f"מוסד:  {user['institutions']. get('name', '')} 🏥")
+            st. info(f"מוסד: {user['institutions']. get('name', '')} 🏥")
         
         col1, col2 = st. columns(2)
         with col1:
@@ -253,7 +301,7 @@ with st.sidebar:
         with col2:
             if st.button("התנתק 🚪", use_container_width=True):
                 st.session_state.logged_in = False
-                st.session_state.user = None
+                st.session_state. user = None
                 st.rerun()
     
     st.divider()
@@ -261,11 +309,11 @@ with st.sidebar:
     # אודות - אימוג'ים בסוף
     with st.expander("אודות המערכת ℹ"):
         st.markdown("""
-        פותח על ידי:  ישי קופרמן 👨‍⚕️
-        תפקיד: אח בטיפול נמרץ ילדים
-        מייל: yishaycopp@gmail.com 📧
-        גרסה: 1.0.0
-        עדכון אחרון:  26/12/2024 📅
+        **פותח על ידי:** ישי קופרמן 👨‍⚕️  
+        **תפקיד:** אח בטיפול נמרץ ילדים  
+        **מייל:** yishaycopp@gmail.com 📧  
+        **גרסה:** 1.0.0  
+        **עדכון אחרון:** 26/12/2024 📅  
         """)
 
 # תוכן ראשי
@@ -280,32 +328,32 @@ if st.session_state.logged_in:
     ])
     
     with tab1:
-        st.markdown("### ברוכים הבאים לפלטפורמת הלמידה! 🎯")
+        st.markdown("### ברוכים הבאים לפלטפורמת הלמידה!  🎯")
         
         # כרטיסיות
         col1, col2, col3 = st.columns(3)
         
         with col1:
             st.markdown("""
-            <div style="padding: 1. 5rem; border-radius: 10px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center;">
-                <h3 style="color: white;">חומרי למידה 📚</h3>
-                <p style="color: white;">גישה לחומרי למידה מעודכנים מבוססי UpToDate</p>
+            <div class="feature-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <h3>חומרי למידה 📚</h3>
+                <p>גישה לחומרי למידה מעודכנים מבוססי UpToDate</p>
             </div>
             """, unsafe_allow_html=True)
         
         with col2:
             st.markdown("""
-            <div style="padding: 1.5rem; border-radius: 10px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; text-align: center;">
-                <h3 style="color: white;">תרגול ומבחנים 📝</h3>
-                <p style="color: white;">מבחנים אינטראקטיביים עם משוב מיידי</p>
+            <div class="feature-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <h3>תרגול ומבחנים 📝</h3>
+                <p>מבחנים אינטראקטיביים עם משוב מיידי</p>
             </div>
             """, unsafe_allow_html=True)
         
         with col3:
             st.markdown("""
-            <div style="padding: 1.5rem; border-radius: 10px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; text-align: center;">
-                <h3 style="color: white;">תחרות בין-מוסדית 🏆</h3>
-                <p style="color: white;">השווה את הביצועים שלך מול מוסדות אחרים</p>
+            <div class="feature-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <h3>תחרות בין-מוסדית 🏆</h3>
+                <p>השווה את הביצועים שלך מול מוסדות אחרים</p>
             </div>
             """, unsafe_allow_html=True)
         
@@ -314,9 +362,13 @@ if st.session_state.logged_in:
         
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.metric("מבחנים שהושלמו", "0")
+            st.metric("מבחנים שהושלמו", len(st.session_state.user_scores))
         with col2:
-            st.metric("ציון ממוצע", "—")
+            if st.session_state.user_scores:
+                avg = sum(st.session_state. user_scores) / len(st.session_state.user_scores)
+                st.metric("ציון ממוצע", f"{avg:.1f}%")
+            else:
+                st.metric("ציון ממוצע", "—")
         with col3:
             st.metric("זמן למידה", "0 שעות")
         with col4:
@@ -326,16 +378,19 @@ if st.session_state.logged_in:
         st.markdown("### חומרי למידה 📚")
         
         if DB_CONNECTED:
-            topics = get_topics()
-            if topics:
-                for topic in topics:
-                    title = topic. get('title', 'נושא')
-                    icon = topic.get('icon', '📖')
-                    with st.expander(f"{title} {icon}"):
-                        st.write(topic.get('description', ''))
-                        st.info("תוכן מפורט יתווסף בקרוב ⏳")
-            else:
-                st.info("אין נושאים זמינים כרגע 📭")
+            try:
+                topics = get_topics()
+                if topics:
+                    for topic in topics:
+                        title = topic. get('title', 'נושא')
+                        icon = topic.get('icon', '📖')
+                        with st.expander(f"{title} {icon}"):
+                            st.write(topic.get('description', ''))
+                            st.info("תוכן מפורט יתווסף בקרוב ⏳")
+                else:
+                    st.info("אין נושאים זמינים כרגע 📭")
+            except: 
+                st.warning("בעיה בטעינת הנושאים ⚠️")
         else:
             st.warning("חומרי למידה יהיו זמינים בקרוב 🔜")
     
@@ -350,31 +405,47 @@ if st.session_state.logged_in:
         with col2:
             st.button("מבחן לפי נושא 📚", disabled=True, use_container_width=True)
         with col3:
-            st.button("מבחן מותאם אישית ⚙️", disabled=True, use_container_width=True)
+            st.button("מבחן מותאם אישית ⚙", disabled=True, use_container_width=True)
     
     with tab4:
-        st.markdown("### הסטטיסטיקות שלי 📊")
+        st. markdown("### הסטטיסטיקות שלי 📊")
         
         if st.session_state.user_scores:
-            df = pd.DataFrame({
+            df = pd. DataFrame({
                 'מספר מבחן': range(1, len(st.session_state.user_scores) + 1),
                 'ציון':  st.session_state.user_scores
             })
             st.line_chart(df.set_index('מספר מבחן'))
+            
+            # סטטיסטיקות
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                best_score = max(st.session_state.user_scores)
+                st.success(f"הציון הטוב ביותר: {best_score}% 🌟")
+            with col2:
+                avg_score = sum(st.session_state.user_scores) / len(st.session_state.user_scores)
+                st.info(f"ממוצע: {avg_score:.1f}% 📊")
+            with col3:
+                last_score = st.session_state.user_scores[-1]
+                st.warning(f"ציון אחרון: {last_score}% 📝")
         else:
             st.info("עדיין אין נתונים להצגה 📈")
-            st.button("התחל את המבחן הראשון שלך 🚀", type="primary")
+            if st.button("התחל את המבחן הראשון שלך 🚀", type="primary"):
+                st.switch_page("pages/2_📝_Quizzes.py")
     
     with tab5:
         st.markdown("### לוח הישגים - תחרות בין-מוסדית 🏆")
         
         if DB_CONNECTED:
-            leaderboard = get_leaderboard()
-            if leaderboard: 
-                df = pd.DataFrame(leaderboard)
-                st.dataframe(df, hide_index=True, use_container_width=True)
-            else:
-                st.info("אין נתונים להצגה עדיין 📊")
+            try: 
+                leaderboard = get_leaderboard()
+                if leaderboard: 
+                    df = pd.DataFrame(leaderboard)
+                    st.dataframe(df, hide_index=True, use_container_width=True)
+                else:
+                    st.info("אין נתונים להצגה עדיין 📊")
+            except:
+                st.warning("בעיה בטעינת הנתונים ⚠️")
         else:
             # נתוני דמו
             demo_data = pd.DataFrame({
@@ -389,18 +460,33 @@ if st.session_state.logged_in:
                 'ציון ממוצע': [88. 4, 88.3, 88.1, 86.0, 82.9],
                 'משתתפים': [10, 27, 9, 8, 30]
             })
-            st.dataframe(demo_data, hide_index=True)
+            st.dataframe(demo_data, hide_index=True, use_container_width=True)
+            
+            # גרף
+            st.bar_chart(demo_data.set_index('מוסד')['ציון ממוצע'])
 
 else:
     # משתמש לא מחובר
     st.warning("יש להתחבר כדי לגשת לתוכן 🔐")
     
-    with st.expander("מידע על הפלטפורמה ℹ️"):
+    # כרטיסיות מידע
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.info("### למידה מתקדמת 📚\nחומרי למידה מעודכנים ומותאמים לצוותי PICU")
+    
+    with col2:
+        st.info("### מבחנים אינטראקטיביים 📝\nתרגול עם משוב מיידי ומעקב התקדמות")
+    
+    with col3:
+        st.info("### תחרות ארצית 🏆\nהשווה את עצמך לעמיתים מכל הארץ")
+    
+    with st.expander("מידע על הפלטפורמה ℹ"):
         st.markdown("""
         ### ברוכים הבאים לפלטפורמת PICU Learning!  🎓
         
         **מטרת הפלטפורמה:**
-        פלטפורמה זו נוצרה כדי להעשיר ולחדד את הידע של צוותי טיפול נמרץ ילדים. 
+        פלטפורמה זו נוצרה כדי להעשיר ולחדד את הידע של צוותי טיפול נמרץ ילדים.
         
         **מה תמצאו כאן:**
         • חומרי למידה מעודכנים על בסיס UpToDate 📚
@@ -409,7 +495,10 @@ else:
         • תחרות בריאה בין מוסדות רפואיים 🏆
         
         **איך מתחילים:**
-        פשוט הירשמו עם המייל שלכם - ללא סיסמה!  ✨
+        פשוט הירשמו עם המייל שלכם - ללא סיסמה! ✨
+        
+        **פותח על ידי:**
+        ישי קופרמן - אח בטיפול נמרץ ילדים
         """)
 
 # כתב ויתור בתחתית
