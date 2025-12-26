@@ -1,0 +1,69 @@
+{
+  "id": "hypertrophic_cardiomyopathy",
+  "title": "קרדיומיופתיה היפרטרופית (HCM)",
+  "description": "ניהול HCM בילדים, דגשים לטיפול תרופתי ואיסורים.",
+  "category": "cardiology",
+  "difficulty": "advanced",
+  "order": 2,
+  "tags": ["לב", "מוות פתאומי", "גנטיקה"],
+  "content": [
+    {
+      "type": "definition",
+      "title": "הגדרה",
+      "text": "הגדלה של חדר שמאל (לרוב גנטית/סרקומרית). הגורם הנפוץ למוות פתאומי (SCD) בצעירים."
+    },
+    {
+      "type": "treatment",
+      "title": "עקרונות טיפול",
+      "sections": [
+        {
+          "name": "מטרות הטיפול",
+          "options": [
+            {
+              "method": "הורדת צריכת חמצן",
+              "details": "האטת קצב הלב לשיפור מילוי חדרים"
+            },
+            {
+              "method": "מניעת התייבשות",
+              "details": "שמירה על Preload גבוה. ירידה בנפח מחמירה את החסימה במוצא חדר שמאל (LVOT)"
+            }
+          ]
+        },
+        {
+          "name": "תרופות מומלצות",
+          "options": [
+            {
+              "method": "Beta Blockers",
+              "details": "קו ראשון (למשל Propranolol/Atenolol)"
+            },
+            {
+              "method": "Verapamil",
+              "details": "קו שני (חסמי תעלות סידן)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "תרופות מסוכנות (יש להימנע)",
+      "items": [
+        {
+          "name": "מרחיבי כלי דם (Vasodilators)",
+          "description": "מורידים Preload ומחמירים חסימה (ACE, משתנים, ניטרוגליצרין)"
+        },
+        {
+          "name": "דיגוקסין (Digoxin)",
+          "description": "מגביר כיווץ (שהוא כבר חזק מדי) ומחמיר חסימה"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "⚠️ ב-HCM אסור לייבש את החולה! משתנים ניתנים רק בזהירות רבה אם יש גודש ריאתי מוכח",
+    "הטיפול מתמקד בבטא-בלוקרס להאטת הדופק",
+    "אסור להשתמש בדיגוקסין או מרחיבי כלי דם"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}

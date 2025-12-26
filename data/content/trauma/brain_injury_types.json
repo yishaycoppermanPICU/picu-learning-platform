@@ -1,0 +1,50 @@
+{
+  "id": "brain_injury_types",
+  "title": "סוגי פגיעות ראש ודימומים",
+  "description": "סיווג פגיעות ראש טראומטיות: דיפוזיות, מוקדיות וסוגי המטומות.",
+  "category": "trauma",
+  "difficulty": "intermediate",
+  "order": 1,
+  "tags": ["מוח", "CT", "דימום", "טראומה"],
+  "content": [
+    {
+      "type": "section",
+      "title": "פגיעות דיפוזיות",
+      "items": [
+        {
+          "name": "DBI (Diffuse Brain Injury)",
+          "description": "נגרם מכוחות האצה/האטה. זעזוע מוח הוא צורה מתונה של זה"
+        },
+        {
+          "name": "DAI (Diffuse Axonal Injury)",
+          "description": "פגיעה מפושטת באקסונים (חומר לבן/אפור). וריאציה חמורה של DBI"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "דימומים (Hemorrhages)",
+      "items": [
+        {
+          "name": "Epidural Hematoma (EDH)",
+          "description": "דימום עורקי לרוב (MMA). בין הדורה לגולגולת. \"תמונת עדשה\" ב-CT"
+        },
+        {
+          "name": "Subdural Hematoma (SDH)",
+          "description": "דימום ורידי (Bridging veins). בין הדורה לארכנואיד. נפוץ בטלטול תינוקות או טראומה"
+        },
+        {
+          "name": "Subarachnoid Hemorrhage (SAH)",
+          "description": "דימום מכלי דם קטנים בשכבת הפיה"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "EDH - \"עדשה\" ב-CT, דימום עורקי, צריך ניתוח דחוף לרוב",
+    "SDH - נפוץ בטלטול תינוקות (shaken baby), דימום ורידי",
+    "DAI - פגיעה נרחבת בחומר הלבן, פרוגנוזה גרועה"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}
