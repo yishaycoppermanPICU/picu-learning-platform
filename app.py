@@ -36,11 +36,11 @@ st.markdown("""
     * {
         direction: rtl ! important;
         text-align:  right !important;
-        font-family: 'Heebo', sans-serif ! important;
+        font-family: 'Heebo', sans-serif !important;
     }
     
     /* תיקון כל הקונטיינרים */
-    . main, .block-container, .element-container, . stApp {
+    .main, .block-container, .element-container, .stApp {
         direction: rtl ! important;
         text-align:  right !important;
     }
@@ -64,7 +64,7 @@ st.markdown("""
         flex-direction: row-reverse !important;
     }
     
-    .stTabs [data-baseweb="tab"] {
+    . stTabs [data-baseweb="tab"] {
         direction: rtl ! important;
     }
     
@@ -92,7 +92,7 @@ st.markdown("""
         text-align: right !important;
     }
     
-    .stSelectbox label,
+    . stSelectbox label,
     .stTextInput label,
     .stTextArea label {
         direction: rtl !important;
@@ -126,7 +126,7 @@ st.markdown("""
         padding: 2rem;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border-radius: 10px;
-        margin-bottom:  2rem;
+        margin-bottom: 2rem;
         direction: rtl !important;
     }
     
@@ -147,7 +147,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # JavaScript חזק לתיקון נוסף
-import streamlit. components.v1 as components
+import streamlit.components.v1 as components
 components.html("""
 <script>
 // המתן לטעינת הדף
@@ -161,14 +161,14 @@ setTimeout(function() {
     // תקן את כל האלמנטים
     document.querySelectorAll('*').forEach(function(el) {
         if (el.style) {
-            el.style. direction = 'rtl';
+            el.style.direction = 'rtl';
         }
     });
     
     // תקן טאבים
     const tabList = document.querySelector('[data-baseweb="tab-list"]');
     if (tabList) {
-        tabList.style.flexDirection = 'row-reverse';
+        tabList.style. flexDirection = 'row-reverse';
     }
 }, 100);
 </script>
@@ -215,12 +215,12 @@ with st.sidebar:
                 try:
                     institutions = get_institutions()
                     inst_names = [inst['name'] for inst in institutions] if institutions else []
-                except:
+                except: 
                     inst_names = []
             else:
                 inst_names = [
                     "שיבא - תל השומר",
-                    "איכילוב - תל אביב", 
+                    "איכילוב - תל אביב",
                     "רמב״ם - חיפה",
                     "הדסה עין כרם - ירושלים",
                     "סורוקה - באר שבע",
@@ -252,8 +252,8 @@ with st.sidebar:
                                 st.session_state.logged_in = True
                                 st.session_state.user = existing
                                 st.success(f"ברוך שובך, {existing['full_name']} 👋")
-                                st. rerun()
-                            else: 
+                                st.rerun()
+                            else:
                                 new_user = create_user(username, email, full_name, institution)
                                 if new_user: 
                                     st.session_state.logged_in = True
@@ -262,7 +262,7 @@ with st.sidebar:
                                     st.balloons()
                                     st.rerun()
                         except Exception as e:
-                            st.error(f"שגיאה: {e}")
+                            st.error(f"שגיאה:  {e}")
                     else:
                         st.session_state.logged_in = True
                         st.session_state.user = {
@@ -292,16 +292,16 @@ with st.sidebar:
         st.success(f"מחובר:  {user. get('full_name', 'משתמש')} ✓")
         
         if 'institutions' in user and user['institutions']:
-            st. info(f"מוסד: {user['institutions']. get('name', '')} 🏥")
+            st.info(f"מוסד:  {user['institutions']. get('name', '')} 🏥")
         
-        col1, col2 = st. columns(2)
+        col1, col2 = st.columns(2)
         with col1:
             if st.button("הנתונים שלי 📊", use_container_width=True):
                 st.switch_page("pages/3_📊_Statistics.py")
         with col2:
-            if st.button("התנתק 🚪", use_container_width=True):
+            if st. button("התנתק 🚪", use_container_width=True):
                 st.session_state.logged_in = False
-                st.session_state. user = None
+                st.session_state.user = None
                 st.rerun()
     
     st.divider()
@@ -313,7 +313,7 @@ with st.sidebar:
         **תפקיד:** אח בטיפול נמרץ ילדים  
         **מייל:** yishaycopp@gmail.com 📧  
         **גרסה:** 1.0.0  
-        **עדכון אחרון:** 26/12/2024 📅  
+        **עדכון אחרון:** 26/12/2024 📅
         """)
 
 # תוכן ראשי
@@ -328,7 +328,7 @@ if st.session_state.logged_in:
     ])
     
     with tab1:
-        st.markdown("### ברוכים הבאים לפלטפורמת הלמידה!  🎯")
+        st.markdown("### ברוכים הבאים לפלטפורמת הלמידה! 🎯")
         
         # כרטיסיות
         col1, col2, col3 = st.columns(3)
@@ -350,7 +350,7 @@ if st.session_state.logged_in:
             """, unsafe_allow_html=True)
         
         with col3:
-            st.markdown("""
+            st. markdown("""
             <div class="feature-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
                 <h3>תחרות בין-מוסדית 🏆</h3>
                 <p>השווה את הביצועים שלך מול מוסדות אחרים</p>
@@ -370,7 +370,7 @@ if st.session_state.logged_in:
             else:
                 st.metric("ציון ממוצע", "—")
         with col3:
-            st.metric("זמן למידה", "0 שעות")
+            st. metric("זמן למידה", "0 שעות")
         with col4:
             st.metric("דירוג במוסד", "—")
     
@@ -408,10 +408,10 @@ if st.session_state.logged_in:
             st.button("מבחן מותאם אישית ⚙", disabled=True, use_container_width=True)
     
     with tab4:
-        st. markdown("### הסטטיסטיקות שלי 📊")
+        st.markdown("### הסטטיסטיקות שלי 📊")
         
         if st.session_state.user_scores:
-            df = pd. DataFrame({
+            df = pd.DataFrame({
                 'מספר מבחן': range(1, len(st.session_state.user_scores) + 1),
                 'ציון':  st.session_state.user_scores
             })
@@ -447,7 +447,7 @@ if st.session_state.logged_in:
             except:
                 st.warning("בעיה בטעינת הנתונים ⚠️")
         else:
-            # נתוני דמו
+            # נתוני דמו - תיקון השגיאה כאן! 
             demo_data = pd.DataFrame({
                 'דירוג': ['🥇', '🥈', '🥉', '4', '5'],
                 'מוסד': [
@@ -457,7 +457,7 @@ if st.session_state.logged_in:
                     'הדסה עין כרם',
                     'סורוקה - באר שבע'
                 ],
-                'ציון ממוצע': [88. 4, 88.3, 88.1, 86.0, 82.9],
+                'ציון ממוצע': [88.4, 88.3, 88.1, 86.0, 82.9],  # תיקון כאן - בלי רווחים! 
                 'משתתפים': [10, 27, 9, 8, 30]
             })
             st.dataframe(demo_data, hide_index=True, use_container_width=True)
@@ -479,14 +479,14 @@ else:
         st.info("### מבחנים אינטראקטיביים 📝\nתרגול עם משוב מיידי ומעקב התקדמות")
     
     with col3:
-        st.info("### תחרות ארצית 🏆\nהשווה את עצמך לעמיתים מכל הארץ")
+        st. info("### תחרות ארצית 🏆\nהשווה את עצמך לעמיתים מכל הארץ")
     
     with st.expander("מידע על הפלטפורמה ℹ"):
         st.markdown("""
         ### ברוכים הבאים לפלטפורמת PICU Learning!  🎓
         
         **מטרת הפלטפורמה:**
-        פלטפורמה זו נוצרה כדי להעשיר ולחדד את הידע של צוותי טיפול נמרץ ילדים.
+        פלטפורמה זו נוצרה כדי להעשיר ולחדד את הידע של צוותי טיפול נמרץ ילדים. 
         
         **מה תמצאו כאן:**
         • חומרי למידה מעודכנים על בסיס UpToDate 📚
@@ -503,4 +503,4 @@ else:
 
 # כתב ויתור בתחתית
 st.divider()
-st.caption("הערה: האתר מיועד למטרות למידה בלבד. האחריות לאימות התוכן עם מקורות רפואיים מעודכנים היא על המשתמש ⚠️")
+st.caption("הערה: האתר מיועד למטרות למידה בלבד.  האחריות לאימות התוכן עם מקורות רפואיים מעודכנים היא על המשתמש ⚠️")
