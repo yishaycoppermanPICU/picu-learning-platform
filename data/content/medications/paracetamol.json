@@ -1,0 +1,46 @@
+{
+  "id": "paracetamol",
+  "title": "פרצטמול / אקמול (Paracetamol)",
+  "genericName": "Acetaminophen",
+  "commercialNames": ["Acamol", "Napa", "Novimol"],
+  "category": "medications",
+  "type": "analgesic",
+  "difficulty": "beginner",
+  "order": 20,
+  "tags": ["חום", "כאב", "בטיחות"],
+  "content": [
+    {
+      "type": "treatment",
+      "title": "מינונים",
+      "sections": [
+        {
+          "name": "כללי",
+          "options": [
+            {
+              "method": "PO / IV / PR",
+              "details": "15 mg/kg/dose כל 4 שעות. עד 5 מנות ביום (75 mg/kg/day)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "name": "רעילות כבדית",
+          "description": "אנטידוט: N-acetyl cysteine (Mucomyst) - יעיל עד 10-24 שעות מההרעלה",
+          "severity": "חמור"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "תרופת הכאב והחום הבטוחה ביותר לילדים",
+    "מינון מקסימלי יומי: 75 mg/kg/day (5 מנות של 15 mg/kg)",
+    "⚠️ מנת יתר גורמת לרעילות כבדית - אנטידוט חובה תוך 24 שעות"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}

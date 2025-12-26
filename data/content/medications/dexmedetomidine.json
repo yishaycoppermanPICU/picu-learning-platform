@@ -1,0 +1,61 @@
+{
+  "id": "dexmedetomidine",
+  "title": "דקסמתומידין / פרסדקס (Dexmedetomidine)",
+  "genericName": "Dexmedetomidine",
+  "commercialNames": ["Precedex"],
+  "category": "medications",
+  "type": "sedative",
+  "difficulty": "advanced",
+  "order": 24,
+  "tags": ["סדציה", "גמילה", "אלפא-אגוניסט"],
+  "content": [
+    {
+      "type": "definition",
+      "title": "הגדרה",
+      "text": "אגוניסט אלפא-2 אדרנרגי. מרגיע ללא דיכוי נשימתי משמעותי."
+    },
+    {
+      "type": "treatment",
+      "title": "מינונים",
+      "sections": [
+        {
+          "name": "העמסה",
+          "options": [
+            {
+              "method": "Loading Dose",
+              "details": "0.5-1 mcg/kg במשך 10 דקות"
+            }
+          ]
+        },
+        {
+          "name": "אחזקה",
+          "options": [
+            {
+              "method": "Continuous Infusion",
+              "details": "0.2-0.7 mcg/kg/h. טיטרציה לפי צורך"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "name": "ברדיקרדיה והיפוטנסיה",
+          "description": "ניטור לחץ דם ודופק רציף",
+          "severity": "נפוץ"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "יתרון עצום - אין דיכוי נשימתי (שומר על נשימה ספונטנית)",
+    "מתאים במיוחד לגמילה מוונטילציה",
+    "⚠️ גורם לברדיקרדיה והיפוטנסיה - ניטור המודינמי חובה",
+    "תרופה יקרה יחסית"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}

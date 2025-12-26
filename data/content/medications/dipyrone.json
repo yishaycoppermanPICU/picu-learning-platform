@@ -1,0 +1,51 @@
+{
+  "id": "dipyrone",
+  "title": "דיפירון / אופטלגין (Dipyrone)",
+  "genericName": "Metamizole",
+  "commercialNames": ["Optalgin"],
+  "category": "medications",
+  "type": "analgesic",
+  "difficulty": "beginner",
+  "order": 22,
+  "tags": ["כאב", "חום"],
+  "content": [
+    {
+      "type": "treatment",
+      "title": "מינונים",
+      "sections": [
+        {
+          "name": "כללי",
+          "options": [
+            {
+              "method": "PO / IV",
+              "details": "15-20 mg/kg/dose כל 6-8 שעות (עד 3-4 פעמים ביום)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "name": "אגרנולוציטוזיס",
+          "description": "הפסקת תרופה ומעקב ספירת דם",
+          "severity": "נדיר אך חמור"
+        },
+        {
+          "name": "ירידת לחץ דם",
+          "description": "בעיקר במתן IV מהיר",
+          "severity": "בינוני"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "משכך כאב וחום חזק יותר מאקמול",
+    "תופעת לוואי נדירה אך חמורה: אגרנולוציטוזיס (ירידה קריטית בתאי דם לבנים)",
+    "⚠️ מתן IV חייב להיות איטי למניעת ירידת לחץ דם"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}

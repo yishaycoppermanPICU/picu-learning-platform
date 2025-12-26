@@ -1,0 +1,49 @@
+{
+  "id": "ibuprofen",
+  "title": "איבופרופן / נורופן (Ibuprofen)",
+  "genericName": "Ibuprofen",
+  "commercialNames": ["Nurofen", "Advil"],
+  "category": "medications",
+  "type": "nsaid",
+  "difficulty": "beginner",
+  "order": 21,
+  "tags": ["חום", "דלקת", "כאב"],
+  "content": [
+    {
+      "type": "treatment",
+      "title": "מינונים",
+      "sections": [
+        {
+          "name": "ילדים (> 6 חודשים)",
+          "options": [
+            {
+              "method": "PO",
+              "details": "10 mg/kg/dose כל 6-8 שעות. מקסימום למנה: 400 mg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "התוויות נגד",
+      "items": [
+        {
+          "name": "מתחת לגיל 6 חודשים",
+          "description": "תפקוד כליות לא בשל"
+        },
+        {
+          "name": "דימום GI / טרומבוציטופניה",
+          "description": "מעכב טסיות ופוגע ברירית הקיבה"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "אסור מתחת לגיל 6 חודשים (פגיעה בכליות)",
+    "אסור במצבי דימום או טרומבוציטופניה (מעכב טסיות)",
+    "יעיל יותר מאקמול לדלקת אך פחות בטוח"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}

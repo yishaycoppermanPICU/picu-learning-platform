@@ -1,0 +1,44 @@
+{
+  "id": "methylprednisolone",
+  "title": "מתילפרדניזולון / סולומדרול (Methylprednisolone)",
+  "genericName": "Methylprednisolone",
+  "commercialNames": ["Solu-Medrol"],
+  "category": "medications",
+  "type": "corticosteroid",
+  "difficulty": "intermediate",
+  "order": 25,
+  "tags": ["סטרואידים", "אסתמה", "דלקת", "ITP"],
+  "content": [
+    {
+      "type": "treatment",
+      "title": "מינונים",
+      "sections": [
+        {
+          "name": "אסתמה חריפה",
+          "options": [
+            {
+              "method": "IV / PO",
+              "details": "1-2 mg/kg/day מחולק ל-1-2 מנות. מקסימום 60 mg/day"
+            }
+          ]
+        },
+        {
+          "name": "ITP (Immune Thrombocytopenia)",
+          "options": [
+            {
+              "method": "IV Pulse",
+              "details": "30 mg/kg/day פולס ל-3 ימים. מקסימום 1000 mg/dose"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "חזק פי 4-5 מהידרוקורטיזון",
+    "מתאים לטיפול באסתמה חמורה, דלקות ומחלות אוטואימוניות",
+    "ב-ITP נותנים מינון פולס גבוה (30 מ\"ג/ק\"ג) למשך 3 ימים"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}

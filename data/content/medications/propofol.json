@@ -1,0 +1,75 @@
+{
+  "id": "propofol",
+  "title": "פרופופול (Propofol)",
+  "genericName": "Propofol",
+  "commercialNames": ["Diprivan"],
+  "category": "medications",
+  "type": "sedative",
+  "difficulty": "advanced",
+  "order": 23,
+  "tags": ["הרדמה", "סדציה", "אקסטובציה"],
+  "content": [
+    {
+      "type": "definition",
+      "title": "הגדרה",
+      "text": "חומר הרדמה קצר טווח (תחילת השפעה 40 שניות, משך 5-15 דקות). מתאים לפרוצדורות קצרות או אקסטובציה."
+    },
+    {
+      "type": "treatment",
+      "title": "מינונים",
+      "sections": [
+        {
+          "name": "מנת בולוס (Induction)",
+          "options": [
+            {
+              "method": "IV Push (20-30 שניות)",
+              "details": "2.5-3.5 mg/kg. ילדים 3-16 שנים"
+            }
+          ]
+        },
+        {
+          "name": "עירוי מתמשך",
+          "options": [
+            {
+              "method": "Continuous Infusion",
+              "details": "125-300 mcg/kg/min. מגיל חודשיים ומעלה"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "התוויות נגד",
+      "items": [
+        {
+          "name": "רגישות לביצים/סויה",
+          "description": "התמיסה היא אמולסיה שומנית"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "name": "PRIS (Propofol Infusion Syndrome)",
+          "description": "במתן ממושך: חמצת מטבולית, רבדומיוליזיס, אי ספיקת לב",
+          "severity": "קטלני"
+        },
+        {
+          "name": "כאב בהזרקה",
+          "description": "שורף בוריד"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "הרדמה מהירה ביותר - תחילת השפעה תוך 40 שניות",
+    "⚠️ PRIS - תסמונת קטלנית במתן ממושך (חמצת, רבדו, אי ספיקת לב)",
+    "אסור באלרגיה לביצים או סויה",
+    "גורם לכאב עז בוריד בזמן ההזרקה"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}

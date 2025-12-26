@@ -1,0 +1,63 @@
+{
+  "id": "valproic_acid",
+  "title": "חומצה ולפרואית / דפלפט (Valproic Acid)",
+  "genericName": "Valproic Acid",
+  "commercialNames": ["Depalept", "Depakine"],
+  "category": "medications",
+  "type": "anticonvulsant",
+  "difficulty": "intermediate",
+  "order": 26,
+  "tags": ["פרכוסים", "אפילפסיה", "מצב רוח"],
+  "content": [
+    {
+      "type": "treatment",
+      "title": "מינונים",
+      "sections": [
+        {
+          "name": "פומי (PO)",
+          "options": [
+            {
+              "method": "התחלה",
+              "details": "10-15 mg/kg/day מחולק ל-1-3 מנות. ניתן לעלות עד 60 mg/kg/day"
+            }
+          ]
+        },
+        {
+          "name": "תוך ורידי (IV)",
+          "options": [
+            {
+              "method": "זהה למינון PO",
+              "details": "מחולק ל-4 מנות (כל 6 שעות)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "name": "הרעלת אמוניה / כבד",
+          "description": "ניטור רמות אמוניה ותפקודי כבד",
+          "severity": "חמור"
+        },
+        {
+          "name": "עלייה במשקל",
+          "description": "תופעת לוואי שכיחה"
+        },
+        {
+          "name": "נשירת שיער",
+          "description": "הפיכה"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "יעיל למגוון רחב של פרכוסים וגם להפרעות מצב רוח",
+    "⚠️ רעילות כבדית ועליית אמוניה - ניטור תפקודי כבד ואמוניה חובה",
+    "תרטוגני - אסור בהריון"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}
