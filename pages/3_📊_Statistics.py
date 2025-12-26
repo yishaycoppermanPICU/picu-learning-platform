@@ -11,11 +11,11 @@ st.markdown("""
 <style>
     /* יישור גלובלי */
     * {
-        direction: rtl ! important;
+        direction: rtl !important;
         text-align: right !important;
     }
     
-    . stApp, .main {
+    .stApp, .main {
         direction: rtl !important;
         text-align: right !important;
     }
@@ -28,7 +28,7 @@ st.markdown("""
     
     /* כותרת */
     .stat-header {
-        background:  linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         padding: 2rem;
         border-radius: 10px;
@@ -38,8 +38,8 @@ st.markdown("""
     
     /* metrics */
     [data-testid="metric-container"] {
-        text-align: center ! important;
-        background:  white;
+        text-align: center !important;
+        background: white;
         padding: 1rem;
         border-radius: 10px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -54,7 +54,7 @@ if not st.session_state.get('logged_in', False):
         st.switch_page("app.py")
     st.stop()
 
-user = st.session_state. get('user', {})
+user = st.session_state.get('user', {})
 
 # כותרת
 st.markdown("""
@@ -80,7 +80,7 @@ with tab1:
     with col1:
         st.metric("ימים פעילים", "7", "2+ מאתמול")
     with col2:
-        st.metric("שעות למידה", "12. 5", "1.5+ השבוע")
+        st.metric("שעות למידה", "12.5", "1.5+ השבוע")
     with col3:
         scores = st.session_state.get('user_scores', [])
         st.metric("מבחנים שבוצעו", len(scores))
@@ -93,7 +93,7 @@ with tab1:
     # גרף התקדמות
     st.markdown("### התקדמות לאורך זמן 📈")
     
-    dates = pd. date_range(end=datetime.now(), periods=30, freq='D')
+    dates = pd.date_range(end=datetime.now(), periods=30, freq='D')
     data = pd.DataFrame({
         'תאריך': dates,
         'ציון': [random.randint(70, 100) for _ in range(30)]
@@ -111,7 +111,7 @@ with tab1:
     st.plotly_chart(fig, use_container_width=True)
 
 with tab2:
-    st. markdown("### היסטוריית המבחנים שלך 📝")
+    st.markdown("### היסטוריית המבחנים שלך 📝")
     
     if st.session_state.get('user_scores'):
         scores = st.session_state.user_scores
@@ -173,7 +173,7 @@ with tab3:
 with tab4:
     st.markdown("### איך אתה מסתדר לעומת אחרים?  🏆")
     
-    col1, col2 = st. columns(2)
+    col1, col2 = st.columns(2)
     
     with col1:
         st.markdown("#### הדירוג שלך במוסד 🏥")
