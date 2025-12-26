@@ -27,151 +27,64 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# CSS חזק ומקיף - תיקון אמיתי
+# CSS פשוט אבל יעיל
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap');
-    
-    /* יישור גלובלי לימין - חזק */
-    * {
-        direction: rtl !important;
-        text-align: right !important;
-        font-family: 'Heebo', sans-serif !important;
+    /* RTL גלובלי */
+    .stApp {
+        direction: rtl;
     }
     
-    /* תיקון כל הקונטיינרים */
-    .main, .block-container, .element-container, .stApp {
-        direction: rtl !important;
-        text-align: right !important;
-    }
-    
-    /* הכרח את הסרגל להיות בימין - SUPER STRONG */
+    /* הזזת סרגל צד לימין */
     section[data-testid="stSidebar"] {
-        right: 0 !important;
-        left: auto !important;
-        position: fixed !important;
-        direction: rtl !important;
+        right: 0;
+        left: auto;
     }
     
-    section[data-testid="stSidebar"] > div:first-child {
-        right: 0 !important;
-        left: auto !important;
-        position: fixed !important;
-        width: 21rem !important;
+    section[data-testid="stSidebar"] > div {
+        right: 0;
+        left: auto;
     }
     
-    /* תיקון מיקום התוכן הראשי כשהסרגל בימין */
+    /* תיקון התוכן הראשי */
     .main .block-container {
-        margin-right: 22rem !important;
-        margin-left: 1rem !important;
-        max-width: none !important;
+        padding-right: 5rem;
+        padding-left: 1rem;
     }
     
-    /* Override לכל הקלאסים של Streamlit */
-    .css-1y4p8pa, .css-1avcm0n, .css-18e3th9, .css-1d391kg {
-        right: 0 !important;
-        left: auto !important;
+    /* טקסט ימין */
+    h1, h2, h3, h4, h5, h6, p, label, span {
+        text-align: right;
+        direction: rtl;
     }
     
-    /* כשהסרגל מכווץ */
-    [data-testid="collapsedControl"] {
-        right: 0 !important;
-        left: auto !important;
-    }
-    
-    /* תיקון טאבים - מימין לשמאל */
+    /* תיקון טאבים */
     .stTabs [data-baseweb="tab-list"] {
-        direction: rtl !important;
-        flex-direction: row-reverse !important;
+        flex-direction: row-reverse;
     }
     
-    .stTabs [data-baseweb="tab"] {
-        direction: rtl !important;
+    /* תיקון שדות קלט */
+    input, textarea, select {
+        direction: rtl;
+        text-align: right;
     }
     
-    /* תיקון כותרות */
-    h1, h2, h3, h4, h5, h6 {
-        direction: rtl !important;
-        text-align: right !important;
-    }
-    
-    /* תיקון טקסט */
-    p, span, div, label {
-        direction: rtl !important;
-        text-align: right !important;
-    }
-    
-    /* תיקון כפתורים */
-    .stButton > button {
-        direction: rtl !important;
-        width: 100%;
-    }
-    
-    /* תיקון שדות טקסט */
-    .stTextInput > div > div > input {
-        direction: rtl !important;
-        text-align: right !important;
-    }
-    
-    .stSelectbox label,
-    .stTextInput label,
-    .stTextArea label {
-        direction: rtl !important;
-        text-align: right !important;
-    }
-    
-    /* תיקון checkbox */
-    .stCheckbox {
-        direction: rtl !important;
-        text-align: right !important;
-    }
-    
-    .stCheckbox > label {
-        flex-direction: row-reverse !important;
-    }
-    
-    /* תיקון metrics */
-    [data-testid="metric-container"] {
-        text-align: center !important;
-    }
-    
-    /* תיקון expander */
-    .streamlit-expanderHeader {
-        direction: rtl !important;
-        flex-direction: row-reverse !important;
-    }
-    
-    /* כותרת ראשית */
+    /* הכותרת הראשית */
     .main-header {
-        text-align: center;
-        padding: 2rem;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 2rem;
         border-radius: 10px;
         margin-bottom: 2rem;
-        direction: rtl !important;
+        color: white;
+        text-align: center;
     }
     
     .main-header h1, .main-header p {
-        direction: rtl !important;
         color: white;
         margin: 0;
-        padding: 0.5rem;
-    }
-    
-    /* כרטיסיות */
-    .feature-card {
-        padding: 1.5rem;
-        border-radius: 10px;
-        text-align: center;
-        color: white;
-        height: 100%;
-        transition: transform 0.3s;
-    }
-    
-    .feature-card:hover {
-        transform: translateY(-5px);
     }
 </style>
+""", unsafe_allow_html=True)
 """, unsafe_allow_html=True)
 
 # אתחול session state
