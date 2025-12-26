@@ -34,15 +34,15 @@ st.markdown("""
     
     /* יישור גלובלי לימין - חזק */
     * {
-        direction: rtl ! important;
-        text-align:  right !important;
+        direction: rtl !important;
+        text-align: right !important;
         font-family: 'Heebo', sans-serif !important;
     }
     
     /* תיקון כל הקונטיינרים */
-    .main, .block-container, . element-container, . stApp {
-        direction: rtl ! important;
-        text-align:  right !important;
+    .main, .block-container, .element-container, .stApp {
+        direction: rtl !important;
+        text-align: right !important;
     }
     
     /* הכרח את הסרגל להיות בימין */
@@ -52,7 +52,7 @@ st.markdown("""
     }
     
     section[data-testid="stSidebar"] {
-        right:  0 !important;
+        right: 0 !important;
         left: auto !important;
         direction: rtl !important;
         text-align: right !important;
@@ -64,7 +64,7 @@ st.markdown("""
     }
     
     /* תיקון מיקום התוכן הראשי */
-    .main . block-container {
+    .main .block-container {
         margin-right: 18rem !important;
         margin-left: 1rem !important;
     }
@@ -72,7 +72,7 @@ st.markdown("""
     /* כשהסרגל מכווץ */
     [data-testid="collapsedControl"] {
         right: 0 !important;
-        left:  auto !important;
+        left: auto !important;
     }
     
     /* תיקון טאבים - מימין לשמאל */
@@ -81,7 +81,7 @@ st.markdown("""
         flex-direction: row-reverse !important;
     }
     
-    . stTabs [data-baseweb="tab"] {
+    .stTabs [data-baseweb="tab"] {
         direction: rtl !important;
     }
     
@@ -98,18 +98,18 @@ st.markdown("""
     }
     
     /* תיקון כפתורים */
-    . stButton > button {
+    .stButton > button {
         direction: rtl !important;
         width: 100%;
     }
     
     /* תיקון שדות טקסט */
-    . stTextInput > div > div > input {
+    .stTextInput > div > div > input {
         direction: rtl !important;
         text-align: right !important;
     }
     
-    . stSelectbox label,
+    .stSelectbox label,
     .stTextInput label,
     .stTextArea label {
         direction: rtl !important;
@@ -122,7 +122,7 @@ st.markdown("""
         text-align: right !important;
     }
     
-    . stCheckbox > label {
+    .stCheckbox > label {
         flex-direction: row-reverse !important;
     }
     
@@ -131,10 +131,20 @@ st.markdown("""
         text-align: center !important;
     }
     
-    /* תיקון expander */
+    /* תיקון expander - הסתרת טקסט מיותר */
     .streamlit-expanderHeader {
         direction: rtl !important;
         flex-direction: row-reverse !important;
+    }
+    
+    /* הסתרת כל טקסט באנגלית ב-expander */
+    details summary::-webkit-details-marker {
+        display: none !important;
+    }
+    
+    /* הסתרת טקסט default של streamlit */
+    .streamlit-expanderHeader::before {
+        content: none !important;
     }
     
     /* כותרת ראשית */
@@ -143,11 +153,11 @@ st.markdown("""
         padding: 2rem;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border-radius: 10px;
-        margin-bottom:  2rem;
+        margin-bottom: 2rem;
         direction: rtl !important;
     }
     
-    . main-header h1, .main-header p {
+    .main-header h1, .main-header p {
         direction: rtl !important;
         color: white;
         margin: 0;
@@ -165,7 +175,7 @@ st.markdown("""
     }
     
     .feature-card:hover {
-        transform:  translateY(-5px);
+        transform: translateY(-5px);
     }
 </style>
 """, unsafe_allow_html=True)
