@@ -25,6 +25,24 @@ def get_all_categories() -> List[Dict]:
             "name": "המטולוגיה ואונקולוגיה",
             "emoji": "🩸",
             "description": "מחלות דם וסרטן בילדים"
+        },
+        {
+            "id": "resuscitation",
+            "name": "החייאה וטיפול דחוף",
+            "emoji": "🚨",
+            "description": "מצבי חירום והחייאה בטיפול נמרץ"
+        },
+        {
+            "id": "infections",
+            "name": "זיהומים",
+            "emoji": "🦠",
+            "description": "זיהומים חיידקיים וויראליים"
+        },
+        {
+            "id": "monitoring",
+            "name": "ניטור ונהלים",
+            "emoji": "📊",
+            "description": "ניטור המודינמי, נהלי סיעוד וציוד"
         }
     ]
 
