@@ -1,0 +1,135 @@
+{
+  "id": "vancomycin",
+  "title": "וונקומיצין (Vancomycin)",
+  "description": "אנטיביוטיקה גליקופפטידית לחיידקים גרם חיוביים עמידים (MRSA, Coagulase-negative Staph).",
+  "category": "medications",
+  "difficulty": "intermediate",
+  "order": 50,
+  "tags": ["אנטיביוטיקה", "MRSA", "vancomycin", "גליקופפטיד"],
+  "content": [
+    {
+      "type": "indications",
+      "title": "אינדיקציות",
+      "items": [
+        "MRSA (Methicillin-Resistant Staph Aureus)",
+        "מניינגיטיס חיידקית (בשילוב עם צפטריאקסון)",
+        "חולים אלרגיים לפניצילין",
+        "זיהום קו מרכזי (CLABSI) עד תרבית",
+        "Coagulase-Negative Staphylococcus (CoNS)"
+      ]
+    },
+    {
+      "type": "dosing",
+      "title": "מינון",
+      "sections": [
+        {
+          "name": "כללי (IV בלבד)",
+          "items": [
+            {
+              "age": "ילדים",
+              "dosage": "10-15 mg/kg/dose",
+              "frequency": "כל 6-8 שעות",
+              "notes": "מינון יומי: 40-60 mg/kg/day. חובה לתת לאורך 60 דקות לפחות (למניעת Red Man Syndrome)."
+            }
+          ]
+        },
+        {
+          "name": "מניינגיטיס",
+          "items": [
+            {
+              "dosage": "15 mg/kg/dose",
+              "frequency": "כל 6 שעות",
+              "notes": "מינון יומי: 60 mg/kg/day. דורש רמות בדם גבוהות יותר לחדירה ל-CSF."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "monitoring",
+      "title": "מעקב רמות בדם",
+      "items": [
+        {
+          "parameter": "Trough Level (רמת שפל)",
+          "timing": "לפני מנה רביעית",
+          "target": "10-20 mcg/ml (זיהומים רגילים), 15-20 (מניינגיטיס/MRSA חמור)",
+          "notes": "רמה גבוהה מדי: רעילות כליות ושמיעה. רמה נמוכה: חוסר יעילות."
+        },
+        {
+          "parameter": "תפקודי כליות",
+          "tests": ["Creatinine", "BUN"],
+          "frequency": "כל 48-72 שעות במהלך הטיפול"
+        }
+      ]
+    },
+    {
+      "type": "side_effects",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "effect": "Red Man Syndrome",
+          "description": "סינדרום האדם האדום - גירוי שחרור היסטמין מהיר.",
+          "symptoms": ["סומק באזור הפנים/צוואר/חזה עליון", "גרד", "טכיקרדיה", "היפוטנזיה"],
+          "management": "הפסק עירוי. האט קצב (תן על 120 דקות במקום 60). שקול Diphenhydramine (אנטי-היסטמין) לפני המנה הבאה."
+        },
+        {
+          "effect": "נפרוטוקסיות (Nephrotoxicity)",
+          "description": "פגיעה בכליות, במיוחד בשילוב עם Aminoglycosides (Gentamicin).",
+          "symptoms": ["עליית קריאטינין", "ירידת GFR"],
+          "management": "ניטור רמות Trough, התאמת מינון לפי תפקוד כליות."
+        },
+        {
+          "effect": "אוטוטוקסיות (Ototoxicity)",
+          "description": "פגיעה בשמיעה (נדיר יחסית).",
+          "risk_factors": "רמות גבוהות ממושכות, שילוב עם Aminoglycosides",
+          "management": "שקול בדיקת שמיעה בטיפול ממושך."
+        }
+      ]
+    },
+    {
+      "type": "contraindications",
+      "title": "התוויות נגד וזהירות",
+      "items": [
+        {
+          "condition": "אי ספיקת כליות",
+          "management": "התאמת מינון וקצב מתן. ניטור רמות הכרחי."
+        },
+        {
+          "condition": "שילוב עם Aminoglycosides",
+          "warning": "סיכון מוגבר לנפרוטוקסיות ואוטוטוקסיות. הימנע אם אפשר."
+        }
+      ]
+    },
+    {
+      "type": "administration",
+      "title": "הנחיות מתן",
+      "items": [
+        {
+          "route": "IV בלבד (לא ניתן IM או PO לזיהומים סיסטמיים)",
+          "preparation": "דלל בנורמל סליין או D5W",
+          "rate": "מינימום 60 דקות למנה רגילה. 90-120 דקות במינונים גבוהים או אם היה Red Man Syndrome.",
+          "incompatibilities": "אל תערבב עם Heparin, Phenytoin, Ceftriaxone באותו עירוי."
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "וונקומיצין הוא הטיפול המועדף ל-MRSA ו-CoNS.",
+    "חובה לתת לאורך 60 דקות לפחות (למניעת Red Man Syndrome).",
+    "ניטור רמות Trough חיוני - יעד: 10-20 mcg/ml.",
+    "נפרוטוקסי - מעקב תפקודי כליות.",
+    "במניינגיטיס: מינון גבוה יותר (15 mg/kg q6h)."
+  ],
+  "critical_alerts": [
+    "⚠️ Red Man Syndrome: אם מופיע - הפסק עירוי מיידית והאט קצב בפעם הבאה.",
+    "⚠️ רמות Trough גבוהות (>20): סכנת נפרוטוקסיות - התאם מינון.",
+    "⚠️ אל תשלב עם Gentamicin ללא ניטור הדוק (רעילות כפולה לכליות)."
+  ],
+  "references": [
+    "Vancomycin - UpToDate Pediatric Dosing",
+    "Red Man Syndrome - Clinical Review"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team",
+  "version": "1.0"
+}

@@ -1,0 +1,145 @@
+{
+  "id": "ceftriaxone",
+  "title": "צפטריאקסון (Ceftriaxone / Rocephin)",
+  "description": "אנטיביוטיקה צפלוספורין דור 3 - טווח רחב לגרם חיוביים ושליליים, מניינגיטיס.",
+  "category": "medications",
+  "difficulty": "intermediate",
+  "order": 52,
+  "tags": ["אנטיביוטיקה", "צפלוספורין", "מניינגיטיס", "rocephin"],
+  "content": [
+    {
+      "type": "indications",
+      "title": "אינדיקציות",
+      "items": [
+        "מניינגיטיס חיידקית (מועדף)",
+        "פנאומוניה חמורה",
+        "ספסיס",
+        "זיהומי עור ורקמות רכות",
+        "פיאלונפריטיס",
+        "מחלות מין (גונוריאה)"
+      ]
+    },
+    {
+      "type": "dosing",
+      "title": "מינון",
+      "sections": [
+        {
+          "name": "כללי",
+          "items": [
+            {
+              "age": "ילדים",
+              "dosage": "50-75 mg/kg/day",
+              "frequency": "פעם ביום או מחולק ל-2",
+              "max": "2 גרם ליום",
+              "notes": "נוח - ניתן לתת פעם ביום בשל זמן מחצית חיים ארוך."
+            }
+          ]
+        },
+        {
+          "name": "מניינגיטיס",
+          "items": [
+            {
+              "age": "ילדים",
+              "dosage": "100 mg/kg/day",
+              "frequency": "מחולק ל-2 מנות (כל 12 שעות)",
+              "max": "4 גרם ליום",
+              "notes": "מינון גבוה יותר לחדירה טובה ל-CSF. שלב עם Vancomycin (לכיסוי MRSA)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "contraindications",
+      "title": "התוויות נגד וזהירות חמורות",
+      "items": [
+        {
+          "condition": "היפרבילירובינמיה ביילוד",
+          "reason": "צפטריאקסון דוחק בילירובין מהאלבומין → סכנת קרניקטרוס (פגיעה מוחית).",
+          "management": "אל תשתמש ביילודים עם צהבת. העדף Cefotaxime."
+        },
+        {
+          "condition": "מתן בו-זמני עם סידן (Calcium)",
+          "reason": "יוצר משקעים (Calcium-Ceftriaxone precipitates) בריאות וכליות → מסכן חיים.",
+          "management": "אל תתן צפטריאקסון ב-48 שעות של תמיסת סידן IV. פרוק קווים לפני מעבר בין תרופות."
+        },
+        {
+          "condition": "אלרגיה לפניצילין",
+          "warning": "אלרגיה צולבת (Cross-reactivity) קיימת ב-5-10% מהמקרים. שקול חלופה אם אנפילקסיס ידוע."
+        }
+      ]
+    },
+    {
+      "type": "side_effects",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "effect": "שלשול ושיבוש פלורה מעיים",
+          "description": "פוגע בפלורה תקינה → שלשול קל. במקרים נדירים: C. difficile colitis.",
+          "management": "פרוביוטיקה יכולה להקל."
+        },
+        {
+          "effect": "כולליתיאזיס (אבנים בכיס מרה)",
+          "description": "משקע בילירובין-צפטריאקסון בכיס מרה (Biliary Sludge).",
+          "symptoms": ["כאב בטן ימני עליון (נדיר)", "ממצא אקראי באולטרסאונד"],
+          "management": "בדרך כלל נעלם ספונטנית לאחר הפסקת טיפול."
+        },
+        {
+          "effect": "פריחה",
+          "description": "פריחה קלה (לא אנפילקטית) בכ-3% מהמקרים."
+        }
+      ]
+    },
+    {
+      "type": "administration",
+      "title": "הנחיות מתן",
+      "items": [
+        {
+          "route": "IV או IM",
+          "preparation": "IV: דלל ב-NS או D5W. IM: דלל ב-Lidocaine 1% (להפחתת כאב).",
+          "rate": "IV: 30 דקות. IM: זריקה אחת.",
+          "incompatibilities": "אל תערבב עם תמיסות סידן (Calcium), Fluconazole, Vancomycin באותו עירוי."
+        }
+      ]
+    },
+    {
+      "type": "coverage",
+      "title": "כיסוי אנטיבקטריאלי",
+      "items": [
+        {
+          "name": "גרם חיוביים",
+          "coverage": "Streptococcus pneumoniae (פנאומוקוק), Streptococcus pyogenes (Group A Strep)",
+          "notes": "לא יעיל נגד MRSA (צריך Vancomycin)."
+        },
+        {
+          "name": "גרם שליליים",
+          "coverage": "E. coli, Klebsiella, Proteus, Neisseria meningitidis, Haemophilus influenzae",
+          "notes": "כיסוי טוב למניינגיטיס."
+        },
+        {
+          "name": "לא מכסה",
+          "list": ["MRSA", "Pseudomonas", "Enterococcus", "Anaerobes (חיידקים אנאירוביים)"]
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "צפטריאקסון הוא קו ראשון למניינגיטיס (100 mg/kg/day מחולק ל-2).",
+    "אסור ביילודים עם צהבת (היפרבילירובינמיה) - סכנת קרניקטרוס!",
+    "אסור לתת עם תמיסות סידן (Calcium) - משקעים קטלניים.",
+    "זמן מחצית חיים ארוך - ניתן פעם ביום (נוח).",
+    "לא מכסה MRSA או Pseudomonas."
+  ],
+  "critical_alerts": [
+    "⚠️ אסור ביילודים עם צהבת - שימוש ב-Cefotaxime במקום!",
+    "⚠️ אסור לשלב עם סידן IV (משקעים מסכני חיים) - פרק קווים בין תרופות.",
+    "⚠️ במניינגיטיס - שלב עם Vancomycin (לכיסוי MRSA)."
+  ],
+  "references": [
+    "Ceftriaxone - UpToDate Pediatric Dosing",
+    "Ceftriaxone-Calcium Interaction - FDA Warning"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team",
+  "version": "1.0"
+}

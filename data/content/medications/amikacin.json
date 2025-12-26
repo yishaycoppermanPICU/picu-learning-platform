@@ -1,0 +1,144 @@
+{
+  "id": "amikacin",
+  "title": "אמיקצין (Amikacin)",
+  "description": "אנטיביוטיקה אמינוגליקוזידית עמידה יותר לאנזימים חיידקיים - שמורה לזיהומים עמידים.",
+  "category": "medications",
+  "difficulty": "advanced",
+  "order": 53,
+  "tags": ["אנטיביוטיקה", "aminoglycoside", "עמידות", "נפרוטוקסי"],
+  "content": [
+    {
+      "type": "indications",
+      "title": "אינדיקציות",
+      "items": [
+        "זיהום גרם שלילי עמיד ל-Gentamicin",
+        "Pseudomonas aeruginosa עמיד",
+        "זיהום חמור בחולים אימונוסופרסיביים",
+        "Mycobacterium avium complex (MAC) - בשילוב",
+        "זיהום בילודים (Gentamicin resistant)"
+      ]
+    },
+    {
+      "type": "dosing",
+      "title": "מינון",
+      "sections": [
+        {
+          "name": "ילדים ומתבגרים",
+          "items": [
+            {
+              "dosage": "15-22.5 mg/kg/day",
+              "frequency": "מחולק ל-2-3 מנות (כל 8-12 שעות)",
+              "notes": "מינון גבוה יותר מ-Gentamicin בשל עמידות."
+            }
+          ]
+        },
+        {
+          "name": "פרוטוקול חד-יומי",
+          "items": [
+            {
+              "dosage": "15-20 mg/kg",
+              "frequency": "פעם ביום (q24h)",
+              "notes": "בחולים עם כליות תקינות."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "monitoring",
+      "title": "מעקב רמות בדם (TDM)",
+      "items": [
+        {
+          "parameter": "Peak Level",
+          "timing": "30 דקות לאחר עירוי",
+          "target": "20-30 mcg/ml",
+          "notes": "גבוה יותר מ-Gentamicin."
+        },
+        {
+          "parameter": "Trough Level",
+          "timing": "לפני מנה הבאה",
+          "target": "< 5-10 mcg/ml",
+          "notes": "רמה גבוהה: נפרוטוקסיות."
+        },
+        {
+          "parameter": "תפקודי כליות",
+          "tests": ["Creatinine", "BUN"],
+          "frequency": "כל 48-72 שעות"
+        }
+      ]
+    },
+    {
+      "type": "side_effects",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "effect": "נפרוטוקסיות (Nephrotoxicity)",
+          "description": "זהה ל-Gentamicin - פגיעה בצינוריות הכליה.",
+          "risk_factors": ["טיפול ממושך", "שילוב עם Vancomycin"],
+          "management": "ניטור קריאטינין, הידרציה."
+        },
+        {
+          "effect": "אוטוטוקסיות (Ototoxicity)",
+          "description": "פגיעה בשמיעה - בלתי הפיכה.",
+          "management": "אודיומטריה בטיפול ממושך."
+        }
+      ]
+    },
+    {
+      "type": "administration",
+      "title": "הנחיות מתן",
+      "items": [
+        {
+          "route": "IV או IM",
+          "rate": "עירוי IV על פני 30-60 דקות",
+          "notes": "אל תתן בבולוס מהיר."
+        }
+      ]
+    },
+    {
+      "type": "comparison",
+      "title": "Amikacin vs Gentamicin",
+      "items": [
+        {
+          "parameter": "עמידות",
+          "amikacin": "עמיד יותר לאנזימים חיידקיים (רחב יותר)",
+          "gentamicin": "נהרס באנזימים בחיידקים עמידים"
+        },
+        {
+          "parameter": "מינון",
+          "amikacin": "15-22.5 mg/kg/day",
+          "gentamicin": "7.5 mg/kg/day"
+        },
+        {
+          "parameter": "רמות יעד",
+          "amikacin": "Peak 20-30, Trough < 5-10",
+          "gentamicin": "Peak 5-10, Trough < 2"
+        },
+        {
+          "parameter": "שימוש",
+          "amikacin": "עמידות, זיהום חמור",
+          "gentamicin": "קו ראשון"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "אמיקצין עמיד יותר מ-Gentamicin - שמור לזיהומים עמידים.",
+    "מינון גבוה יותר: 15-22.5 mg/kg/day.",
+    "רמות Peak גבוהות יותר: 20-30 mcg/ml.",
+    "רעיל לכליות ולאוזניים - זהה ל-Gentamicin.",
+    "ניטור רמות בדם חובה."
+  ],
+  "critical_alerts": [
+    "⚠️ שמור לזיהומים עמידים - לא לשימוש שגרתי (למניעת עמידות נוספת).",
+    "⚠️ Trough גבוה: סכנת נפרוטוקסיות - התאם מינון.",
+    "⚠️ שילוב עם Vancomycin - רעילות כפולה לכליות."
+  ],
+  "references": [
+    "Amikacin - UpToDate Pediatric Dosing",
+    "Aminoglycoside Resistance Mechanisms"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team",
+  "version": "1.0"
+}

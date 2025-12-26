@@ -1,0 +1,167 @@
+{
+  "id": "rocuronium",
+  "title": "רוקורוניום (Rocuronium / Esmeron)",
+  "description": "משתק שרירים לא-דפולריזינג - לאינטובציה והנשמה מכנית.",
+  "category": "medications",
+  "difficulty": "advanced",
+  "order": 61,
+  "tags": ["משתק שרירים", "אינטובציה", "neuromuscular blocker"],
+  "content": [
+    {
+      "type": "indications",
+      "title": "אינדיקציות",
+      "items": [
+        "אינטובציה מהירה (RSI - Rapid Sequence Intubation)",
+        "הקלת הנשמה מכנית בחולה שנאבק",
+        "הליכים כירורגיים",
+        "שיתוק זמני לבדיקות דימות (CT, MRI)"
+      ]
+    },
+    {
+      "type": "dosing",
+      "title": "מינון",
+      "sections": [
+        {
+          "name": "אינטובציה (RSI)",
+          "items": [
+            {
+              "dosage": "0.6-1.2 mg/kg IV",
+              "onset": "45-60 שניות (מהיר)",
+              "duration": "30-45 דקות",
+              "notes": "במינון 1.2 mg/kg - Onset מהיר יותר (30-45 שניות), דומה ל-Succinylcholine."
+            }
+          ]
+        },
+        {
+          "name": "עירוי מתמשך (הנשמה מכנית)",
+          "items": [
+            {
+              "dosage": "8-12 mcg/kg/min",
+              "notes": "התאם לפי TOF (Train of Four) monitoring."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "mechanism",
+      "title": "מנגנון פעולה",
+      "items": [
+        {
+          "description": "משתק שרירים לא-דפולריזינג (Non-Depolarizing NMBA) - חוסם קולטני ACh (אצטילכולין) בחיבור נוירו-שרירי.",
+          "notes": "לא גורם לפרכוסים שריריים (Fasciculations) בניגוד ל-Succinylcholine."
+        }
+      ]
+    },
+    {
+      "type": "side_effects",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "effect": "היפרקלמיה קלה",
+          "description": "עלייה קלה באשלגן (בניגוד ל-Succinylcholine שגורם לעלייה חדה).",
+          "notes": "בטוח יחסית בחולי כליות."
+        },
+        {
+          "effect": "אין השפעה המודינמית",
+          "description": "לא משנה לחץ דם או דופק (יתרון על פני Succinylcholine).",
+          "notes": "בטוח בחולה לב."
+        }
+      ]
+    },
+    {
+      "type": "contraindications",
+      "title": "התוויות נגד וזהירות",
+      "items": [
+        {
+          "condition": "אלרגיה ידועה",
+          "warning": "נדיר - אנפילקסיס."
+        },
+        {
+          "condition": "Myasthenia Gravis",
+          "warning": "רגישות מוגברת - דורש מינון נמוך יותר."
+        }
+      ]
+    },
+    {
+      "type": "antidote",
+      "title": "אנטגוניסט - סוגמדקס (Sugammadex / Bridion)",
+      "items": [
+        {
+          "indication": "היפוך מיידי של שיתוק רוקורוניום",
+          "dosage": "2-4 mg/kg IV (תלוי בעומק השיתוק)",
+          "onset": "1-3 דקות",
+          "mechanism": "קושר רוקורוניום באופן ספציפי ומבטל את פעולתו.",
+          "notes": "יתרון עצום על Neostigmine (מהיר יותר, בטוח יותר). יקר."
+        }
+      ]
+    },
+    {
+      "type": "monitoring",
+      "title": "מעקב",
+      "items": [
+        {
+          "parameter": "TOF (Train of Four)",
+          "description": "מדידת עומק שיתוק באמצעות גירוי חשמלי לעצב.",
+          "target": "1-2 twitches מתוך 4 (שיתוק מספק להנשמה)",
+          "notes": "חשוב לפני ניסיון אקסטובציה - TOF ratio > 0.9 = התאוששות מלאה."
+        },
+        {
+          "parameter": "נשימה ספונטנית",
+          "timing": "לפני הפסקת הנשמה מכנית",
+          "signs": ["TOF > 0.9", "נפח גאות (Tidal Volume) > 5 ml/kg", "כוח נשימתי (NIF) < -20 cmH2O"]
+        }
+      ]
+    },
+    {
+      "type": "comparison",
+      "title": "Rocuronium vs Succinylcholine",
+      "items": [
+        {
+          "parameter": "Onset",
+          "rocuronium": "45-60 שניות (1.2 mg/kg: 30-45 שניות)",
+          "succinylcholine": "30-60 שניות"
+        },
+        {
+          "parameter": "Duration",
+          "rocuronium": "30-45 דקות",
+          "succinylcholine": "5-10 דקות"
+        },
+        {
+          "parameter": "אנטידוט",
+          "rocuronium": "Sugammadex (מהיר, יעיל)",
+          "succinylcholine": "אין (חובה להמתין)"
+        },
+        {
+          "parameter": "תופעות לוואי",
+          "rocuronium": "מעט מאוד",
+          "succinylcholine": "היפרקלמיה, ברדיקרדיה, malignant hyperthermia"
+        },
+        {
+          "parameter": "שימוש",
+          "rocuronium": "מועדף ברוב המקרים (בטיחות)",
+          "succinylcholine": "רק אם אין Sugammadex זמין או במצבי חירום"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "רוקורוניום הוא משתק שרירים מועדף לאינטובציה (RSI).",
+    "מינון: 0.6-1.2 mg/kg IV. Onset: 45-60 שניות.",
+    "אנטידוט: Sugammadex (2-4 mg/kg) - היפוך מהיר ובטוח.",
+    "בטוח יותר מ-Succinylcholine (אין היפרקלמיה משמעותית).",
+    "ניטור TOF חשוב להערכת עומק שיתוק."
+  ],
+  "critical_alerts": [
+    "⚠️ רוקורוניום גורם לשיתוק מלא - חובה לבצע אינטובציה מוצלחת!",
+    "⚠️ תן רק אם אתה בטוח ביכולת לנהל את נתיב האוויר (Bag-Mask, אינטובציה).",
+    "⚠️ Sugammadex זמין? ודא לפני מתן (אנטידוט מציל חיים במצב 'Cannot Intubate Cannot Ventilate')."
+  ],
+  "references": [
+    "Rocuronium - UpToDate Pediatric Dosing",
+    "Neuromuscular Blockers in RSI"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team",
+  "version": "1.0"
+}

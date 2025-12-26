@@ -1,0 +1,147 @@
+{
+  "id": "gentamicin",
+  "title": "גנטמיצין (Gentamicin / Garamycin)",
+  "description": "אנטיביוטיקה אמינוגליקוזידית לחיידקים גרם שליליים (Pseudomonas, E. coli, Klebsiella).",
+  "category": "medications",
+  "difficulty": "intermediate",
+  "order": 51,
+  "tags": ["אנטיביוטיקה", "aminoglycoside", "גרם שלילי", "נפרוטוקסי"],
+  "content": [
+    {
+      "type": "indications",
+      "title": "אינדיקציות",
+      "items": [
+        "זיהום חמור גרם שלילי (ספסיס, פנאומוניה)",
+        "Pseudomonas aeruginosa",
+        "אנדוקרדיטיס (בשילוב)",
+        "זיהומי שתן מסובכים",
+        "זיהום תוך-בטני (בשילוב)"
+      ]
+    },
+    {
+      "type": "dosing",
+      "title": "מינון",
+      "sections": [
+        {
+          "name": "פרוטוקול רגיל (Multiple Daily Dosing)",
+          "items": [
+            {
+              "age": "ילדים",
+              "dosage": "2.5 mg/kg/dose",
+              "frequency": "כל 8 שעות",
+              "notes": "מינון יומי כולל: 7.5 mg/kg/day."
+            }
+          ]
+        },
+        {
+          "name": "פרוטוקול חד-יומי (Once Daily Dosing)",
+          "items": [
+            {
+              "age": "ילדים מעל חודש עם כליות תקינות",
+              "dosage": "5-7 mg/kg",
+              "frequency": "פעם ביום (q24h)",
+              "notes": "יעילות זהה, פחות רעיל. מועדף במקרים רבים."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "monitoring",
+      "title": "מעקב רמות בדם (TDM)",
+      "items": [
+        {
+          "parameter": "Peak Level (שיא)",
+          "timing": "30 דקות לאחר סיום עירוי",
+          "target": "5-10 mcg/ml",
+          "notes": "רמה גבוהה מדי: אוטוטוקסיות (פגיעה בשמיעה)."
+        },
+        {
+          "parameter": "Trough Level (שפל)",
+          "timing": "לפני מנה הבאה",
+          "target": "< 2 mcg/ml",
+          "notes": "רמה גבוהה מדי: נפרוטוקסיות (פגיעה בכליות)."
+        },
+        {
+          "parameter": "תפקודי כליות",
+          "tests": ["Creatinine", "BUN"],
+          "frequency": "כל 48-72 שעות (יותר תדיר בטיפול ממושך)"
+        }
+      ]
+    },
+    {
+      "type": "side_effects",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "effect": "נפרוטוקסיות (Nephrotoxicity)",
+          "description": "פגיעה בצינוריות הכליה, הפיכה בדרך כלל.",
+          "risk_factors": ["טיפול ממושך (>7 ימים)", "התייבשות", "שילוב עם Vancomycin/NSAIDs"],
+          "management": "עצור טיפול אם קריאטינין עולה פי 2. הידרציה טובה."
+        },
+        {
+          "effect": "אוטוטוקסיות (Ototoxicity)",
+          "description": "פגיעה בתאי שיער באוזן הפנימית - **בלתי הפיכה**.",
+          "symptoms": ["טינטון", "ורטיגו", "אובדן שמיעה (במיוחד תדרים גבוהים)"],
+          "risk_factors": "רמות Peak גבוהות, טיפול ממושך",
+          "management": "אודיומטריה בטיפול >2 שבועות."
+        },
+        {
+          "effect": "חסימה נוירומוסקולרית",
+          "description": "נדיר - חולשת שרירים, דיכוי נשימתי.",
+          "risk_factors": "חולי Myasthenia Gravis, שילוב עם משתקי שרירים",
+          "management": "הימנע בחולים אלו."
+        }
+      ]
+    },
+    {
+      "type": "contraindications",
+      "title": "התוויות נגד וזהירות",
+      "items": [
+        {
+          "condition": "אי ספיקת כליות",
+          "management": "התאמת מינון והארכת מרווחים. ניטור רמות הכרחי."
+        },
+        {
+          "condition": "Myasthenia Gravis",
+          "warning": "התווית נגד יחסית - עלול להחמיר חולשה."
+        },
+        {
+          "condition": "שילוב עם Vancomycin",
+          "warning": "נפרוטוקסיות מוגברת. הימנע אם אפשר, או נטר הדוק."
+        }
+      ]
+    },
+    {
+      "type": "administration",
+      "title": "הנחיות מתן",
+      "items": [
+        {
+          "route": "IV או IM",
+          "preparation": "דלל ב-NS או D5W ל-1-2 mg/ml",
+          "rate": "עירוי IV על פני 30-60 דקות",
+          "notes": "אל תתן בבולוס מהיר (סיכון לאוטוטוקסיות)."
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "גנטמיצין יעיל נגד גרם שלילי (Pseudomonas, E. coli).",
+    "רעיל לכליות ולאוזניים - ניטור רמות חובה.",
+    "יעדי רמות: Peak 5-10, Trough < 2 mcg/ml.",
+    "פרוטוקול חד-יומי (5-7 mg/kg q24h) מועדף כשכליות תקינות.",
+    "פגיעה בשמיעה היא בלתי הפיכה!"
+  ],
+  "critical_alerts": [
+    "⚠️ Trough > 2 mcg/ml: סכנת נפרוטוקסיות - התאם מינון מיידית.",
+    "⚠️ אוטוטוקסיות היא בלתי הפיכה - זהירות בטיפול ממושך.",
+    "⚠️ שילוב עם Vancomycin מכפיל סיכון לכליות - נטר קריאטינין יומי."
+  ],
+  "references": [
+    "Aminoglycosides - UpToDate Pediatric Dosing",
+    "TDM Guidelines for Gentamicin"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team",
+  "version": "1.0"
+}

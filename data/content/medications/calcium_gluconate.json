@@ -1,0 +1,182 @@
+{
+  "id": "calcium_gluconate",
+  "title": "קלציום גלוקונט (Calcium Gluconate)",
+  "description": "תוסף קלציום להיפוקלצמיה, היפרקלמיה והרעלות.",
+  "category": "medications",
+  "difficulty": "intermediate",
+  "order": 70,
+  "tags": ["אלקטרוליטים", "קלציום", "היפוקלצמיה", "היפרקלמיה"],
+  "content": [
+    {
+      "type": "indications",
+      "title": "אינדיקציות",
+      "items": [
+        "היפוקלצמיה סימפטומטית (טטניה, פרכוסים, הפרעות קצב)",
+        "היפרקלמיה עם שינויי ECG (הגנת לב)",
+        "הרעלת מגנזיום (אנטגוניסט)",
+        "הרעלה ב-Calcium Channel Blockers",
+        "תסמונת מסה (Tumor Lysis, רבדומיוליזה) - במקרים נדירים"
+      ]
+    },
+    {
+      "type": "dosing",
+      "title": "מינון",
+      "sections": [
+        {
+          "name": "היפוקלצמיה חמורה / פרכוסים",
+          "items": [
+            {
+              "dosage": "50-100 mg/kg (0.5-1 ml/kg של 10%)",
+              "max": "3 גרם (30 מ\"ל) למנה",
+              "route": "IV לאט",
+              "rate": "לא מהיר מ-100 mg/min (1 מ\"ל/דקה)",
+              "notes": "עירוי מהיר מדי → ברדיקרדיה, דום לב."
+            }
+          ]
+        },
+        {
+          "name": "היפרקלמיה (Cardioprotection)",
+          "items": [
+            {
+              "dosage": "50-100 mg/kg (0.5-1 ml/kg)",
+              "max": "3 גרם",
+              "route": "IV לאט על 5-10 דקות",
+              "onset": "1-3 דקות",
+              "duration": "30-60 דקות",
+              "notes": "מייצב קרום תא הלב. לא מוריד אשלגן! חובה לתת טיפול נוסף (אינסולין, רזינים)."
+            }
+          ]
+        },
+        {
+          "name": "תחזוקה (עירוי)",
+          "items": [
+            {
+              "dosage": "50-75 mg/kg/day",
+              "route": "עירוי מתמשך או מחולק למנות",
+              "notes": "לאחר תיקון חריף."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "monitoring",
+      "title": "מעקב",
+      "items": [
+        {
+          "parameter": "Ionized Calcium (Ca++)",
+          "target": "1.1-1.3 mmol/L",
+          "notes": "זו הרמה הפעילה. Total Calcium מושפע מאלבומין ואינו מדויק."
+        },
+        {
+          "parameter": "ECG",
+          "timing": "במתן להיפרקלמיה - נטר במהלך עירוי",
+          "signs": ["QT interval - מתקצר בהיפרקלצמיה, מתארך בהיפוקלצמיה"]
+        },
+        {
+          "parameter": "מגנזיום",
+          "notes": "היפומגנזמיה מונעת תיקון קלציום - בדוק ותקן גם מגנזיום."
+        }
+      ]
+    },
+    {
+      "type": "side_effects",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "effect": "ברדיקרדיה / דום לב",
+          "description": "במתן מהיר מדי.",
+          "prevention": "עירוי לאט (לא מהיר מ-100 mg/min). ניטור ECG."
+        },
+        {
+          "effect": "Extravasation (דליפה מהוריד)",
+          "description": "קלציום מגרה מאוד לרקמות → נמק.",
+          "management": "אם יש נפיחות/כאב - הפסק עירוי מיידית. תן דרך קו מרכזי אם אפשר."
+        },
+        {
+          "effect": "היפרקלצמיה",
+          "description": "במתן יתר.",
+          "symptoms": ["בחילות", "עצירות", "חולשה", "QT קצר", "אבנים בכליות"],
+          "management": "הפסק עירוי. הידרציה."
+        }
+      ]
+    },
+    {
+      "type": "contraindications",
+      "title": "התוויות נגד וזהירות",
+      "items": [
+        {
+          "condition": "היפרקלצמיה",
+          "warning": "אל תתן אם רמת קלציום גבוהה."
+        },
+        {
+          "condition": "Digoxin Toxicity",
+          "warning": "קלציום מחמיר רעילות דיגוקסין → הפרעות קצב קטלניות. התווית נגד יחסית."
+        },
+        {
+          "condition": "תמיסת ביקרבונט / פוספטים",
+          "warning": "אל תערבב באותו עירוי (משקעים)."
+        }
+      ]
+    },
+    {
+      "type": "administration",
+      "title": "הנחיות מתן",
+      "items": [
+        {
+          "route": "IV בלבד (לא IM)",
+          "preparation": "Calcium Gluconate 10% (100 mg/ml)",
+          "dilution": "דלל ב-D5W או NS",
+          "rate": "מקסימום 100 mg/min (1 מ\"ל/דקה) - לאט!",
+          "line": "העדף קו מרכזי (CVL) על פריפרי (סכנת Extravasation)",
+          "incompatibilities": "אל תערבב עם Bicarbonate, Phosphate, Ceftriaxone"
+        }
+      ]
+    },
+    {
+      "type": "calcium_types",
+      "title": "Calcium Gluconate vs Calcium Chloride",
+      "items": [
+        {
+          "parameter": "אלמנטלי קלציום",
+          "gluconate": "9% (פחות מרוכז)",
+          "chloride": "27% (יותר מרוכז)"
+        },
+        {
+          "parameter": "מתן",
+          "gluconate": "IV פריפרי או מרכזי",
+          "chloride": "רק קו מרכזי (מגרה מאוד)"
+        },
+        {
+          "parameter": "שימוש",
+          "gluconate": "מועדף ברוב המקרים (בטוח יותר)",
+          "chloride": "החייאה/מצב קריטי (פעולה מהירה יותר)"
+        },
+        {
+          "parameter": "מינון המרה",
+          "note": "1 גרם Calcium Chloride ≈ 3 גרם Calcium Gluconate"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "קלציום גלוקונט מועדף על Calcium Chloride (בטוח יותר לעירוי פריפרי).",
+    "מינון: 50-100 mg/kg IV לאט (מקסימום 100 mg/min).",
+    "שימושים: היפוקלצמיה, היפרקלמיה (הגנת לב), הרעלות.",
+    "עירוי מהיר → ברדיקרדיה/דום לב!",
+    "Extravasation גורם לנמק רקמות - העדף קו מרכזי."
+  ],
+  "critical_alerts": [
+    "⚠️ עירוי מהיר מדי → דום לב! תן לאט (לא מהיר מ-100 mg/min).",
+    "⚠️ Extravasation = נמק רקמות - העדף CVL על פריפרי.",
+    "⚠️ בהיפרקלמיה: קלציום מייצב לב אבל לא מוריד אשלגן - חובה טיפול נוסף!",
+    "⚠️ אל תתן עם Digoxin Toxicity - מחמיר הפרעות קצב."
+  ],
+  "references": [
+    "Calcium Gluconate - UpToDate Pediatric Dosing",
+    "Hypercalcemia and Hypocalcemia Management"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team",
+  "version": "1.0"
+}

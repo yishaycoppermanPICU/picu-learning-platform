@@ -1,0 +1,186 @@
+{
+  "id": "meropenem",
+  "title": "מרופנם (Meropenem)",
+  "description": "אנטיביוטיקה קרבפנם - טווח רחב ביותר, כולל Pseudomonas ואנאירובים.",
+  "category": "medications",
+  "difficulty": "advanced",
+  "order": 54,
+  "tags": ["אנטיביוטיקה", "carbapenem", "pseudomonas", "טווח רחב"],
+  "content": [
+    {
+      "type": "indications",
+      "title": "אינדיקציות",
+      "items": [
+        "ספסיס חמור בחולה אימונוסופרסיבי",
+        "זיהום Pseudomonas aeruginosa",
+        "מניינגיטיס חיידקית (חלופה)",
+        "זיהום תוך-בטני / אגן (אנאירובים)",
+        "Febrile Neutropenia (חום בנויטרופניה)",
+        "זיהום עם חיידקים מרובי-עמידות (ESBL, MDR)"
+      ]
+    },
+    {
+      "type": "dosing",
+      "title": "מינון",
+      "sections": [
+        {
+          "name": "כללי",
+          "items": [
+            {
+              "age": "ילדים מעל 3 חודשים",
+              "dosage": "20 mg/kg/dose",
+              "frequency": "כל 8 שעות",
+              "max": "1 גרם למנה",
+              "notes": "מינון יומי: 60 mg/kg/day."
+            }
+          ]
+        },
+        {
+          "name": "מניינגיטיס / Pseudomonas",
+          "items": [
+            {
+              "dosage": "40 mg/kg/dose",
+              "frequency": "כל 8 שעות",
+              "max": "2 גרם למנה",
+              "notes": "מינון גבוה לחדירה טובה ל-CSF ולכיסוי Pseudomonas."
+            }
+          ]
+        },
+        {
+          "name": "יילודים",
+          "items": [
+            {
+              "age": "< 7 ימים",
+              "dosage": "20 mg/kg",
+              "frequency": "כל 12 שעות"
+            },
+            {
+              "age": "7-28 ימים",
+              "dosage": "20 mg/kg",
+              "frequency": "כל 8 שעות"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "coverage",
+      "title": "כיסוי אנטיבקטריאלי (הרחב ביותר)",
+      "items": [
+        {
+          "name": "גרם חיוביים",
+          "coverage": "Streptococcus, Staphylococcus (לא MRSA), Listeria",
+          "notes": "לא מכסה MRSA - צריך Vancomycin."
+        },
+        {
+          "name": "גרם שליליים",
+          "coverage": "E. coli, Klebsiella, Pseudomonas aeruginosa, Proteus, Enterobacter, ESBL producers",
+          "notes": "כיסוי מצוין ל-Pseudomonas."
+        },
+        {
+          "name": "אנאירובים",
+          "coverage": "Bacteroides fragilis, Clostridium (רוב המינים)",
+          "notes": "יעיל בזיהום תוך-בטני."
+        },
+        {
+          "name": "לא מכסה",
+          "list": ["MRSA", "Enterococcus faecium (VRE)", "Stenotrophomonas"]
+        }
+      ]
+    },
+    {
+      "type": "side_effects",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "effect": "שלשול / C. difficile",
+          "description": "פוגע בפלורה המעיים → שלשול. במקרים נדירים: קוליטיס ע\"י C. difficile.",
+          "management": "אם שלשול חמור: בדוק C. diff toxin."
+        },
+        {
+          "effect": "פרכוסים (Seizures)",
+          "description": "נדיר, אבל חמור - במיוחד במינונים גבוהים או אי ספיקת כליות.",
+          "risk_factors": ["מניינגיטיס", "אי ספיקת כליות", "הפרעות קצב", "מינון גבוה"],
+          "management": "התאם מינון בחולי כליות. שקול EEG במצב לא ברור."
+        },
+        {
+          "effect": "פריחה",
+          "description": "3-5% מהמטופלים. לרוב קלה."
+        }
+      ]
+    },
+    {
+      "type": "contraindications",
+      "title": "התוויות נגד וזהירות",
+      "items": [
+        {
+          "condition": "אלרגיה לפניצילין",
+          "warning": "אלרגיה צולבת (Cross-reactivity) נדירה (<1%), אבל קיימת. שקול בזהירות אם אנפילקסיס ידוע.",
+          "management": "במקרה של היסטוריה של אנפילקסיס לפניצילין - שקול חלופה (Fluoroquinolone, Aztreonam)."
+        },
+        {
+          "condition": "אי ספיקת כליות",
+          "management": "התאם מינון ומרווחים לפי GFR. סכנת הצטברות ופרכוסים."
+        },
+        {
+          "condition": "Valproic Acid (דפלפט) - אינטראקציה מסוכנת!",
+          "warning": "מרופנם מוריד רמות Valproate בדם באופן דרמטי → סיכון לפרכוסים.",
+          "management": "הימנע משילוב אם אפשר. אם חובה - נטר רמות Valproate והעלה מינון."
+        }
+      ]
+    },
+    {
+      "type": "administration",
+      "title": "הנחיות מתן",
+      "items": [
+        {
+          "route": "IV בלבד (לא IM או PO)",
+          "preparation": "דלל ב-NS או D5W",
+          "rate": "עירוי על פני 15-30 דקות (מניינגיטיס: 30 דקות)",
+          "stability": "יציב בטמפרטורת החדר עד 4 שעות. אל תקפיא."
+        }
+      ]
+    },
+    {
+      "type": "comparison",
+      "title": "Meropenem vs Imipenem",
+      "items": [
+        {
+          "parameter": "פרכוסים",
+          "meropenem": "סיכון נמוך יותר",
+          "imipenem": "סיכון גבוה יותר"
+        },
+        {
+          "parameter": "שימוש במניינגיטיס",
+          "meropenem": "מאושר",
+          "imipenem": "לא מאושר (לא חודר מספיק ל-CSF)"
+        },
+        {
+          "parameter": "כיסוי Pseudomonas",
+          "meropenem": "מעולה",
+          "imipenem": "טוב"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "מרופנם הוא אנטיביוטיקה טווח רחב ביותר - מכסה Pseudomonas ואנאירובים.",
+    "מינון כללי: 20 mg/kg q8h. במניינגיטיס/Pseudomonas: 40 mg/kg q8h.",
+    "לא מכסה MRSA - שלב עם Vancomycin אם יש חשד.",
+    "אינטראקציה מסוכנת עם Valproic Acid (דפלפט) - מוריד רמות.",
+    "סיכון נמוך לפרכוסים (בניגוד ל-Imipenem)."
+  ],
+  "critical_alerts": [
+    "⚠️ אינטראקציה מסוכנת עם Valproic Acid - מוריד רמות → פרכוסים.",
+    "⚠️ סיכון לפרכוסים במינונים גבוהים או אי ספיקת כליות.",
+    "⚠️ לא מכסה MRSA - שלב עם Vancomycin בחולה קריטי.",
+    "⚠️ שמור לזיהומים חמורים/עמידים - שימוש זהיר למניעת עמידות."
+  ],
+  "references": [
+    "Meropenem - UpToDate Pediatric Dosing",
+    "Carbapenem Resistance Mechanisms"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team",
+  "version": "1.0"
+}

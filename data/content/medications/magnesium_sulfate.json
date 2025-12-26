@@ -1,0 +1,209 @@
+{
+  "id": "magnesium_sulfate",
+  "title": "מגנזיום סולפט (Magnesium Sulfate)",
+  "description": "תוסף מגנזיום להיפומגנזמיה, פרכוסים, אסטמה והפרעות קצב.",
+  "category": "medications",
+  "difficulty": "intermediate",
+  "order": 71,
+  "tags": ["אלקטרוליטים", "מגנזיום", "פרכוסים", "אסטמה", "Torsades"],
+  "content": [
+    {
+      "type": "indications",
+      "title": "אינדיקציות",
+      "items": [
+        "היפומגנזמיה סימפטומטית",
+        "פרכוסים עמידים (במיוחד עם היפומגנזמיה)",
+        "Torsades de Pointes (הפרעת קצב מסוכנת)",
+        "אסטמה חריפה חמורה (ברונכודילטציה)",
+        "Eclampsia / Pre-eclampsia (במיילדות)",
+        "Neuroprotection (TBI - ניסיוני)"
+      ]
+    },
+    {
+      "type": "dosing",
+      "title": "מינון",
+      "sections": [
+        {
+          "name": "היפומגנזמיה חמורה / פרכוסים",
+          "items": [
+            {
+              "dosage": "25-50 mg/kg (0.2-0.4 mEq/kg)",
+              "max": "2 גרם למנה",
+              "route": "IV לאט על 15-30 דקות",
+              "notes": "עירוי מהיר → היפוטנזיה, ברדיקרדיה."
+            }
+          ]
+        },
+        {
+          "name": "Torsades de Pointes",
+          "items": [
+            {
+              "dosage": "25-50 mg/kg",
+              "max": "2 גרם",
+              "route": "IV לאט על 1-2 דקות (במצב חירום) או 15 דקות",
+              "notes": "יעיל בהפרעת קצב זו גם אם מגנזיום תקין."
+            }
+          ]
+        },
+        {
+          "name": "אסטמה חריפה חמורה",
+          "items": [
+            {
+              "dosage": "25-75 mg/kg",
+              "max": "2 גרם",
+              "route": "IV על 20-30 דקות",
+              "notes": "ברונכודילטציה. יעיל באסטמה עמידה לטיפול סטנדרטי."
+            }
+          ]
+        },
+        {
+          "name": "תחזוקה (עירוי)",
+          "items": [
+            {
+              "dosage": "25-50 mg/kg/day",
+              "route": "עירוי מתמשך או מחולק למנות",
+              "notes": "לאחר תיקון חריף."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "monitoring",
+      "title": "מעקב",
+      "items": [
+        {
+          "parameter": "רמת מגנזיום בדם",
+          "target": "1.7-2.4 mg/dL (0.7-1.0 mmol/L)",
+          "notes": "בדוק לפני מתן ו-4-6 שעות אחרי."
+        },
+        {
+          "parameter": "רפלקסים עמוקים (DTR - Deep Tendon Reflexes)",
+          "timing": "במהלך עירוי",
+          "signs": ["אובדן רפלקסים = סימן להיפרמגנזמיה (רעילות)"]
+        },
+        {
+          "parameter": "ECG",
+          "signs": ["QT interval", "הפרעות הולכה (AV block במגנזיום גבוה)"]
+        },
+        {
+          "parameter": "תפקודי כליות",
+          "notes": "מגנזיום מופרש בכליות - סכנת הצטברות באי ספיקת כליות."
+        }
+      ]
+    },
+    {
+      "type": "side_effects",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "effect": "היפוטנזיה",
+          "description": "הרחבת כלי דם במתן מהיר.",
+          "prevention": "עירוי לאט על 15-30 דקות."
+        },
+        {
+          "effect": "ברדיקרדיה",
+          "description": "במינון גבוה או מתן מהיר."
+        },
+        {
+          "effect": "דיכוי נשימתי",
+          "description": "במינון גבוה מדי (היפרמגנזמיה).",
+          "signs": ["רפלקסים נעלמים", "חולשה שרירים", "נשימה איטית"],
+          "antidote": "Calcium Gluconate (אנטגוניסט)"
+        },
+        {
+          "effect": "הסמקה (Flushing)",
+          "description": "תחושת חום, אדמומיות בפנים.",
+          "notes": "שכיח, לא מסוכן."
+        }
+      ]
+    },
+    {
+      "type": "contraindications",
+      "title": "התוויות נגד וזהירות",
+      "items": [
+        {
+          "condition": "היפרמגנזמיה",
+          "warning": "רמת מגנזיום גבוהה (> 2.5 mg/dL) - התווית נגד."
+        },
+        {
+          "condition": "אי ספיקת כליות חמורה",
+          "warning": "סכנת הצטברות ורעילות. התאם מינון."
+        },
+        {
+          "condition": "חסם לב (Heart Block)",
+          "warning": "מגנזיום מחמיר הפרעות הולכה."
+        },
+        {
+          "condition": "Myasthenia Gravis",
+          "warning": "מחמיר חולשה שרירים."
+        }
+      ]
+    },
+    {
+      "type": "antidote",
+      "title": "אנטגוניסט - קלציום גלוקונט",
+      "items": [
+        {
+          "indication": "היפרמגנזמיה חמורה (רעילות)",
+          "dosage": "50-100 mg/kg Calcium Gluconate IV לאט",
+          "mechanism": "אנטגוניזם תחרותי - מבטל השפעות קרדיו-רספירטוריות של מגנזיום.",
+          "notes": "במקביל הפסק מגנזיום, הידרציה, שקול דיאליזה באי ספיקת כליות."
+        }
+      ]
+    },
+    {
+      "type": "administration",
+      "title": "הנחיות מתן",
+      "items": [
+        {
+          "route": "IV או IM",
+          "preparation": "Magnesium Sulfate 50% (500 mg/ml = 4 mEq/ml)",
+          "dilution": "דלל ב-D5W או NS ל-20% (200 mg/ml) לפני עירוי",
+          "rate": "לא מהיר מ-150 mg/min (כ-1 גרם ב-7 דקות)",
+          "notes": "IM כואב - השתמש ב-IV אם אפשר."
+        }
+      ]
+    },
+    {
+      "type": "special_notes",
+      "title": "הערות מיוחדות",
+      "items": [
+        {
+          "topic": "היפומגנזמיה והיפוקלצמיה",
+          "description": "היפומגנזמיה מונעת תיקון קלציום (מעכבת הפרשת PTH).",
+          "recommendation": "בדוק ותקן מגנזיום לפני תיקון קלציום."
+        },
+        {
+          "topic": "מגנזיום באסטמה",
+          "description": "מרחיב סימפונות (ברונכודילטור).",
+          "evidence": "יעיל באסטמה חריפה חמורה עמידה לסלבוטמול וסטרואידים."
+        },
+        {
+          "topic": "Torsades de Pointes",
+          "description": "מגנזיום הוא טיפול קו ראשון (גם אם רמה תקינה).",
+          "mechanism": "מייצב קרום תא הלב."
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "מגנזיום יעיל לפרכוסים, Torsades, ואסטמה חמורה.",
+    "מינון: 25-50 mg/kg IV לאט (מקסימום 2 גרם).",
+    "עירוי מהיר → היפוטנזיה, ברדיקרדיה.",
+    "רעילות (היפרמגנזמיה): אובדן רפלקסים, דיכוי נשימתי → אנטידוט: Calcium Gluconate.",
+    "היפומגנזמיה מונעת תיקון קלציום - תקן מגנזיום קודם."
+  ],
+  "critical_alerts": [
+    "⚠️ עירוי מהיר → היפוטנזיה וברדיקרדיה - תן לאט (15-30 דקות).",
+    "⚠️ רעילות: אובדן רפלקסים → דיכוי נשימתי → אנטידוט: Calcium Gluconate 50-100 mg/kg.",
+    "⚠️ אי ספיקת כליות → סכנת הצטברות - התאם מינון ונטר רמות."
+  ],
+  "references": [
+    "Magnesium Sulfate - UpToDate Pediatric Dosing",
+    "Hypermagnesemia and Hypomagnesemia"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team",
+  "version": "1.0"
+}

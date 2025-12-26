@@ -1,0 +1,188 @@
+{
+  "id": "sodium_bicarbonate",
+  "title": "ביקרבונט נתרן (Sodium Bicarbonate)",
+  "description": "מאגר בסיסי לאסידוזיס מטבולית והיפרקלמיה.",
+  "category": "medications",
+  "difficulty": "intermediate",
+  "order": 72,
+  "tags": ["אלקטרוליטים", "אסידוזיס", "היפרקלמיה", "ביקרבונט"],
+  "content": [
+    {
+      "type": "indications",
+      "title": "אינדיקציות",
+      "items": [
+        "אסידוזיס מטבולית חמורה (pH < 7.1-7.2)",
+        "היפרקלמיה חמורה (הסטת אשלגן לתוך תאים)",
+        "הרעלות ספציפיות (Tricyclic antidepressants, Aspirin, Methanol)",
+        "CPR ממושכת (שנוי במחלוקת)",
+        "אסידוזיס צינורית כלייתית (RTA)",
+        "Rhabdomyolysis (אלקליניזציה של שתן)"
+      ]
+    },
+    {
+      "type": "dosing",
+      "title": "מינון",
+      "sections": [
+        {
+          "name": "אסידוזיס מטבולית חריפה",
+          "items": [
+            {
+              "formula": "מחסור ביקרבונט (mEq) = 0.3 × משקל (kg) × (HCO3 רצוי - HCO3 נמדד)",
+              "initial_dose": "תן מחצית מהמחסור לאט",
+              "notes": "לדוגמה: ילד 10 ק\"ג, HCO3=10, רצוי 18 → 0.3×10×8=24 mEq. תן 12 mEq."
+            },
+            {
+              "practical_dose": "1-2 mEq/kg IV לאט",
+              "rate": "על 30-60 דקות",
+              "notes": "בדוק גזים אחרי כל מנה. אל תתקן מהר מדי."
+            }
+          ]
+        },
+        {
+          "name": "היפרקלמיה",
+          "items": [
+            {
+              "dosage": "1 mEq/kg IV",
+              "rate": "על 5-10 דקות",
+              "onset": "5-10 דקות",
+              "duration": "1-2 שעות",
+              "notes": "מסיט אשלגן לתוך תאים. לא מסיר אשלגן מהגוף - חובה טיפול נוסף (רזינים, דיאליזה)."
+            }
+          ]
+        },
+        {
+          "name": "CPR (החייאה)",
+          "items": [
+            {
+              "dosage": "1 mEq/kg IV בולוס",
+              "timing": "רק אחרי הנשמה ומסאז' מספיק + אדרנלין",
+              "notes": "לא קו ראשון. שימוש שנוי במחלוקת."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "mechanism",
+      "title": "מנגנון פעולה",
+      "items": [
+        {
+          "description": "מאגר (Buffer) - מנטרל חומצות ומעלה pH.",
+          "reaction": "HCO3- + H+ → H2CO3 → H2O + CO2",
+          "notes": "יוצר CO2 שצריך להיות מוסר על ידי הריאות (הנשמה)."
+        }
+      ]
+    },
+    {
+      "type": "side_effects",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "effect": "אלקלוזיס מטבולית",
+          "description": "תיקון יתר → pH גבוה מדי.",
+          "symptoms": ["בלבול", "פרכוסים", "הפרעות קצב"],
+          "prevention": "תקן לאט. בדוק גזים לאחר מנה."
+        },
+        {
+          "effect": "היפרנתרמיה (Hypernatremia)",
+          "description": "ביקרבונט מכיל נתרן (1 mEq HCO3 = 1 mEq Na).",
+          "risk": "עומס נתרן במתן מרובה.",
+          "monitoring": "בדוק אלקטרוליטים."
+        },
+        {
+          "effect": "היפוקלמיה (Hypokalemia)",
+          "description": "אלקליניזציה מסיטה אשלגן לתוך תאים → אשלגן בדם יורד.",
+          "management": "נטר אשלגן ותקן במקביל."
+        },
+        {
+          "effect": "עומס נוזלים",
+          "description": "ביקרבונט ניתן בנפח גדול.",
+          "risk": "בצקת ריאות בחולה לב/כליות."
+        },
+        {
+          "effect": "היפוקלצמיה (Ionized Calcium)",
+          "description": "pH גבוה מוריד Ionized Calcium.",
+          "symptoms": ["טטניה"],
+          "management": "בדוק Ionized Calcium."
+        }
+      ]
+    },
+    {
+      "type": "contraindications",
+      "title": "התוויות נגד וזהירות",
+      "items": [
+        {
+          "condition": "אלקלוזיס מטבולית",
+          "warning": "אל תתן אם pH גבוה."
+        },
+        {
+          "condition": "היפוקלמיה",
+          "warning": "תקן אשלגן קודם - ביקרבונט מחמיר."
+        },
+        {
+          "condition": "אסידוזיס נשימתית (Respiratory Acidosis)",
+          "warning": "ביקרבונט יוצר CO2 → מחמיר! טפל בהנשמה, לא ביקרבונט."
+        },
+        {
+          "condition": "אי ספיקת לב / בצקת ריאות",
+          "warning": "עומס נתרן ונוזלים."
+        }
+      ]
+    },
+    {
+      "type": "administration",
+      "title": "הנחיות מתן",
+      "items": [
+        {
+          "route": "IV בלבד (לא IM)",
+          "preparation": "תמיסה 8.4% (1 mEq/ml) או 4.2% (0.5 mEq/ml) ביילודים",
+          "dilution": "אפשר לדלל ב-D5W או סטרילי מים (לא NS - עומס נתרן)",
+          "rate": "לאט - לא מהיר מ-1 mEq/kg על 30-60 דקות (למעט חירום)",
+          "incompatibilities": "אל תערבב עם Calcium (משקעים), Catecholamines (מבטל פעילות)"
+        }
+      ]
+    },
+    {
+      "type": "special_notes",
+      "title": "הערות מיוחדות",
+      "items": [
+        {
+          "topic": "אסידוזיס נשימתית",
+          "description": "אל תתן ביקרבונט באסידוזיס נשימתית (CO2 גבוה) - זה יחמיר!",
+          "reason": "ביקרבונט יוצר CO2 נוסף, והריאות לא יכולות להוציא.",
+          "solution": "שפר הנשמה (הגבר MV)."
+        },
+        {
+          "topic": "DKA (Diabetic Ketoacidosis)",
+          "description": "ביקרבונט לא מומלץ ב-DKA (אלא אם pH < 6.9).",
+          "reason": "תיקון מהיר מדי → בצקת מוחית. הגוף מתקן בעצמו עם אינסולין ונוזלים."
+        },
+        {
+          "topic": "היפרקלמיה",
+          "description": "ביקרבונט מסיט אשלגן זמנית לתוך תאים.",
+          "notes": "לא מסיר אשלגן מהגוף - חובה טיפול נוסף (Kayexalate, דיאליזה)."
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "ביקרבונט לאסידוזיס מטבולית חמורה (pH < 7.1-7.2) והיפרקלמיה.",
+    "מינון: 1-2 mEq/kg IV לאט על 30-60 דקות.",
+    "תופעות: היפוקלמיה, היפרנתרמיה, עומס נוזלים.",
+    "אל תתן באסידוזיס נשימתית - זה מחמיר (יוצר CO2)!",
+    "בדוק גזים ואלקטרוליטים לאחר מנה."
+  ],
+  "critical_alerts": [
+    "⚠️ אסידוזיס נשימתית - ביקרבונט מחמיר! תקן הנשמה, לא מטבוליזם.",
+    "⚠️ תיקון מהיר מדי → אלקלוזיס, היפוקלמיה, היפוקלצמיה, פרכוסים.",
+    "⚠️ DKA: אל תתן אלא אם pH < 6.9 (סכנת בצקת מוחית).",
+    "⚠️ אל תערבב עם Calcium (משקעים) או Catecholamines (מבטל פעילות)."
+  ],
+  "references": [
+    "Sodium Bicarbonate - UpToDate Pediatric Dosing",
+    "Metabolic Acidosis Management"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team",
+  "version": "1.0"
+}

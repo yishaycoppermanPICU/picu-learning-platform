@@ -1,0 +1,151 @@
+{
+  "id": "morphine",
+  "title": "מורפין (Morphine)",
+  "description": "אופיואיד לכאב בינוני-חמור, הרדמה ותמיכה נשימתית.",
+  "category": "medications",
+  "difficulty": "intermediate",
+  "order": 60,
+  "tags": ["אופיואיד", "כאב", "הרדמה", "morphine"],
+  "content": [
+    {
+      "type": "indications",
+      "title": "אינדיקציות",
+      "items": [
+        "כאב חמור (לאחר ניתוח, טראומה)",
+        "הרדמה בהנשמה מכנית",
+        "בצקת ריאות קרדיוגנית (הפחתת preload)",
+        "Sickle Cell Crisis (משבר תאי חרמש)"
+      ]
+    },
+    {
+      "type": "dosing",
+      "title": "מינון",
+      "sections": [
+        {
+          "name": "IV בולוס (כאב חריף)",
+          "items": [
+            {
+              "age": "ילדים",
+              "dosage": "0.05-0.1 mg/kg",
+              "frequency": "כל 2-4 שעות לפי צורך",
+              "max": "10-15 mg למנה",
+              "notes": "תן לאט על 5 דקות."
+            }
+          ]
+        },
+        {
+          "name": "עירוי מתמשך (הרדמה)",
+          "items": [
+            {
+              "dosage": "10-40 mcg/kg/h",
+              "notes": "התחל במינון נמוך והעלה בהדרגה לפי תגובה."
+            }
+          ]
+        },
+        {
+          "name": "PCA (Patient Controlled Analgesia)",
+          "items": [
+            {
+              "loading_dose": "0.05-0.1 mg/kg",
+              "demand_dose": "0.01-0.03 mg/kg",
+              "lockout": "6-10 דקות",
+              "background": "0-20 mcg/kg/h (אופציונלי)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "side_effects",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "effect": "דיכוי נשימתי (Respiratory Depression)",
+          "description": "התופעה המסוכנת ביותר - ירידה בקצב נשימה ו-SpO2.",
+          "risk_factors": ["מינון גבוה", "תינוקות < 6 חודשים", "שילוב עם בנזודיאזפינים"],
+          "management": "Naloxone (נרקן) 0.01-0.1 mg/kg IV - אנטגוניסט."
+        },
+        {
+          "effect": "עצירות",
+          "description": "מאט תנועות מעיים.",
+          "management": "מתן מתרככי צואה פרואקטיבית (Lactulose, Docusate)."
+        },
+        {
+          "effect": "בחילות והקאות",
+          "management": "אנטי-אמטיקה (Ondansetron, Metoclopramide)."
+        },
+        {
+          "effect": "גרד (Pruritus)",
+          "description": "שחרור היסטמין.",
+          "management": "אנטי-היסטמין או Nalbuphine במינון נמוך."
+        },
+        {
+          "effect": "עכבון שתן",
+          "description": "קושי במתן שתן (מפחית טונוס שלפוחית)."
+        }
+      ]
+    },
+    {
+      "type": "contraindications",
+      "title": "התוויות נגד וזהירות",
+      "items": [
+        {
+          "condition": "דיכוי נשימתי חמור",
+          "warning": "אל תתן אם SpO2 < 90% או נשימה < 10 לדקה ללא הנשמה מכנית."
+        },
+        {
+          "condition": "בטן חריפה (Acute Abdomen)",
+          "warning": "עלול להסתיר סימנים קליניים חשובים. תן רק לאחר הערכה כירורגית."
+        },
+        {
+          "condition": "חסימה מעיים",
+          "warning": "מחמיר עצירות ואטוניה."
+        }
+      ]
+    },
+    {
+      "type": "administration",
+      "title": "הנחיות מתן",
+      "items": [
+        {
+          "route": "IV, SC, PO, Epidural",
+          "preparation": "דלל ב-NS ל-0.5-1 mg/ml",
+          "rate": "בולוס IV: לאט על 5 דקות (מהיר מדי → היפוטנזיה, גרד)",
+          "monitoring": "SpO2, קצב נשימה, תגובה לכאב (pain score)"
+        }
+      ]
+    },
+    {
+      "type": "antidote",
+      "title": "אנטגוניסט - נלוקסון (Naloxone / Narcan)",
+      "items": [
+        {
+          "indication": "דיכוי נשימתי, הרעלה באופיואידים",
+          "dosage": "0.01-0.1 mg/kg IV (עד 2 mg)",
+          "onset": "1-2 דקות",
+          "duration": "30-60 דקות (קצר ממורפין! - עלול לחזור דיכוי)",
+          "notes": "אם אין תגובה - חזור על מנה. שים לב: גורם לכאב פתאומי (מבטל השפעת מורפין)."
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "מורפין הוא אופיואיד סטנדרטי לכאב חמור והרדמה.",
+    "מינון: 0.05-0.1 mg/kg IV בולוס, 10-40 mcg/kg/h עירוי.",
+    "תופעת לוואי חמורה: דיכוי נשימתי - אנטידוט Naloxone.",
+    "תופעות נוספות: עצירות (נפוץ מאוד), בחילות, גרד.",
+    "זמן מחצית חיים קצר - דורש מתן חוזר/עירוי."
+  ],
+  "critical_alerts": [
+    "⚠️ דיכוי נשימתי: Naloxone 0.01-0.1 mg/kg IV מיידית!",
+    "⚠️ נלוקסון קצר מ-מורפין - ייתכן צורך במנות חוזרות או עירוי.",
+    "⚠️ תינוקות < 6 חודשים רגישים במיוחד - התחל במינון נמוך."
+  ],
+  "references": [
+    "Morphine - UpToDate Pediatric Dosing",
+    "Opioid Side Effects Management"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team",
+  "version": "1.0"
+}
