@@ -27,20 +27,20 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# CSS מתוקן לעברית מושלמת
+# CSS מתוקן לעברית
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap');
     
     /* כיוון כללי לעברית */
     html, body, [class*="css"] {
-        font-family: 'Heebo', sans-serif ! important;
-        direction: rtl !important;
+        font-family:  'Heebo', sans-serif ! important;
+        direction: rtl ! important;
     }
     
     /* תיקון האפליקציה הראשית */
     .stApp {
-        direction: rtl !important;
+        direction: rtl ! important;
         text-align: right !important;
     }
     
@@ -51,42 +51,51 @@ st.markdown("""
         direction: rtl !important;
     }
     
-    section[data-testid="stSidebar"] > div {
-        direction: rtl !important;
-        text-align: right !important;
-    }
-    
-    /* תיקון הטאבים */
-    .stTabs {
-        direction: rtl !important;
-    }
-    
-    .stTabs [data-baseweb="tab-list"] {
-        flex-direction: row-reverse !important;
-    }
-    
-    /* תיקון כפתורים */
-    .stButton > button {
-        direction: rtl !important;
+    /* כפתור Google */
+    .google-btn {
+        background-color: #4285F4;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight:  bold;
+        font-size: 16px;
         width: 100%;
+        justify-content: center;
+        transition: background-color 0.3s;
+        margin: 10px 0;
     }
     
-    /* תיקון שדות קלט */
-    .stTextInput > div > div > input,
-    .stSelectbox > div > div {
-        direction: rtl !important;
-        text-align: right !important;
+    .google-btn:hover {
+        background-color: #357ae8;
+        color: white;
+        text-decoration: none;
     }
     
-    /* תיקון metrics */
-    [data-testid="metric-container"] {
-        text-align: center !important;
+    . quick-login-btn {
+        background:  linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+        font-size: 16px;
+        width: 100%;
+        justify-content: center;
+        transition: transform 0.3s;
+        margin: 10px 0;
     }
     
-    /* תיקון expanders */
-    .streamlit-expanderHeader {
-        direction: rtl !important;
-        flex-direction: row-reverse !important;
+    . quick-login-btn:hover {
+        transform: translateY(-2px);
+        color: white;
+        text-decoration: none;
     }
     
     /* כותרת ראשית */
@@ -104,33 +113,14 @@ st.markdown("""
         margin: 0;
     }
     
-    .main-header p {
+    . main-header p {
         color: #f0f0f0;
         font-size: 1.2rem;
-    }
-    
-    /* כרטיסי תכונה */
-    .feature-card {
-        padding: 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        text-align: center;
-        height: 100%;
-    }
-    
-    /* תיקון checkbox */
-    .stCheckbox {
-        direction: rtl !important;
-        text-align: right !important;
-    }
-    
-    .stCheckbox > label {
-        flex-direction: row-reverse !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# JavaScript לתיקון כיוון נוסף
+# JavaScript לתיקונים נוספים
 import streamlit.components.v1 as components
 components.html("""
 <script>
@@ -141,12 +131,6 @@ window.addEventListener('load', function() {
         sidebar.style.right = '0';
         sidebar.style.left = 'auto';
     }
-    
-    // תקן כיוון טאבים
-    const tabs = document.querySelectorAll('. stTabs [data-baseweb="tab-list"]');
-    tabs.forEach(tab => {
-        tab.style.flexDirection = 'row-reverse';
-    });
 });
 </script>
 """, height=0)
@@ -158,6 +142,8 @@ if 'user' not in st.session_state:
     st.session_state. user = None
 if 'user_scores' not in st.session_state:
     st.session_state.user_scores = []
+if 'quick_login_email' not in st.session_state:
+    st.session_state.quick_login_email = ""
 
 # כותרת ראשית
 st.markdown("""
@@ -173,63 +159,116 @@ if DB_CONNECTED:
 else:
     db_status = "🔴 לא מחובר"
 
-# סרגל צד - כניסה מהירה
+# סרגל צד - כניסה
 with st.sidebar:
-    st. title("🔐 כניסה למערכת")
+    st.title("🔐 כניסה למערכת")
     st.caption(f"מסד נתונים: {db_status}")
     
     if not st.session_state.logged_in:
-        st.subheader("✨ כניסה מהירה")
-        st.caption("ללא צורך בסיסמה!")
         
+        # כפתורי כניסה מהירה
+        st.markdown("""
+        ### 🚀 כניסה מהירה
+        
+        <a href="#" class="google-btn" onclick="alert('התחברות עם Google תהיה זמינה בקרוב!  בינתיים השתמש בכניסה המהירה למטה. '); return false;">
+            <img src="https://www.google.com/favicon.ico" width="20"> 
+            התחבר עם Google
+        </a>
+        
+        <a href="#" class="quick-login-btn" onclick="document.querySelector('[data-testid=stFormSubmitButton]').click(); return false;">
+            ⚡ כניסה מהירה ללא סיסמה
+        </a>
+        """, unsafe_allow_html=True)
+        
+        st.divider()
+        st.subheader("או הרשם ידנית:")
+        
+        # טופס הרשמה/כניסה
         with st.form("quick_login_form"):
-            full_name = st.text_input("שם מלא", placeholder="לדוגמה: ישי קופרמן")
-            email = st.text_input("כתובת מייל", placeholder="example@hospital.org. il")
             
-            # טעינת רשימת מוסדות
-            if DB_CONNECTED:
-                try:
-                    institutions = get_institutions()
-                    inst_names = [inst['name'] for inst in institutions] if institutions else []
-                except: 
-                    inst_names = []
+            # כניסה מהירה עם מייל בלבד (לבדיקה)
+            use_quick = st.checkbox("⚡ כניסה מהירה (רק מייל)")
+            
+            if use_quick:
+                email = st.text_input("📧 מייל בלבד", placeholder="your@email.com")
+                full_name = email. split('@')[0] if '@' in email else email
+                institution = "מוסד לדוגמה"
             else:
-                inst_names = ["מרכז שניידר", "הדסה עין כרם", "רמב״ם", "שיבא - תל השומר"]
+                full_name = st.text_input("👤 שם מלא", placeholder="לדוגמה: ישי קופרמן")
+                email = st. text_input("📧 כתובת מייל", placeholder="example@hospital.org. il")
+                
+                # טעינת רשימת מוסדות מעודכנת
+                if DB_CONNECTED:
+                    try:
+                        institutions = get_institutions()
+                        if institutions:
+                            inst_names = [inst['name'] for inst in institutions]
+                        else:
+                            inst_names = []
+                    except Exception as e: 
+                        st.error(f"שגיאה בטעינת מוסדות: {e}")
+                        inst_names = []
+                else:
+                    inst_names = ["מרכז שניידר", "הדסה עין כרם", "רמב״ם", "שיבא - תל השומר"]
+                
+                # אפשרות בחירה או הקלדה חופשית
+                col1, col2 = st. columns([3, 1])
+                with col1:
+                    if inst_names:
+                        institution = st.selectbox(
+                            "🏥 בחר מוסד מהרשימה",
+                            [""] + sorted(inst_names) + ["➕ אחר - הקלד ידנית"]
+                        )
+                    else:
+                        institution = ""
+                
+                # אם בחר "אחר" או אין רשימה
+                if institution == "➕ אחר - הקלד ידנית" or institution == "" or not inst_names:
+                    institution = st.text_input("🏥 הקלד שם מוסד", placeholder="שם המוסד שלך")
             
-            if inst_names:
-                institution = st.selectbox("מוסד רפואי", ["בחר מוסד... "] + sorted(inst_names))
-            else:
-                institution = st.text_input("מוסד רפואי")
-            
-            agree_terms = st.checkbox("אני מאשר/ת שימוש למטרות למידה בלבד")
+            agree_terms = st.checkbox("✅ אני מאשר/ת שימוש למטרות למידה בלבד")
             
             submitted = st.form_submit_button("🚀 כניסה", type="primary", use_container_width=True)
             
             if submitted: 
-                if not all([full_name, email, institution != "בחר מוסד.. .", agree_terms]):
-                    st.error("נא למלא את כל השדות ולאשר את התנאים")
-                else: 
+                if use_quick and email:
+                    # כניסה מהירה עם מייל בלבד
+                    username = email.split('@')[0].replace('.', '_').replace('-', '_')
+                    st.session_state.logged_in = True
+                    st.session_state.user = {
+                        'username': username,
+                        'full_name': username,
+                        'email': email,
+                        'institutions': {'name': 'מוסד לדוגמה'}
+                    }
+                    st.success(f"ברוך הבא!")
+                    st.rerun()
+                
+                elif not use_quick and all([full_name, email, institution, agree_terms]):
                     # יצירת username מהמייל
-                    username = email. split('@')[0].replace('.', '_').replace('-', '_')
+                    username = email.split('@')[0].replace('.', '_').replace('-', '_')
                     
                     if DB_CONNECTED:
-                        # בדיקה אם המשתמש קיים
-                        existing_user = authenticate_user(username)
-                        
-                        if existing_user: 
-                            st.session_state.logged_in = True
-                            st.session_state.user = existing_user
-                            st.success(f"ברוך הבא חזרה, {existing_user['full_name']}!")
-                            st.rerun()
-                        else:
-                            # יצירת משתמש חדש
-                            new_user = create_user(username, email, full_name, institution)
-                            if new_user:
+                        try:
+                            # בדיקה אם המשתמש קיים
+                            existing_user = authenticate_user(username)
+                            
+                            if existing_user: 
                                 st.session_state.logged_in = True
-                                st.session_state.user = new_user
-                                st.success(f"ברוך הבא, {full_name}!")
-                                st.balloons()
+                                st.session_state.user = existing_user
+                                st.success(f"ברוך הבא חזרה, {existing_user['full_name']}!")
                                 st.rerun()
+                            else:
+                                # יצירת משתמש חדש
+                                new_user = create_user(username, email, full_name, institution)
+                                if new_user:
+                                    st.session_state.logged_in = True
+                                    st.session_state.user = new_user
+                                    st. success(f"ברוך הבא, {full_name}!")
+                                    st.balloons()
+                                    st. rerun()
+                        except Exception as e:
+                            st. error(f"שגיאה: {e}")
                     else:
                         # Demo mode
                         st.session_state.logged_in = True
@@ -237,19 +276,24 @@ with st.sidebar:
                             'username': username,
                             'full_name': full_name,
                             'email': email,
-                            'institutions': {'name': institution}
+                            'institutions': {'name':  institution}
                         }
                         st.success(f"ברוך הבא, {full_name}!  (Demo Mode)")
                         st.rerun()
+                else:
+                    if use_quick:
+                        st. error("נא להזין כתובת מייל")
+                    else:
+                        st.error("נא למלא את כל השדות ולאשר את התנאים")
         
         st.divider()
         
-        with st.expander("❓ למה בלי סיסמה?"):
+        with st.expander("❓ למה כניסה מהירה?"):
             st.info("""
-            • פלטפורמה חינוכית פתוחה
-            • אין מידע רפואי רגיש
-            • גישה מהירה ונוחה
-            • המידע נשמר לפי המייל
+            • ללא צורך בסיסמה מסובכת
+            • גישה מיידית לתוכן
+            • המידע נשמר לפי המייל שלך
+            • אפשרות לכניסה עם Google בקרוב
             """)
     
     else:
@@ -263,31 +307,26 @@ with st.sidebar:
         col1, col2 = st.columns(2)
         with col1:
             if st.button("📊 הנתונים שלי", use_container_width=True):
-                st.session_state. show_stats = True
+                st.session_state.show_stats = True
         with col2:
             if st.button("🚪 יציאה", use_container_width=True):
                 st. session_state.logged_in = False
                 st.session_state.user = None
-                st. rerun()
+                st.rerun()
     
     st.divider()
     
     # מידע על המערכת
-    with st.expander("ℹ️ אודות המערכת"):
+    with st.expander("ℹ️ אודות"):
         st.markdown("""
         **👨‍⚕️ פותח על ידי:**  
         ישי קופרמן  
         אח בטיפול נמרץ ילדים  
-        מרצה בבית ספר לסיעוד
         
         **📧 יצירת קשר:**  
         yishay.cooperman@gmail.com
         
-        **🎯 מטרה:**  
-        שיפור הידע של צוותי PICU
-        
-        **📅 גרסה:** 1.0.0  
-        **🔄 עדכון:** 25/12/2024
+        **📅 גרסה:** 1.0.0
         """)
 
 # תוכן ראשי
@@ -308,7 +347,7 @@ if st.session_state.logged_in:
         
         with col1:
             st.markdown("""
-            <div class="feature-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <div style="padding: 1. 5rem; border-radius: 10px; background:  linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center;">
                 <h3>📚 חומרי למידה</h3>
                 <p>גישה לחומרי למידה מעודכנים מבוססי UpToDate</p>
             </div>
@@ -316,7 +355,7 @@ if st.session_state.logged_in:
             
         with col2:
             st.markdown("""
-            <div class="feature-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+            <div style="padding: 1.5rem; border-radius: 10px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; text-align: center;">
                 <h3>📝 תרגול ומבחנים</h3>
                 <p>מבחנים אינטראקטיביים עם משוב מיידי</p>
             </div>
@@ -324,7 +363,7 @@ if st.session_state.logged_in:
             
         with col3:
             st.markdown("""
-            <div class="feature-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">
+            <div style="padding: 1.5rem; border-radius: 10px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; text-align: center;">
                 <h3>🏆 תחרות בין-מוסדית</h3>
                 <p>השווה את הביצועים שלך מול מוסדות אחרים</p>
             </div>
@@ -358,12 +397,12 @@ if st.session_state.logged_in:
                         st. write(topic. get('description', ''))
                         st.info("תוכן מפורט יתווסף בקרוב")
             else:
-                st.info("אין נושאים זמינים כרגע")
+                st. info("אין נושאים זמינים כרגע")
         else:
             st.info("חומרי הלמידה יהיו זמינים בקרוב")
     
     with tab3:
-        st. title("📝 מבחנים ותרגול")
+        st.title("📝 מבחנים ותרגול")
         st.info("המבחנים יהיו זמינים בקרוב")
     
     with tab4:
@@ -383,17 +422,11 @@ if st.session_state.logged_in:
         
         if DB_CONNECTED:
             leaderboard = get_leaderboard()
-            if leaderboard:
+            if leaderboard: 
                 df = pd.DataFrame(leaderboard)
-                df['דירוג'] = range(1, len(df) + 1)
-                df['דירוג'] = df['דירוג'].apply(lambda x: 
-                    f"🥇 {x}" if x == 1 else 
-                    f"🥈 {x}" if x == 2 else 
-                    f"🥉 {x}" if x == 3 else f"{x}")
-                
                 st.dataframe(df, hide_index=True, use_container_width=True)
             else:
-                st.info("אין נתונים להצגה עדיין")
+                st. info("אין נתונים להצגה עדיין")
         else:
             # Demo data
             demo_data = pd.DataFrame({
@@ -412,7 +445,7 @@ else:
         st.markdown("""
         ### ברוכים הבאים לפלטפורמת הלמידה PICU! 
         
-        פלטפורמה זו נוצרה כדי להעשיר ולחדד את הידע של צוותי טיפול נמרץ ילדים. 
+        פלטפורמה זו נוצרה כדי להעשיר ולחדד את הידע של צוותי טיפול נמרץ ילדים.
         
         **מה תמצאו כאן:**
         - 📚 חומרי למידה מעודכנים מבוססי UpToDate
@@ -426,5 +459,5 @@ else:
 # כתב ויתור
 st.divider()
 st.caption("""
-⚠️ **כתב ויתור:** האתר מיועד למטרות למידה בלבד. האחריות לאימות התוכן עם מקורות רפואיים מעודכנים היא על המשתמש.
+⚠️ **כתב ויתור:** האתר מיועד למטרות למידה בלבד. האחריות לאימות התוכן עם מקורות רפואיים מעודכנים היא על המשתמש. 
 """)
