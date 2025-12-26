@@ -49,6 +49,12 @@ def get_all_categories() -> List[Dict]:
             "name": "תרופות",
             "emoji": "💊",
             "description": "מדריך תרופות בטיפול נמרץ - מינונים, התוויות ותופעות לוואי"
+        },
+        {
+            "id": "fluids_electrolytes",
+            "name": "נוזלים ואלקטרוליטים",
+            "emoji": "💧",
+            "description": "ניהול נוזלים, תיקון אלקטרוליטים ואיזון חומצה-בסיס"
         }
     ]
 

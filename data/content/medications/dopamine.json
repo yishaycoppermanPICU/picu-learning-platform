@@ -1,0 +1,82 @@
+{
+  "id": "dopamine",
+  "title": "דופמין (Dopamine)",
+  "genericName": "Dopamine",
+  "commercialNames": ["Dopamine"],
+  "category": "medications",
+  "type": "vasopressor",
+  "difficulty": "intermediate",
+  "order": 12,
+  "tags": ["שוק", "כליות", "לב", "לחץ דם"],
+  "content": [
+    {
+      "type": "definition",
+      "title": "הגדרה ומנגנון",
+      "text": "תרופה לתמיכה המודינמית שהשפעתה תלויה במינון (Dose-dependent)."
+    },
+    {
+      "type": "treatment",
+      "title": "מינונים והשפעות",
+      "sections": [
+        {
+          "name": "מינון נמוך (Renal Dose)",
+          "options": [
+            {
+              "method": "1-5 mcg/kg/min",
+              "details": "משפר פרפוזיה לכליות ומעלה תפוקת שתן"
+            }
+          ]
+        },
+        {
+          "name": "מינון בינוני (Cardiac Dose)",
+          "options": [
+            {
+              "method": "5-15 mcg/kg/min",
+              "details": "משפר פרפוזיה לכליות, מעלה קצב לב, עוצמת כיווץ ותפוקת לב, מעלה לחץ דם"
+            }
+          ]
+        },
+        {
+          "name": "מינון גבוה (Vasopressor Dose)",
+          "options": [
+            {
+              "method": "> 15 mcg/kg/min",
+              "details": "אפקט אלפא-אדרנרגי דומיננטי - כיווץ כלי דם והעלאת לחץ דם"
+            }
+          ]
+        },
+        {
+          "name": "פרוטוקול התחלה",
+          "options": [
+            {
+              "method": "התחלה",
+              "details": "2-20 mcg/kg/min. העלאה הדרגתית של 5-10 mcg/kg/min עד השגת תוצאה אופטימלית"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "name": "הפרעות קצב",
+          "description": "ניטור קרדיאלי רציף",
+          "severity": "משמעותי"
+        },
+        {
+          "name": "היפרגליקמיה",
+          "description": "מעקב סוכר"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "השפעת הדופמין משתנה דרמטית בהתאם למינון: משיפור כליתי במינון נמוך ועד כיווץ כלי דם במינון גבוה",
+    "ניתן להשתמש בדופמין כקו ראשון או שני בשוק, בהתאם לפרוטוקול המחלקה",
+    "⚠️ דליפה של דופמין לרקמה (Extravasation) גורמת לנמק קשה. חובה לתת בוריד מרכזי"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}
