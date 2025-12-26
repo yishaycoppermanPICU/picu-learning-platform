@@ -1,0 +1,66 @@
+{
+  "id": "dexamethasone",
+  "title": "דקסמתזון (Dexamethasone)",
+  "genericName": "Dexamethasone",
+  "commercialNames": ["Dexacort"],
+  "category": "medications",
+  "type": "corticosteroid",
+  "difficulty": "intermediate",
+  "order": 2,
+  "tags": ["נתיב אוויר", "בצקת מוחית", "אקסטובציה", "מנינגיטיס"],
+  "content": [
+    {
+      "type": "section",
+      "title": "התוויות",
+      "items": [
+        {
+          "name": "בצקת בדרכי אוויר / לקראת אקסטובציה",
+          "description": "להפחתת נפיחות באזור הגלוטיס ומניעת סטרידור"
+        },
+        {
+          "name": "מנינגיטיס חיידקית",
+          "description": "למניעת פגיעה בשמיעה (בעיקר בהמופילוס אינפלואנזה)"
+        },
+        {
+          "name": "בצקת מוחית",
+          "description": "להורדת לחץ תוך גולגולתי"
+        }
+      ]
+    },
+    {
+      "type": "treatment",
+      "title": "מינונים",
+      "sections": [
+        {
+          "name": "בצקת דרכי אוויר / אקסטובציה",
+          "options": [
+            {
+              "method": "מינון סטנדרטי",
+              "details": "0.5 mg/kg/dose IV/IM/PO. מתחילים 6-12 שעות לפני אקסטובציה, כל 6 שעות (סה\"כ 6 מנות). מקסימום למנה: 10 mg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "name": "דיכוי אדרנל",
+          "description": "בשימוש ממושך יש להפחית מינון בהדרגה",
+          "severity": "חמור"
+        },
+        {
+          "name": "הפרעות פסיכיאטריות",
+          "description": "אגיטציה, דיכאון, שינויי מצב רוח"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "⚠️ במנינגיטיס, יש לתת את המנה הראשונה לפני או יחד עם המנה הראשונה של האנטיביוטיקה ליעילות מירבית"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}

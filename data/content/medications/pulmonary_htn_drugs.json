@@ -1,0 +1,52 @@
+{
+  "id": "pulmonary_htn_drugs",
+  "title": "תרופות ליתר לחץ דם ריאתי (PHTN)",
+  "description": "סקירת תרופות ייעודיות ל-PHTN: חנקן חמצני, סילדנפיל ואפופרוסטנול.",
+  "category": "medications",
+  "type": "vasodilator",
+  "difficulty": "advanced",
+  "order": 3,
+  "tags": ["ריאות", "לב", "PHTN", "NO"],
+  "content": [
+    {
+      "type": "section",
+      "title": "חנקן חמצני (iNO - Inhaled Nitric Oxide)",
+      "items": [
+        {
+          "name": "מינון ושימוש",
+          "description": "גז הניתן באינהלציה רציפה דרך המנשם. מינון מקובל: 20 PPM. אין לעלות מעל 40 PPM מחשש למתהמוגלובינמיה ויצירת NO2 רעיל.",
+          "management": ["⚠️ אסור להפסיק בבת אחת! סכנת ריבאונד קטלני."]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "סילדנפיל (Sildenafil / Viagra)",
+      "items": [
+        {
+          "name": "מינון פומי",
+          "description": "0.5-3 mg/kg/dose כל 6-12 שעות",
+          "management": ["⚠️ אין לשלב עם ניטרטים (סכנת נפילת ל\"ד חמורה)"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "אפופרוסטנול (Epoprostenol / Flolan)",
+      "items": [
+        {
+          "name": "פרוסטגלנדינים IV",
+          "description": "למקרים קשים (High Risk). התחלה ב-1-2 ng/kg/min, העלאה הדרגתית עד מינון מטרה 20-40 ng/kg/min",
+          "management": ["תופעות לוואי רבות: סומק, כאב ראש, ירידת ל\"ד, כאבי לסת"]
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "⚠️ הפסקה פתאומית של iNO או Flolan עלולה לגרום למשבר יתר לחץ דם ריאתי ומוות מיידי",
+    "הגמילה חייבת להיות איטית ומבוקרת",
+    "סילדנפיל אסור בשילוב עם ניטרטים"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}

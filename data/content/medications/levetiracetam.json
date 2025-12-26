@@ -1,0 +1,71 @@
+{
+  "id": "levetiracetam",
+  "title": "לווטירצטם / קפרה (Levetiracetam)",
+  "genericName": "Levetiracetam",
+  "commercialNames": ["Keppra"],
+  "category": "medications",
+  "type": "anticonvulsant",
+  "difficulty": "intermediate",
+  "order": 2,
+  "tags": ["פרכוסים", "אפילפסיה", "בטוח לשימוש"],
+  "content": [
+    {
+      "type": "definition",
+      "title": "הגדרה",
+      "text": "תרופה אנטי-פרכוסית רחבת טווח, בעלת פרופיל בטיחות גבוה יחסית."
+    },
+    {
+      "type": "treatment",
+      "title": "מינונים (אחזקה)",
+      "sections": [
+        {
+          "name": "ילדים (4-16 שנים)",
+          "options": [
+            {
+              "method": "מינון התחלתי",
+              "details": "10 mg/kg/dose פעמיים ביום (Total: 20 mg/kg/day). ניתן להעלות כל שבועיים ב-10 mg/kg עד יעד של 60 mg/kg/day (30 פעמיים ביום)"
+            }
+          ]
+        },
+        {
+          "name": "תינוקות (6 חודשים - 4 שנים)",
+          "options": [
+            {
+              "method": "מינון התחלתי",
+              "details": "10 mg/kg/dose פעמיים ביום. יעד מומלץ: 25 mg/kg/dose (פעמיים ביום)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "הערות למתן",
+      "items": [
+        {
+          "name": "IV / PO",
+          "description": "המינון זהה בשתי הדרכים. יש למהול את ה-IV ביחס של 5-15 mg לכל 1 מ\"ל ולתת במשך 15 דקות"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "אזהרות",
+      "items": [
+        {
+          "name": "הפסקה פתאומית",
+          "description": "עלולה לגרום לסטטוס אפילפטיקוס",
+          "severity": "חמור"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "קפרה נחשבת בטוחה יחסית ומשמשת כקו ראשון/שני במחלקות רבות",
+    "המינון התוך ורידי זהה למינון הפומי",
+    "יש לתת את העירוי במשך 15 דקות לפחות",
+    "אסור להפסיק פתאום - סכנת סטטוס אפילפטיקוס"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}

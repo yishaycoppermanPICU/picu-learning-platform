@@ -1,0 +1,66 @@
+{
+  "id": "hydrocortisone",
+  "title": "הידרוקורטיזון (Hydrocortisone)",
+  "genericName": "Hydrocortisone",
+  "commercialNames": ["Solu-Cortef"],
+  "category": "medications",
+  "type": "corticosteroid",
+  "difficulty": "intermediate",
+  "order": 1,
+  "tags": ["שוק", "ספסיס", "אדרנל", "סטרואידים"],
+  "content": [
+    {
+      "type": "definition",
+      "title": "הגדרה",
+      "text": "קורטיקוסטרואיד המשמש לטיפול בתגובות דלקתיות חריפות, אי ספיקת אדרנל ושוק ספטי עמיד."
+    },
+    {
+      "type": "section",
+      "title": "התוויות",
+      "items": [
+        {
+          "name": "שוק ספטי (Septic Shock)",
+          "description": "בשוק עמיד לנוזלים וקטכולאמינים (Inotrope resistant)."
+        },
+        {
+          "name": "אי ספיקת אדרנל חריפה",
+          "description": "משבר אדיסוני או חסר מולד."
+        },
+        {
+          "name": "אסטמה / דלקת",
+          "description": "טיפול אנטי-דלקתי סיסטמי."
+        }
+      ]
+    },
+    {
+      "type": "treatment",
+      "title": "מינונים",
+      "sections": [
+        {
+          "name": "שוק ספטי (Septic Shock)",
+          "options": [
+            {
+              "method": "מנה סטנדרטית",
+              "details": "2 mg/kg IV Bolus. מקסימום למנה: 100 mg"
+            }
+          ]
+        },
+        {
+          "name": "אי ספיקת אדרנל (Stress Dose)",
+          "options": [
+            {
+              "method": "תינוקות וילדים",
+              "details": "2-3 mg/kg IV Stat, לאחר מכן מינון אחזקה כל 6 שעות"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "תרופת הבחירה לשוק ספטי שאינו מגיב לנוראדרנלין/אדרנלין (חשד לאי ספיקת אדרנל יחסית)",
+    "בשוק נותנים בבולוס מהיר"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}

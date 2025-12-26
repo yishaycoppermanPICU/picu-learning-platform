@@ -43,6 +43,12 @@ def get_all_categories() -> List[Dict]:
             "name": "ניטור ונהלים",
             "emoji": "📊",
             "description": "ניטור המודינמי, נהלי סיעוד וציוד"
+        },
+        {
+            "id": "medications",
+            "name": "תרופות",
+            "emoji": "💊",
+            "description": "מדריך תרופות בטיפול נמרץ - מינונים, התוויות ותופעות לוואי"
         }
     ]
 

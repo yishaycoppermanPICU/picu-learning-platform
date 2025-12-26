@@ -1,0 +1,63 @@
+{
+  "id": "furosemide",
+  "title": "פורוסמיד / פוסיד (Furosemide)",
+  "genericName": "Furosemide",
+  "commercialNames": ["Fusid", "Lasix"],
+  "category": "medications",
+  "type": "diuretic",
+  "difficulty": "beginner",
+  "order": 1,
+  "tags": ["בצקת", "כליות", "אי ספיקת לב", "משתנים"],
+  "content": [
+    {
+      "type": "definition",
+      "title": "הגדרה",
+      "text": "משתן לולאה (Loop Diuretic). משמש לטיפול בעומס נוזלים, בצקות ויתר לחץ דם."
+    },
+    {
+      "type": "treatment",
+      "title": "מינונים",
+      "sections": [
+        {
+          "name": "ילדים",
+          "options": [
+            {
+              "method": "IV / PO",
+              "details": "0.5-2 mg/kg/dose. מינון מקובל: 1 mg/kg. מקסימום למנה: 20 mg (חריג: 40 mg)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "name": "הפרעות אלקטרוליטריות",
+          "description": "היפוקלמיה (איבוד אשלגן), היפונתרמיה, היפומגנזמיה"
+        },
+        {
+          "name": "התייבשות / היפוולמיה",
+          "description": "ניטור תפוקת שתן ולחץ דם"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "אינטראקציות חשובות",
+      "items": [
+        {
+          "name": "מילרינון / וזודילטורים",
+          "description": "סיכון מוגבר לנפילת לחץ דם (Hypotension) בשילוב עם איבוד נוזלים"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "פוסיד גורם לאיבוד אשלגן - יש לבדוק רמות אשלגן ולתת תוסף (Slow K / KCl) במידת הצורך",
+    "אין להפסיק בבת אחת בטיפול כרוני (חשש לריבאונד)"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}

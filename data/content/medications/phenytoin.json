@@ -1,0 +1,78 @@
+{
+  "id": "phenytoin",
+  "title": "פניטואין (Phenytoin)",
+  "genericName": "Phenytoin",
+  "commercialNames": ["Epanutin", "Dilantin"],
+  "category": "medications",
+  "type": "anticonvulsant",
+  "difficulty": "advanced",
+  "order": 1,
+  "tags": ["פרכוסים", "אפילפסיה", "סטטוס אפילפטיקוס"],
+  "content": [
+    {
+      "type": "definition",
+      "title": "הגדרה",
+      "text": "תרופה אנטי-אפילפטית ממשפחת ההידנטואין. משמשת לטיפול בכל סוגי הפרכוסים למעט Absence."
+    },
+    {
+      "type": "treatment",
+      "title": "מינונים",
+      "sections": [
+        {
+          "name": "מנת העמסה (Loading Dose)",
+          "options": [
+            {
+              "method": "IV",
+              "details": "20 mg/kg. ניתן לחלק ל-1 או 2 מנות. מקסימום למנה: 1000 mg"
+            }
+          ]
+        },
+        {
+          "name": "מנת אחזקה",
+          "options": [
+            {
+              "method": "יומי",
+              "details": "4-8 mg/kg/day מחולק ל-2 מנות. מקסימום ליום: 300 mg. מתחילים כ-12 שעות לאחר ההעמסה"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "דגשים קריטיים למתן",
+      "items": [
+        {
+          "name": "IV Infusion",
+          "description": "חובה להשתמש בפילטר 0.2 מיקרון. קצב איטי (במשך חצי שעה לפחות). מעקב צמוד אחר לחץ דם"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "תופעות לוואי",
+      "items": [
+        {
+          "name": "הפרעות קצב / ירידת לחץ דם",
+          "description": "האטת קצב המתן, ניטור אק\"ג בזמן העמסה",
+          "severity": "חמור"
+        },
+        {
+          "name": "היפרפלזיה של החניכיים",
+          "description": "בשימוש כרוני"
+        },
+        {
+          "name": "דיכוי מח עצם",
+          "description": "אנמיה, לויקופניה, טרומבוציטופניה"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "חובה לתת עם פילטר 0.2 מיקרון",
+    "מעקב אחר לחץ דם והפרעות קצב בזמן המתן",
+    "לא יעיל בפרכוסי Absence"
+  ],
+  "last_updated": "2025-01-01",
+  "author": "PICU Team"
+}
