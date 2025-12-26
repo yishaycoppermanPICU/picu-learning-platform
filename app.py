@@ -40,22 +40,39 @@ st.markdown("""
     }
     
     /* תיקון כל הקונטיינרים */
-    .main, .block-container, .element-container, .stApp {
+    .main, .block-container, . element-container, . stApp {
         direction: rtl ! important;
         text-align:  right !important;
     }
     
-    /* הסרגל הצדדי - העברה לימין */
-    section[data-testid="stSidebar"] {
+    /* הכרח את הסרגל להיות בימין */
+    .css-1y4p8pa {
         right: 0 !important;
+        left: auto !important;
+    }
+    
+    section[data-testid="stSidebar"] {
+        right:  0 !important;
         left: auto !important;
         direction: rtl !important;
         text-align: right !important;
     }
     
-    section[data-testid="stSidebar"] [data-testid="stSidebarNav"] {
-        direction: rtl !important;
-        text-align: right !important;
+    section[data-testid="stSidebar"] > div:first-child {
+        right: 0 !important;
+        left: auto !important;
+    }
+    
+    /* תיקון מיקום התוכן הראשי */
+    .main . block-container {
+        margin-right: 18rem !important;
+        margin-left: 1rem !important;
+    }
+    
+    /* כשהסרגל מכווץ */
+    [data-testid="collapsedControl"] {
+        right: 0 !important;
+        left:  auto !important;
     }
     
     /* תיקון טאבים - מימין לשמאל */
@@ -65,7 +82,7 @@ st.markdown("""
     }
     
     . stTabs [data-baseweb="tab"] {
-        direction: rtl ! important;
+        direction: rtl !important;
     }
     
     /* תיקון כותרות */
@@ -126,13 +143,15 @@ st.markdown("""
         padding: 2rem;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border-radius: 10px;
-        margin-bottom: 2rem;
+        margin-bottom:  2rem;
         direction: rtl !important;
     }
     
     . main-header h1, .main-header p {
-        direction: rtl ! important;
+        direction: rtl !important;
         color: white;
+        margin: 0;
+        padding: 0.5rem;
     }
     
     /* כרטיסיות */
@@ -142,37 +161,14 @@ st.markdown("""
         text-align: center;
         color: white;
         height: 100%;
+        transition: transform 0.3s;
+    }
+    
+    .feature-card:hover {
+        transform:  translateY(-5px);
     }
 </style>
 """, unsafe_allow_html=True)
-
-# JavaScript חזק לתיקון נוסף
-import streamlit.components.v1 as components
-components.html("""
-<script>
-// המתן לטעינת הדף
-setTimeout(function() {
-    // הזז סרגל צד לימין בכוח
-    const sidebar = document.querySelector('section[data-testid="stSidebar"]');
-    if (sidebar) {
-        sidebar.style.cssText = 'right: 0 !important; left: auto !important; direction: rtl !important;';
-    }
-    
-    // תקן את כל האלמנטים
-    document.querySelectorAll('*').forEach(function(el) {
-        if (el.style) {
-            el.style.direction = 'rtl';
-        }
-    });
-    
-    // תקן טאבים
-    const tabList = document.querySelector('[data-baseweb="tab-list"]');
-    if (tabList) {
-        tabList.style. flexDirection = 'row-reverse';
-    }
-}, 100);
-</script>
-""", height=0)
 
 # אתחול session state
 if 'logged_in' not in st.session_state:
@@ -241,7 +237,7 @@ with st.sidebar:
             # כפתור - אימוג'י בסוף
             submitted = st.form_submit_button("התחבר למערכת ◀", type="primary", use_container_width=True)
             
-            if submitted:
+            if submitted: 
                 if full_name and email and institution and institution != "" and agree:
                     username = email.split('@')[0].replace('.', '_').replace('-', '_')
                     
@@ -253,16 +249,16 @@ with st.sidebar:
                                 st.session_state.user = existing
                                 st.success(f"ברוך שובך, {existing['full_name']} 👋")
                                 st.rerun()
-                            else:
+                            else: 
                                 new_user = create_user(username, email, full_name, institution)
                                 if new_user: 
                                     st.session_state.logged_in = True
                                     st.session_state. user = new_user
                                     st.success(f"ברוך הבא, {full_name} 🎉")
                                     st.balloons()
-                                    st.rerun()
+                                    st. rerun()
                         except Exception as e:
-                            st.error(f"שגיאה:  {e}")
+                            st. error(f"שגיאה: {e}")
                     else:
                         st.session_state.logged_in = True
                         st.session_state.user = {
@@ -294,12 +290,12 @@ with st.sidebar:
         if 'institutions' in user and user['institutions']:
             st.info(f"מוסד:  {user['institutions']. get('name', '')} 🏥")
         
-        col1, col2 = st.columns(2)
+        col1, col2 = st. columns(2)
         with col1:
             if st.button("הנתונים שלי 📊", use_container_width=True):
                 st.switch_page("pages/3_📊_Statistics.py")
         with col2:
-            if st. button("התנתק 🚪", use_container_width=True):
+            if st.button("התנתק 🚪", use_container_width=True):
                 st.session_state.logged_in = False
                 st.session_state.user = None
                 st.rerun()
@@ -328,7 +324,7 @@ if st.session_state.logged_in:
     ])
     
     with tab1:
-        st.markdown("### ברוכים הבאים לפלטפורמת הלמידה! 🎯")
+        st.markdown("### ברוכים הבאים לפלטפורמת הלמידה!  🎯")
         
         # כרטיסיות
         col1, col2, col3 = st.columns(3)
@@ -350,7 +346,7 @@ if st.session_state.logged_in:
             """, unsafe_allow_html=True)
         
         with col3:
-            st. markdown("""
+            st.markdown("""
             <div class="feature-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
                 <h3>תחרות בין-מוסדית 🏆</h3>
                 <p>השווה את הביצועים שלך מול מוסדות אחרים</p>
@@ -370,7 +366,7 @@ if st.session_state.logged_in:
             else:
                 st.metric("ציון ממוצע", "—")
         with col3:
-            st. metric("זמן למידה", "0 שעות")
+            st.metric("זמן למידה", "0 שעות")
         with col4:
             st.metric("דירוג במוסד", "—")
     
@@ -408,7 +404,7 @@ if st.session_state.logged_in:
             st.button("מבחן מותאם אישית ⚙", disabled=True, use_container_width=True)
     
     with tab4:
-        st.markdown("### הסטטיסטיקות שלי 📊")
+        st. markdown("### הסטטיסטיקות שלי 📊")
         
         if st.session_state.user_scores:
             df = pd.DataFrame({
@@ -424,7 +420,7 @@ if st.session_state.logged_in:
                 st.success(f"הציון הטוב ביותר: {best_score}% 🌟")
             with col2:
                 avg_score = sum(st.session_state.user_scores) / len(st.session_state.user_scores)
-                st.info(f"ממוצע: {avg_score:.1f}% 📊")
+                st.info(f"ממוצע:  {avg_score:.1f}% 📊")
             with col3:
                 last_score = st.session_state.user_scores[-1]
                 st.warning(f"ציון אחרון: {last_score}% 📝")
@@ -439,7 +435,7 @@ if st.session_state.logged_in:
         if DB_CONNECTED:
             try: 
                 leaderboard = get_leaderboard()
-                if leaderboard: 
+                if leaderboard:
                     df = pd.DataFrame(leaderboard)
                     st.dataframe(df, hide_index=True, use_container_width=True)
                 else:
@@ -447,7 +443,7 @@ if st.session_state.logged_in:
             except:
                 st.warning("בעיה בטעינת הנתונים ⚠️")
         else:
-            # נתוני דמו - תיקון השגיאה כאן! 
+            # נתוני דמו
             demo_data = pd.DataFrame({
                 'דירוג': ['🥇', '🥈', '🥉', '4', '5'],
                 'מוסד': [
@@ -457,7 +453,7 @@ if st.session_state.logged_in:
                     'הדסה עין כרם',
                     'סורוקה - באר שבע'
                 ],
-                'ציון ממוצע': [88.4, 88.3, 88.1, 86.0, 82.9],  # תיקון כאן - בלי רווחים! 
+                'ציון ממוצע': [88. 4, 88.3, 88.1, 86.0, 82.9],
                 'משתתפים': [10, 27, 9, 8, 30]
             })
             st.dataframe(demo_data, hide_index=True, use_container_width=True)
@@ -479,20 +475,20 @@ else:
         st.info("### מבחנים אינטראקטיביים 📝\nתרגול עם משוב מיידי ומעקב התקדמות")
     
     with col3:
-        st. info("### תחרות ארצית 🏆\nהשווה את עצמך לעמיתים מכל הארץ")
+        st.info("### תחרות ארצית 🏆\nהשווה את עצמך לעמיתים מכל הארץ")
     
     with st.expander("מידע על הפלטפורמה ℹ"):
         st.markdown("""
         ### ברוכים הבאים לפלטפורמת PICU Learning!  🎓
         
         **מטרת הפלטפורמה:**
-        פלטפורמה זו נוצרה כדי להעשיר ולחדד את הידע של צוותי טיפול נמרץ ילדים. 
+        פלטפורמה זו נוצרה כדי להעשיר ולחדד את הידע של צוותי טיפול נמרץ ילדים.
         
         **מה תמצאו כאן:**
-        • חומרי למידה מעודכנים על בסיס UpToDate 📚
-        • מבחנים אינטראקטיביים עם משוב מיידי 📝
-        • מעקב אחר התקדמות אישית 📈
-        • תחרות בריאה בין מוסדות רפואיים 🏆
+        • חומרי למידה מעודכנים על בסיס UpToDate 📚  
+        • מבחנים אינטראקטיביים עם משוב מיידי 📝  
+        • מעקב אחר התקדמות אישית 📈  
+        • תחרות בריאה בין מוסדות רפואיים 🏆  
         
         **איך מתחילים:**
         פשוט הירשמו עם המייל שלכם - ללא סיסמה! ✨
