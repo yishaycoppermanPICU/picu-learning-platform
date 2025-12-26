@@ -98,16 +98,16 @@ if 'user_scores' not in st.session_state:
 # כותרת ראשית - אימוג'י בסוף! 
 st.markdown("""
 <div class="main-header">
-    <h1>פלטפורמת למידה PICU 🏥</h1>
+    <h1>פלטפורמת למידה PICU &#x1F3E5;</h1>
     <p>פלטפורמת למידה מתקדמת לטיפול נמרץ ילדים</p>
 </div>
 """, unsafe_allow_html=True)
 
 # בדיקת חיבור למסד נתונים
 if DB_CONNECTED:
-    db_status = "מחובר 🟢"
+    db_status = "מחובר ✓"
 else: 
-    db_status = "לא מחובר 🔴"
+    db_status = "לא מחובר ✗"
 
 # סרגל צד
 with st.sidebar:
