@@ -96,28 +96,24 @@ if 'user' not in st.session_state:
 if 'user_scores' not in st.session_state:
     st.session_state.user_scores = []
 
-# כותרת ראשית - אימוג'י בסוף! 
-st.markdown("""
-<div class="main-header">
-    <h1>פלטפורמת למידה PICU &#x1F3E5;</h1>
-    <p>פלטפורמת למידה מתקדמת לטיפול נמרץ ילדים</p>
-</div>
-""", unsafe_allow_html=True)
+# כותרת ראשית
+st.title("🏥 פלטפורמת למידה PICU")
+st.markdown("### פלטפורמת למידה מתקדמת לטיפול נמרץ ילדים")
 
 # בדיקת חיבור למסד נתונים
 if DB_CONNECTED:
-    db_status = "מחובר ✓"
+    db_status = "מחובר 🟢"
 else: 
-    db_status = "לא מחובר ✗"
+    db_status = "לא מחובר 🔴"
 
 # סרגל צד
 with st.sidebar:
     # כותרת - אימוג'י בסוף
-    st.markdown("## מערכת כניסה")
+    st.markdown("## מערכת כניסה 🔐")
     st.caption(f"סטטוס מסד נתונים: {db_status}")
     
     if not st.session_state.logged_in:
-        st.markdown("### התחברות מהירה")
+        st.markdown("### התחברות מהירה 🚀")
         
         with st.form("login_form"):
             # שדות - אימוג'י בסוף התווית
@@ -150,7 +146,7 @@ with st.sidebar:
             if institution == "אחר ➕": 
                 institution = st.text_input("הכנס שם מוסד:")
             
-            agree = st.checkbox("מאשר/ת שימוש למטרות למידה")
+            agree = st.checkbox("מאשר/ת שימוש למטרות למידה ✓")
             
             # כפתור - אימוג'י בסוף
             submitted = st.form_submit_button("התחבר למערכת ◀", type="primary", use_container_width=True)
@@ -165,14 +161,14 @@ with st.sidebar:
                             if existing:
                                 st.session_state.logged_in = True
                                 st.session_state.user = existing
-                                st.success(f"ברוך שובך, {existing['full_name']}!")
+                                st.success(f"ברוך שובך, {existing['full_name']} 👋")
                                 st.rerun()
                             else: 
                                 new_user = create_user(username, email, full_name, institution)
                                 if new_user: 
                                     st.session_state.logged_in = True
                                     st.session_state. user = new_user
-                                    st.success(f"ברוך הבא, {full_name}!")
+                                    st.success(f"ברוך הבא, {full_name} 🎉")
                                     st.balloons()
                                     st. rerun()
                         except Exception as e:
@@ -188,11 +184,11 @@ with st.sidebar:
                         st.success(f"ברוך הבא, {full_name}!")
                         st.rerun()
                 else:
-                    st.error("נא למלא את כל השדות")
+                    st.error("נא למלא את כל השדות ❌")
         
         st.divider()
         
-        with st.expander("למה כניסה בלי סיסמה?"):
+        with st.expander("למה כניסה בלי סיסמה? ❓"):
             st.info("""
             - ללא צורך בסיסמה מסובכת
             - גישה מיידית לתוכן
@@ -203,7 +199,7 @@ with st.sidebar:
     else:
         # משתמש מחובר
         user = st.session_state.user
-        st.success(f"מחובר: {user.get('full_name', 'משתמש')}")
+        st.success(f"מחובר: {user.get('full_name', 'משתמש')} ✓")
         
         if 'institutions' in user and user['institutions']:
             st.info(f"מוסד:  {user['institutions']. get('name', '')} 🏥")
@@ -221,13 +217,13 @@ with st.sidebar:
     st.divider()
     
     # אודות
-    with st.expander("אודות המערכת"):
+    with st.expander("אודות המערכת ℹ️"):
         st.markdown("""
-        **פותח על ידי:** ישי קופרמן  
+        **פותח על ידי:** ישי קופרמן 👨‍⚕️  
         **תפקיד:** אח בטיפול נמרץ ילדים  
-        **מייל:** yishaycopp@gmail.com  
+        **מייל:** yishaycopp@gmail.com 📧  
         **גרסה:** 1.0.0  
-        **עדכון אחרון:** 26/12/2024
+        **עדכון אחרון:** 26/12/2024 📅
         """)
 
 # תוכן ראשי
