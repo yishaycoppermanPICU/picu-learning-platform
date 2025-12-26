@@ -45,28 +45,32 @@ st.markdown("""
         text-align: right !important;
     }
     
-    /* הכרח את הסרגל להיות בימין */
-    .css-1y4p8pa {
-        right: 0 !important;
-        left: auto !important;
-    }
-    
+    /* הכרח את הסרגל להיות בימין - SUPER STRONG */
     section[data-testid="stSidebar"] {
         right: 0 !important;
         left: auto !important;
+        position: fixed !important;
         direction: rtl !important;
-        text-align: right !important;
     }
     
     section[data-testid="stSidebar"] > div:first-child {
         right: 0 !important;
         left: auto !important;
+        position: fixed !important;
+        width: 21rem !important;
     }
     
-    /* תיקון מיקום התוכן הראשי */
+    /* תיקון מיקום התוכן הראשי כשהסרגל בימין */
     .main .block-container {
-        margin-right: 18rem !important;
+        margin-right: 22rem !important;
         margin-left: 1rem !important;
+        max-width: none !important;
+    }
+    
+    /* Override לכל הקלאסים של Streamlit */
+    .css-1y4p8pa, .css-1avcm0n, .css-18e3th9, .css-1d391kg {
+        right: 0 !important;
+        left: auto !important;
     }
     
     /* כשהסרגל מכווץ */
@@ -131,20 +135,10 @@ st.markdown("""
         text-align: center !important;
     }
     
-    /* תיקון expander - הסתרת טקסט מיותר */
+    /* תיקון expander */
     .streamlit-expanderHeader {
         direction: rtl !important;
         flex-direction: row-reverse !important;
-    }
-    
-    /* הסתרת כל טקסט באנגלית ב-expander */
-    details summary::-webkit-details-marker {
-        display: none !important;
-    }
-    
-    /* הסתרת טקסט default של streamlit */
-    .streamlit-expanderHeader::before {
-        content: none !important;
     }
     
     /* כותרת ראשית */
