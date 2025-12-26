@@ -453,7 +453,7 @@ if st.session_state.logged_in:
                     'הדסה עין כרם',
                     'סורוקה - באר שבע'
                 ],
-                'ציון ממוצע': [88. 4, 88.3, 88.1, 86.0, 82.9],
+                'ציון ממוצע': [88.4, 88.3, 88.1, 86.0, 82.9],
                 'משתתפים': [10, 27, 9, 8, 30]
             })
             st.dataframe(demo_data, hide_index=True, use_container_width=True)
