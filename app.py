@@ -86,7 +86,6 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-""", unsafe_allow_html=True)
 
 # אתחול session state
 if 'logged_in' not in st.session_state:
@@ -189,13 +188,11 @@ with st.sidebar:
         st.divider()
         
         with st.expander("למה כניסה בלי סיסמה? ❓"):
-            st.markdown("""
-            **יתרונות:**
-            - ללא צורך בסיסמה מסובכת
-            - גישה מיידית לתוכן
-            - המידע נשמר לפי המייל שלך
-            - אפשרות לכניסה עם Google בקרוב
-            """)
+            st.write("**יתרונות:**")
+            st.write("- ללא צורך בסיסמה מסובכת")
+            st.write("- גישה מיידית לתוכן")
+            st.write("- המידע נשמר לפי המייל שלך")
+            st.write("- אפשרות לכניסה עם Google בקרוב")
     
     else:
         # משתמש מחובר
@@ -218,14 +215,12 @@ with st.sidebar:
     st.divider()
     
     # אודות
-    with st.expander("אודות המערכת ℹ️"):
-        st.markdown("""
-        **פותח על ידי:** ישי קופרמן 👨‍⚕️  
-        **תפקיד:** אח בטיפול נמרץ ילדים  
-        **מייל:** yishaycopp@gmail.com 📧  
-        **גרסה:** 1.0.0  
-        **עדכון אחרון:** 26/12/2024 📅
-        """)
+    with st.expander("אודות המערכת"):
+        st.write("**פותח על ידי:** ישי קופרמן")
+        st.write("**תפקיד:** אח בטיפול נמרץ ילדים")
+        st.write("**מייל:** yishaycopp@gmail.com")
+        st.write("**גרסה:** 1.0.0")
+        st.write("**עדכון אחרון:** 26/12/2024")
 
 # תוכן ראשי
 if st.session_state.logged_in:
@@ -245,28 +240,13 @@ if st.session_state.logged_in:
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            st.markdown("""
-            <div class="feature-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                <h3>חומרי למידה 📚</h3>
-                <p>גישה לחומרי למידה מעודכנים מבוססי UpToDate</p>
-            </div>
-            """, unsafe_allow_html=True)
+            st.info("### חומרי למידה 📚\nגישה לחומרי למידה מעודכנים מבוססי UpToDate")
         
         with col2:
-            st.markdown("""
-            <div class="feature-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                <h3>תרגול ומבחנים 📝</h3>
-                <p>מבחנים אינטראקטיביים עם משוב מיידי</p>
-            </div>
-            """, unsafe_allow_html=True)
+            st.info("### תרגול ומבחנים 📝\nמבחנים אינטראקטיביים עם משוב מיידי")
         
         with col3:
-            st.markdown("""
-            <div class="feature-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                <h3>תחרות בין-מוסדית 🏆</h3>
-                <p>השווה את הביצועים שלך מול מוסדות אחרים</p>
-            </div>
-            """, unsafe_allow_html=True)
+            st.info("### תחרות בין-מוסדית 🏆\nהשווה את הביצועים שלך מול מוסדות אחרים")
         
         st.divider()
         st.markdown("### הסטטיסטיקות שלך 📈")
@@ -392,23 +372,18 @@ else:
     with col3:
         st.info("### תחרות ארצית 🏆\nהשווה את עצמך לעמיתים מכל הארץ")
     
-    with st.expander("מידע על הפלטפורמה ℹ"):
-        st.markdown("""
-        **מטרת הפלטפורמה:**
-        פלטפורמה זו נוצרה כדי להעשיר ולחדד את הידע של צוותי טיפול נמרץ ילדים.
-        
-        **מה תמצאו כאן:**
-        • חומרי למידה מעודכנים על בסיס UpToDate 📚  
-        • מבחנים אינטראקטיביים עם משוב מיידי 📝  
-        • מעקב אחר התקדמות אישית 📈  
-        • תחרות בריאה בין מוסדות רפואיים 🏆  
-        
-        **איך מתחילים:**
-        פשוט הירשמו עם המייל שלכם - ללא סיסמה! ✨
-        
-        **פותח על ידי:**
-        ישי קופרמן - אח בטיפול נמרץ ילדים
-        """)
+    with st.expander("מידע על הפלטפורמה"):
+        st.write("**מטרת הפלטפורמה:**")
+        st.write("פלטפורמה זו נוצרה כדי להעשיר ולחדד את הידע של צוותי טיפול נמרץ ילדים.")
+        st.write("")
+        st.write("**מה תמצאו כאן:**")
+        st.write("- חומרי למידה מעודכנים על בסיס UpToDate 📚")
+        st.write("- מבחנים אינטראקטיביים עם משוב מיידי 📝")
+        st.write("- מעקב אחר התקדמות אישית 📈")
+        st.write("- תחרות בריאה בין מוסדות רפואיים 🏆")
+        st.write("")
+        st.write("**איך מתחילים:**")
+        st.write("פשוט הירשמו עם המייל שלכם - ללא סיסמה!")
 
 # כתב ויתור בתחתית
 st.divider()
