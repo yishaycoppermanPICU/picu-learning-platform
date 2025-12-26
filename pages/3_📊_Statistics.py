@@ -1,262 +1,189 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import plotly.graph_objects as go
 from datetime import datetime, timedelta
 import random
 
-st.set_page_config(page_title="סטטיסטיקות", page_icon="📊", layout="wide")
+st.set_page_config(page_title="הסטטיסטיקות שלי", page_icon="📊", layout="wide")
 
-# CSS
+# CSS לעברית
 st.markdown("""
 <style>
     .stApp {
-        direction: rtl;
+        direction: rtl ! important;
+        text-align: right !important;
     }
-    .stat-card {
+    
+    .stat-header {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        padding: 1.5rem;
-        border-radius: 10px;
+        padding: 2rem;
+        border-radius:  10px;
         text-align: center;
+        margin-bottom: 2rem;
     }
-    .stat-number {
-        font-size: 2.5rem;
-        font-weight: bold;
+    
+    [data-testid="metric-container"] {
+        text-align: center ! important;
+        background: white;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 </style>
 """, unsafe_allow_html=True)
 
-st.title("📊 הסטטיסטיקות שלי")
-st.markdown("---")
-
 # בדיקת התחברות
 if not st.session_state.get('logged_in', False):
-    st.warning("יש להתחבר כדי לראות סטטיסטיקות")
+    st.error("יש להתחבר כדי לראות את הסטטיסטיקות שלך")
     st.stop()
 
-# נתונים לדוגמה - במציאות יגיעו ממסד נתונים
-if 'user_scores' not in st.session_state or len(st.session_state.user_scores) == 0:
-    # יצירת נתונים לדוגמה
-    st.session_state.user_scores = []
-    for i in range(15):
-        date = datetime.now() - timedelta(days=random.randint(1, 30))
-        st.session_state.user_scores.append({
-            'date':  date.strftime("%Y-%m-%d"),
-            'score': random.randint(60, 100),
-            'questions': random.choice([5, 10, 20]),
-            'correct': 0,
-            'topic': random.choice(['החייאה', 'הנשמה', 'תרופות', 'כללי'])
-        })
-    for score in st.session_state.user_scores:
-        score['correct'] = int(score['questions'] * score['score'] / 100)
+user = st.session_state.get('user', {})
 
-# המרה ל-DataFrame
-df = pd. DataFrame(st.session_state. user_scores)
-df['date'] = pd.to_datetime(df['date'])
+st.markdown("""
+<div class="stat-header">
+    <h1>הסטטיסטיקות שלי 📊</h1>
+    <p>מעקב אחר ההתקדמות שלך</p>
+</div>
+""", unsafe_allow_html=True)
 
-# סטטיסטיקות ראשיות
-col1, col2, col3, col4 = st.columns(4)
+# טאבים
+tab1, tab2, tab3, tab4 = st.tabs(["סקירה כללית 📈", "מבחנים 📝", "למידה 📚", "השוואה 🏆"])
 
-with col1:
-    avg_score = df['score'].mean()
-    st.markdown(f"""
-    <div class="stat-card">
-        <div>ציון ממוצע</div>
-        <div class="stat-number">{avg_score:. 1f}%</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col2:
-    total_tests = len(df)
-    st.markdown(f"""
-    <div class="stat-card">
-        <div>מבחנים שהושלמו</div>
-        <div class="stat-number">{total_tests}</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col3:
-    total_questions = df['questions'].sum()
-    st.markdown(f"""
-    <div class="stat-card">
-        <div>סה"כ שאלות</div>
-        <div class="stat-number">{total_questions}</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col4:
-    best_score = df['score'].max()
-    st.markdown(f"""
-    <div class="stat-card">
-        <div>הציון הטוב ביותר</div>
-        <div class="stat-number">{best_score}%</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown("---")
-
-# גרפים
-col1, col2 = st.columns(2)
-
-with col1:
-    st.subheader("📈 התקדמות לאורך זמן")
+with tab1:
+    st.subheader("סקירה כללית")
     
-    # גרף התקדמות
-    fig_progress = go.Figure()
+    col1, col2, col3, col4 = st.columns(4)
     
-    df_sorted = df.sort_values('date')
-    fig_progress.add_trace(go.Scatter(
-        x=df_sorted['date'],
-        y=df_sorted['score'],
-        mode='lines+markers',
-        name='ציון',
-        line=dict(color='#667eea', width=3),
-        marker=dict(size=8)
-    ))
-    
-    # הוספת קו ממוצע
-    fig_progress.add_hline(
-        y=avg_score, 
-        line_dash="dash", 
-        line_color="gray",
-        annotation_text=f"ממוצע: {avg_score:.1f}%"
-    )
-    
-    fig_progress.update_layout(
-        xaxis_title="תאריך",
-        yaxis_title="ציון (%)",
-        yaxis_range=[0, 105],
-        hovermode='x unified',
-        showlegend=False,
-        height=350
-    )
-    
-    st.plotly_chart(fig_progress, use_container_width=True)
-
-with col2:
-    st.subheader("📊 התפלגות ציונים")
-    
-    # היסטוגרמה של ציונים
-    fig_hist = px.histogram(
-        df, 
-        x='score', 
-        nbins=10,
-        color_discrete_sequence=['#764ba2']
-    )
-    
-    fig_hist.update_layout(
-        xaxis_title="ציון",
-        yaxis_title="מספר מבחנים",
-        showlegend=False,
-        height=350
-    )
-    
-    st.plotly_chart(fig_hist, use_container_width=True)
-
-# ביצועים לפי נושא
-st.subheader("🎯 ביצועים לפי נושא")
-
-if 'topic' in df.columns:
-    topic_stats = df.groupby('topic').agg({
-        'score':  'mean',
-        'questions': 'sum',
-        'correct': 'sum'
-    }).round(1)
-    
-    topic_stats['accuracy'] = (topic_stats['correct'] / topic_stats['questions'] * 100).round(1)
-    topic_stats = topic_stats.rename(columns={
-        'score': 'ציון ממוצע (%)',
-        'questions': 'סה"כ שאלות',
-        'correct': 'תשובות נכונות',
-        'accuracy': 'אחוז דיוק (%)'
-    })
-    
-    st.dataframe(topic_stats, use_container_width=True)
-    
-    # גרף עמודות לפי נושא
-    fig_topics = px.bar(
-        x=topic_stats.index,
-        y=topic_stats['ציון ממוצע (%)'],
-        color=topic_stats['ציון ממוצע (%)'],
-        color_continuous_scale='Viridis'
-    )
-    
-    fig_topics.update_layout(
-        xaxis_title="נושא",
-        yaxis_title="ציון ממוצע (%)",
-        showlegend=False,
-        height=300
-    )
-    
-    st.plotly_chart(fig_topics, use_container_width=True)
-
-# היסטוריית מבחנים
-st.subheader("📜 היסטוריית מבחנים אחרונים")
-
-df_recent = df.sort_values('date', ascending=False).head(10)
-df_display = df_recent[['date', 'topic', 'score', 'questions', 'correct']].copy()
-df_display. columns = ['תאריך', 'נושא', 'ציון (%)', 'שאלות', 'נכונות']
-df_display['תאריך'] = df_display['תאריך'].dt.strftime('%d/%m/%Y')
-
-st.dataframe(
-    df_display,
-    use_container_width=True,
-    hide_index=True,
-    column_config={
-        "ציון (%)": st.column_config.ProgressColumn(
-            "ציון (%)",
-            help="הציון במבחן",
-            min_value=0,
-            max_value=100,
-        ),
-    }
-)
-
-# המלצות אישיות
-st.subheader("💡 המלצות אישיות")
-
-weak_topics = df. groupby('topic')['score'].mean().sort_values().head(2)
-
-if len(weak_topics) > 0:
-    st.info(f"""
-    **בהתבסס על הביצועים שלך, מומלץ:**
-    
-    🔸 להתמקד בנושאים:  {', '.join(weak_topics.index)}
-    
-    🔸 לחזור על חומר הלמידה בנושאים אלו
-    
-    🔸 לבצע תרגול נוסף של שאלות
-    
-    🔸 הממוצע שלך ({avg_score:.1f}%) {'מעל הממוצע הכללי - כל הכבוד!' if avg_score > 75 else 'יש מקום לשיפור - המשך להתאמן! '}
-    """)
-
-# סרגל צד - יעדים
-with st.sidebar:
-    st.subheader("🎯 היעדים שלך")
-    
-    target_score = st.slider("יעד ציון ממוצע", 60, 100, 85)
-    
-    if avg_score >= target_score:
-        st. success(f"✅ הגעת ליעד! ({avg_score:.1f}%)")
-    else:
-        gap = target_score - avg_score
-        st.warning(f"📈 {gap:.1f}% עד היעד")
-        
-        # חישוב כמה מבחנים טובים נדרשים
-        tests_needed = int(gap / 5) + 1
-        st.info(f"💪 עוד {tests_needed} מבחנים עם ציון {target_score}+ יביאו אותך ליעד!")
+    with col1:
+        st.metric("ימים פעילים", "7", "2+")
+    with col2:
+        st.metric("זמן למידה כולל", "12. 5 שעות", "1.5+")
+    with col3:
+        st.metric("מבחנים שהושלמו", len(st.session_state.get('user_scores', [])))
+    with col4:
+        scores = st.session_state.get('user_scores', [])
+        avg_score = sum(scores) / len(scores) if scores else 0
+        st.metric("ציון ממוצע", f"{avg_score:.1f}%")
     
     st.divider()
     
-    # סטטיסטיקת השבוע
-    st.subheader("📅 השבוע שלך")
+    # גרף התקדמות
+    st.subheader("התקדמות לאורך זמן 📈")
     
-    week_ago = datetime.now() - timedelta(days=7)
-    week_tests = df[df['date'] > week_ago]
+    # נתונים לדוגמה
+    dates = pd.date_range(end=datetime.now(), periods=30, freq='D')
+    progress_data = pd.DataFrame({
+        'תאריך': dates,
+        'ציון': [random.randint(70, 100) for _ in range(30)],
+        'זמן למידה (דקות)': [random.randint(10, 60) for _ in range(30)]
+    })
     
-    if len(week_tests) > 0:
-        st.metric("מבחנים השבוע", len(week_tests))
-        st.metric("ממוצע השבוע", f"{week_tests['score']. mean():.1f}%")
+    fig = px.line(progress_data, x='תאריך', y='ציון', 
+                  title='ציונים במבחנים',
+                  markers=True)
+    fig.update_layout(
+        xaxis_title="תאריך",
+        yaxis_title="ציון (%)",
+        hovermode='x unified'
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
+with tab2:
+    st.subheader("היסטוריית מבחנים 📝")
+    
+    if st.session_state.get('user_scores'):
+        # יצירת טבלה עם היסטוריית מבחנים
+        quiz_history = []
+        for i, score in enumerate(st.session_state.user_scores, 1):
+            quiz_history.append({
+                'מבחן מס׳': i,
+                'נושא': 'החייאה - BLS & PALS',
+                'ציון':  f"{score}%",
+                'תאריך': (datetime.now() - timedelta(days=i)).strftime('%d/%m/%Y'),
+                'משך זמן': f"{random.randint(5, 20)} דקות"
+            })
+        
+        df = pd.DataFrame(quiz_history)
+        st.dataframe(df, use_container_width=True, hide_index=True)
     else:
-        st. info("אין פעילות השבוע")
+        st.info("עדיין לא ביצעת מבחנים")
+    
+    # כפתור למבחן חדש
+    if st.button("התחל מבחן חדש 🚀", type="primary"):
+        st.switch_page("pages/2_📝_Quizzes.py")
+
+with tab3:
+    st.subheader("התקדמות בלמידה 📚")
+    
+    # נושאי למידה
+    topics_progress = [
+        {"נושא": "החייאה - BLS & PALS", "התקדמות": 75, "שעות": 3. 5},
+        {"נושא":  "הנשמה מכנית", "התקדמות": 50, "שעות": 2.0},
+        {"נושא":  "תרופות בטיפול נמרץ", "התקדמות": 30, "שעות": 1.5},
+        {"נושא": "נוזלים ואלקטרוליטים", "התקדמות": 60, "שעות": 2.5},
+        {"נושא": "זיהומים ואנטיביוטיקה", "התקדמות": 40, "שעות": 2.0},
+    ]
+    
+    for topic in topics_progress:
+        col1, col2, col3 = st.columns([3, 1, 1])
+        with col1:
+            st.markdown(f"**{topic['נושא']}**")
+            st.progress(topic['התקדמות'] / 100)
+        with col2:
+            st.metric("התקדמות", f"{topic['התקדמות']}%", label_visibility="collapsed")
+        with col3:
+            st.metric("שעות", topic['שעות'], label_visibility="collapsed")
+    
+    st.divider()
+    
+    # המלצות ללמידה
+    st.subheader("המלצות ללמידה 💡")
+    st.info("""
+    • המשך עם נושא 'החייאה' - אתה כמעט מסיים! 
+    • כדאי להתחיל לתרגל 'תרופות בטיפול נמרץ'
+    • נסה להקדיש לפחות 30 דקות ביום ללמידה
+    """)
+
+with tab4:
+    st.subheader("השוואה למשתמשים אחרים 🏆")
+    
+    col1, col2 = st. columns(2)
+    
+    with col1:
+        st. markdown("### הדירוג שלך במוסד")
+        
+        # דירוג במוסד
+        institution_ranking = pd.DataFrame({
+            'משתמש': ['אתה', 'משתמש א', 'משתמש ב', 'משתמש ג', 'משתמש ד'],
+            'ציון ממוצע': [85, 92, 88, 82, 79],
+            'מבחנים': [5, 12, 8, 6, 4]
+        })
+        
+        fig = px.bar(institution_ranking, x='משתמש', y='ציון ממוצע',
+                    color='ציון ממוצע',
+                    color_continuous_scale='Viridis',
+                    title='דירוג במוסד שלך')
+        st.plotly_chart(fig, use_container_width=True)
+    
+    with col2:
+        st.markdown("### השוואה ארצית")
+        
+        st.metric("הדירוג הארצי שלך", "127 מתוך 543")
+        st.metric("אחוזון", "76%", "5%+")
+        
+        # התפלגות ציונים ארצית
+        fig = px.histogram(
+            x=[random.gauss(75, 15) for _ in range(500)],
+            nbins=30,
+            title='התפלגות ציונים ארצית',
+            labels={'x': 'ציון', 'y': 'מספר משתמשים'}
+        )
+        fig.add_vline(x=85, line_dash="dash", line_color="red", 
+                     annotation_text="הציון שלך")
+        st.plotly_chart(fig, use_container_width=True)
+
+# כפתור חזרה
+st.divider()
+if st.button("חזרה לעמוד הראשי 🏠", use_container_width=True):
+    st.switch_page("app.py")
