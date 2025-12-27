@@ -94,9 +94,32 @@ st.markdown("""
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 if 'user' not in st.session_state:
-    st.session_state. user = None
+    st.session_state.user = None
 if 'user_scores' not in st.session_state:
     st.session_state.user_scores = []
+
+# בדיקה אם יש משתמש שמור (שחזור לאחר רענון)
+try:
+    query_params = st.query_params
+    if 'user_email' in query_params and not st.session_state.logged_in:
+        # Try to restore user session
+        saved_email = query_params['user_email']
+        existing_user = get_user_by_email(saved_email)
+        
+        if existing_user:
+            # Restore session
+            username = saved_email.split('@')[0].replace('.', '_').replace('-', '_')
+            st.session_state.logged_in = True
+            st.session_state.user = {
+                'username': username,
+                'full_name': existing_user.get('name', ''),
+                'email': saved_email,
+                'institution': existing_user.get('hospital', ''),
+                'institutions': {'name': existing_user.get('hospital', '')}
+            }
+            update_last_login(saved_email)
+except:
+    pass
 
 # כותרת ראשית
 st.title("🏥 פלטפורמת למידה PICU")
@@ -208,6 +231,9 @@ with st.sidebar:
                     
                     username = email.split('@')[0].replace('.', '_').replace('-', '_')
                     
+                    # Save email to query params for persistence
+                    st.query_params['user_email'] = email
+                    
                     if DB_CONNECTED:
                         try:
                             existing = authenticate_user(username)
@@ -273,6 +299,9 @@ with st.sidebar:
                 st.switch_page("pages/3_📊_Statistics.py")
         with col2:
             if st.button("התנתק 🚪", use_container_width=True):
+                # Clear query params
+                if 'user_email' in st.query_params:
+                    del st.query_params['user_email']
                 st.session_state.logged_in = False
                 st.session_state.user = None
                 st.rerun()
