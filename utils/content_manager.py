@@ -11,6 +11,8 @@ import os
 
 # Base path for content
 CONTENT_DIR = Path(__file__).parent.parent / "data" / "content"
+EDITORS_FILE = Path(__file__).parent.parent / "data" / "editors.json"
+USERS_FILE = Path(__file__).parent.parent / "data" / "users.json"
 
 def get_all_categories() -> List[Dict]:
     """
@@ -163,6 +165,31 @@ def create_topic(category_id: str, topic_data: Dict) -> bool:
         print(f"Error creating topic: {e}")
         return False
 
+def update_topic(category_id: str, topic_id: str, updated_data: Dict) -> bool:
+    """
+    Update an existing topic with new data
+    
+    Args:
+        category_id: Category identifier
+        topic_id: Topic identifier
+        updated_data: Updated topic data
+    
+    Returns:
+        True if successful, False otherwise
+    """
+    topic_path = CONTENT_DIR / category_id / f"{topic_id}.json"
+    
+    if not topic_path.exists():
+        return False
+    
+    try:
+        with open(topic_path, 'w', encoding='utf-8') as f:
+            json.dump(updated_data, f, ensure_ascii=False, indent=2)
+        return True
+    except Exception as e:
+        print(f"Error updating topic: {e}")
+        return False
+
 def add_content_item(category_id: str, topic_id: str, item: Dict) -> bool:
     """
     Add content item to existing topic
@@ -268,3 +295,224 @@ def get_stats() -> Dict:
         "total_topics": total_topics,
         "total_content_items": total_items
     }
+
+def get_editors() -> List[str]:
+    """
+    Get list of authorized editors
+    
+    Returns:
+        List of editor email addresses
+    """
+    if not EDITORS_FILE.exists():
+        return ["yishaycopp@gmail.com"]
+    
+    try:
+        with open(EDITORS_FILE, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            return data.get("editors", ["yishaycopp@gmail.com"])
+    except Exception as e:
+        print(f"Error loading editors: {e}")
+        return ["yishaycopp@gmail.com"]
+
+def is_editor(email: str) -> bool:
+    """
+    Check if a user is authorized to edit content
+    
+    Args:
+        email: User email address
+    
+    Returns:
+        True if user is authorized editor, False otherwise
+    """
+    editors = get_editors()
+    return email in editors
+
+def add_editor(email: str) -> bool:
+    """
+    Add a new editor
+    
+    Args:
+        email: Email address to add
+    
+    Returns:
+        True if successful, False otherwise
+    """
+    if not email or '@' not in email:
+        return False
+    
+    editors = get_editors()
+    if email not in editors:
+        editors.append(email)
+        return save_editors(editors)
+    return True
+
+def remove_editor(email: str) -> bool:
+    """
+    Remove an editor
+    
+    Args:
+        email: Email address to remove
+    
+    Returns:
+        True if successful, False otherwise
+    """
+    editors = get_editors()
+    if email in editors:
+        if len(editors) == 1:
+            return False  # Don't remove last editor
+        editors.remove(email)
+        return save_editors(editors)
+    return False
+
+def save_editors(editors: List[str]) -> bool:
+    """
+    Save editors list to file
+    
+    Args:
+        editors: List of editor emails
+    
+    Returns:
+        True if successful, False otherwise
+    """
+    EDITORS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    
+    from datetime import datetime
+    data = {
+        "editors": editors,
+        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    }
+    
+    try:
+        with open(EDITORS_FILE, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        return True
+    except Exception as e:
+        print(f"Error saving editors: {e}")
+        return False
+
+# ===== User Management Functions =====
+
+def get_all_users() -> List[Dict]:
+    """
+    Get all registered users
+    
+    Returns:
+        List of user dictionaries
+    """
+    if not USERS_FILE.exists():
+        return []
+    
+    try:
+        with open(USERS_FILE, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            return data.get("users", [])
+    except Exception as e:
+        print(f"Error loading users: {e}")
+        return []
+
+def get_user_by_email(email: str) -> Optional[Dict]:
+    """
+    Get user details by email
+    
+    Args:
+        email: User email address
+    
+    Returns:
+        User dictionary or None if not found
+    """
+    users = get_all_users()
+    for user in users:
+        if user.get('email', '').lower() == email.lower():
+            return user
+    return None
+
+def save_user(email: str, name: str, hospital: str) -> bool:
+    """
+    Save or update user information
+    
+    Args:
+        email: User email address
+        name: User full name
+        hospital: User hospital
+    
+    Returns:
+        True if successful, False otherwise
+    """
+    from datetime import datetime
+    
+    users = get_all_users()
+    
+    # Check if user exists
+    user_exists = False
+    for i, user in enumerate(users):
+        if user.get('email', '').lower() == email.lower():
+            # Update existing user
+            users[i] = {
+                "email": email,
+                "name": name,
+                "hospital": hospital,
+                "last_login": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }
+            user_exists = True
+            break
+    
+    # Add new user
+    if not user_exists:
+        users.append({
+            "email": email,
+            "name": name,
+            "hospital": hospital,
+            "last_login": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "first_login": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        })
+    
+    # Save to file
+    USERS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    
+    data = {
+        "users": users,
+        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    }
+    
+    try:
+        with open(USERS_FILE, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        return True
+    except Exception as e:
+        print(f"Error saving user: {e}")
+        return False
+
+def update_last_login(email: str) -> bool:
+    """
+    Update user's last login time
+    
+    Args:
+        email: User email address
+    
+    Returns:
+        True if successful, False otherwise
+    """
+    from datetime import datetime
+    
+    users = get_all_users()
+    
+    for i, user in enumerate(users):
+        if user.get('email', '').lower() == email.lower():
+            users[i]['last_login'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            
+            data = {
+                "users": users,
+                "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }
+            
+            try:
+                with open(USERS_FILE, 'w', encoding='utf-8') as f:
+                    json.dump(data, f, ensure_ascii=False, indent=2)
+                return True
+            except Exception as e:
+                print(f"Error updating last login: {e}")
+                return False
+    
+    return False
+
+

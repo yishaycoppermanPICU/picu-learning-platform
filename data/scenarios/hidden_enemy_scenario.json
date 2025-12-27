@@ -1,0 +1,769 @@
+{
+  "scenario_id": "hidden_enemy_01",
+  "title": "האויב הנסתר (The Hidden Enemy)",
+  "description": "תסמינים ויראליים המסתירים לוקמיה, ספסיס ותסמונת פירוק הגידול",
+  "difficulty": "hard",
+  "estimated_time": 25,
+  "category": "oncology_hematology",
+  "tags": ["לוקמיה", "TLS", "ספסיס", "שוק", "החייאה", "היפרקלמיה"],
+  "learning_objectives": [
+    "זיהוי מוקדם של ממאירות המטולוגית המוסווית כמחלה ויראלית",
+    "ניהול שוק ספטי בילדים עם נויטרופניה",
+    "זיהוי וטיפול בתסמונת פירוק הגידול (TLS)",
+    "החלטות קריטיות בהכנת חדר, אינטובציה והחייאה",
+    "מניעת טעויות קטלניות (LP בטרומבוציטופניה, Propofol בשוק)"
+  ],
+  "patient_profile": {
+    "age": 6,
+    "weight": 20,
+    "gender": "male",
+    "initial_presentation": "חום, הקאות, טכיקרדיה",
+    "background": "בריא לכאורה, 2 שבועות של כאבי עצמות"
+  },
+  "stages": [
+    {
+      "id": 1,
+      "type": "checklist_selection",
+      "title": "הכנת החדר (Room Preparation)",
+      "time_limit": 120,
+      "context": {
+        "text": "🚨 שיחה ממיון: ילד בן 6, חום 39.5°C, הקאות, טכיקרדיה. קיבל 2 ליטר נוזלים במיון. מועבר כעת ל-PICU. הכינו את החדר!",
+        "vitals_reported": "HR 155, BP 85/45, Sat 94%, RR 35, Temp 39.5°C",
+        "additional_info": "האם דיווחה על חולשה ופטכיות על החזה"
+      },
+      "instructions": "בחר את הציוד החיוני להכנת החדר. זמן מוגבל! בחר בחוכמה - ציוד מיותר יעכב אותך.",
+      "items": [
+        {
+          "id": "ambu_bag",
+          "name": "אמבו בג + מסכה (גודל מתאים)",
+          "is_required": true,
+          "type": "standard",
+          "category": "airway"
+        },
+        {
+          "id": "guedel",
+          "name": "Oropharyngeal Airway (Guedel)",
+          "is_required": true,
+          "type": "standard",
+          "category": "airway"
+        },
+        {
+          "id": "resus_drugs",
+          "name": "תרופות החייאה (אדרנלין/אטרופין אמפולות)",
+          "is_required": true,
+          "type": "standard",
+          "category": "drugs"
+        },
+        {
+          "id": "cpr_sheet",
+          "name": "טבלת תרופות החייאה לפי משקל",
+          "is_required": true,
+          "type": "standard",
+          "category": "protocol"
+        },
+        {
+          "id": "blood_consent",
+          "name": "טופס הסכמה למוצרי דם",
+          "is_required": true,
+          "type": "standard",
+          "category": "admin"
+        },
+        {
+          "id": "id_bands",
+          "name": "צמידי זיהוי (צהוב/אדום/ירוק)",
+          "is_required": true,
+          "type": "standard",
+          "category": "safety"
+        },
+        {
+          "id": "syringe_pumps",
+          "name": "משאבות מזרקים (סט של 3)",
+          "is_required": true,
+          "type": "specific",
+          "category": "equipment"
+        },
+        {
+          "id": "norepinephrine",
+          "name": "מזרק נוראפינפרין מוכן",
+          "is_required": true,
+          "type": "specific",
+          "category": "drugs"
+        },
+        {
+          "id": "fluid_warmer",
+          "name": "מחמם נוזלים",
+          "is_required": true,
+          "type": "specific",
+          "category": "equipment"
+        },
+        {
+          "id": "monitor_cables",
+          "name": "כבלי מוניטור (ECG/SpO2/NIBP)",
+          "is_required": true,
+          "type": "specific",
+          "category": "monitoring"
+        },
+        {
+          "id": "defib_pads",
+          "name": "רפידות דפיברילטור",
+          "is_required": false,
+          "type": "distractor",
+          "category": "equipment",
+          "penalty": "time"
+        },
+        {
+          "id": "chest_tube",
+          "name": "ערכת חזה (Chest Tube Kit)",
+          "is_required": false,
+          "type": "distractor",
+          "category": "procedure",
+          "penalty": "time"
+        },
+        {
+          "id": "lp_tray",
+          "name": "ערכת דקירת מותן (LP)",
+          "is_required": false,
+          "type": "distractor",
+          "category": "procedure",
+          "penalty": "time"
+        },
+        {
+          "id": "suture_kit",
+          "name": "ערכת תפירה",
+          "is_required": false,
+          "type": "distractor",
+          "category": "procedure",
+          "penalty": "time"
+        },
+        {
+          "id": "otoscope",
+          "name": "אוטוסקופ",
+          "is_required": false,
+          "type": "distractor",
+          "category": "examination",
+          "penalty": "time"
+        },
+        {
+          "id": "humidifier",
+          "name": "מכשיר אדים קרים",
+          "is_required": false,
+          "type": "distractor",
+          "category": "equipment",
+          "penalty": "time"
+        },
+        {
+          "id": "gastric_lavage",
+          "name": "ערכת שטיפת קיבה",
+          "is_required": false,
+          "type": "distractor",
+          "category": "procedure",
+          "penalty": "time"
+        },
+        {
+          "id": "c_collar",
+          "name": "צווארון קשיח (C-Collar)",
+          "is_required": false,
+          "type": "distractor",
+          "category": "trauma",
+          "penalty": "time"
+        }
+      ],
+      "scoring": {
+        "perfect_selection": {
+          "condition": "all_required_and_no_distractors",
+          "points": 100,
+          "outcome": "optimal_start",
+          "message": "✅ הכנה מושלמת! החדר מוכן לקבלת המטופל."
+        },
+        "good_selection": {
+          "condition": "all_required_max_2_distractors",
+          "points": 80,
+          "outcome": "good_start",
+          "message": "✓ הכנה טובה, אך החדר מעט צפוף."
+        },
+        "missing_standard": {
+          "condition": "missing_any_standard",
+          "points": -50,
+          "outcome": "safety_violation",
+          "message": "⚠️ חסר ציוד בטיחות בסיסי! זו הפרת פרוטוקול חמורה."
+        },
+        "missing_specific": {
+          "condition": "missing_pumps_or_norad",
+          "points": -30,
+          "outcome": "hemodynamic_crisis",
+          "message": "⚠️ חסרות משאבות/נוראפינפרין! המטופל יגיע במצב קריטי."
+        },
+        "too_many_distractors": {
+          "condition": "more_than_3_distractors",
+          "points": -20,
+          "outcome": "time_penalty",
+          "message": "⏱️ החדר צפוף מדי! ההערכה מתעכבת."
+        }
+      },
+      "consequences": {
+        "optimal_start": {
+          "patient_state": {
+            "bp": "75/40",
+            "hr": 155,
+            "sat": 94,
+            "consciousness": "lethargic"
+          },
+          "next_stage": 2
+        },
+        "good_start": {
+          "patient_state": {
+            "bp": "75/40",
+            "hr": 155,
+            "sat": 94,
+            "consciousness": "lethargic"
+          },
+          "next_stage": 2,
+          "time_penalty": 30
+        },
+        "safety_violation": {
+          "patient_state": {
+            "bp": "75/40",
+            "hr": 155,
+            "sat": 94,
+            "consciousness": "lethargic"
+          },
+          "next_stage": 2,
+          "safety_score_deduction": true,
+          "incident_report": true
+        },
+        "hemodynamic_crisis": {
+          "patient_state": {
+            "bp": "55/30",
+            "hr": 175,
+            "sat": 88,
+            "consciousness": "obtunded"
+          },
+          "next_stage": 2,
+          "difficulty_mode": "hard",
+          "urgent_action_required": true
+        }
+      }
+    },
+    {
+      "id": 2,
+      "type": "branching_choice",
+      "title": "קבלה והערכה ראשונית",
+      "time_limit": 90,
+      "context": {
+        "text": "המטופל מגיע על אלונקה. חיוור, רדום. האחות מדווחת: 'האם אומרת שהיו כאבי עצמות במשך שבועיים, ויש פטכיות על החזה.'",
+        "physical_exam": "חיוור++, פטכיות על בית החזה, כבד מוגדל 3 ס\"מ מתחת לקצה הצלעות",
+        "vitals": "HR 155, BP [תלוי בשלב 1], Sat 94%, RR 35, Temp 39.5°C",
+        "key_findings": "פטכיות + כאבי עצמות + הפטומגליה"
+      },
+      "question": "ממצאים חדשים (פטכיות + כאבי עצמות) מעידים על חשד לממאירות + ספסיס. מהי הפעולה האבחנתית המיידית?",
+      "options": [
+        {
+          "id": "A",
+          "text": "בדיקות מעבדה דחופות: CBC, אלקטרוליטים (Ca, P, K, חומצה אורית), קרישה. חשד ל-TLS",
+          "is_correct": true,
+          "explanation": "זיהוי נכון של חשד ללוקמיה + TLS. הבדיקות חיוניות לפני כל טיפול.",
+          "consequences": {
+            "patient_response": "הבדיקות נשלחות בדחיפות. זוהה ספסיס + חשד לממאירות.",
+            "labs_ordered": true,
+            "next_stage": 3,
+            "state_change": {
+              "diagnosis_clarity": "suspected_leukemia_tls",
+              "sepsis_recognized": true
+            }
+          },
+          "points": 100
+        },
+        {
+          "id": "B",
+          "text": "ביצוע דקירת מותן (LP) מיידית לחשד למנינגיטיס",
+          "is_correct": false,
+          "is_critical_error": true,
+          "explanation": "❌ טעות קטלנית! בחולה עם פטכיות (טרומבוציטופניה חמורה) LP עלול לגרום לדימום אינטרקרניאלי או הרניאציה.",
+          "consequences": {
+            "outcome": "death",
+            "death_mechanism": "intracranial_hemorrhage",
+            "death_description": "במהלך דקירת המותן התפתח דימום תוך גולגולתי מסיבי. המטופל פיתח הרניאציה ונפטר.",
+            "next_stage": "game_over",
+            "lesson": "לעולם אל תבצע LP בחולה עם חשד לטרומבוציטופניה (פטכיות) לפני בדיקת קרישה ותיקון טסיות!"
+          },
+          "points": -200
+        },
+        {
+          "id": "C",
+          "text": "המשך בולוסים של נוזלים באופן עיוור (20 ml/kg נוספים)",
+          "is_correct": false,
+          "explanation": "בולוסי נוזלים ללא הערכה עלולים לגרום לבצקת ריאות, במיוחד בחולה עם אפשרית אי ספיקת לב.",
+          "consequences": {
+            "patient_response": "מתפתחת בצקת ריאות (רעשים נשמעים). לחץ הדם לא משתפר.",
+            "next_stage": 3,
+            "state_change": {
+              "respiratory_status": "worsening",
+              "lung_sounds": "crackles",
+              "fluid_overload": true,
+              "bp_response": "no_improvement"
+            }
+          },
+          "points": -30
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "branching_choice",
+      "title": "ניהול שוק (Shock Management)",
+      "time_limit": 60,
+      "context": {
+        "text": "שוק עמיד לנוזלים (Fluid Refractory Shock). הריאות רטובות, כבד מוגדל, לחץ דם נמוך.",
+        "vitals": "HR 165, BP 65/35, Sat 90%, CVP elevated",
+        "physical_exam": "רעשים בשתי הריאות, כבד +4 ס\"מ, קצוות קרים, Capillary refill 4 שניות",
+        "labs_pending": "ממתינים לתוצאות מעבדה"
+      },
+      "question": "כיצד לנהל את ההמודינמיקה?",
+      "options": [
+        {
+          "id": "A",
+          "text": "התחלת נוראפינפרין באמצעות משאבת מזרק (0.1 mcg/kg/min). הפסקת בולוסים",
+          "is_correct": true,
+          "explanation": "נוראפינפרין הוא קו ראשון בשוק קר עמיד לנוזלים. הפסקת בולוסים מונעת עומס נוזלים נוסף.",
+          "consequences": {
+            "patient_response": "לחץ הדם מתייצב ל-90/50. שיפור בפרפוזיה היקפית.",
+            "next_stage": 4,
+            "state_change": {
+              "bp": "90/50",
+              "hr": 155,
+              "perfusion": "improving",
+              "norepinephrine_started": true
+            }
+          },
+          "points": 100
+        },
+        {
+          "id": "B",
+          "text": "מתן פורוסמיד (Furosemide/Lasix) להוצאת נוזלים מהריאות",
+          "is_correct": false,
+          "is_critical_error": true,
+          "explanation": "❌ טעות קטלנית! משתן בשוק היפו-וולמי יגרום להיפוטנזיה חמורה ועצירת לב.",
+          "consequences": {
+            "outcome": "cardiac_arrest",
+            "arrest_type": "PEA",
+            "arrest_description": "תוך דקות מהמתן לחץ הדם צנח ל-40/20. המטופל פיתח PEA Arrest.",
+            "next_stage": 9,
+            "requires_cpr": true,
+            "lesson": "אסור לתת משתנים בשוק לפני ייצוב המודינמי!"
+          },
+          "points": -200
+        },
+        {
+          "id": "C",
+          "text": "התחלת דופמין באמצעות משאבת מזרק",
+          "is_correct": false,
+          "explanation": "דופמין יכול לעזור אך נחות לנוראפינפרין בשוק קר. בנוסף, מחמיר טכיקרדיה.",
+          "consequences": {
+            "patient_response": "לחץ הדם עולה מעט ל-75/40, אך הטכיקרדיה מחמירה ל-180.",
+            "next_stage": 4,
+            "state_change": {
+              "bp": "75/40",
+              "hr": 180,
+              "perfusion": "partial_improvement",
+              "dopamine_started": true,
+              "tachycardia_worsening": true
+            }
+          },
+          "points": 40
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "branching_choice",
+      "title": "אנטיביוטיקה (Golden Hour)",
+      "time_limit": 45,
+      "context": {
+        "text": "חולה נויטרופני בחשד ספסיס. נדרש כיסוי רחב ספקטרום.",
+        "vitals": "HR 160, BP [תלוי בשלב קודם], Temp 39.8°C",
+        "clinical_state": "חום גבוה, חשד לנויטרופניה (ממתינים ל-CBC)"
+      },
+      "question": "בחר את משטר האנטיביוטיקה המתאים:",
+      "options": [
+        {
+          "id": "A",
+          "text": "מרופנם + ונקומיצין (כיסוי רחב)",
+          "is_correct": true,
+          "explanation": "משטר מצוין לספסיס נויטרופני: כיסוי גרם שליליים (כולל פסאודומונס) + MRSA.",
+          "consequences": {
+            "patient_response": "הספסיס מטופל. החום מתחיל לרדת. מצב יציב יותר.",
+            "next_stage": 5,
+            "state_change": {
+              "antibiotics_given": true,
+              "sepsis_controlled": true,
+              "fever_trend": "improving"
+            }
+          },
+          "points": 100
+        },
+        {
+          "id": "B",
+          "text": "מוקסיפן פומי או צפטריאקסון IV בלבד",
+          "is_correct": false,
+          "explanation": "כיסוי לא מספק לנויטרופניה. חסר כיסוי לפסאודומונס ו-MRSA.",
+          "consequences": {
+            "patient_response": "כיסוי לא מספק. החום ממשיך לעלות ל-40.2°C. ההיפוטנזיה חוזרת.",
+            "next_stage": 5,
+            "state_change": {
+              "antibiotics_given": true,
+              "sepsis_controlled": false,
+              "fever_trend": "worsening",
+              "bp_deteriorating": true,
+              "clinical_status": "unstable"
+            }
+          },
+          "points": -40
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "branching_choice",
+      "title": "דרכי אוויר (Intubation)",
+      "time_limit": 90,
+      "context": {
+        "text": "עייפות נשימתית מתקדמת. המטופל מידרדר.",
+        "vitals": "HR 170, BP [תלוי], Sat 88% על O2 100%, RR 45 shallow, GCS 9 (E2V3M4)",
+        "physical_exam": "מאמץ נשימתי קשה, שימוש בשרירי עזר, ציאנוזה היקפית",
+        "decision": "נדרשת אינטובציה (RSI)"
+      },
+      "question": "בחר תרופות אינדוקציה (RSI) לחולה בשוק ספטי:",
+      "options": [
+        {
+          "id": "A",
+          "text": "קטמין (1-2 mg/kg) + רוקורוניום (Ketamine + Rocuronium)",
+          "is_correct": true,
+          "explanation": "קטמין שומר על יציבות המודינמית בשוק. זוהי הבחירה המועדפת.",
+          "consequences": {
+            "patient_response": "אינטובציה חלקה. לחץ הדם נשמר יציב. אוורור מכני החל.",
+            "next_stage": 6,
+            "state_change": {
+              "intubated": true,
+              "ventilated": true,
+              "bp_stable": true,
+              "sedation": "ketamine"
+            }
+          },
+          "points": 100
+        },
+        {
+          "id": "B",
+          "text": "פרופופול (3 mg/kg) + רוקורוניום (Propofol + Rocuronium)",
+          "is_correct": false,
+          "is_critical_error": true,
+          "explanation": "❌ טעות קטלנית! פרופופול גורם להרחבת כלי דם ו-myocardial depression. בשוק = עצירת לב.",
+          "consequences": {
+            "outcome": "cardiac_arrest",
+            "arrest_type": "PEA",
+            "arrest_description": "מיד לאחר זריקת הפרופופול לחץ הדם צנח ל-30/15. המטופל פיתח PEA Arrest.",
+            "next_stage": 9,
+            "requires_cpr": true,
+            "lesson": "אסור לתת פרופופול בשוק! תמיד השתמש בקטמין."
+          },
+          "points": -200
+        },
+        {
+          "id": "C",
+          "text": "אטומידט (Etomidate)",
+          "is_correct": false,
+          "explanation": "אטומידט גורם לדיכוי יותרת הכליה. אמנם המודינמית יציבה בטווח הקצר, אך השוק יהפוך לעמיד.",
+          "consequences": {
+            "patient_response": "אינטובציה מוצלחת. לחץ דם יציב תחילה, אך השוק הופך לעמיד לטיפול (adrenal suppression).",
+            "next_stage": 6,
+            "state_change": {
+              "intubated": true,
+              "ventilated": true,
+              "bp_stable": false,
+              "adrenal_suppressed": true,
+              "shock_refractory": true,
+              "difficulty_mode": "hard"
+            }
+          },
+          "points": -30
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "branching_choice",
+      "title": "המפנה (Tumor Lysis Syndrome)",
+      "time_limit": 60,
+      "context": {
+        "text": "תוצאות המעבדה מגיעות! 🚨",
+        "labs": {
+          "wbc": "200,000 (לוקמיה)",
+          "hgb": "6.2",
+          "plt": "15,000",
+          "potassium": "6.9 mEq/L ⚠️",
+          "calcium": "6.5 mg/dL",
+          "phosphorus": "9.0 mg/dL",
+          "uric_acid": "15 mg/dL",
+          "creatinine": "2.1 mg/dL"
+        },
+        "interpretation": "TLS חמור + היפרקלמיה מסכנת חיים",
+        "ecg": "גלי T מחודדים, QRS מתרחב"
+      },
+      "question": "היפרקלמיה קריטית (6.9)! פעולה מיידית?",
+      "options": [
+        {
+          "id": "A",
+          "text": "קלציום גלוקונט (להגנת הלב) + אינסולין/גלוקוז + סלבוטמול",
+          "is_correct": true,
+          "explanation": "פרוטוקול נכון: קלציום מגן על הלב, אינסולין+גלוקוז מעבירים אשלגן לתוך התאים, סלבוטמול מוריד אשלגן.",
+          "consequences": {
+            "patient_response": "הפרעת הקצב נמנעת. האשלגן יורד באופן זמני ל-5.8.",
+            "next_stage": 7,
+            "state_change": {
+              "potassium": "5.8",
+              "arrhythmia_prevented": true,
+              "tls_recognized": true,
+              "emergency_tx_given": true
+            }
+          },
+          "points": 100
+        },
+        {
+          "id": "B",
+          "text": "מתן אשלגן בנוזלי תחזוקה (לא שמת לב לתוצאה)",
+          "is_correct": false,
+          "is_critical_error": true,
+          "explanation": "❌ טעות קטלנית! הוספת אשלגן תגרום להיפרקלמיה קטלנית ועצירת לב.",
+          "consequences": {
+            "outcome": "cardiac_arrest",
+            "arrest_type": "VF",
+            "arrest_description": "תוך דקות האשלגן עלה ל-8.2. ה-ECG הראה Sine Wave ואז VF.",
+            "next_stage": 9,
+            "requires_cpr": true,
+            "lesson": "תמיד בדוק תוצאות מעבדה לפני מתן אשלגן!"
+          },
+          "points": -200
+        },
+        {
+          "id": "C",
+          "text": "מתן פורוסמיד (Furosemide) להוצאת אשלגן בשתן",
+          "is_correct": false,
+          "explanation": "משתן לא יעיל בכשל כליתי ויגרום להיפוטנזיה חמורה בשוק.",
+          "consequences": {
+            "patient_response": "לחץ הדם צונח שוב ל-60/30. החולה לא משתין (אוליגוריה). האשלגן ממשיך לעלות.",
+            "next_stage": 7,
+            "state_change": {
+              "bp": "60/30",
+              "urine_output": "0",
+              "potassium": "7.5",
+              "renal_failure_worsening": true,
+              "clinical_status": "critical"
+            }
+          },
+          "points": -50
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "type": "branching_choice",
+      "title": "הידרדרות (Refractory TLS)",
+      "time_limit": 45,
+      "context": {
+        "text": "אוליגוריה (ללא שתן). האשלגן עולה שוב. צמיגות דם גבוהה (היפרלויקוציטוזיס).",
+        "vitals": "HR 180, BP 85/50 (על נוראפינפרין גבוה), Sat 92%",
+        "labs": "K 7.1, Uric Acid 18, WBC 200k",
+        "urine_output": "5 ml ב-6 שעות האחרונות"
+      },
+      "question": "הטיפול הרפואי כשל. צעד הבא?",
+      "options": [
+        {
+          "id": "A",
+          "text": "הכנה לדיאליזה דחופה (CVVH) או החלפת דם (Exchange Transfusion)",
+          "is_correct": true,
+          "explanation": "הטיפול היחיד שיכול להציל את החולה במצב של TLS עמיד וכשל כליתי.",
+          "consequences": {
+            "patient_response": "תוכנית הוכנה. צוות הדיאליזה הוזעק. מועבר להתערבות.",
+            "next_stage": 8,
+            "state_change": {
+              "dialysis_planned": true,
+              "life_saving_intervention": true
+            }
+          },
+          "points": 100
+        },
+        {
+          "id": "B",
+          "text": "התחלת כימותרפיה מיידית להורדת ה-WBC",
+          "is_correct": false,
+          "is_critical_error": true,
+          "explanation": "❌ טעות קטלנית! כימותרפיה תגרום לפירוק מסיבי של תאים ו-TLS קטסטרופלי.",
+          "consequences": {
+            "outcome": "death",
+            "death_mechanism": "massive_tls",
+            "death_description": "תוך שעות מהכימותרפיה התפתח TLS מסיבי. האשלגן עלה ל-9.2. עצירת לב בלתי הפיכה.",
+            "next_stage": "game_over",
+            "lesson": "לעולם אל תתחיל כימותרפיה לפני ציטורדוקציה מכנית (דיאליזה/החלפת דם) במצב של TLS חמור!"
+          },
+          "points": -200
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "branching_choice",
+      "title": "הובלה ל-CT (Transport)",
+      "time_limit": 30,
+      "context": {
+        "text": "החולה פיתח שינוי באישון (Pupil change). חשד לדימום תוך גולגולתי. נדרש CT מוח דחוף.",
+        "vitals": "HR 165, BP 80/45, Intubated & Ventilated",
+        "neuro_exam": "אישון ימין 5 מ\"מ, שמאל 3 מ\"מ. GCS 3T",
+        "transport_distance": "מרחק של 200 מטר דרך מסדרון"
+      },
+      "question": "איזה ציוד חייב להיות על מיטת ההובלה?",
+      "options": [
+        {
+          "id": "A",
+          "text": "עגלת החייאה מלאה (דפיברילטור, אדרנלין, אמבו בג, משאבות)",
+          "is_correct": true,
+          "explanation": "חובה לקחת ציוד החייאה מלא בהובלת חולה קריטי. המרחק אינו משנה.",
+          "consequences": {
+            "patient_response": "ההובלה מתבצעת בבטחה עם כל הציוד הדרוש.",
+            "next_stage": 9,
+            "state_change": {
+              "transport_safe": true
+            }
+          },
+          "points": 100
+        },
+        {
+          "id": "B",
+          "text": "רק המונע (ventilator) ובלון חמצן",
+          "is_correct": false,
+          "is_critical_error": true,
+          "explanation": "❌ טעות קטלנית! חולה קריטי עלול להידרדר בכל רגע. חסר ציוד החייאה.",
+          "consequences": {
+            "outcome": "death",
+            "death_mechanism": "arrest_no_equipment",
+            "death_description": "במסדרון המטופל פיתח עצירת לב. ללא ציוד החייאה לא ניתן היה להציל אותו.",
+            "next_stage": "game_over",
+            "lesson": "לעולם אל תוביל חולה קריטי ללא עגלת החייאה מלאה!"
+          },
+          "points": -200
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "type": "branching_choice",
+      "title": "עצירת לב (CPR)",
+      "time_limit": 45,
+      "context": {
+        "text": "המטופל פיתח הפרעת קצב חמורה! 🚨",
+        "monitor": "ECG מראה Sine Wave → Asystole/PEA",
+        "event": "עצירת לב ממקור מטבולי (היפרקלמיה)",
+        "cpr_in_progress": "החייאה בתהליך - דופק חיצוני"
+      },
+      "question": "החייאה מתבצעת. כיצד להשיג ROSC?",
+      "options": [
+        {
+          "id": "A",
+          "text": "החייאה + אדרנלין + קלציום גלוקונט + ביקרבונט (טיפול מטבולי)",
+          "is_correct": true,
+          "explanation": "נכון! בעצירת לב ממקור מטבולי יש לטפל בגורם (היפרקלמיה) תוך כדי החייאה.",
+          "consequences": {
+            "patient_response": "לאחר 3 מחזורי החייאה + טיפול מטבולי הושג ROSC! דופק חוזר!",
+            "next_stage": 10,
+            "state_change": {
+              "rosc_achieved": true,
+              "post_cardiac_arrest": true,
+              "critical_condition": true
+            }
+          },
+          "points": 100
+        },
+        {
+          "id": "B",
+          "text": "מתן הלם (Defibrillation)",
+          "is_correct": false,
+          "is_critical_error": true,
+          "explanation": "❌ טעות! הלם לא מיועד ל-Asystole או PEA. זה בזבוז זמן קריטי.",
+          "consequences": {
+            "outcome": "death",
+            "death_mechanism": "inappropriate_shock",
+            "death_description": "החייאה נכשלה. הלם אינו מיועד ל-PEA. המטופל לא הגיב ונפטר.",
+            "next_stage": "game_over",
+            "lesson": "Asystole/PEA - אין להלם! רק החייאה + אדרנלין + טיפול בגורם."
+          },
+          "points": -200
+        },
+        {
+          "id": "C",
+          "text": "רק אדרנלין (ללא טיפול בהפרעה המטבולית)",
+          "is_correct": false,
+          "is_critical_error": true,
+          "explanation": "❌ אדרנלין לבדו לא יעזור אם לא מטפלים בהיפרקלמיה.",
+          "consequences": {
+            "outcome": "death",
+            "death_mechanism": "refractory_arrest",
+            "death_description": "החייאה נמשכה 45 דקות ללא הצלחה. ללא תיקון ההפרעה המטבולית לא ניתן להשיג ROSC.",
+            "next_stage": "game_over",
+            "lesson": "בעצירת לב מטבולית חובה לטפל בגורם המטבולי!"
+          },
+          "points": -200
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "type": "conclusion",
+      "title": "סיכום ומשוב",
+      "context": {
+        "success": {
+          "text": "✅ המטופל מיוצב! הוא מחובר לדיאליזה (CVVH), על תמיכה אינוטרופית ומונשם. האבחנה: לוקמיה לימפובלסטית חריפה (ALL) עם TLS ושוק ספטי.",
+          "outcomes": [
+            "הדיאליזה תפעל 48-72 שעות עד לשיפור בתפקוד הכליות",
+            "טיפול כימותרפי יחל לאחר ייצוב המטבולי",
+            "הפרוגנוזה זהירה אך יש סיכוי להחלמה",
+            "זיהוי מוקדם והחלטות נכונות הצילו את חייו"
+          ],
+          "key_decisions": [
+            "הכנת חדר מושלמת",
+            "זיהוי מוקדם של TLS",
+            "הימנעות מ-LP בטרומבוציטופניה",
+            "שימוש בקטמין ולא בפרופופול",
+            "טיפול נכון בהיפרקלמיה",
+            "החלטה נכונה על דיאליזה"
+          ]
+        },
+        "failure": {
+          "text": "❌ המטופל נפטר.",
+          "lesson": "תרחיש זה מדגים כמה החלטות קריטיות יכולות להיות ההבדל בין חיים למוות. סקור את הטעויות ונסה שוב."
+        }
+      },
+      "learning_points": [
+        "🔍 תמיד חשוד בממאירות כאשר יש פטכיות + כאבי עצמות + הפטומגליה",
+        "⚠️ אסור לבצע LP בחולה עם פטכיות לפני בדיקת קרישה ותיקון טסיות",
+        "💉 קטמין הוא תרופת הבחירה לאינטובציה בשוק. אסור פרופופול!",
+        "⚡ TLS הוא מצב חירום המצריך טיפול אגרסיבי וזיהוי מוקדם",
+        "💊 בהיפרקלמיה: קלציום מגן על הלב, אינסולין+גלוקוז מורידים אשלגן",
+        "🚫 אסור לתת משתנים בשוק לפני ייצוב המודינמי",
+        "🔄 בעצירת לב מטבולית יש לטפל בגורם המטבולי תוך כדי החייאה",
+        "🚑 חולה קריטי תמיד מועבר עם עגלת החייאה מלאה"
+      ],
+      "references": [
+        "Cairo MS, Bishop M. Tumour lysis syndrome. Lancet Oncol. 2004",
+        "Howard SC, Jones DP, Pui CH. The tumor lysis syndrome. NEJM 2011",
+        "Sepsis Guidelines - Surviving Sepsis Campaign 2021",
+        "PALS Guidelines - AHA 2020"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "created_date": "2025-12-26",
+    "author": "PICU Medical Simulation Team",
+    "last_updated": "2025-12-26",
+    "reviewed_by": "Senior PICU Attending",
+    "difficulty_justification": "תרחיש זה דורש ידע מתקדם בהמטולוגיה, אונקולוגיה, ניהול שוק וטיפול נמרץ. מספר החלטות קריטיות והצורך בחשיבה רב-מערכתית הופכים אותו לתרחיש ברמת Hard."
+  }
+}

@@ -67,7 +67,7 @@ data = {
     'מבחנים כולל': [113, 148, 95, 31, 67, 88, 45, 117, 71, 64]
 }
 
-df = pd. DataFrame(data)
+df = pd.DataFrame(data)
 
 # עיצוב המדליות
 def get_medal(rank):
@@ -153,11 +153,11 @@ st.divider()
 col1, col2 = st.columns(2)
 
 with col1:
-    st. subheader("📈 התפלגות ציונים")
+    st.subheader("📈 התפלגות ציונים")
     
     # יצירת גרף עמודות
     fig = px.bar(
-        df. head(5), 
+        df.head(5), 
         x='ציון ממוצע', 
         y='מוסד',
         orientation='h',
@@ -178,7 +178,7 @@ with col2:
     
     # יצירת גרף עוגה
     fig = px.pie(
-        df. head(5),
+        df.head(5),
         values='משתתפים',
         names='מוסד',
         title='התפלגות משתתפים - חמשת המובילים'

@@ -2,6 +2,21 @@ import streamlit as st
 import pandas as pd
 import json
 from datetime import datetime
+from pathlib import Path
+import sys
+
+# Add utils to path
+sys.path.append(str(Path(__file__).parent.parent))
+from utils.content_manager import (
+    get_all_categories,
+    get_category_topics,
+    get_topic,
+    update_topic,
+    get_editors,
+    add_editor,
+    remove_editor,
+    is_editor
+)
 
 # נסה לייבא מהדאטאבייס
 try:
@@ -54,10 +69,10 @@ st.markdown("""
         direction: rtl !important;
         text-align: right !important;
         padding-right: 20px !important;
-        padding-left: 0 ! important;
+        padding-left: 0 !important;
     }
     
-    . stMarkdown li {
+    .stMarkdown li {
         direction: rtl !important;
         text-align: right !important;
         margin-right: 0 !important;
@@ -77,27 +92,27 @@ st.markdown("""
     
     /* תיקון טבלאות */
     table {
-        direction: rtl ! important;
+        direction: rtl !important;
     }
     
     /* תיקון כפתורים */
-    . stButton > button {
+    .stButton > button {
         direction: rtl !important;
     }
     
     /* תיקון טאבים */
     .stTabs {
-        direction: rtl ! important;
+        direction: rtl !important;
     }
     
-    . stTabs [data-baseweb="tab-list"] {
+    .stTabs [data-baseweb="tab-list"] {
         direction: rtl !important;
         flex-direction: row-reverse !important;
     }
     
     /* כותרת מעוצבת */
     .admin-header {
-        background:  linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         padding: 2rem;
         border-radius: 10px;
@@ -119,10 +134,123 @@ if not st.session_state.get('logged_in', False):
     st.error("❌ יש להתחבר למערכת כדי לגשת לדף זה")
     st.stop()
 
+# בדיקה שהמשתמש הוא עורך מורשה
+user = st.session_state.get('user', {})
+user_email = user.get('email', '')
+
+if not is_editor(user_email):
+    st.error("❌ אין לך הרשאות לערוך תוכן. פנה למנהל המערכת.")
+    st.stop()
+
 # תפריט טאבים
-tab1, tab2, tab3 = st.tabs(["➕ הוספת שאלה", "📚 הוספת תוכן למידה", "📊 סטטיסטיקות"])
+tab1, tab2, tab3, tab4 = st.tabs(["✏️ עריכת תוכן קיים", "➕ הוספת שאלה", "📚 הוספת תוכן למידה", "👥 ניהול עורכים"])
+
+# תפריט טאבים
+tab1, tab2, tab3, tab4 = st.tabs(["✏️ עריכת תוכן קיים", "➕ הוספת שאלה", "📚 הוספת תוכן למידה", "👥 ניהול עורכים"])
 
 with tab1:
+    st.subheader("✏️ עריכת תוכן קיים")
+    st.markdown("בחר קטגוריה ונושא לעריכה מלאה של התוכן")
+    
+    # בחירת קטגוריה
+    categories = get_all_categories()
+    category_names = {cat['id']: f"{cat['emoji']} {cat['name']}" for cat in categories}
+    
+    selected_category_name = st.selectbox(
+        "בחר קטגוריה",
+        options=list(category_names.values())
+    )
+    
+    # מצא את הקטגוריה שנבחרה
+    selected_category_id = None
+    for cat_id, cat_name in category_names.items():
+        if cat_name == selected_category_name:
+            selected_category_id = cat_id
+            break
+    
+    if selected_category_id:
+        # בחירת נושא
+        topics = get_category_topics(selected_category_id)
+        
+        if not topics:
+            st.info("אין נושאים בקטגוריה זו")
+        else:
+            topic_options = {t['id']: t['title'] for t in topics}
+            selected_topic_name = st.selectbox(
+                "בחר נושא",
+                options=list(topic_options.values())
+            )
+            
+            # מצא את הנושא שנבחר
+            selected_topic_id = None
+            for topic_id, topic_name in topic_options.items():
+                if topic_name == selected_topic_name:
+                    selected_topic_id = topic_id
+                    break
+            
+            if selected_topic_id:
+                topic = get_topic(selected_category_id, selected_topic_id)
+                
+                if topic:
+                    st.divider()
+                    st.markdown("### 📝 עריכת פרטי הנושא")
+                    
+                    with st.form("edit_topic_form"):
+                        # מטא-דאטה בסיסי
+                        new_title = st.text_input("כותרת", value=topic.get('title', ''))
+                        new_description = st.text_area("תיאור", value=topic.get('description', ''), height=100)
+                        
+                        col1, col2 = st.columns(2)
+                        with col1:
+                            difficulty_options = {"beginner": "מתחילים", "intermediate": "בינוני", "advanced": "מתקדמים"}
+                            current_diff = topic.get('difficulty', 'intermediate')
+                            new_difficulty = st.selectbox(
+                                "רמת קושי",
+                                options=list(difficulty_options.keys()),
+                                format_func=lambda x: difficulty_options[x],
+                                index=list(difficulty_options.keys()).index(current_diff) if current_diff in difficulty_options else 1
+                            )
+                        with col2:
+                            tags_str = ', '.join(topic.get('tags', []))
+                            new_tags_str = st.text_input("תגיות (מופרדות בפסיקים)", value=tags_str)
+                        
+                        st.divider()
+                        st.markdown("### 📄 עריכת תוכן")
+                        st.info("💡 לעריכה מתקדמת של פריטי תוכן, השתמש בממשק העריכה בספרייה (לחץ על נושא ואז '✏️ מצב עריכה')")
+                        
+                        # הצגת תוכן ראשי
+                        content_items = topic.get('content', [])
+                        st.markdown(f"**מספר פריטי תוכן:** {len(content_items)}")
+                        
+                        # הצג את התוכן בצורה קריאה
+                        if content_items:
+                            with st.expander("👁️ צפייה בתוכן הקיים", expanded=False):
+                                for idx, item in enumerate(content_items, 1):
+                                    st.markdown(f"**פריט {idx}:**")
+                                    st.json(item)
+                        
+                        # כפתור שמירה
+                        st.divider()
+                        submit_edit = st.form_submit_button("💾 שמור שינויים", type="primary", use_container_width=True)
+                        
+                        if submit_edit:
+                            if new_title and new_description:
+                                # עדכון הנושא
+                                topic['title'] = new_title
+                                topic['description'] = new_description
+                                topic['difficulty'] = new_difficulty
+                                topic['tags'] = [tag.strip() for tag in new_tags_str.split(',') if tag.strip()]
+                                topic['last_updated'] = datetime.now().strftime("%Y-%m-%d")
+                                
+                                if update_topic(selected_category_id, selected_topic_id, topic):
+                                    st.success("✅ השינויים נשמרו בהצלחה!")
+                                    st.balloons()
+                                else:
+                                    st.error("❌ שגיאה בשמירת השינויים")
+                            else:
+                                st.error("❌ נא למלא את כל השדות הנדרשים")
+
+with tab2:
     st.subheader("📝 הוספת שאלה חדשה")
     
     with st.form("add_question_form", clear_on_submit=True):
@@ -136,10 +264,10 @@ with tab1:
                     selected_topic = st.selectbox("נושא", topic_names, label_visibility="collapsed")
                 else:
                     st.error("אין נושאים במערכת")
-                    st. stop()
+                    st.stop()
             except:  
                 topic_names = ["החייאה - BLS & PALS", "הנשמה מכנית", "תרופות בטיפול נמרץ"]
-                selected_topic = st. selectbox("נושא", topic_names, label_visibility="collapsed")
+                selected_topic = st.selectbox("נושא", topic_names, label_visibility="collapsed")
         else:
             topic_names = ["החייאה - BLS & PALS", "הנשמה מכנית", "תרופות בטיפול נמרץ"]
             selected_topic = st.selectbox("נושא", topic_names, label_visibility="collapsed")
@@ -150,8 +278,8 @@ with tab1:
         st.markdown("**טקסט השאלה:**")
         question_text = st.text_area("שאלה", height=100, placeholder="הקלד את השאלה כאן...", label_visibility="collapsed")
         
-        st. markdown("**אפשרויות תשובה:**")
-        col1, col2 = st. columns(2)
+        st.markdown("אפשרויות תשובה:")
+        col1, col2 = st.columns(2)
         with col1:
             option1 = st.text_input("אפשרות 1", placeholder="תשובה ראשונה")
             option2 = st.text_input("אפשרות 2", placeholder="תשובה שנייה")
@@ -161,7 +289,7 @@ with tab1:
         
         st.divider()
         
-        col1, col2 = st. columns(2)
+        col1, col2 = st.columns(2)
         with col1:
             st.markdown("**תשובה נכונה:**")
             correct_answer = st.selectbox("בחר", [1, 2, 3, 4], label_visibility="collapsed")
@@ -183,7 +311,7 @@ with tab1:
                 
                 # הצגת השאלה שנוספה
                 with st.expander("צפה בשאלה שנוספה"):
-                    st. json({
+                    st.json({
                         "נושא": selected_topic,
                         "שאלה": question_text,
                         "אפשרויות": [option1, option2, option3, option4],
@@ -212,8 +340,8 @@ with tab1:
         **הסבר:** המינון הוא 0.01 מ"ג/ק"ג = 0.15 מ"ג. בתמיסה 1:10,000 זה שווה ל-1.5 מ"ל. 
         """)
 
-with tab2:
-    st. subheader("📚 הוספת חומר למידה")
+with tab3:
+    st.subheader("📚 הוספת חומר למידה")
     
     with st.form("add_content_form"):
         st.markdown("**פרטי התוכן**")
@@ -239,31 +367,101 @@ with tab2:
             else:
                 st.error("❌ נא למלא את כל השדות")
 
-with tab3:
-    st.subheader("📊 סטטיסטיקות מערכת")
+with tab4:
+    st.subheader("👥 ניהול עורכים מורשים")
+    st.markdown("הוסף או הסר עורכים שיכולים לערוך תוכן במערכת")
     
-    col1, col2, col3, col4 = st.columns(4)
+    # הצגת עורכים נוכחיים
+    current_editors = get_editors()
     
-    with col1:
-        st.metric("שאלות במערכת", "5", "2+")
-    with col2:
-        st.metric("נושאי למידה", "3", "0")
-    with col3:
-        st.metric("משתמשים רשומים", "1", "1+")
-    with col4:
-        st.metric("מבחנים שבוצעו", "0", "0")
+    st.markdown("### 📋 עורכים מורשים כרגע:")
+    for idx, editor in enumerate(current_editors, 1):
+        col1, col2 = st.columns([3, 1])
+        with col1:
+            st.markdown(f"**{idx}.** {editor}")
+            if editor == user_email:
+                st.caption("(אתה)")
+        with col2:
+            if len(current_editors) > 1:  # אל תאפשר למחוק את העורך האחרון
+                if st.button(f"🗑️ הסר", key=f"remove_{editor}"):
+                    if remove_editor(editor):
+                        st.success(f"✅ {editor} הוסר מרשימת העורכים")
+                        st.rerun()
+                    else:
+                        st.error("❌ שגיאה בהסרת עורך")
     
     st.divider()
     
-    # גרף התפלגות שאלות
-    st.subheader("📈 התפלגות שאלות לפי נושא")
+    # הוספת עורך חדש
+    st.markdown("### ➕ הוסף עורך חדש")
     
-    df = pd.DataFrame({
-        'נושא': ['החייאה', 'הנשמה', 'תרופות'],
-        'מספר שאלות': [2, 1, 2]
-    })
+    with st.form("add_editor_form"):
+        new_editor_email = st.text_input(
+            "כתובת אימייל של העורך החדש",
+            placeholder="example@email.com"
+        )
+        
+        submit_new_editor = st.form_submit_button("➕ הוסף עורך", type="primary")
+        
+        if submit_new_editor:
+            if new_editor_email:
+                if '@' not in new_editor_email:
+                    st.error("❌ כתובת אימייל לא תקינה")
+                elif new_editor_email in current_editors:
+                    st.warning("⚠️ העורך כבר קיים ברשימה")
+                else:
+                    if add_editor(new_editor_email):
+                        st.success(f"✅ {new_editor_email} נוסף בהצלחה לרשימת העורכים!")
+                        st.balloons()
+                        st.rerun()
+                    else:
+                        st.error("❌ שגיאה בהוספת עורך")
+            else:
+                st.error("❌ נא להזין כתובת אימייל")
     
-    st.bar_chart(df.set_index('נושא'))
+    st.divider()
+    
+    # הסבר
+    with st.expander("💡 מידע חשוב"):
+        st.markdown("""
+        **מי זה עורך מורשה?**
+        - עורכים מורשים יכולים לערוך תוכן קיים במערכת
+        - העריכה זמינה דרך ממשק הניהול או דרך הספרייה (כפתור "✏️ מצב עריכה")
+        - יש לוודא שהעורכים מתחברים עם אותו אימייל שהוזן כאן
+        
+        **אבטחה:**
+        - לא ניתן להסיר את העורך האחרון מהרשימה
+        - רק עורכים מורשים יכולים לגשת לממשק הניהול
+        - כל שינוי נשמר עם חותמת זמן
+        """)
+
+# הזז את הסטטיסטיקות לתחתית הדף, מחוץ לטאבים
+st.divider()
+st.markdown("---")
+st.subheader("📊 סטטיסטיקות מערכת")
+    
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    st.metric("שאלות במערכת", "5", "2+")
+with col2:
+    st.metric("נושאי למידה", "3", "0")
+with col3:
+    st.metric("משתמשים רשומים", "1", "1+")
+with col4:
+    st.metric("מבחנים שבוצעו", "0", "0")
+
+st.divider()
+
+# גרף התפלגות שאלות
+st.subheader("📈 התפלגות שאלות לפי נושא")
+
+df = pd.DataFrame({
+    'נושא': ['החייאה', 'הנשמה', 'תרופות'],
+    'מספר שאלות': [2, 1, 2]
+})
+
+st.bar_chart(df.set_index('נושא'))
 
 # כפתור חזרה
 st.divider()

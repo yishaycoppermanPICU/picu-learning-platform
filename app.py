@@ -5,6 +5,9 @@ from datetime import datetime
 import json
 import os
 
+# ייבוא פונקציות ניהול תוכן
+from utils.content_manager import get_user_by_email, save_user, update_last_login
+
 # ייבוא פונקציות מסד נתונים
 try:
     from utils.database import (
@@ -114,10 +117,44 @@ with st.sidebar:
     if not st.session_state.logged_in:
         st.markdown("### התחברות מהירה 🚀")
         
+        # Initialize session state for form fields
+        if 'form_email' not in st.session_state:
+            st.session_state.form_email = ""
+        if 'form_name' not in st.session_state:
+            st.session_state.form_name = ""
+        if 'form_hospital' not in st.session_state:
+            st.session_state.form_hospital = ""
+        
+        # Email input with auto-complete
+        email_input = st.text_input(
+            "דואר אלקטרוני:",
+            value=st.session_state.form_email,
+            placeholder="your@email.com",
+            key="email_field"
+        )
+        
+        # Auto-fill when email changes
+        if email_input and email_input != st.session_state.form_email:
+            st.session_state.form_email = email_input
+            # Check if user exists
+            existing_user = get_user_by_email(email_input)
+            if existing_user:
+                st.session_state.form_name = existing_user.get('name', '')
+                st.session_state.form_hospital = existing_user.get('hospital', '')
+                st.info("✨ מצאתי את הפרטים שלך! נא לאשר או לעדכן")
+                st.rerun()
+        
         with st.form("login_form"):
-            # שדות - אימוג'י בסוף התווית
-            full_name = st.text_input("שם מלא:", placeholder="הזן את שמך המלא")
-            email = st.text_input("דואר אלקטרוני:", placeholder="your@email.com")
+            # שדות - מוזנים אוטומטית אם המשתמש קיים
+            full_name = st.text_input(
+                "שם מלא:",
+                value=st.session_state.form_name,
+                placeholder="הזן את שמך המלא"
+            )
+            
+            # כפל את המייל (מוסתר)
+            email = st.session_state.form_email
+            st.caption(f"📧 מייל: {email if email else 'לא הוזן'}")
             
             # רשימת מוסדות
             if DB_CONNECTED:
@@ -138,9 +175,23 @@ with st.sidebar:
                 ]
             
             if inst_names:
-                institution = st.selectbox("בחר מוסד רפואי:", [""] + sorted(inst_names) + ["אחר ➕"])
+                # Find index of saved hospital
+                default_idx = 0
+                if st.session_state.form_hospital:
+                    hospital_list = [""] + sorted(inst_names) + ["אחר ➕"]
+                    if st.session_state.form_hospital in hospital_list:
+                        default_idx = hospital_list.index(st.session_state.form_hospital)
+                
+                institution = st.selectbox(
+                    "בחר מוסד רפואי:",
+                    [""] + sorted(inst_names) + ["אחר ➕"],
+                    index=default_idx
+                )
             else:
-                institution = st.text_input("שם המוסד:")
+                institution = st.text_input(
+                    "שם המוסד:",
+                    value=st.session_state.form_hospital
+                )
             
             if institution == "אחר ➕": 
                 institution = st.text_input("הכנס שם מוסד:")
@@ -152,6 +203,9 @@ with st.sidebar:
             
             if submitted: 
                 if full_name and email and institution and institution != "" and agree:
+                    # Save user to local file
+                    save_user(email, full_name, institution)
+                    
                     username = email.split('@')[0].replace('.', '_').replace('-', '_')
                     
                     if DB_CONNECTED:
@@ -160,18 +214,19 @@ with st.sidebar:
                             if existing:
                                 st.session_state.logged_in = True
                                 st.session_state.user = existing
+                                update_last_login(email)
                                 st.success(f"ברוך שובך, {existing['full_name']} 👋")
                                 st.rerun()
                             else: 
                                 new_user = create_user(username, email, full_name, institution)
                                 if new_user: 
                                     st.session_state.logged_in = True
-                                    st.session_state. user = new_user
+                                    st.session_state.user = new_user
                                     st.success(f"ברוך הבא, {full_name} 🎉")
                                     st.balloons()
-                                    st. rerun()
+                                    st.rerun()
                         except Exception as e:
-                            st. error(f"שגיאה: {e}")
+                            st.error(f"שגיאה: {e}")
                     else:
                         st.session_state.logged_in = True
                         st.session_state.user = {
@@ -183,7 +238,10 @@ with st.sidebar:
                         st.success(f"ברוך הבא, {full_name}!")
                         st.rerun()
                 else:
-                    st.error("נא למלא את כל השדות ❌")
+                    if not email:
+                        st.error("נא להזין כתובת מייל תחילה ❌")
+                    else:
+                        st.error("נא למלא את כל השדות ❌")
         
         st.divider()
         
@@ -193,6 +251,13 @@ with st.sidebar:
             st.write("- גישה מיידית לתוכן")
             st.write("- המידע נשמר לפי המייל שלך")
             st.write("- אפשרות לכניסה עם Google בקרוב")
+        
+        with st.expander("✨ שמירה אוטומטית של פרטים"):
+            st.write("**המערכת זוכרת אותך!**")
+            st.write("- הזן את המייל שלך")
+            st.write("- אם התחברת בעבר, הפרטים ימולאו אוטומטית")
+            st.write("- פשוט אשר ולחץ התחבר")
+            st.write("- חוסך זמן בכל כניסה למערכת 🚀")
     
     else:
         # משתמש מחובר
@@ -202,7 +267,7 @@ with st.sidebar:
         if 'institutions' in user and user['institutions']:
             st.info(f"מוסד: {user['institutions'].get('name', '')} 🏥")
         
-        col1, col2 = st. columns(2)
+        col1, col2 = st.columns(2)
         with col1:
             if st.button("הנתונים שלי 📊", use_container_width=True):
                 st.switch_page("pages/3_📊_Statistics.py")
@@ -224,137 +289,83 @@ with st.sidebar:
 
 # תוכן ראשי
 if st.session_state.logged_in:
-    # טאבים - אימוג'ים בסוף! 
-    tab1, tab2, tab3, tab4, tab5 = st.tabs([
-        "דף הבית 🏠",
-        "חומרי למידה 📚",
-        "מבחנים ותרגול 📝",
-        "הנתונים שלי 📊",
-        "לוח הישגים 🏆"
-    ])
+    st.markdown("### ברוכים הבאים לפלטפורמת הלמידה! 🎯")
     
-    with tab1:
-        st.markdown("### ברוכים הבאים לפלטפורמת הלמידה!  🎯")
-        
-        # כרטיסיות
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
-            st.info("### חומרי למידה 📚\nגישה לחומרי למידה מעודכנים מבוססי UpToDate")
-        
-        with col2:
-            st.info("### תרגול ומבחנים 📝\nמבחנים אינטראקטיביים עם משוב מיידי")
-        
-        with col3:
-            st.info("### תחרות בין-מוסדית 🏆\nהשווה את הביצועים שלך מול מוסדות אחרים")
-        
-        st.divider()
-        st.markdown("### הסטטיסטיקות שלך 📈")
-        
-        col1, col2, col3, col4 = st.columns(4)
-        with col1:
-            st.metric("מבחנים שהושלמו", len(st.session_state.user_scores))
-        with col2:
-            if st.session_state.user_scores:
-                avg = sum(st.session_state. user_scores) / len(st.session_state.user_scores)
-                st.metric("ציון ממוצע", f"{avg:.1f}%")
-            else:
-                st.metric("ציון ממוצע", "—")
-        with col3:
-            st.metric("זמן למידה", "0 שעות")
-        with col4:
-            st.metric("דירוג במוסד", "—")
+    user = st.session_state.user
+    st.markdown(f"**שלום {user.get('full_name', 'משתמש')}!** 👋")
     
-    with tab2:
-        st.markdown("### חומרי למידה 📚")
-        
-        if DB_CONNECTED:
-            try:
-                topics = get_topics()
-                if topics:
-                    for topic in topics:
-                        title = topic. get('title', 'נושא')
-                        icon = topic.get('icon', '📖')
-                        with st.expander(f"{title} {icon}"):
-                            st.write(topic.get('description', ''))
-                            st.info("תוכן מפורט יתווסף בקרוב ⏳")
-                else:
-                    st.info("אין נושאים זמינים כרגע 📭")
-            except: 
-                st.warning("בעיה בטעינת הנושאים ⚠️")
-        else:
-            st.warning("חומרי למידה יהיו זמינים בקרוב 🔜")
+    st.divider()
     
-    with tab3:
-        st.markdown("### מבחנים ותרגול 📝")
-        st.info("מערכת המבחנים תהיה זמינה בקרוב 🚀")
-        
-        # כפתורים לדוגמה
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.button("מבחן אקראי 🎲", disabled=True, use_container_width=True)
-        with col2:
-            st.button("מבחן לפי נושא 📚", disabled=True, use_container_width=True)
-        with col3:
-            st.button("מבחן מותאם אישית ⚙", disabled=True, use_container_width=True)
+    # כרטיסיות ראשיות עם כפתורים מובילים
+    st.markdown("### ניווט מהיר 🚀")
     
-    with tab4:
-        st. markdown("### הסטטיסטיקות שלי 📊")
-        
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown("""
+        <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                    padding: 2rem; border-radius: 10px; text-align: center; color: white;'>
+            <h2 style='color: white;'>📚</h2>
+            <h3 style='color: white;'>ספריית תוכן</h3>
+            <p style='color: white;'>חומרי למידה מקצועיים ומעודכנים</p>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("כניסה לספרייה", key="library_btn", use_container_width=True, type="primary"):
+            st.switch_page("pages/1_📚_Library.py")
+    
+    with col2:
+        st.markdown("""
+        <div style='background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); 
+                    padding: 2rem; border-radius: 10px; text-align: center; color: white;'>
+            <h2 style='color: white;'>📊</h2>
+            <h3 style='color: white;'>הנתונים שלי</h3>
+            <p style='color: white;'>מעקב התקדמות וסטטיסטיקות</p>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("צפייה בסטטיסטיקות", key="stats_btn", use_container_width=True, type="primary"):
+            st.switch_page("pages/3_📊_Statistics.py")
+    
+    with col3:
+        st.markdown("""
+        <div style='background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); 
+                    padding: 2rem; border-radius: 10px; text-align: center; color: white;'>
+            <h2 style='color: white;'>🏆</h2>
+            <h3 style='color: white;'>לוח הישגים</h3>
+            <p style='color: white;'>תחרות בין-מוסדית</p>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("לוח התוצאות", key="leaderboard_btn", use_container_width=True, type="primary"):
+            st.switch_page("pages/4_🏆_Leaderboard.py")
+    
+    st.divider()
+    
+    # סטטיסטיקות מהירות
+    st.markdown("### הסטטיסטיקות שלך במבט 📈")
+    
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("מבחנים שהושלמו", len(st.session_state.user_scores))
+    with col2:
         if st.session_state.user_scores:
-            df = pd.DataFrame({
-                'מספר מבחן': range(1, len(st.session_state.user_scores) + 1),
-                'ציון':  st.session_state.user_scores
-            })
-            st.line_chart(df.set_index('מספר מבחן'))
-            
-            # סטטיסטיקות
-            col1, col2, col3 = st.columns(3)
-            with col1:
-                best_score = max(st.session_state.user_scores)
-                st.success(f"הציון הטוב ביותר: {best_score}% 🌟")
-            with col2:
-                avg_score = sum(st.session_state.user_scores) / len(st.session_state.user_scores)
-                st.info(f"ממוצע:  {avg_score:.1f}% 📊")
-            with col3:
-                last_score = st.session_state.user_scores[-1]
-                st.warning(f"ציון אחרון: {last_score}% 📝")
+            avg = sum(st.session_state.user_scores) / len(st.session_state.user_scores)
+            st.metric("ציון ממוצע", f"{avg:.1f}%")
         else:
-            st.info("עדיין אין נתונים להצגה 📈")
-            if st.button("התחל את המבחן הראשון שלך 🚀", type="primary"):
-                st.switch_page("pages/2_📝_Quizzes.py")
+            st.metric("ציון ממוצע", "—")
+    with col3:
+        st.metric("זמן למידה", "0 שעות")
+    with col4:
+        st.metric("דירוג במוסד", "—")
     
-    with tab5:
-        st.markdown("### לוח הישגים - תחרות בין-מוסדית 🏆")
-        
-        if DB_CONNECTED:
-            try: 
-                leaderboard = get_leaderboard()
-                if leaderboard:
-                    df = pd.DataFrame(leaderboard)
-                    st.dataframe(df, hide_index=True, use_container_width=True)
-                else:
-                    st.info("אין נתונים להצגה עדיין 📊")
-            except:
-                st.warning("בעיה בטעינת הנתונים ⚠️")
-        else:
-            # נתוני דמו
-            demo_data = pd.DataFrame({
-                'דירוג': ['🥇', '🥈', '🥉', '4', '5'],
-                'מוסד': [
-                    'שיבא - תל השומר',
-                    'איכילוב - תל אביב',
-                    'רמב״ם - חיפה',
-                    'הדסה עין כרם',
-                    'סורוקה - באר שבע'
-                ],
-                'ציון ממוצע': [88.4, 88.3, 88.1, 86.0, 82.9],
-                'משתתפים': [10, 27, 9, 8, 30]
-            })
-            st.dataframe(demo_data, hide_index=True, use_container_width=True)
-            
-            # גרף
-            st.bar_chart(demo_data.set_index('מוסד')['ציון ממוצע'])
+    st.divider()
+    
+    # מידע נוסף
+    with st.expander("💡 עצות למידה"):
+        st.write("**כיצד להפיק את המרב מהפלטפורמה:**")
+        st.write("- התחל עם נושאים בסיסיים ועבור לנושאים מתקדמים")
+        st.write("- הקדש לפחות 15-30 דקות ביום ללמידה")
+        st.write("- חזור על חומרים שקשים לך")
+        st.write("- השתמש בחומרים כהשלמה לניסיון הקליני")
+        st.write("- שתף ידע עם עמיתים")
 
 else:
     # משתמש לא מחובר
