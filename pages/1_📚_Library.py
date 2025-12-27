@@ -78,6 +78,25 @@ if not st.session_state.get('logged_in', False):
 st.title("📚 ספריית תוכן רפואי")
 st.markdown("### גישה לחומרי למידה מקיפים לטיפול נמרץ ילדים")
 
+# Navigation breadcrumb
+col1, col2, col3 = st.columns([1, 4, 1])
+with col1:
+    if st.button("🏠 דף הבית"):
+        # Clear selection when going to home
+        if 'selected_category' in st.session_state:
+            del st.session_state['selected_category']
+        if 'selected_topic' in st.session_state:
+            del st.session_state['selected_topic']
+        st.switch_page("app.py")
+with col2:
+    # Show breadcrumb if returning from a topic
+    if st.session_state.get('selected_category'):
+        from utils.content_manager import get_all_categories
+        categories = get_all_categories()
+        cat_info = next((c for c in categories if c['id'] == st.session_state.get('selected_category')), None)
+        if cat_info:
+            st.markdown(f"**נמצא בקטגוריה:** {cat_info['emoji']} {cat_info['name']}")
+
 st.divider()
 
 # Statistics
@@ -122,8 +141,14 @@ else:
     st.markdown("### קטגוריות")
     st.info("💡 לחץ על קטגוריה כדי לראות את הנושאים שבה")
     
+    # Check if returning from a specific category (to keep it expanded)
+    last_category = st.session_state.get('selected_category')
+    
     for category in categories:
-        with st.expander(f"{category['emoji']} {category['name']}", expanded=False):
+        # Expand the category if user just came back from viewing a topic in it
+        is_expanded = (category['id'] == last_category)
+        
+        with st.expander(f"{category['emoji']} {category['name']}", expanded=is_expanded):
             st.markdown(f"*{category['description']}*")
             st.divider()
             

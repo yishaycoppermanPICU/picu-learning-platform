@@ -106,12 +106,25 @@ is_admin = is_editor(user_email)
 if 'edit_mode' not in st.session_state:
     st.session_state.edit_mode = False
 
+# Breadcrumb navigation
+from utils.content_manager import get_all_categories
+
+# Get category name
+categories = get_all_categories()
+category_info = next((cat for cat in categories if cat['id'] == category_id), None)
+category_name = category_info['name'] if category_info else category_id
+
+# Display breadcrumbs
+st.markdown(f"🏠 [ספרייה](/) > {category_info['emoji']} {category_name} > **{topic['title']}**")
+st.divider()
+
 # Navigation
 col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
 with col1:
-    if st.button("◀ חזור לספרייה"):
+    if st.button("◀ חזור לקטגוריה"):
         # Reset edit mode when leaving
         st.session_state.edit_mode = False
+        # Stay in the same category - just go back to library with category selected
         st.switch_page("pages/1_📚_Library.py")
 with col2:
     if st.button("📝 היבחן בנושא", type="primary"):
