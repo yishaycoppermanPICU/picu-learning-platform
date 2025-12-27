@@ -120,9 +120,10 @@ else:
     categories = get_all_categories()
     
     st.markdown("### קטגוריות")
+    st.info("💡 לחץ על קטגוריה כדי לראות את הנושאים שבה")
     
     for category in categories:
-        with st.expander(f"{category['emoji']} {category['name']}", expanded=True):
+        with st.expander(f"{category['emoji']} {category['name']}", expanded=False):
             st.markdown(f"*{category['description']}*")
             st.divider()
             
