@@ -15,7 +15,8 @@ from utils.content_manager import (
     get_editors,
     add_editor,
     remove_editor,
-    is_editor
+    is_editor,
+    restore_user_session
 )
 
 # נסה לייבא מהדאטאבייס
@@ -29,6 +30,9 @@ except:
     DB_CONNECTED = False
 
 st.set_page_config(page_title="ניהול תוכן", page_icon="⚙️", layout="wide")
+
+# Restore user session if available
+restore_user_session(st)
 
 # CSS מקיף לתיקון כל בעיות היישור
 st.markdown("""
@@ -143,10 +147,7 @@ if not is_editor(user_email):
     st.stop()
 
 # תפריט טאבים
-tab1, tab2, tab3, tab4 = st.tabs(["✏️ עריכת תוכן קיים", "➕ הוספת שאלה", "📚 הוספת תוכן למידה", "👥 ניהול עורכים"])
-
-# תפריט טאבים
-tab1, tab2, tab3, tab4 = st.tabs(["✏️ עריכת תוכן קיים", "➕ הוספת שאלה", "📚 הוספת תוכן למידה", "👥 ניהול עורכים"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["✏️ עריכת תוכן קיים", "➕ הוספת שאלה", "📚 הוספת תוכן למידה", "🎬 עריכת תרחישים", "👥 ניהול עורכים"])
 
 with tab1:
     st.subheader("✏️ עריכת תוכן קיים")
@@ -368,6 +369,121 @@ with tab3:
                 st.error("❌ נא למלא את כל השדות")
 
 with tab4:
+    st.subheader("🎬 עריכת תרחישים")
+    st.markdown("ערוך תרחישים מתגלגלים קיימים בצורה נוחה")
+    
+    # טען את התרחישים
+    scenarios_dir = Path(__file__).parent.parent / "data" / "scenarios"
+    scenarios = []
+    
+    if scenarios_dir.exists():
+        for file in scenarios_dir.glob("*.json"):
+            try:
+                with open(file, 'r', encoding='utf-8') as f:
+                    scenario = json.load(f)
+                    scenario['_filename'] = file.name
+                    scenarios.append(scenario)
+            except Exception as e:
+                st.error(f"שגיאה בטעינת {file.name}: {e}")
+    
+    if not scenarios:
+        st.warning("לא נמצאו תרחישים בתיקייה data/scenarios/")
+    else:
+        # בחירת תרחיש
+        scenario_titles = {s['scenario_id']: s['title'] for s in scenarios}
+        selected_scenario_title = st.selectbox(
+            "בחר תרחיש לעריכה",
+            options=list(scenario_titles.values())
+        )
+        
+        # מצא את התרחיש שנבחר
+        selected_scenario = None
+        for s in scenarios:
+            if s['title'] == selected_scenario_title:
+                selected_scenario = s
+                break
+        
+        if selected_scenario:
+            st.divider()
+            st.markdown("### 📝 עריכת פרטי התרחיש")
+            
+            # עריכה בעורך טקסט JSON
+            st.info("💡 ערוך את התרחיש בפורמט JSON. שים לב לתחביר הנכון!")
+            
+            with st.form("edit_scenario_form"):
+                # הצג את התרחיש כ-JSON לעריכה
+                scenario_json = json.dumps(selected_scenario, ensure_ascii=False, indent=2)
+                edited_json = st.text_area(
+                    "תוכן התרחיש (JSON)",
+                    value=scenario_json,
+                    height=500,
+                    help="ערוך את התרחיש בפורמט JSON"
+                )
+                
+                col1, col2 = st.columns(2)
+                with col1:
+                    submit_scenario = st.form_submit_button("💾 שמור שינויים", type="primary", use_container_width=True)
+                with col2:
+                    validate_only = st.form_submit_button("✅ בדוק תקינות בלבד", use_container_width=True)
+                
+                if submit_scenario or validate_only:
+                    try:
+                        # נסה לפרסר את ה-JSON
+                        edited_scenario = json.loads(edited_json)
+                        
+                        # בדיקות בסיסיות
+                        required_fields = ['scenario_id', 'title', 'description', 'stages']
+                        missing_fields = [f for f in required_fields if f not in edited_scenario]
+                        
+                        if missing_fields:
+                            st.error(f"❌ חסרים שדות חובה: {', '.join(missing_fields)}")
+                        else:
+                            if validate_only:
+                                st.success("✅ התרחיש תקין!")
+                                st.balloons()
+                            else:
+                                # שמור את הקובץ
+                                filename = selected_scenario['_filename']
+                                filepath = scenarios_dir / filename
+                                
+                                # מחק את השדה הפנימי
+                                if '_filename' in edited_scenario:
+                                    del edited_scenario['_filename']
+                                
+                                with open(filepath, 'w', encoding='utf-8') as f:
+                                    json.dump(edited_scenario, f, ensure_ascii=False, indent=2)
+                                
+                                st.success("✅ התרחיש נשמר בהצלחה!")
+                                st.balloons()
+                                
+                    except json.JSONDecodeError as e:
+                        st.error(f"❌ שגיאת תחביר JSON: {e}")
+                    except Exception as e:
+                        st.error(f"❌ שגיאה: {e}")
+            
+            # תצוגה מקדימה של השלבים
+            st.divider()
+            st.markdown("### 👁️ תצוגה מקדימה")
+            
+            with st.expander("צפה בשלבי התרחיש", expanded=False):
+                try:
+                    parsed = json.loads(edited_json) if edited_json else selected_scenario
+                    
+                    st.markdown(f"**כותרת:** {parsed.get('title', 'N/A')}")
+                    st.markdown(f"**תיאור:** {parsed.get('description', 'N/A')}")
+                    st.markdown(f"**רמת קושי:** {parsed.get('difficulty', 'N/A')}")
+                    st.markdown(f"**זמן משוער:** {parsed.get('estimated_time', 'N/A')} דקות")
+                    
+                    stages = parsed.get('stages', [])
+                    st.markdown(f"**מספר שלבים:** {len(stages)}")
+                    
+                    for idx, stage in enumerate(stages, 1):
+                        st.markdown(f"**שלב {idx}:** {stage.get('title', 'N/A')} ({stage.get('type', 'N/A')})")
+                        
+                except Exception as e:
+                    st.error(f"לא ניתן להציג תצוגה מקדימה: {e}")
+
+with tab5:
     st.subheader("👥 ניהול עורכים מורשים")
     st.markdown("הוסף או הסר עורכים שיכולים לערוך תוכן במערכת")
     

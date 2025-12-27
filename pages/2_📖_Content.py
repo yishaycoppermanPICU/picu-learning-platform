@@ -6,13 +6,24 @@ from pathlib import Path
 # Add utils to path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from utils.content_manager import get_topic, get_category_topics, update_topic, is_editor
+from utils.content_manager import restore_user_session, is_editor
+from utils.database import get_topics, get_content_item, update_content_item
+
+# Import rich text editor
+try:
+    from streamlit_quill import st_quill
+    RICH_EDITOR_AVAILABLE = True
+except ImportError:
+    RICH_EDITOR_AVAILABLE = False
 
 st.set_page_config(
     page_title="תוכן רפואי",
     page_icon="📖",
     layout="wide"
 )
+
+# Restore user session if available
+restore_user_session(st)
 
 # CSS
 st.markdown("""
@@ -37,6 +48,11 @@ st.markdown("""
         border-radius: 10px;
         border-right: 4px solid #007bff;
         margin: 1rem 0;
+    }
+    
+    .definition-box div, .definition-box p {
+        direction: rtl;
+        text-align: right;
     }
     
     .key-points-box {
@@ -67,6 +83,31 @@ st.markdown("""
         padding: 1rem;
         border-radius: 8px;
         margin-bottom: 1rem;
+    }
+    
+    /* Rich text content styling */
+    .ql-editor {
+        direction: rtl;
+        text-align: right;
+        min-height: 200px;
+    }
+    
+    /* Style the rendered rich text */
+    .definition-box strong, .definition-box b {
+        font-weight: bold;
+    }
+    
+    .definition-box em, .definition-box i {
+        font-style: italic;
+    }
+    
+    .definition-box u {
+        text-decoration: underline;
+    }
+    
+    .definition-box ul, .definition-box ol {
+        padding-right: 20px;
+        text-align: right;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -147,39 +188,48 @@ with col4:
 # Title and metadata - editable in edit mode
 if st.session_state.edit_mode and is_admin:
     st.markdown("### ✏️ מצב עריכה - ערוך את התוכן")
-    topic['title'] = st.text_input("כותרת", value=topic['title'])
-    topic['description'] = st.text_area("תיאור", value=topic['description'], height=100)
     
-    col1, col2 = st.columns(2)
-    with col1:
-        difficulty_options = ["beginner", "intermediate", "advanced"]
-        current_diff = topic.get('difficulty', 'intermediate')
-        topic['difficulty'] = st.selectbox(
-            "רמת קושי",
-            difficulty_options,
-            index=difficulty_options.index(current_diff) if current_diff in difficulty_options else 1
-        )
-    with col2:
-        tags_str = ', '.join(topic.get('tags', []))
-        new_tags = st.text_input("תגיות (מופרדות בפסיקים)", value=tags_str)
-        topic['tags'] = [tag.strip() for tag in new_tags.split(',') if tag.strip()]
-    
-    # Save button
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("💾 שמור את כל השינויים", type="primary", use_container_width=True):
+    with st.form("edit_topic_metadata"):
+        new_title = st.text_input("כותרת", value=topic['title'])
+        new_description = st.text_area("תיאור", value=topic['description'], height=100)
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            difficulty_options = ["beginner", "intermediate", "advanced"]
+            current_diff = topic.get('difficulty', 'intermediate')
+            new_difficulty = st.selectbox(
+                "רמת קושי",
+                difficulty_options,
+                index=difficulty_options.index(current_diff) if current_diff in difficulty_options else 1
+            )
+        with col2:
+            tags_str = ', '.join(topic.get('tags', []))
+            new_tags_str = st.text_input("תגיות (מופרדות בפסיקים)", value=tags_str)
+        
+        # Save button
+        col1, col2 = st.columns(2)
+        with col1:
+            submit_save = st.form_submit_button("💾 שמור את כל השינויים", type="primary", use_container_width=True)
+        with col2:
+            submit_cancel = st.form_submit_button("🚫 בטל ויצא (ללא שמירה)", use_container_width=True)
+        
+        if submit_save:
             from datetime import datetime
+            # Update topic with new values
+            topic['title'] = new_title
+            topic['description'] = new_description
+            topic['difficulty'] = new_difficulty
+            topic['tags'] = [tag.strip() for tag in new_tags_str.split(',') if tag.strip()]
             topic['last_updated'] = datetime.now().strftime("%Y-%m-%d")
+            
             if update_topic(category_id, topic_id, topic):
                 st.success("✅ השינויים נשמרו בהצלחה!")
                 st.session_state.edit_mode = False
                 st.rerun()
             else:
                 st.error("❌ שגיאה בשמירת השינויים")
-    
-    with col2:
-        if st.button("🚫 בטל ויצא (ללא שמירה)", use_container_width=True):
-            st.warning("⚠️ השינויים לא יישמרו!")
+        
+        if submit_cancel:
             st.session_state.edit_mode = False
             st.rerun()
     
@@ -250,86 +300,128 @@ st.markdown("### 📄 תוכן הנושא")
 
 for idx, item in enumerate(topic.get('content', [])):
     if st.session_state.edit_mode and is_admin:
-        with st.expander(f"✏️ עריכת סעיף {idx + 1}: {item.get('title', item.get('type', 'ללא כותרת'))}", expanded=True):
-            # סוג הסעיף
-            type_options = {
-                "definition": "הגדרה",
-                "section": "סעיף",
-                "treatment": "טיפול",
-                "key_points": "נקודות מפתח",
-                "symptoms": "תסמינים",
-                "indications": "התוויות",
-                "dosing": "מינון",
-                "table": "טבלה"
-            }
-            
-            current_type = item.get('type', 'section')
-            selected_type = st.selectbox(
-                "סוג התוכן",
-                options=list(type_options.keys()),
-                format_func=lambda x: type_options[x],
-                index=list(type_options.keys()).index(current_type) if current_type in type_options else 0,
-                key=f"type_{idx}"
-            )
-            topic['content'][idx]['type'] = selected_type
-            
-            # כותרת
-            new_title = st.text_input(
-                "כותרת הסעיף",
-                value=item.get('title', ''),
-                key=f"title_{idx}",
-                placeholder="הזן כותרת לסעיף"
-            )
-            topic['content'][idx]['title'] = new_title
-            
-            # תוכן טקסטואלי
-            if 'text' in item or selected_type == 'definition':
-                new_text = st.text_area(
-                    "תוכן",
-                    value=item.get('text', ''),
-                    height=200,
-                    key=f"text_{idx}",
-                    placeholder="הזן את תוכן הסעיף"
+        with st.expander(f"✏️ עריכת סעיף {idx + 1}: {item.get('title', item.get('type', 'ללא כותרת'))}", expanded=False):
+            with st.form(f"edit_section_{idx}"):
+                # סוג הסעיף
+                type_options = {
+                    "definition": "הגדרה",
+                    "section": "סעיף",
+                    "treatment": "טיפול",
+                    "key_points": "נקודות מפתח",
+                    "symptoms": "תסמינים",
+                    "indications": "התוויות",
+                    "dosing": "מינון",
+                    "table": "טבלה"
+                }
+                
+                current_type = item.get('type', 'section')
+                selected_type = st.selectbox(
+                    "סוג התוכן",
+                    options=list(type_options.keys()),
+                    format_func=lambda x: type_options[x],
+                    index=list(type_options.keys()).index(current_type) if current_type in type_options else 0,
+                    key=f"type_{idx}"
                 )
-                topic['content'][idx]['text'] = new_text
-            
-            # נקודות / פריטים
-            if 'points' in item:
-                st.markdown("**נקודות מפתח (אחת בכל שורה):**")
-                points_text = '\n'.join(item.get('points', []))
-                new_points = st.text_area(
-                    "נקודות",
-                    value=points_text,
-                    height=150,
-                    key=f"points_{idx}",
-                    label_visibility="collapsed"
+                
+                # כותרת
+                new_title = st.text_input(
+                    "כותרת הסעיף",
+                    value=item.get('title', ''),
+                    key=f"title_{idx}",
+                    placeholder="הזן כותרת לסעיף"
                 )
-                topic['content'][idx]['points'] = [p.strip() for p in new_points.split('\n') if p.strip()]
-            
-            # פריטים מורכבים
-            if 'items' in item:
-                st.markdown("**פריטים מורכבים:**")
-                st.json(item['items'])
-                st.info("💡 לעריכה של פריטים מורכבים, ערוך את קובץ ה-JSON ישירות או השתמש בעורך JSON מקוון")
-            
-            # סעיפי טיפול
-            if 'sections' in item:
-                st.markdown("**סעיפי טיפול:**")
-                st.json(item['sections'])
-                st.info("💡 לעריכה של סעיפים מורכבים, ערוך את קובץ ה-JSON ישירות")
-            
-            st.divider()
+                
+                # תוכן טקסטואלי
+                new_text = None
+                if 'text' in item or selected_type == 'definition':
+                    st.info("""
+                    💡 **טיפים לעיצוב הטקסט:**
+                    - `**טקסט מודגש**` → **טקסט מודגש**
+                    - `*טקסט נטוי*` → *טקסט נטוי*
+                    - `~~טקסט עם קו חוצה~~` → ~~טקסט עם קו חוצה~~
+                    - `- פריט ברשימה` → רשימה
+                    - `1. פריט ברשימה ממוספרת` → רשימה ממוספרת
+                    - `[טקסט קישור](https://example.com)` → קישור
+                    """)
+                    
+                    new_text = st.text_area(
+                        "תוכן (תמיכה ב-Markdown)",
+                        value=item.get('text', ''),
+                        height=300,
+                        key=f"text_{idx}",
+                        placeholder="הזן את תוכן הסעיף. השתמש בסימני Markdown לעיצוב!"
+                    )
+                    
+                    # Preview
+                    if new_text and new_text != item.get('text', ''):
+                        with st.expander("👁️ תצוגה מקדימה", expanded=False):
+                            st.markdown(new_text)
+                
+                # נקודות / פריטים
+                new_points = None
+                if 'points' in item:
+                    st.markdown("**נקודות מפתח (אחת בכל שורה):**")
+                    points_text = '\n'.join(item.get('points', []))
+                    new_points = st.text_area(
+                        "נקודות",
+                        value=points_text,
+                        height=150,
+                        key=f"points_{idx}",
+                        label_visibility="collapsed"
+                    )
+                
+                # פריטים מורכבים
+                if 'items' in item:
+                    st.markdown("**פריטים מורכבים:**")
+                    with st.expander("הצג JSON", expanded=False):
+                        st.json(item['items'])
+                    st.info("💡 לעריכה של מבנים מורכבים, השתמש בעורך JSON המתקדם למטה")
+                
+                # סעיפי טיפול
+                if 'sections' in item:
+                    st.markdown("**סעיפי טיפול:**")
+                    with st.expander("הצג JSON", expanded=False):
+                        st.json(item['sections'])
+                    st.info("💡 לעריכה של מבנים מורכבים, השתמש בעורך JSON המתקדם למטה")
+                
+                # Save section button
+                st.divider()
+                submit_section = st.form_submit_button("💾 שמור סעיף זה", type="primary", use_container_width=True)
+                
+                if submit_section:
+                    # Update the specific section
+                    topic['content'][idx]['type'] = selected_type
+                    topic['content'][idx]['title'] = new_title
+                    if new_text is not None:
+                        topic['content'][idx]['text'] = new_text
+                    if new_points is not None:
+                        topic['content'][idx]['points'] = [p.strip() for p in new_points.split('\n') if p.strip()]
+                    
+                    # Save to file
+                    from datetime import datetime
+                    topic['last_updated'] = datetime.now().strftime("%Y-%m-%d")
+                    if update_topic(category_id, topic_id, topic):
+                        st.success(f"✅ סעיף {idx + 1} נשמר בהצלחה!")
+                        st.rerun()
+                    else:
+                        st.error("❌ שגיאה בשמירת הסעיף")
     else:
         # Normal render mode
         item_type = item.get('type')
         
         if item_type == 'definition':
+            text_content = item.get('text', '')
+            # Render as Markdown
             st.markdown(f"""
             <div class="definition-box">
                 <h3>{item.get('title', 'הגדרה')}</h3>
-                <p>{item.get('text', '')}</p>
             </div>
             """, unsafe_allow_html=True)
+            
+            # Render markdown content
+            st.markdown(f'<div style="padding: 0 1.5rem 1rem 1.5rem;">', unsafe_allow_html=True)
+            st.markdown(text_content)
+            st.markdown('</div>', unsafe_allow_html=True)
         
         elif item_type == 'section':
             st.markdown(f"### {item.get('title', '')}")
@@ -363,8 +455,27 @@ for idx, item in enumerate(topic.get('content', [])):
             
             for section in item.get('sections', []):
                 st.markdown(f"#### {section.get('name', '')}")
-                for step in section.get('steps', []):
-                    st.write(f"• {step}")
+                
+                # Handle 'steps' format
+                if 'steps' in section:
+                    for step in section.get('steps', []):
+                        st.write(f"• {step}")
+                
+                # Handle 'options' format (like in HLH)
+                if 'options' in section:
+                    for option in section.get('options', []):
+                        if option.get('method'):
+                            st.markdown(f"**{option.get('method')}**")
+                        if option.get('details'):
+                            st.write(option.get('details'))
+                        if option.get('dosing'):
+                            st.write(f"*{option.get('dosing')}*")
+                        st.write("")
+                
+                # Handle direct text
+                if 'text' in section:
+                    st.write(section.get('text'))
+                
                 st.write("")
         
         elif item_type == 'key_points':

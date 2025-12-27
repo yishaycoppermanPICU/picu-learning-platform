@@ -516,3 +516,41 @@ def update_last_login(email: str) -> bool:
     return False
 
 
+def restore_user_session(st_instance):
+    """
+    Restore user session from query params if available
+    
+    Args:
+        st_instance: Streamlit instance
+    
+    Returns:
+        True if session was restored, False otherwise
+    """
+    try:
+        # Check if already logged in
+        if st_instance.session_state.get('logged_in', False):
+            return True
+        
+        # Try to restore from query params
+        query_params = st_instance.query_params
+        if 'user_email' in query_params:
+            saved_email = query_params['user_email']
+            existing_user = get_user_by_email(saved_email)
+            
+            if existing_user:
+                # Restore session
+                username = saved_email.split('@')[0].replace('.', '_').replace('-', '_')
+                st_instance.session_state.logged_in = True
+                st_instance.session_state.user = {
+                    'username': username,
+                    'full_name': existing_user.get('name', ''),
+                    'email': saved_email,
+                    'institution': existing_user.get('hospital', ''),
+                    'institutions': {'name': existing_user.get('hospital', '')}
+                }
+                update_last_login(saved_email)
+                return True
+    except Exception as e:
+        print(f"Error restoring session: {e}")
+    
+    return False

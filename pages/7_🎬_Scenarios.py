@@ -8,11 +8,16 @@ from datetime import datetime
 # Add utils to path
 sys.path.append(str(Path(__file__).parent.parent))
 
+from utils.content_manager import restore_user_session
+
 st.set_page_config(
     page_title="תרחישים מתגלגלים",
     page_icon="🎬",
     layout="wide"
 )
+
+# Restore user session if available
+restore_user_session(st)
 
 # CSS
 st.markdown("""
@@ -197,7 +202,7 @@ else:
     scenario = st.session_state.current_scenario
     current_stage_idx = st.session_state.current_stage
     
-    # Check if scenario is complete
+    # Check if scenario is complete or if we're at conclusion stage
     if current_stage_idx >= len(scenario['stages']):
         st.success("🎉 סיימת את התרחיש!")
         st.markdown(f"### ציון סופי: {st.session_state.score}")
@@ -230,8 +235,22 @@ else:
                                 st.markdown(f"✅ {decision}")
                         break
         
-        # Display learning points from main scenario
-        if scenario.get('learning_points'):
+        # Display learning points from conclusion stage if exists
+        if len(scenario['stages']) > 0 and scenario['stages'][-1].get('type') == 'conclusion':
+            learning_points = scenario['stages'][-1].get('learning_points', [])
+            if learning_points:
+                st.markdown("#### נקודות למידה:")
+                for point in learning_points:
+                    st.markdown(f"💡 {point}")
+            
+            # Display references if exists
+            references = scenario['stages'][-1].get('references', [])
+            if references:
+                with st.expander("📚 מקורות"):
+                    for ref in references:
+                        st.markdown(f"• {ref}")
+        # Otherwise display learning points from main scenario
+        elif scenario.get('learning_points'):
             st.markdown("#### נקודות למידה:")
             for point in scenario['learning_points']:
                 st.markdown(f"💡 {point}")
@@ -288,7 +307,70 @@ else:
     # Display stage content
     st.markdown(f"## שלב {current_stage_idx + 1}: {stage['title']}")
     
-    # Display context
+    # Handle conclusion stage specially
+    if stage.get('type') == 'conclusion':
+        context = stage.get('context', {})
+        
+        # Display success outcome by default (or based on score)
+        outcome_type = 'success' if st.session_state.score >= 0 else 'failure'
+        outcome_info = context.get(outcome_type, {})
+        
+        if outcome_info:
+            st.markdown("### סיכום התרחיש")
+            if outcome_info.get('text'):
+                st.markdown(outcome_info['text'])
+            
+            # Display outcomes
+            if outcome_info.get('outcomes'):
+                st.markdown("#### תוצאות:")
+                for outcome in outcome_info['outcomes']:
+                    st.markdown(f"• {outcome}")
+            
+            # Display key decisions
+            if outcome_info.get('key_decisions'):
+                st.markdown("#### החלטות מפתח:")
+                for decision in outcome_info['key_decisions']:
+                    st.markdown(f"✅ {decision}")
+            
+            # Display lesson if failure
+            if outcome_type == 'failure' and outcome_info.get('lesson'):
+                st.error(f"**לקח:** {outcome_info['lesson']}")
+        
+        # Display learning points
+        learning_points = stage.get('learning_points', [])
+        if learning_points:
+            st.markdown("#### נקודות למידה:")
+            for point in learning_points:
+                st.markdown(f"{point}")
+        
+        # Display references
+        references = stage.get('references', [])
+        if references:
+            with st.expander("📚 מקורות"):
+                for ref in references:
+                    st.markdown(f"• {ref}")
+        
+        # Navigation buttons
+        st.divider()
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("חזור לרשימת תרחישים", use_container_width=True):
+                st.session_state.scenario_active = False
+                st.session_state.current_scenario = None
+                st.session_state.current_stage = 0
+                st.rerun()
+        with col2:
+            if st.button("נסה שוב", use_container_width=True):
+                st.session_state.current_stage = 0
+                st.session_state.patient_state = scenario.get('patient_profile', {})
+                st.session_state.selections = {}
+                st.session_state.score = 0
+                st.session_state.stage_start_time = datetime.now()
+                st.rerun()
+        
+        st.stop()  # Don't process further
+    
+    # Display context for non-conclusion stages
     if 'context' in stage:
         context = stage['context']
         if isinstance(context, dict):

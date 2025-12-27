@@ -6,12 +6,7 @@ from pathlib import Path
 # Add utils to path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from utils.content_manager import (
-    get_all_categories,
-    get_category_topics,
-    search,
-    get_stats
-)
+from utils.database import get_topics, get_content_item
 
 st.set_page_config(
     page_title="ספריית תוכן",
@@ -67,117 +62,154 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Check authentication
-if not st.session_state.get('logged_in', False):
-    st.error("יש להתחבר כדי לגשת לספרייה")
-    if st.button("חזור לדף הראשי"):
-        st.switch_page("app.py")
-    st.stop()
-
 # Header
 st.title("📚 ספריית תוכן רפואי")
 st.markdown("### גישה לחומרי למידה מקיפים לטיפול נמרץ ילדים")
 
-# Navigation breadcrumb
-col1, col2, col3 = st.columns([1, 4, 1])
+# Navigation
+col1, col2 = st.columns([1, 5])
 with col1:
     if st.button("🏠 דף הבית"):
-        # Clear selection when going to home
-        if 'selected_category' in st.session_state:
-            del st.session_state['selected_category']
-        if 'selected_topic' in st.session_state:
-            del st.session_state['selected_topic']
         st.switch_page("app.py")
-with col2:
-    # Show breadcrumb if returning from a topic
-    if st.session_state.get('selected_category'):
-        from utils.content_manager import get_all_categories
-        categories = get_all_categories()
-        cat_info = next((c for c in categories if c['id'] == st.session_state.get('selected_category')), None)
-        if cat_info:
-            st.markdown(f"**נמצא בקטגוריה:** {cat_info['emoji']} {cat_info['name']}")
 
 st.divider()
+
+# Get all topics from database
+topics = get_topics()
+
+if not topics:
+    st.warning("אין תוכן זמין כרגע במסד הנתונים")
+    st.stop()
 
 # Statistics
-stats = get_stats()
+st.markdown("### 📊 סטטיסטיקה")
 col1, col2, col3 = st.columns(3)
 
+categories = {}
+for topic in topics:
+    cat = topic.get('category', 'כללי')
+    if cat not in categories:
+        categories[cat] = []
+    categories[cat].append(topic)
+
 with col1:
-    st.metric("קטגוריות", stats["total_categories"])
+    st.metric("קטגוריות", len(categories))
 with col2:
-    st.metric("נושאים", stats["total_topics"])
+    st.metric("נושאים", len(topics))
 with col3:
-    st.metric("פריטי תוכן", stats["total_content_items"])
+    # Count total sections
+    total_sections = 0
+    for topic in topics:
+        full_topic = get_content_item(topic['id'])
+        if full_topic:
+            total_sections += len(full_topic.get('sections', []))
+    st.metric("פריטי תוכן", total_sections)
 
 st.divider()
 
-# Search
-search_query = st.text_input("🔍 חיפוש בספרייה", placeholder="הקלד מילת חיפוש...")
+# Category selector
+category_names = {
+    'hematology': '🩸 המטולוגיה',
+    'immunology': '🛡️ אימונולוגיה',
+    'resuscitation': '🚨 החייאה',
+    'infections': '🦠 זיהומים',
+    'cardiology': '❤️ קרדיולוגיה',
+    'medications': '💊 תרופות',
+    'fluids_electrolytes': '💧 נוזלים ואלקטרוליטים',
+    'monitoring': '📊 ניטור',
+    'trauma': '🤕 טראומה'
+}
 
-if search_query:
-    results = search(search_query)
-    st.markdown(f"### תוצאות חיפוש: {len(results)} נמצאו")
+st.markdown("### קטגוריות")
+
+for cat_id, cat_topics in sorted(categories.items()):
+    cat_display = category_names.get(cat_id, cat_id)
     
-    if results:
-        for result in results:
-            with st.container():
-                col1, col2 = st.columns([4, 1])
-                with col1:
-                    st.markdown(f"**{result['title']}**")
-                    st.caption(f"{result['category_name']} • {result['description']}")
-                with col2:
-                    if st.button("פתח", key=f"open_{result['topic_id']}"):
-                        st.session_state['selected_category'] = result['category_id']
-                        st.session_state['selected_topic'] = result['topic_id']
-                        st.switch_page("pages/2_📖_Content.py")
-                st.divider()
-    else:
-        st.info("לא נמצאו תוצאות")
-else:
-    # Display categories
-    categories = get_all_categories()
-    
-    st.markdown("### קטגוריות")
-    st.info("💡 לחץ על קטגוריה כדי לראות את הנושאים שבה")
-    
-    # Check if returning from a specific category (to keep it expanded)
-    last_category = st.session_state.get('selected_category')
-    
-    for category in categories:
-        # Expand the category if user just came back from viewing a topic in it
-        is_expanded = (category['id'] == last_category)
-        
-        with st.expander(f"{category['emoji']} {category['name']}", expanded=is_expanded):
-            st.markdown(f"*{category['description']}*")
+    with st.expander(f"{cat_display} ({len(cat_topics)} נושאים)", expanded=True):
+        for topic in sorted(cat_topics, key=lambda x: x.get('order_index', 999)):
+            col1, col2 = st.columns([5, 1])
+            
+            with col1:
+                icon = topic.get('icon', '📄')
+                st.markdown(f"**{icon} {topic['title']}**")
+                st.caption(topic.get('description', ''))
+                if topic.get('tags'):
+                    tags_str = ' • '.join([f"`{tag}`" for tag in topic['tags']])
+                    st.markdown(tags_str)
+            
+            with col2:
+                if st.button("פתח", key=f"view_{topic['id']}"):
+                    st.session_state['selected_topic_id'] = topic['id']
+                    st.rerun()
+            
             st.divider()
-            
-            topics = get_category_topics(category['id'])
-            
-            if topics:
-                st.markdown(f"**{len(topics)} נושאים זמינים:**")
+
+# Display selected topic
+if st.session_state.get('selected_topic_id'):
+    topic_id = st.session_state['selected_topic_id']
+    
+    # Back button
+    if st.button("← חזור לרשימת הנושאים"):
+        del st.session_state['selected_topic_id']
+        st.rerun()
+    
+    st.divider()
+    
+    # Load full topic with sections
+    full_topic = get_content_item(topic_id)
+    
+    if full_topic:
+        # Topic header
+        icon = full_topic.get('icon', '📄')
+        st.title(f"{icon} {full_topic['title']}")
+        st.markdown(full_topic.get('description', ''))
+        
+        if full_topic.get('tags'):
+            tags_str = ' • '.join([f"`{tag}`" for tag in full_topic['tags']])
+            st.markdown(tags_str)
+        
+        st.divider()
+        
+        # Display sections
+        sections = full_topic.get('sections', [])
+        if sections:
+            for section in sorted(sections, key=lambda x: x.get('order_index', 999)):
+                section_type = section.get('section_type', 'text')
+                title = section.get('title', '')
+                content = section.get('content', '')
                 
-                for topic in topics:
-                    col1, col2 = st.columns([4, 1])
-                    
-                    with col1:
-                        difficulty_badge = {
-                            "beginner": "🟢 מתחיל",
-                            "intermediate": "🟡 בינוני",
-                            "advanced": "🔴 מתקדם"
-                        }.get(topic.get('difficulty', ''), '')
-                        
-                        st.markdown(f"**{topic['title']}** {difficulty_badge}")
-                        st.caption(topic['description'])
-                        if topic.get('tags'):
-                            st.caption(f"תגיות: {', '.join(topic['tags'])}")
-                    
-                    with col2:
-                        if st.button("פתח", key=f"view_{category['id']}_{topic['id']}"):
-                            st.session_state['selected_category'] = category['id']
-                            st.session_state['selected_topic'] = topic['id']
-                            st.switch_page("pages/2_📖_Content.py")
-                    
-                    st.divider()
-            else:
-                st.info("אין נושאים זמינים בקטגוריה זו")
+                if title:
+                    st.subheader(title)
+                
+                if section_type == 'alert':
+                    alert_type = section.get('metadata', {}).get('alert_type', 'info')
+                    if alert_type == 'warning':
+                        st.warning(content)
+                    elif alert_type == 'error':
+                        st.error(content)
+                    elif alert_type == 'success':
+                        st.success(content)
+                    else:
+                        st.info(content)
+                
+                elif section_type == 'steps':
+                    st.markdown(content)
+                
+                elif section_type == 'options':
+                    st.markdown(content)
+                
+                elif section_type == 'list':
+                    st.markdown(content)
+                
+                elif section_type == 'table':
+                    # Display table content
+                    st.markdown(content)
+                
+                else:  # text or default
+                    st.markdown(content)
+                
+                st.markdown("")  # Add spacing
+        else:
+            st.info("אין תוכן זמין לנושא זה")
+    else:
+        st.error("שגיאה בטעינת התוכן")

@@ -8,6 +8,8 @@ import time
 # Add utils to path
 sys.path.append(str(Path(__file__).parent.parent))
 
+from utils.content_manager import restore_user_session
+
 from utils.quiz_manager import (
     create_quiz, 
     check_answer, 
@@ -22,6 +24,9 @@ st.set_page_config(
     page_icon="📝",
     layout="wide"
 )
+
+# Restore user session if available
+restore_user_session(st)
 
 # CSS
 st.markdown("""

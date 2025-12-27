@@ -3,8 +3,17 @@ import pandas as pd
 import plotly.express as px
 from datetime import datetime, timedelta
 import random
+import sys
+from pathlib import Path
+
+# Add utils to path
+sys.path.append(str(Path(__file__).parent.parent))
+from utils.content_manager import restore_user_session
 
 st.set_page_config(page_title="הסטטיסטיקות שלי", page_icon="📊", layout="wide")
+
+# Restore user session if available
+restore_user_session(st)
 
 # CSS לעברית
 st.markdown("""

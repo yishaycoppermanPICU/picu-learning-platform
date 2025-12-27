@@ -1,35 +1,36 @@
 {
   "id": "scid_management",
-  "title": "SCID - כשל חיסוני משולב חמור",
-  "description": "פרוטוקול טיפול, בידוד ומתן מוצרי דם בילדים עם SCID.",
+  "title": "SCID - Severe Combined Immunodeficiency",
+  "description": "כשל חיסוני משולב חמור - מחלה הנגרמת ממוטציה בגנים האחראים על התפתחות תקינה של תאי B ו-T. מרגע שילד אובחן עם SCID, יש לנקוט באמצעי הגנה במהירות האפשרית.",
   "category": "immunology",
   "difficulty": "advanced",
   "order": 1,
-  "tags": ["אימונולוגיה", "בידוד", "חיסונים", "מוצרי דם"],
+  "tags": ["אימונולוגיה", "בידוד", "חיסונים", "מוצרי דם", "CMV", "HSV", "השתלת מח עצם"],
   "content": [
     {
       "type": "definition",
       "title": "הגדרה",
-      "text": "מחלה הנגרמת ממוטציה בגנים האחראים על התפתחות תקינה של תאי B ו-T. לעיתים פוגעת גם בתאי NK. ללא טיפול המחלה סופנית."
+      "text": "מחלה הנגרמת ממוטציה בגנים האחראים על התפתחות תקינה של תאי B ו-T וב-50% מהמקרים תהיה השפעה גם על תאי NK (Natural Killers). לעיתים הפגיעה תהיה בתאי T בלבד, אך תהיה השפעה גם על תאי B כי כדי לפעול הם צריכים לקבל סיגנל מתאי T."
     },
     {
       "type": "treatment",
-      "title": "אמצעי הגנה ובידוד",
+      "title": "אמצעי הגנה לילד עם SCID",
       "sections": [
         {
-          "name": "בידוד ומניעה",
+          "name": "בידוד",
           "options": [
             {
               "method": "בידוד מגן",
-              "details": "יש לשהות בבידוד עד לקבלת טיפול דפיניטיבי וייצור תאי T"
-            },
+              "details": "ילדים שאובחנו עם SCID צריכים לשהות בבידוד עד לקבלת טיפול דפיניטיבי, וייצור תאי T."
+            }
+          ]
+        },
+        {
+          "name": "הימנעות מחיסון חי מוחלש",
+          "options": [
             {
-              "method": "הימנעות מחיסונים",
-              "details": "איסור מוחלט על חיסון חי-מוחלש לילד או לקרוביו"
-            },
-            {
-              "method": "הנקה",
-              "details": "אם לאם יש נוגדנים ל-CMV (IgG/IgM), יש להימנע מהנקה"
+              "method": "איסור חיסונים",
+              "details": "אין לתת חיסון חי מוחלש לילד או לקרוביו, למעט מקרים בהם כבר ניתן חיסון ולא התפתח זיהום."
             }
           ]
         },
@@ -37,8 +38,17 @@
           "name": "מוצרי דם",
           "options": [
             {
-              "method": "דרישות סף",
-              "details": "כל מוצרי הדם חייבים להיות: מוקרנים, מסוננים, ושליליים ל-CMV"
+              "method": "דרישות מחמירות",
+              "details": "כל מוצרי הדם צריכים להיות מוקרנים, מסוננים, ושליליים ל-CMV."
+            }
+          ]
+        },
+        {
+          "name": "הנקה",
+          "options": [
+            {
+              "method": "הימנעות במקרים מסוימים",
+              "details": "אם לאם ישנם נוגדנים מסוג IgG או IgM ל-CMV, יש להימנע מהנקה. CMV וזיהומים ויראליים הם הסיבות השכיחות ביותר למוות ילדי SCID."
             }
           ]
         }
@@ -46,32 +56,84 @@
     },
     {
       "type": "section",
-      "title": "טיפול תרופתי ופרופילקטי",
+      "title": "מתן טיפול פרופילקטי",
       "items": [
         {
           "name": "IVIG",
-          "description": "מתן נוגדנים"
+          "description": "מתן אימונוגלובולינים תוך ורידי לתמיכה חיסונית"
         },
         {
-          "name": "רספרים (Resprim)",
-          "description": "מניעת PJP Pneumonia"
+          "name": "רספרים מניעתי (Resprim)",
+          "description": "נגד P. jirovecii pneumonia (PJP)"
         },
         {
-          "name": "Palivizumab",
-          "description": "נוגדנים ל-RSV (בעונה)"
+          "name": "פלוקנזול (Fluconazole)",
+          "description": "נגד זיהומים פטרייתיים"
         },
         {
-          "name": "Fluconazole",
-          "description": "נגד פטריות"
+          "name": "פליויזומב (Palivizumab)",
+          "description": "נוגדנים ל-RSV - ניתנים רק בתקופה שיש זיהום נפוץ של RSV"
+        },
+        {
+          "name": "אציקלוויר או טיפול אנטי ויראלי אחר",
+          "description": "בעיקר נגד משפחת ה'הרפס', במיוחד אם האמא הייתה נשאית ל-HSV"
+        }
+      ]
+    },
+    {
+      "type": "treatment",
+      "title": "טיפול דפיניטיבי",
+      "sections": [
+        {
+          "name": "השתלת מח עצם (HCT - Hematopoietic Cell Transplantation)",
+          "options": [
+            {
+              "method": "השתלה מתורם מתאים",
+              "details": "הטיפול הדפיניטיבי הוא השתלת מח עצם מתורם מתאים. חשוב להדגיש, שגם לאחר השתלת מח עצם, לוקח זמן עד שתאי T מתחדשים, והזיהומים שגורמים למוות בשכיחות הגבוהה ביותר הינם CMV, EBV ואדנו וירוס."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "התייצגות במחלקה וטיפול בספסיס",
+      "items": [
+        {
+          "name": "התייצגות קלינית",
+          "description": "אצלנו במחלקה ילדי SCID מתייצגים בדרך כלל בספסיס, או מגיעים להשגחה לאחר השתלת מח עצם."
+        },
+        {
+          "name": "טיפול בספסיס",
+          "description": "הטיפול יהיה כמו כל טיפול לספסיס: פוש מרופנם לפי 20mg/kg ומתן אדרנלין לפי צורך. (פירוט על טיפול בספסיס בנפרד)"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "פרוגנוזה",
+      "items": [
+        {
+          "name": "ללא טיפול",
+          "description": "בקרב ילדים שלא טופלו המחלה הינה סופנית."
+        },
+        {
+          "name": "עם טיפול מוקדם",
+          "description": "מחקרים הראו שבילדים מתחת גיל 3.5 חודשים שלא נדבקו בזיהום, והושתלו במח עצם, סיכויי ההישרדות שלהם היו 96%."
         }
       ]
     }
   ],
   "key_points": [
-    "⚠️ CMV וזיהומים ויראליים הם גורמי המוות השכיחים ביותר בילדי SCID",
-    "⚠️ חל איסור מוחלט לתת מוצרי דם שאינם מוקרנים ומסוננים",
-    "הטיפול הדפיניטיבי הוא השתלת מח עצם"
+    "⚠️ מרגע אבחון יש לנקוט באמצעי הגנה במהירות האפשרית - בידוד מיידי",
+    "⚠️ CMV וזיהומים ויראליים הם הסיבות השכיחות ביותר למוות ילדי SCID",
+    "⚠️ כל מוצרי הדם חייבים להיות מוקרנים, מסוננים ושליליים ל-CMV",
+    "🚫 איסור מוחלט על חיסון חי מוחלש לילד או לקרוביו",
+    "💊 טיפול פרופילקטי: IVIG, רספרים, פלוקנזול, פליויזומב (RSV), אציקלוויר",
+    "🏥 השתלת מח עצם היא הטיפול הדפיניטיבי - גם אחריה לוקח זמן עד התאוששות",
+    "📊 בילדים מתחת 3.5 חודשים ללא זיהום שהושתלו - הישרדות 96%",
+    "🚨 במחלקה מתייצגים בספסיס - טפל כמו ספסיס: מרופנם 20mg/kg + אדרנלין לפי צורך"
   ],
-  "last_updated": "2025-01-01",
+  "last_updated": "2025-12-27",
   "author": "PICU Team"
 }
