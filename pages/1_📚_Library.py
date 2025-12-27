@@ -140,7 +140,7 @@ for cat_id, cat_topics in sorted(categories.items()):
             with col2:
                 if st.button("פתח", key=f"view_{topic['id']}"):
                     st.session_state['selected_topic_id'] = topic['id']
-                    st.rerun()
+                    st.switch_page("pages/9_📖_Content_DB.py")
             
             st.divider()
 
