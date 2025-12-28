@@ -152,13 +152,13 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # הפודיום בHTML
-st.markdown(f"""
+podium_html = f"""
 <div class="podium-container">
     <div class="podium-place podium-first">
         <h2 style='margin: 0;'>🥇</h2>
         <h3 style='margin: 10px 0;'>מקום ראשון</h3>
         <h4 style='margin: 10px 0;'>{df.iloc[0]['מוסד']}</h4>
-        <p style='margin: 0;'>ציון ממוצע: {df.iloc[0]['ציון ממוצע']:.1f}%</p>
+        <p style='margin: 0;'>ציון ממוצע: {df.iloc[0]['ציון ממוצע']:.0f}%</p>
         <p style='margin: 0;'>משתתפים: {df.iloc[0]['משתתפים']}</p>
     </div>
     
@@ -166,7 +166,7 @@ st.markdown(f"""
         <h2 style='margin: 0;'>🥈</h2>
         <h3 style='margin: 10px 0;'>מקום שני</h3>
         <h4 style='margin: 10px 0;'>{df.iloc[1]['מוסד']}</h4>
-        <p style='margin: 0;'>ציון ממוצע: {df.iloc[1]['ציון ממוצע']:.1f}%</p>
+        <p style='margin: 0;'>ציון ממוצע: {df.iloc[1]['ציון ממוצע']:.0f}%</p>
         <p style='margin: 0;'>משתתפים: {df.iloc[1]['משתתפים']}</p>
     </div>
     
@@ -174,11 +174,13 @@ st.markdown(f"""
         <h2 style='margin: 0;'>🥉</h2>
         <h3 style='margin: 10px 0;'>מקום שלישי</h3>
         <h4 style='margin: 10px 0;'>{df.iloc[2]['מוסד']}</h4>
-        <p style='margin: 0;'>ציון ממוצע: {df.iloc[2]['ציון ממוצע']:.1f}%</p>
+        <p style='margin: 0;'>ציון ממוצע: {df.iloc[2]['ציון ממוצע']:.0f}%</p>
         <p style='margin: 0;'>משתתפים: {df.iloc[2]['משתתפים']}</p>
     </div>
 </div>
-""", unsafe_allow_html=True)
+"""
+
+st.markdown(podium_html, unsafe_allow_html=True)
 st.divider()
 
 # טבלה מלאה
