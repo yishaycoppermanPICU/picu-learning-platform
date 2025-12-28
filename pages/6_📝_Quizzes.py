@@ -179,10 +179,10 @@ if not st.session_state.quiz_active:
         # Number of questions - spinner
         num_questions = st.number_input(
             "מספר שאלות:",
-            min_value=5,
-            max_value=50,
+            min_value=1,
+            max_value=200,
             value=10,
-            step=5
+            step=1
         )
         
         # Difficulty level
