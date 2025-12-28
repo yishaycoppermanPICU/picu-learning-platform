@@ -8,8 +8,6 @@ import time
 # Add utils to path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from utils.content_manager import restore_user_session
-
 from utils.quiz_manager import (
     create_quiz, 
     check_answer, 
@@ -24,9 +22,6 @@ st.set_page_config(
     page_icon="📝",
     layout="wide"
 )
-
-# Restore user session if available
-restore_user_session(st)
 
 # CSS
 st.markdown("""
@@ -100,6 +95,18 @@ st.markdown("""
 
 # Quiz Setup Screen
 if not st.session_state.quiz_active:
+    
+    # Check if coming from a specific topic
+    from_topic = st.session_state.get('quiz_topic')
+    from_category = st.session_state.get('quiz_category')
+    
+    if from_topic:
+        st.info(f"🎯 מבחן ממוקד: {from_topic}")
+        if st.button("🔙 חזור לבחירה כללית"):
+            st.session_state['quiz_topic'] = None
+            st.session_state['quiz_category'] = None
+            st.rerun()
+    
     st.markdown("### 🎯 הגדר את המבחן שלך")
     
     col1, col2 = st.columns([2, 1])
@@ -176,6 +183,12 @@ if not st.session_state.quiz_active:
             # Create quiz based on filters
             all_questions = get_all_questions()
             
+            # Filter by topic if coming from content page
+            from_topic = st.session_state.get('quiz_topic')
+            if from_topic:
+                all_questions = [q for q in all_questions if q.get('topic') == from_topic]
+                st.info(f"🎯 סינון לפי נושא: {from_topic} ({len(all_questions)} שאלות זמינות)")
+            
             # Filter by category
             if selected_category != "all":
                 all_questions = [q for q in all_questions if q.get('category') == selected_category]
@@ -206,8 +219,12 @@ if not st.session_state.quiz_active:
                     'category': selected_category,
                     'difficulty': difficulty,
                     'quiz_type': quiz_type,
-                    'show_timer': show_timer
+                    'show_timer': show_timer,
+                    'from_topic': from_topic
                 }
+                # Clear topic filter after use
+                st.session_state['quiz_topic'] = None
+                st.session_state['quiz_category'] = None
                 st.rerun()
     
     # Statistics preview
@@ -331,31 +348,32 @@ if not st.session_state.quiz_active and st.session_state.quiz_answers:
             result = check_answer(answer['question_id'], answer['user_answer'])
             if result['is_correct']:
                 correct_count += 1
-            earned_points += result['points']
-            
+                
             question = next((q for q in st.session_state.quiz_questions if q['id'] == answer['question_id']), None)
             if question:
-                total_points += question.get('points', 0)
+                q_points = question.get('points', 2)
+                total_points += q_points
+                if result['is_correct']:
+                    earned_points += q_points
     
-    score_percentage = (correct_count / answered_questions * 100) if answered_questions > 0 else 0
+    # Calculate score out of 100 (normalize the points)
+    score_out_of_100 = (earned_points / total_points * 100) if total_points > 0 else 0
     time_taken = int(time.time() - st.session_state.quiz_start_time) if st.session_state.quiz_start_time else 0
     
     # Display results
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3 = st.columns(3)
     
     with col1:
         st.metric("תשובות נכונות", f"{correct_count}/{answered_questions}")
     with col2:
-        st.metric("ציון", f"{score_percentage:.1f}%")
+        st.metric("ציון", f"{score_out_of_100:.0f}/100")
     with col3:
-        st.metric("נקודות", f"{earned_points}/{total_points}")
-    with col4:
         st.metric("זמן", f"{time_taken//60}:{time_taken%60:02d}")
     
     # Performance message
-    if score_percentage >= 90:
+    if score_out_of_100 >= 90:
         st.success("🌟 מצוין! אתה שולט בנושא!")
-    elif score_percentage >= 70:
+    elif score_out_of_100 >= 70:
         st.info("👍 יפה מאוד! עם עוד קצת תרגול תהיה מושלם")
     else:
         st.warning("💪 כדאי לחזור על החומר ולנסות שוב")
@@ -400,7 +418,7 @@ if not st.session_state.quiz_active and st.session_state.quiz_answers:
             'difficulty': st.session_state.quiz_config.get('difficulty'),
             'total_questions': answered_questions,
             'correct_answers': correct_count,
-            'score_percentage': score_percentage,
+            'score_percentage': score_out_of_100,
             'time_taken': time_taken,
             'points_earned': earned_points
         }

@@ -1,53 +1,252 @@
 {
   "id": "anaphylaxis_management",
   "title": "אנפילקסיס ושוק אנפילקטי",
-  "description": "זיהוי וטיפול מציל חיים בתגובה אלרגית חריפה.",
+  "description": "זיהוי מוקדם וטיפול מציל חיים בתגובה אלרגית חריפה מסכנת חיים.",
   "category": "resuscitation",
   "difficulty": "intermediate",
   "order": 1,
-  "tags": ["אלרגיה", "אדרנלין", "דרכי אוויר", "שוק"],
+  "tags": ["אלרגיה", "אדרנלין", "דרכי אוויר", "שוק", "אפינפרין", "אנגיואדמה"],
   "content": [
     {
       "type": "definition",
       "title": "הגדרה",
-      "text": "מצב חירום מסכן חיים המאופיין בהופעה מהירה של תסמינים עוריים נשימתיים וקרדיווסקולריים."
+      "text": "אנפילקסיס הוא מצב רפואי מסכן חיים שקשה לזהות בשלב ההתחלתי ולכן גם לא מטופל בזמן. אנפילקסיס היא הפרעה בעלת תסמינים רבים ומגוונים, והמטרה היא לזהות אותה מוקדם ולטפל באדרנלין (אפינפרין)."
+    },
+    {
+      "type": "diagnosis",
+      "title": "אבחון קליני",
+      "subtitle": "האבחון מתבצע קלינית - אין צורך לחכות לבדיקות מעבדה",
+      "criteria": {
+        "common_signs": {
+          "title": "הסימנים הנפוצים ביותר",
+          "location": "עור (skin findings)",
+          "examples": [
+            "אורטיקריה (urticaria) - הופעה מהירה",
+            "אנגיואדמה (angioedema)",
+            "הסמקה (flushing)",
+            "גרד (pruritus)"
+          ],
+          "note": "⚠️ חשוב: ל-10-20% מהמקרים אין תופעות על העור כלל!"
+        },
+        "dangerous_signs": {
+          "title": "סימנים מסוכנים - דורשים טיפול מיידי",
+          "categories": [
+            {
+              "system": "נשימתי (Respiratory distress)",
+              "signs": [
+                "סטרידור (stridor)",
+                "צפצופים (wheezing)",
+                "דיספנאה (dyspnea)",
+                "עבודת נשימה מוגברת (increased work of breathing)",
+                "רטרקציות (retractions)",
+                "שיעול מתמשך (persistent cough)",
+                "ציאנוזיס (cyanosis)"
+              ]
+            },
+            {
+              "system": "קרדיווסקולרי (Poor perfusion)",
+              "signs": [
+                "פרפוזיה לקויה",
+                "כאב בבטן (abdominal pain)",
+                "הקאות (vomiting)",
+                "הפרעות קצב (dysrhythmia)",
+                "היפוטנזיה (hypotension)",
+                "קריסה (collapse)"
+              ]
+            }
+          ],
+          "critical_note": "החמרה מהירה של תסמינים = טפל מיידית!"
+        }
+      }
     },
     {
       "type": "section",
-      "title": "סימנים קליניים",
+      "title": "סימנים קליניים - סיכום",
       "items": [
         {
-          "name": "סימני אזהרה",
-          "signs": [
-            "עור: אורטיקריה, אנגיואדמה (נפיחות)",
-            "נשימה: סטרידור, צפצופים, קוצר נשימה",
-            "קרדיו: ירידת לחץ דם, טכיקרדיה, קריסה",
-            "עיכול: כאב בטן, הקאות"
-          ]
+          "name": "עור (10-20% ללא סימנים עוריים!)",
+          "signs": ["אורטיקריה", "אנגיואדמה (נפיחות)", "הסמקה", "גרד"]
+        },
+        {
+          "name": "נשימתי",
+          "signs": ["סטרידור", "צפצופים", "דיספנאה", "רטרקציות", "שיעול מתמשך", "ציאנוזיס"]
+        },
+        {
+          "name": "קרדיווסקולרי",
+          "signs": ["ירידת לחץ דם", "טכיקרדיה", "הפרעות קצב", "פרפוזיה לקויה", "קריסה"]
+        },
+        {
+          "name": "עיכולי",
+          "signs": ["כאב בטן", "הקאות"]
         }
       ]
     },
     {
       "type": "treatment",
-      "title": "פרוטוקול טיפול",
+      "title": "ניהול אקוטי - פרוטוקול טיפול מלא",
+      "critical_note": "⚠️ אין קונטראינדיקציה מוחלטת למתן אדרנלין במצב של אנפילקסיס!",
       "sections": [
         {
-          "name": "טיפול מיידי (קו ראשון)",
-          "steps": [
-            "אדרנלין (Epinephrine) IM: 0.01 mg/kg (מקס' 0.5 מ\"ג). הזרקה לירך חיצונית",
-            "ניתן לחזור כל 5-15 דקות אם אין שיפור",
-            "אין קונטראינדיקציה לאדרנלין באנפילקסיס!",
-            "נוזלים (Bolus): NS 20 ml/kg בהזרקה מהירה במקרה של ירידת לחץ דם"
+          "step": "1",
+          "name": "דרכי אוויר (Airway) - עדיפות ראשונה",
+          "critical": true,
+          "details": "אינטובציה מיידית לאור התפתחות חסימת דרכי אוויר כתוצאה מאנגיואדמה.",
+          "warnings": [
+            "⚠️ עיכוב עלול להסתיים בחסימת דרכי אוויר מלאה",
+            "⚠️ האינטובציה עלולה להיות קשה וצריכה להתבצע על ידי איש הצוות המיומן ביותר",
+            "⚠️ לעיתים יש צורך בקוניוטומיה/קריקוטירואידוטומיה (דרך הקריקואיד)"
+          ],
+          "indications": [
+            "עדות להתקדמות חסימת דרכי אוויר מאנגיואדמה",
+            "סטרידור מתקדם",
+            "מצוקה נשימתית חמורה",
+            "חוסר יכולת להגן על דרכי אוויר"
+          ],
+          "technique": "האינטובציה עלולה להיות קשה. יש צורך באיש צוות מנוסה. קוניוטומיה עלולה להיות נחוצה."
+        },
+        {
+          "step": "2",
+          "name": "אפינפרין IM (אדרנלין תוך שרירי) - הטיפול החשוב ביותר!",
+          "description": "הזרקה תוך שרירית לירך החיצונית (Vastus Lateralis)"
+        }
+    "🚨 אין קונטראינדיקציה מוחלטת לאפינפרין באנפילקסיס - NO absolute contraindications to epinephrine",
+    "🚨 עיכוב באינטובציה עלול להיות קטלני - פעלו מהר!",
+    "🚨 אפינפרין IM עדיף על IV בולוס (IV בולוס עלול לגרום להפרעות קצב)"
+  ],
+  "summary_uptodate": {
+    "diagnosis": "האבחון מתבצע קלינית. הסימנים הנפוצים ביותר הם עוריים (אורטיקריה, אנגיואדמה, הסמקה, גרד), אך 10-20% מהמקרים ללא סימנים עוריים.",
+    "dangerous_signs": "סימנים מסוכנים: החמרה מהירה של תסמינים, מצוקה נשימתית (סטרידור, צפצופים, דיספנאה, רטרקציות), פרפוזיה לקויה, כאב בבטן, הקאות, הפרעות קצב, היפוטנזיה, קריסה.",
+    "treatment_priority": "1. דרכי אוויר (אינטובציה מיידית במצבי אנגיואדמה), 2. אפינפרין IM 0.01mg/kg (מקס 0.5mg), 3. מיקום שכיבה + הרמת רגליים, 4. חמצן 100%, 5. נוזלים NS 20ml/kg, 6-10. טיפולים נוספים (ונטולין, אנטיהיסטמינים, סטרואידים, ניטור).",
+    "refractory_treatment": "אפינפרין עירוי IV 0.1-1 mcg/kg/min (לאחר 3 מנות IM), ואזופרסין כתוספת (לא במקום אפינפרין)."
+  },
+  "references": [
+    "UpToDate: Emergency management of anaphylaxis in infants and children - Rapid overview",
+    "UpToDate Clinical Guidelines"
+  ],
+  "last_updated": "2025-12-27",
+  "author": "PICU Team",
+  "version": "2.0: "מקסימום למנה 0.5 mg (בילדים גדולים מעל 50 ק\"ג)",
+            "concentration": "1 mg/ml (1:1000)"
+          },
+          "administration": {
+            "site": "חלק עליון וחיצוני של הירך (anterolateral thigh)",
+            "repeat": "ניתן לחזור על המנה כל 5-15 דקות (ולעיתים אף יותר)",
+            "escalation": "במידה והפרפוזיה אינה טובה גם לאחר שלוש הזרקות - מכינים אדרנלין IV (עירוי מתמשך)"
+          },
+          "critical_notes": [
+            "🔴 זו התרופה המצילה חיים - אל תדחו!",
+            "🔴 אין קונטראינדיקציה מוחלטת לאפינפרין באנפילקסיס",
+            "🔴 IM עדיף על IV בולוס (IV בולוס עלול לגרום להפרעות קצב)"
           ]
         },
         {
-          "name": "טיפול שניוני",
-          "steps": [
-            "אינהלציית ונטולין לברונכוספאזם - 0.15 mg/kg",
-            "סטרואידים: מתילפרדניזולון 1-2 מ\"ג/ק\"ג",
-            "אנטי-היסטמינים: דיפנהידרמין",
-            "למניעת תגובה מאוחרת - לא מחליפים אדרנלין"
+          "step": "3",
+          "name": "מיקום המטופל (Position)",
+          "instructions": [
+            "להשכיב את המטופל (Place patient in recumbent position)",
+            "אם אפשר - להרים את הרגליים (elevate lower extremities)",
+            "מיקום זה משפר את החזר הדם ללב"
           ]
+        },
+        {
+          "step": "4",
+          "name": "חמצן (Oxygen)",
+          "details": "לחבר את המטופל למסכת פנים עד 100% חמצן לפי הצורך",
+          "delivery": "מסכת פנים או נבולייזר, או עד 100% חמצן בהתאם לצורך (8 to 10 L/minute via facemask or up to 100% oxygen, as needed)"
+        },
+        {
+          "step": "5",
+          "name": "החזר נוזלים (Normal Saline Rapid Bolus)",
+          "indication": "לשיפור פרפוזיה במצב של היפוטנזיה",
+          "protocol": {
+            "fluid": "Normal Saline (NS)",
+            "dose": "20 ml/kg",
+            "speed": "בהזרקה מהירה (rapid infusion)",
+            "repeat": "הערכה מחדש, ובמידת הצורך בולוס נוסף באותו מינון",
+            "max": "ניתן להגיע עד 100 ml/kg במידת הצורך (massive fluid shifts with severe loss of intravascular volume)",
+            "monitoring": "יש לנטר תפוקת שתן (monitor urine output)"
+          }
+        },
+        {
+          "step": "6",
+          "name": "סלבוטמול/אלבוטרול - ונטולין (Albuterol)",
+          "indication": "לברונכוספאזם עמיד לאפינפרין IM",
+          "dose": "0.15 mg/kg (מינימום למנה 2.5 mg) ב-3 מ\"ל סליין",
+          "route": "נבולייזר (nebulizer)",
+          "repeat": "ניתן לחזור לפי צורך",
+          "note": "לטיפול בברונכוספאזם שלא מגיב לאפינפרין"
+        },
+        {
+          "step": "7",
+          "name": "אנטיהיסטמין H1 - דיפנהידרמין",
+          "drug": "Diphenhydramine",
+          "route": "IV",
+          "dose": "1 mg/kg",
+          "max_dose": "מקסימום 50 mg",
+          "administration": "מתן IV במשך 5 דקות לפחות (over at least 5 minutes)",
+          "note": "לשקול מתן - אינו מחליף אפינפרין"
+        },
+        {
+          "step": "8",
+          "name": "אנטיהיסטמין H2 - פמוטידין",
+          "drug": "Famotidine",
+          "route": "IV",
+          "dose": "0.25 mg/kg",
+          "max_dose": "מקסימום 20 mg",
+          "administration": "מתן IV במשך 2 דקות לפחות (over at least 2 minutes)",
+          "note": "לשקול מתן"
+        },
+        {
+          "step": "9",
+          "name": "גלוקוקורטיקואיד - סטרואידים",
+          "drug": "Methylprednisolone (סולומדרול/מתילפרדניזולון)",
+          "route": "IV",
+          "dose": "1 mg/kg",
+          "max_dose": "מקסימום 125 mg",
+          "alternative": {
+            "drug": "Dexamethasone",
+            "dose": "עד 10 mg"
+          },
+          "note": "לשקול מתן - אינו מחליף אפינפרין. עוזר במניעת תגובה מאוחרת (biphasic reaction)"
+        },
+        {
+          "step": "10",
+          "name": "ניטור (Monitoring)",
+          "parameters": [
+            "דופק (pulse)",
+            "לחץ דם (blood pressure)",
+            "סטורציה (pulse oximetry)",
+            "תפוקת שתן - במטופלים שקיבלו החזר נוזלים בגלל שוק היפוטנסיבי משמעותי"
+          ],
+          "note": "ניטור המודינמי רציף חובה (continuous noninvasive hemodynamic monitoring and pulse oximetry monitoring should be performed)"
+        }
+      ]
+    },
+    {
+      "type": "treatment",
+      "title": "טיפול בתסמינים עמידים (Refractory Symptoms)",
+      "subtitle": "כאשר הטיפול הסטנדרטי אינו מספיק",
+      "sections": [
+        {
+          "name": "1. עירוי אפינפרין מתמשך (Epinephrine Infusion)",
+          "indication": "מטופלים שלא הגיבו לאפינפרין IM או להחזר נוזלים של סליין",
+          "protocol": {
+            "route": "IV - עירוי מתמשך (continuous infusion)",
+            "dose": "0.1-1 mcg/kg/minute",
+            "titration": "בטיטרציה עד האפקט הרצוי (with the doses titrated continuously according to blood pressure and cardiac acceleration)",
+            "monitoring": "ניטור מתמשך של לחץ דם וקצב לב"
+          },
+          "critical_note": "⚠️ במטופלים עם תגובה לא מספקת ל-IM epinephrine ו-IV saline"
+        },
+        {
+          "name": "2. ואזופרסין (Vasopressin)",
+          "indication": "מטופלים שלא מגיבים מספיק לאדרנלין ויצטרכו תמיכה נוספת",
+          "critical_note": "⚠️ ואזופרסין תמיד יגיע כתוספת לאדרנלין ולא במקומו!",
+          "protocol": {
+            "use": "כתוספת לאדרנלין (adjunctive therapy)",
+            "indication": "שוק עמיד לטיפול (refractory shock)",
+            "note": "ישנם מטופלים שצריכים תמיכה נוספת של ואזופרסין למעבר לממצא היפודינמי במצבים של vasodilation משמעותי"
+          }
         }
       ]
     }

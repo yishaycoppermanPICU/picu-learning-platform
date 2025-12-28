@@ -9,42 +9,28 @@ from pathlib import Path
 # Add utils to path
 sys.path.append(str(Path(__file__).parent.parent))
 from utils.content_manager import restore_user_session
+from utils.styles import get_common_styles
+from utils.weekly_content import get_user_weekly_stats, get_current_weekly_content
+from utils.quiz_manager import get_user_stats, get_user_quiz_history
+from utils.badges import (
+    get_badge_html, 
+    get_badge_card_html, 
+    get_progress_badges_html,
+    calculate_user_achievements,
+    get_all_badges_showcase
+)
 
 st.set_page_config(page_title="הסטטיסטיקות שלי", page_icon="📊", layout="wide")
 
 # Restore user session if available
 restore_user_session(st)
 
-# CSS לעברית
+# CSS מרכזי
+st.markdown(get_common_styles(), unsafe_allow_html=True)
+
+# CSS נוסף ספציפי לדף
 st.markdown("""
 <style>
-    /* יישור גלובלי */
-    * {
-        direction: rtl !important;
-        text-align: right !important;
-    }
-    
-    .stApp, .main {
-        direction: rtl !important;
-        text-align: right !important;
-    }
-    
-    /* תיקון טאבים */
-    .stTabs [data-baseweb="tab-list"] {
-        direction: rtl !important;
-        flex-direction: row-reverse !important;
-    }
-    
-    /* כותרת */
-    .stat-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 2rem;
-        border-radius: 10px;
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-    
     /* metrics */
     [data-testid="metric-container"] {
         text-align: center !important;
@@ -74,8 +60,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # טאבים - אימוג'י בסוף! 
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "סקירה כללית 📈",
+    "תגי הישגים 🏅",
     "היסטוריית מבחנים 📝",
     "התקדמות בלמידה 📚",
     "השוואה לאחרים 🏆"
@@ -84,18 +71,57 @@ tab1, tab2, tab3, tab4 = st.tabs([
 with tab1:
     st.markdown("### נתונים כלליים 📊")
     
+    # קבלת נתונים שבועיים ונתוני מבחנים
+    user_email = user.get('email', '')
+    weekly_stats = get_user_weekly_stats(user_email) if user_email else {}
+    quiz_stats = get_user_stats(user_email) if user_email else {}
+    
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
-        st.metric("ימים פעילים", "7", "2+ מאתמול")
+        st.metric("שבועות שהושלמו", weekly_stats.get('completed_weeks', 0))
     with col2:
-        st.metric("שעות למידה", "12.5", "1.5+ השבוע")
+        st.metric("תגי מצטיין", weekly_stats.get('total_badges', 0))
     with col3:
-        scores = st.session_state.get('user_scores', [])
-        st.metric("מבחנים שבוצעו", len(scores))
+        st.metric("מבחנים שבוצעו", quiz_stats.get('total_quizzes', 0))
     with col4:
-        avg = sum(scores) / len(scores) if scores else 0
-        st.metric("ציון ממוצע", f"{avg:.1f}%")
+        avg = quiz_stats.get('average_score', 0)
+        st.metric("ציון ממוצע", f"{avg:.0f}/100")
+    
+    st.divider()
+    
+    # תוכן שבועי נוכחי
+    weekly_content = get_current_weekly_content()
+    is_completed = weekly_stats.get('current_week_completed', False)
+    
+    completion_status = "✅ הושלם השבוע" if is_completed else "⏳ ממתין להשלמה"
+    status_color = "#28a745" if is_completed else "#ffc107"
+    
+    st.markdown(f"""
+    <div style="
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border-right: 5px solid {status_color};
+    ">
+        <h3 style="margin: 0 0 1rem 0;">📅 תוכן השבוע הנוכחי</h3>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <span style="font-size: 3rem;">{weekly_content['icon']}</span>
+            <div>
+                <h4 style="margin: 0;">{weekly_content['title']}</h4>
+                <p style="color: #6c757d; margin: 0.3rem 0;">{weekly_content['description']}</p>
+                <span style="
+                    background: {status_color};
+                    color: white;
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 15px;
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                ">{completion_status}</span>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
     st.divider()
     
@@ -120,39 +146,93 @@ with tab1:
     st.plotly_chart(fig, use_container_width=True)
 
 with tab2:
+    st.markdown("### תגי ההישגים שלך 🏅")
+    
+    user_email = user.get('email', '')
+    if user_email:
+        weekly_stats = get_user_weekly_stats(user_email)
+        badges_list = weekly_stats.get('badges', [])
+        
+        if badges_list:
+            st.success(f"🎉 יש לך {len(badges_list)} תגים!")
+            
+            # הצגת התגים
+            st.markdown("#### התגים שצברת")
+            
+            for badge in sorted(badges_list, key=lambda x: x.get('date', ''), reverse=True):
+                badge_date = datetime.fromisoformat(badge['date']).strftime('%d/%m/%Y %H:%M')
+                st.markdown(
+                    get_badge_card_html(
+                        'excellence',
+                        earned_date=badge_date,
+                        score=badge.get('score')
+                    ),
+                    unsafe_allow_html=True
+                )
+            
+            st.divider()
+            
+            # התקדמות לתגים נוספים
+            st.markdown("#### התקדמות לתגים נוספים")
+            st.markdown(get_progress_badges_html(
+                weekly_stats['completed_weeks'],
+                weekly_stats['total_badges']
+            ), unsafe_allow_html=True)
+            
+            # הישגים זמינים
+            achievements = calculate_user_achievements(weekly_stats, badges_list)
+            if achievements:
+                st.markdown("#### הישגים שזכית להם")
+                for achievement in achievements:
+                    st.markdown(get_badge_html(achievement, 'medium'), unsafe_allow_html=True)
+        else:
+            st.info("עדיין לא צברת תגים. השלם את המשימה השבועית כדי לקבל את התג הראשון!")
+            
+            st.markdown("#### תגים זמינים")
+            st.markdown(get_all_badges_showcase(), unsafe_allow_html=True)
+    else:
+        st.warning("לא ניתן לטעון תגים - אין מידע על משתמש")
+
+with tab3:
     st.markdown("### היסטוריית המבחנים שלך 📝")
     
-    if st.session_state.get('user_scores'):
-        scores = st.session_state.user_scores
-        history = []
-        for i, score in enumerate(scores, 1):
-            history.append({
-                'מבחן': f"מבחן {i}",
-                'נושא': 'החייאה',
-                'ציון': f"{score}%",
-                'תאריך': (datetime.now() - timedelta(days=i)).strftime('%d/%m/%Y'),
-                'משך': f"{random.randint(5, 20)} דקות"
+    # קבלת היסטוריה אמיתית
+    quiz_history = get_user_quiz_history(user_email) if user_email else []
+    
+    if quiz_history:
+        # הצגת טבלה
+        history_data = []
+        for quiz in quiz_history:
+            history_data.append({
+                'תאריך': datetime.fromisoformat(quiz['timestamp']).strftime('%d/%m/%Y %H:%M'),
+                'קטגוריה': quiz.get('category', 'כללי'),
+                'רמת קושי': quiz.get('difficulty', 'כללי'),
+                'שאלות': f"{quiz['correct_answers']}/{quiz['total_questions']}",
+                'ציון': f"{quiz['score_percentage']:.0f}/100",
+                'זמן': f"{quiz['time_taken']//60}:{quiz['time_taken']%60:02d}"
             })
         
-        df = pd.DataFrame(history)
+        df = pd.DataFrame(history_data)
         st.dataframe(df, use_container_width=True, hide_index=True)
         
         # סטטיסטיקות
         col1, col2, col3 = st.columns(3)
-        avg = sum(scores) / len(scores)
         with col1:
-            best = max(scores)
-            st.success(f"הציון הטוב ביותר: {best}% 🌟")
+            best = quiz_stats.get('best_score', 0)
+            st.success(f"הציון הטוב ביותר: {best:.0f}/100 🌟")
         with col2:
-            st.info(f"ממוצע ציונים: {avg:.1f}% 📊")
+            avg = quiz_stats.get('average_score', 0)
+            st.info(f"ממוצע ציונים: {avg:.0f}/100 📊")
         with col3:
-            st.warning(f"צריך שיפור: {100-avg:.0f}% 📈")
+            total = quiz_stats.get('total_questions', 0)
+            correct = quiz_stats.get('total_correct', 0)
+            st.metric("סה\"כ תשובות נכונות", f"{correct}/{total}")
     else:
         st.info("עדיין לא ביצעת מבחנים 📝")
         if st.button("התחל מבחן ראשון 🚀", type="primary"):
-            st.switch_page("pages/2_📝_Quizzes.py")
+            st.switch_page("pages/6_📝_Quizzes.py")
 
-with tab3:
+with tab4:
     st.markdown("### ההתקדמות שלך בנושאי הלמידה 📚")
     
     topics = [
@@ -175,11 +255,11 @@ with tab3:
     
     st.divider()
     st.markdown("### המלצות אישיות 💡")
-    st.success("כל הכבוד!  אתה מתקדם יפה בנושא 'החייאה' 🎉")
+    st.success("כל הכבוד! אתה מתקדם יפה בנושא 'החייאה' 🎉")
     st.info("כדאי להתמקד בנושא 'תרופות בטיפול נמרץ' 💊")
     st.warning("נסה להקדיש לפחות 30 דקות ביום ללמידה ⏰")
 
-with tab4:
+with tab5:
     st.markdown("### איך אתה מסתדר לעומת אחרים?  🏆")
     
     col1, col2 = st.columns(2)

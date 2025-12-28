@@ -278,3 +278,53 @@ def delete_quiz_question(question_id: str) -> bool:
         print(f"Error deleting quiz question: {e}")
         return False
 
+def get_user_weekly_progress(user_email: str) -> Dict:
+    """
+    קבלת נתוני ההתקדמות השבועית של משתמש ממסד הנתונים
+    Get user's weekly progress from database
+    """
+    try:
+        supabase = init_supabase()
+        if not supabase:
+            return {'completed_weeks': [], 'badges': [], 'total_points': 0}
+        
+        # נרמול המייל לאותיות קטנות
+        user_email = user_email.lower()
+        
+        # חיפוש המשתמש לפי email
+        response = supabase.table('users').select('weekly_progress').eq('email', user_email).execute()
+        
+        if response.data and len(response.data) > 0:
+            progress = response.data[0].get('weekly_progress')
+            if progress:
+                return progress
+        
+        # אם אין נתונים, החזר ברירת מחדל
+        return {'completed_weeks': [], 'badges': [], 'total_points': 0}
+    except Exception as e:
+        print(f"Error getting user weekly progress: {e}")
+        return {'completed_weeks': [], 'badges': [], 'total_points': 0}
+
+def update_user_weekly_progress(user_email: str, progress_data: Dict) -> bool:
+    """
+    עדכון נתוני ההתקדמות השבועית של משתמש במסד הנתונים
+    Update user's weekly progress in database
+    """
+    try:
+        supabase = init_supabase()
+        if not supabase:
+            return False
+        
+        # נרמול המייל לאותיות קטנות
+        user_email = user_email.lower()
+        
+        # עדכון ה-weekly_progress
+        response = supabase.table('users').update({
+            'weekly_progress': progress_data
+        }).eq('email', user_email).execute()
+        
+        return True
+    except Exception as e:
+        print(f"Error updating user weekly progress: {e}")
+        return False
+

@@ -5,7 +5,13 @@
   "category": "fluids_electrolytes",
   "difficulty": "intermediate",
   "order": 4,
-  "tags": ["סוכר", "גלוקוז", "DKA", "היפוגליקמיה", "אינסולין"],
+  "tags": [
+    "סוכר",
+    "גלוקוז",
+    "DKA",
+    "היפוגליקמיה",
+    "אינסולין"
+  ],
   "content": [
     {
       "type": "definition",

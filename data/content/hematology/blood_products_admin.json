@@ -5,7 +5,15 @@
   "category": "hematology",
   "difficulty": "beginner",
   "order": 4,
-  "tags": ["דם", "עירוי", "פרוטוקול", "טסיות", "פלזמה", "FFP", "CRYO"],
+  "tags": [
+    "דם",
+    "עירוי",
+    "פרוטוקול",
+    "טסיות",
+    "פלזמה",
+    "FFP",
+    "CRYO"
+  ],
   "content": [
     {
       "type": "section",

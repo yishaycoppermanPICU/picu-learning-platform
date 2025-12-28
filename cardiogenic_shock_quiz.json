@@ -1,0 +1,259 @@
+{
+  "questions": [
+    {
+      "id": "cardiogenic_shock_1",
+      "category": "cardiology",
+      "topic": "cardiogenic_shock",
+      "difficulty": "easy",
+      "question": "איזה מהמצבים הבאים מוגדר בטקסט כגורם ל'שוק חסימתי' (בעיה חסימתית)?",
+      "options": [
+        "מיוקרדיטיס",
+        "ספסיס",
+        "טנשן פנאומטורקס (חזה אוויר בלחץ)",
+        "הפרעות קצב"
+      ],
+      "correct_answer": "טנשן פנאומטורקס (חזה אוויר בלחץ)",
+      "explanation": "הטקסט מחלק את הגורמים לבעיה תפקודית ולבעיה חסימתית. תחת 'בעיה חסימתית' מופיעים: טנשן פנאומטורקס, המוטורקס, טמפונדה לבבית, מחלה לבבית מולדת עם סגירה של ה-DA, ותסחיף פולמונרי.",
+      "time_limit": 45,
+      "points": 10
+    },
+    {
+      "id": "cardiogenic_shock_2",
+      "category": "cardiology",
+      "topic": "cardiogenic_shock",
+      "difficulty": "easy",
+      "question": "מהו טווח קצב הלב האופייני לתינוקות במצב של SVT על פי הטקסט?",
+      "options": [
+        "180 עד 220 פעימות לדקה",
+        "220 עד 280 פעימות לדקה",
+        "מעל 300 פעימות לדקה",
+        "150 עד 200 פעימות לדקה"
+      ],
+      "correct_answer": "220 עד 280 פעימות לדקה",
+      "explanation": "תחת סעיף ECG נכתב: 'תינוקות 220 עד 280 פעימות לדקה; ילדים ובני נוער 180 עד 240 פעימות לדקה'.",
+      "time_limit": 45,
+      "points": 10
+    },
+    {
+      "id": "cardiogenic_shock_3",
+      "category": "cardiology",
+      "topic": "cardiogenic_shock",
+      "difficulty": "medium",
+      "question": "כיצד יש לבצע גירוי ואגלי בתינוקות עם SVT יציב?",
+      "options": [
+        "ביצוע עיסוי קרוטיד (Carotid massage)",
+        "לחץ מתון על גלגלי העיניים (Orbital pressure)",
+        "נשיפה דרך קש סתום למשך 15-20 שניות",
+        "הצמדת שקית עם מי קרח בחלק העליון של הפנים מעל האף למשך 15-30 שניות"
+      ],
+      "correct_answer": "הצמדת שקית עם מי קרח בחלק העליון של הפנים מעל האף למשך 15-30 שניות",
+      "explanation": "הטקסט מפרט: 'בתינוקות, יש להצמיד שקית עם מי קרח...'. לגבי עיסוי קרוטיד ולחץ על העיניים נכתב במפורש 'אין לבצע'. נשיפה בקש מיועדת לילדים גדולים יותר.",
+      "time_limit": 60,
+      "points": 15
+    },
+    {
+      "id": "cardiogenic_shock_4",
+      "category": "cardiology",
+      "topic": "cardiogenic_shock",
+      "difficulty": "medium",
+      "question": "מהו המינון הראשון של אדנוזין לטיפול ב-SVT ומהי המנה המקסימלית למנה זו?",
+      "options": [
+        "0.2 mg/kg, מקסימום 12 mg",
+        "0.1 mg/kg, מקסימום 6 mg",
+        "0.1 mg/kg, מקסימום 12 mg",
+        "0.5 mg/kg, מקסימום 6 mg"
+      ],
+      "correct_answer": "0.1 mg/kg, מקסימום 6 mg",
+      "explanation": "תחת 'אדנוזין' בחולה יציב נכתב: 'מינון: 0.1mg/kg עד 6mg במנה הראשונה'.",
+      "time_limit": 60,
+      "points": 15
+    },
+    {
+      "id": "cardiogenic_shock_5",
+      "category": "cardiology",
+      "topic": "cardiogenic_shock",
+      "difficulty": "medium",
+      "question": "כיצד יש לנהוג בילד עם SVT שאינו יציב כאשר אין גישה ורידית (IV/IO)?",
+      "options": [
+        "יש לנסות להשיג גישה ורידית בכל מחיר לפני כל טיפול אחר",
+        "יש לבצע עיסוי קרוטיד מיד",
+        "יש לבצע היפוך חשמלי במינון 0.5-1 J/kg",
+        "יש לתת אדנוזין בזריקה תוך שרירית (IM)"
+      ],
+      "correct_answer": "יש לבצע היפוך חשמלי במינון 0.5-1 J/kg",
+      "explanation": "תחת חולה לא יציב נכתב: 'כשאין IV/IO מורכבים: יש לבצע היפוך חשמלי. מינון: 0.5-1 J/kg'.",
+      "time_limit": 60,
+      "points": 15
+    },
+    {
+      "id": "cardiogenic_shock_6",
+      "category": "cardiology",
+      "topic": "cardiogenic_shock",
+      "difficulty": "easy",
+      "question": "באיזה אופן יש לתת את תרופת האדנוזין?",
+      "options": [
+        "בעירוי איטי במשך 10 דקות",
+        "בתוך שקית נוזלים של 100 מ\"ל",
+        "במתן פוש (Push) מהיר כשהיד מורמת, מלווה בשטיפה מהירה של 5 מ\"ל סליין",
+        "בזריקה תת-עורית (SC)"
+      ],
+      "correct_answer": "במתן פוש (Push) מהיר כשהיד מורמת, מלווה בשטיפה מהירה של 5 מ\"ל סליין",
+      "explanation": "בטקסט מצוין: 'מתן פוש אדנוזין כשהיד מורמת למעלה מלווה בשטיפה מהירה של 5 מ״ל סליין'.",
+      "time_limit": 45,
+      "points": 10
+    },
+    {
+      "id": "cardiogenic_shock_7",
+      "category": "cardiology",
+      "topic": "cardiogenic_shock",
+      "difficulty": "medium",
+      "question": "מהו המינון וזמן המתן של אמיאודרון (פרוקור) לטיפול ב-SVT עיקש?",
+      "options": [
+        "5 mg/kg IV במשך 20-60 דקות",
+        "10 mg/kg IV בפוש מהיר",
+        "1 mg/kg IV במשך 5 דקות",
+        "15 mg/kg IV במנה אחת מהירה"
+      ],
+      "correct_answer": "5 mg/kg IV במשך 20-60 דקות",
+      "explanation": "תחת אמיאודרון נכתב: 'מינון: 5mg/kg IV במשך 20-60 דקות'.",
+      "time_limit": 60,
+      "points": 15
+    },
+    {
+      "id": "cardiogenic_shock_8",
+      "category": "cardiology",
+      "topic": "cardiogenic_shock",
+      "difficulty": "medium",
+      "question": "מהו הטיפול המומלץ בילד עם VT (טכיקרדיה חדרית) שיש לו דופק ופיצוי המודינמי (לפי הטקסט)?",
+      "options": [
+        "שוק לא מסונכרן (דפיברילציה)",
+        "שוק מסונכרן במינון 0.5-1 J/kg",
+        "אדנוזין במינון כפול",
+        "עיסוי לב (החייאה) מיידי"
+      ],
+      "correct_answer": "שוק מסונכרן במינון 0.5-1 J/kg",
+      "explanation": "תחת טיפול ב-VT נכתב: 'כאשר יש פיצוי, יש לתת שוק מסונכרן... מנה ראשונה 0.5-1J/kg'.",
+      "time_limit": 60,
+      "points": 15
+    },
+    {
+      "id": "cardiogenic_shock_9",
+      "category": "cardiology",
+      "topic": "cardiogenic_shock",
+      "difficulty": "easy",
+      "question": "מהו המינון של השוק החשמלי הראשון במצב של VF (פרפור חדרים) או pVT (טכיקרדיה חדרית ללא דופק)?",
+      "options": [
+        "0.5 J/kg",
+        "1 J/kg",
+        "2 J/kg",
+        "4 J/kg"
+      ],
+      "correct_answer": "2 J/kg",
+      "explanation": "תחת VF נכתב: 'מתן שוק במינון 2J/kg'.",
+      "time_limit": 45,
+      "points": 10
+    },
+    {
+      "id": "cardiogenic_shock_10",
+      "category": "cardiology",
+      "topic": "cardiogenic_shock",
+      "difficulty": "medium",
+      "question": "אילו הפרעות אלקטרוליטריות מוזכרות בטקסט כגורמים אפשריים ל-VT?",
+      "options": [
+        "היפרנתרמיה והיפוקלמיה",
+        "היפרקלמיה, היפוקלצמיה והיפומגנזמיה",
+        "היפונתרמיה והיפרקלצמיה",
+        "היפרמגנזמיה והיפוקלמיה"
+      ],
+      "correct_answer": "היפרקלמיה, היפוקלצמיה והיפומגנזמיה",
+      "explanation": "תחת גורמים ל-VT נכתב: 'היפרקלמיה, היפוקלצמיה, היפומגנזמיה'.",
+      "time_limit": 60,
+      "points": 15
+    },
+    {
+      "id": "cardiogenic_shock_11",
+      "category": "cardiology",
+      "topic": "cardiogenic_shock",
+      "difficulty": "hard",
+      "question": "מה כוללת רשימת הגורמים ההפיכים ל-PEA (ה-H וה-T) המוזכרים בטקסט?",
+      "options": [
+        "היפרגליקמיה וטרומבוציטופניה",
+        "היפוגליקמיה וטראומה",
+        "יתר לחץ דם וטכיקרדיה",
+        "היפוולמיה וטטנוס"
+      ],
+      "correct_answer": "היפוגליקמיה וטראומה",
+      "explanation": "ברשימת הגורמים ל-PEA מופיעים בין היתר: היפוגליקמיה וטראומה. (טרומבוציטופניה, טטנוס ויתר לחץ דם אינם מופיעים ברשימה זו).",
+      "time_limit": 75,
+      "points": 20
+    },
+    {
+      "id": "cardiogenic_shock_12",
+      "category": "cardiology",
+      "topic": "cardiogenic_shock",
+      "difficulty": "medium",
+      "question": "מהו הצעד הבא בטיפול ב-VF לאחר מתן השוק הראשון (2 J/kg)?",
+      "options": [
+        "מתן שוק נוסף מיד במינון 4 J/kg",
+        "בדיקת דופק מיידית",
+        "מתן אדרנלין",
+        "המשך החייאה (עיסויים) במשך 2 דקות לפני בדיקת דופק"
+      ],
+      "correct_answer": "המשך החייאה (עיסויים) במשך 2 דקות לפני בדיקת דופק",
+      "explanation": "בטקסט נכתב: 'מתן שוק במינון 2J/kg. המשך החייאה במשך 2 דקות לפני בדיקת דופק'.",
+      "time_limit": 60,
+      "points": 15
+    },
+    {
+      "id": "cardiogenic_shock_13",
+      "category": "cardiology",
+      "topic": "cardiogenic_shock",
+      "difficulty": "hard",
+      "question": "מהו הטיפול התרופתי (SVT עיקש) בפרוקאינמיד עבור יילודים?",
+      "options": [
+        "מנת העמסה של 7-10 mg/kg במשך 30-45 דקות",
+        "מנת העמסה של 10-15 mg/kg במשך 30-45 דקות",
+        "מנת העמסה של 20 mcg/kg בפוש מהיר",
+        "פרוקאינמיד אסור לשימוש ביילודים"
+      ],
+      "correct_answer": "מנת העמסה של 7-10 mg/kg במשך 30-45 דקות",
+      "explanation": "תחת פרוקאינמיד נכתב: 'יילודים: מנת העמסה לפי 7-10mg/kg במשך 30-45 דקות'. (המינון של 10-15 מיועד לתינוקות וילדים גדולים).",
+      "time_limit": 75,
+      "points": 20
+    },
+    {
+      "id": "cardiogenic_shock_14",
+      "category": "cardiology",
+      "topic": "cardiogenic_shock",
+      "difficulty": "easy",
+      "question": "אילו סימנים קליניים מוזכרים בטקסט כמעידים על 'כשל לבבי' בהערכת שוק קרדיוגני?",
+      "options": [
+        "הקאות ושלשולים",
+        "פריחה עורית וגרד",
+        "התנשמות, הפטומגליה (כבד מוגדל), קרפיטציות וחרחורים",
+        "אישונים מורחבים ורעד"
+      ],
+      "correct_answer": "התנשמות, הפטומגליה (כבד מוגדל), קרפיטציות וחרחורים",
+      "explanation": "תחת הערכה קלינית / סימני כשל לבבי נכתב: 'התנשמות, הפטומגליה, קרפטציות וחרחורים (rales)'.",
+      "time_limit": 45,
+      "points": 10
+    },
+    {
+      "id": "cardiogenic_shock_15",
+      "category": "cardiology",
+      "topic": "cardiogenic_shock",
+      "difficulty": "medium",
+      "question": "מהו המינון של השוק החשמלי השני בפרוטוקול הטיפול ב-VF (פרפור חדרים)?",
+      "options": [
+        "2 J/kg",
+        "4 J/kg",
+        "10 J/kg",
+        "0.5 J/kg"
+      ],
+      "correct_answer": "4 J/kg",
+      "explanation": "סדר הפעולות בטקסט: שוק 2J/kg -> החייאה 2 דקות -> 'מתן שוק במינון גבוה יותר 4J/kg'.",
+      "time_limit": 60,
+      "points": 15
+    }
+  ]
+}

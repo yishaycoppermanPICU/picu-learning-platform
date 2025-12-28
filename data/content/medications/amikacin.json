@@ -26,7 +26,7 @@
           "name": "ילדים ומתבגרים",
           "items": [
             {
-              "dosage": "15-22.5 mg/kg/day",
+              "dosage": "15-22.5mg/kg/day",
               "frequency": "מחולק ל-2-3 מנות (כל 8-12 שעות)",
               "notes": "מינון גבוה יותר מ-Gentamicin בשל עמידות."
             }
@@ -36,7 +36,7 @@
           "name": "פרוטוקול חד-יומי",
           "items": [
             {
-              "dosage": "15-20 mg/kg",
+              "dosage": "15-20mg/kg",
               "frequency": "פעם ביום (q24h)",
               "notes": "בחולים עם כליות תקינות."
             }
@@ -106,8 +106,8 @@
         },
         {
           "parameter": "מינון",
-          "amikacin": "15-22.5 mg/kg/day",
-          "gentamicin": "7.5 mg/kg/day"
+          "amikacin": "15-22.5mg/kg/day",
+          "gentamicin": "7.5mg/kg/day"
         },
         {
           "parameter": "רמות יעד",
@@ -124,7 +124,7 @@
   ],
   "key_points": [
     "אמיקצין עמיד יותר מ-Gentamicin - שמור לזיהומים עמידים.",
-    "מינון גבוה יותר: 15-22.5 mg/kg/day.",
+    "מינון גבוה יותר: 15-22.5mg/kg/day.",
     "רמות Peak גבוהות יותר: 20-30 mcg/ml.",
     "רעיל לכליות ולאוזניים - זהה ל-Gentamicin.",
     "ניטור רמות בדם חובה."

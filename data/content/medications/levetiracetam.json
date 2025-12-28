@@ -23,7 +23,7 @@
           "options": [
             {
               "method": "מינון התחלתי",
-              "details": "10 mg/kg/dose פעמיים ביום (Total: 20 mg/kg/day). ניתן להעלות כל שבועיים ב-10 mg/kg עד יעד של 60 mg/kg/day (30 פעמיים ביום)"
+              "details": "פעמיים ביום 10mg/kg/dose (סה\"כ: 20mg/kg/day). ניתן להעלות כל שבועיים ב-10mg/kg עד יעד של 60mg/kg/day (30mg/kg פעמיים ביום)"
             }
           ]
         },
@@ -32,7 +32,7 @@
           "options": [
             {
               "method": "מינון התחלתי",
-              "details": "10 mg/kg/dose פעמיים ביום. יעד מומלץ: 25 mg/kg/dose (פעמיים ביום)"
+              "details": "פעמיים ביום 10mg/kg/dose. יעד מומלץ: 25mg/kg/dose פעמיים ביום"
             }
           ]
         }

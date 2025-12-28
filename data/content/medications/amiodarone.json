@@ -2,12 +2,21 @@
   "id": "amiodarone",
   "title": "אמיודרון / פרוקור (Amiodarone / Cordarone)",
   "genericName": "Amiodarone",
-  "commercialNames": ["Cordarone", "Procor"],
+  "commercialNames": [
+    "Cordarone",
+    "Procor"
+  ],
   "category": "medications",
   "type": "antiarrhythmic",
   "difficulty": "advanced",
   "order": 32,
-  "tags": ["הפרעות קצב", "VF", "VT", "SVT", "החייאה"],
+  "tags": [
+    "הפרעות קצב",
+    "VF",
+    "VT",
+    "SVT",
+    "החייאה"
+  ],
   "content": [
     {
       "type": "definition",
@@ -46,14 +55,14 @@
           "options": [
             {
               "method": "מנה ראשונה",
-              "details": "5 mg/kg IV/IO Push (בולוס מהיר)",
+              "details": "5mg/kg IV/IO Push (בולוס מהיר)",
               "timing": "לאחר מחזור ה-3 של החייאה ואדרנלין",
               "max": "מקסימום 300 mg למנה"
             },
             {
               "method": "מנות חוזרות",
-              "details": "ניתן לחזור על 5 mg/kg עד 3 פעמים",
-              "total_max": "מקסימום מצטבר: 15 mg/kg או 2.2 גרם ביום"
+              "details": "ניתן לחזור על 5mg/kg עד 3 פעמים",
+              "total_max": "מקסימום מצטבר: 15mg/kg או 2.2 גרם ביום"
             }
           ]
         },
@@ -62,7 +71,7 @@
           "options": [
             {
               "method": "עירוי איטי",
-              "details": "5 mg/kg IV במשך 20-60 דקות",
+              "details": "5mg/kg IV במשך 20-60 דקות",
               "notes": "תחת ניטור ECG ולחץ דם מתמיד",
               "max": "מקסימום 300 mg למנה"
             }
@@ -73,7 +82,7 @@
           "maintenance": [
             {
               "method": "ילדים",
-              "details": "5-15 mcg/kg/min (0.3-0.9 mg/kg/hr)",
+              "details": "5-15 mcg/kg/min (0.3-0.9mg/kg/hr)",
               "duration": "6-24 שעות"
             }
           ]
@@ -92,7 +101,7 @@
           "name": "בולוס (החייאה)",
           "bolus_prep": [
             "אמפולה 150 mg/3 ml (ריכוז 50 mg/ml)",
-            "דוגמה: ילד 20 ק\"ג → 5 mg/kg = 100 mg = 2 ml מהאמפולה",
+            "דוגמה: ילד 20 ק\"ג → 5mg/kg = 100 mg = 2 ml מהאמפולה",
             "ניתן ישירות או מדולל מעט ב-D5W"
           ]
         },
@@ -216,8 +225,8 @@
   ],
   "key_points": [
     "⚠️ אסור לנער את האמפולה! (גורם לקצף ושינוי ריכוז)",
-    "מינון החייאה: 5 mg/kg IV Push (VF/Pulseless VT)",
-    "מינון עם דופק: 5 mg/kg במשך 20-60 דקות (לא בולוס מהיר!)",
+    "מינון החייאה: 5mg/kg IV Push (VF/Pulseless VT)",
+    "מינון עם דופק: 5mg/kg במשך 20-60 דקות (לא בולוס מהיר!)",
     "⚠️ תופעות שכיחות: היפוטנזיה, ברדיקרדיה, הארכת QT",
     "תמיד תקן K+ ו-Mg+ לפני מתן אמיודרון (למניעת Torsades)",
     "⚠️ מדללים רק ב-D5W, לא ב-NS. רק בבקבוק זכוכית/PVC מיוחד"

@@ -1,0 +1,53 @@
+{
+  "email": "Yishaycopp@gmail.com",
+  "quizzes": [
+    {
+      "quiz_id": "quiz_1766873668",
+      "date": "2025-12-27 22:14:28",
+      "category": "trauma",
+      "topic": null,
+      "difficulty": "all",
+      "total_questions": 10,
+      "correct_answers": 10,
+      "score_percentage": 100.0,
+      "time_taken": 28,
+      "points_earned": 100.0
+    },
+    {
+      "quiz_id": "quiz_1766873928",
+      "date": "2025-12-27 22:18:48",
+      "category": "trauma",
+      "topic": null,
+      "difficulty": "all",
+      "total_questions": 10,
+      "correct_answers": 10,
+      "score_percentage": 100.0,
+      "time_taken": 49,
+      "points_earned": 100.0
+    },
+    {
+      "quiz_id": "quiz_1766874156",
+      "date": "2025-12-27 22:22:36",
+      "category": "trauma",
+      "topic": null,
+      "difficulty": "all",
+      "total_questions": 10,
+      "correct_answers": 10,
+      "score_percentage": 100.0,
+      "time_taken": 59,
+      "points_earned": 100.0
+    },
+    {
+      "quiz_id": "quiz_1766874389",
+      "date": "2025-12-27 22:26:29",
+      "category": "trauma",
+      "topic": null,
+      "difficulty": "all",
+      "total_questions": 10,
+      "correct_answers": 10,
+      "score_percentage": 100.0,
+      "time_taken": 61,
+      "points_earned": 100.0
+    }
+  ]
+}

@@ -1,59 +1,358 @@
 {
   "id": "myocarditis",
-  "title": "מיוקרדיטיס (Myocarditis)",
-  "description": "דלקת שריר הלב - אטיולוגיה, קליניקה וטיפול תרופתי ותמיכתי.",
+  "title": "מיוקרדיטיס (Myocarditis) - דלקת שריר הלב",
+  "description": "דלקת בשריר הלב המובילה לתפקוד לבבי לקוי, אי ספיקת לב והפרעות קצב מסכנות חיים. סיכון גבוה לתחלואה ותמותה.",
   "category": "cardiology",
   "difficulty": "intermediate",
   "order": 1,
-  "tags": ["לב", "דלקת", "כשל לבבי", "הפרעות קצב"],
+  "tags": [
+    "לב",
+    "דלקת",
+    "כשל לבבי",
+    "הפרעות קצב",
+    "מיוקרדיטיס",
+    "ECMO",
+    "VAD",
+    "מילרינון"
+  ],
   "content": [
     {
+      "type": "definition",
+      "title": "הגדרה",
+      "text": "דלקת בשריר הלב (Myocarditis) המובילה לתפקוד לבבי לקוי, שיכול לגרום לתסמיני אי ספיקת לב, פיצוי המודינמי והפרעות קצב מסכנות חיים. ילדים הסובלים ממיוקרדיטיס נמצאים בסיכון גבוה לתחלואה ותמותה."
+    },
+    {
       "type": "section",
-      "title": "אטיולוגיה וקליניקה",
+      "title": "אטיולוגיה (Etiology)",
+      "subtitle": "הסיבות למיוקרדיטיס כוללות זיהום, הרעלה וסיבות אוטואימוניות",
       "items": [
         {
-          "name": "גורמים",
-          "description": "לרוב ויראלי (Adenovirus, Parvovirus B19, Enterovirus). לעיתים קוביד/PIMS"
+          "name": "זיהומים ויראליים (העיקריים)",
+          "description": "הזיהומים, ברובם ויראליים, והם האטיולוגיה העיקרית",
+          "pathogens": [
+            "אנטרווירוס (Enterovirus)",
+            "אדנווירוס (Adenovirus)",
+            "פרווירוס B19 (Parvovirus B19)",
+            "אפשטיין בר וירוס (Epstein-Barr Virus - EBV)",
+            "ציטומגלווירוס (Cytomegalovirus - CMV)",
+            "הומן הרפס 6 (Human Herpesvirus 6 - HHV-6)"
+          ]
         },
         {
-          "name": "סימנים קליניים",
-          "description": "פרודרום ויראלי (חום, כאבי שרירים), סימני אי ספיקה (קוצר נשימה, טכיקרדיה במנוחה, כבד מוגדל), הפרעות קצב (SVT, VT, Block), דמיון למחלות אחרות (כאב בטן, הקאות)"
+          "name": "סארס קוב-2 (SARS-CoV-2) / קוביד",
+          "description": "יכולה לגרום לתמונה קלינית של מיוקרדיטיס",
+          "note": "למעשה מדובר באפקט משני לתסמינים של קוביד ולא מיוקרדיטיס ישירה. אצל ילדים רואים את זה בעיקר ב-PIMS (Pediatric Inflammatory Multisystem Syndrome)"
+        },
+        {
+          "name": "סיבות נדירות",
+          "causes": [
+            "תסמונת אוטואימונית",
+            "רגישות גבוהה לתרופות (Drug hypersensitivity)",
+            "הרעלה (Toxins)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "epidemiology",
+      "title": "אפידמיולוגיה (Epidemiology)",
+      "data": {
+        "incidence": "כ-1-2 מקרים על כל 100,000 ילדים",
+        "peak_age": "גיל ההתבגרות (לפי רוב המחקרים)",
+        "underdiagnosis": "⚠️ המחקרים אינם מדויקים - ישנם הרבה מקרים שהמחלה היא תת-קלינית (subclinical)",
+        "diagnostic_challenges": [
+          "התסמינים אינם ספציפיים",
+          "אין מבחן ספציפי בעל רגישות למיוקרדיטיס שיוכל לאבחן את המחלה"
+        ]
+      }
+    },
+    {
+      "type": "clinical_presentation",
+      "title": "התייצגות קלינית",
+      "presentations": [
+        {
+          "name": "פרודרום ויראלי (Viral Prodrome)",
+          "description": "מכיוון שהאטיולוגיה הנפוצה ביותר בילדים היא ויראלית",
+          "timeline": "היסטוריה של תסמינים נשימתיים או גסטרואינטסטינליים של שבועיים",
+          "symptoms": [
+            "פרודרום של חום",
+            "מיאלגיה (כאבי שרירים)",
+            "אי שקט",
+            "תסמינים מופיעים ימים בודדים לפני התלקחות התסמינים הקרדיאליים"
+          ]
+        },
+        {
+          "name": "תסמינים לא ספציפיים",
+          "description": "התסמינים הבולטים ביותר בעת הגעה למרפאה",
+          "symptoms": [
+            "קשיי נשימה (Dyspnea)",
+            "כאב אפיגסטרי (Epigastric pain)",
+            "אנורקסיה (Anorexia)",
+            "הקאות (Vomiting)"
+          ],
+          "mimics": [
+            "זיהומי נשימה (Respiratory infections)",
+            "גסטרואנטריטיס (Gastroenteritis)",
+            "אפנדיציטיס (Appendicitis)"
+          ],
+          "note": "⚠️ התסמינים הללו גורמים לאבחנה שגויה בילדים רבים!"
+        },
+        {
+          "name": "תסמינים של כשל לבבי (Heart Failure)",
+          "population": "תינוקות וילדים",
+          "symptoms": [
+            "דיספנאה במנוחה (Dyspnea at rest)",
+            "קושי לבצע פעילות גופנית (Exercise intolerance)",
+            "סינקופה (Syncope)",
+            "טכיפניאה (Tachypnea)",
+            "טכיקרדיה ממושכת (Prolonged tachycardia)",
+            "הפטומגליה (Hepatomegaly - כבד מוגדל)"
+          ]
+        },
+        {
+          "name": "הפרעות קצב (Arrhythmias)",
+          "types": [
+            "SVT (Supraventricular Tachycardia)",
+            "VT (Ventricular Tachycardia)",
+            "Complete Heart Block (חסם AV מוחלט)"
+          ]
+        },
+        {
+          "name": "מיוקרדיטיס פולמיננטית (Fulminant Myocarditis)",
+          "description": "תת קבוצה של מטופלים סובלים ממיוקרדיטיס פולמיננטית",
+          "presentation": "התלקחות חריפה של אי יציבות המודינמית",
+          "signs": [
+            "ירידה בתפוקת הלב (Decreased cardiac output)",
+            "היפוטנזיה (Hypotension)",
+            "דופק מוחלש (Weak pulse)",
+            "ירידה בפרפוזיה (Decreased perfusion)",
+            "חמצת (Acidosis)",
+            "הפטומגליה (Hepatomegaly)"
+          ],
+          "complications": [
+            "קריסה קרדיווסקולרית (Cardiovascular collapse)",
+            "הפרעות קצב ממאירות (Malignant arrhythmias)"
+          ],
+          "critical_note": "⚠️ בחלק מהמקרים, החמרת המחלה כל כך מהירה שאין מספיק זמן לאבחן את המחלה עד שהיא מדרדרת לשוק קרדיוגני ומוות!"
         }
       ]
     },
     {
       "type": "treatment",
-      "title": "טיפול",
+      "title": "טיפול אקוטי - גישה כוללת",
+      "subtitle": "הטיפול במחלה סוערת כולל קודם כל טיפול סימפטומטי ולאחר מכן בירור",
+      "principles": [
+        "טיפול תומך לשמירה על מצב המודינמי תקין ופרפוזיה טובה",
+        "מעקב וטיפול בהפרעות קצב",
+        "טיפול אימונומודולטורי במעורבות אוטואימונית",
+        "במקרה של מיוקרדיטיס פולמיננטית - ייתכן שיהיה צורך בתמיכה מכנית (ECMO או VAD)"
+      ],
       "sections": [
         {
-          "name": "טיפול תרופתי",
-          "options": [
+          "name": "1. תמיכה המודינמית (Hemodynamic Support)",
+          "description": "ילדים ותינוקות עם מיוקרדיטיס מגיעים בדרך כלל עם כשל לבבי",
+          "interventions": [
             {
-              "method": "מילרינון (Milrinone)",
-              "details": "מרחיב כלי דם ומחזק כיווץ (Inodilator). מינון: 0.25-0.75 mcg/kg/min"
+              "intervention": "חמצן (Oxygen)",
+              "details": "מתן חמצן לפי צורך"
             },
             {
-              "method": "משתנים",
-              "details": "פוסיד להורדת עומס נוזלים (Preload)"
+              "intervention": "נוזלים בזהירות",
+              "details": "כדי לא להעמיס על הלב (Avoid fluid overload)",
+              "rationale": "הלב החלש לא יכול להתמודד עם עומס נוזלים"
             },
             {
-              "method": "IVIG",
-              "details": "טיפול אימונומודולטורי במעורבות אוטואימונית"
+              "intervention": "משתנים (Diuretics)",
+              "drug": "פוסיד (Furosemide/Lasix)",
+              "purpose": "להורדת עומס נוזלים (Preload reduction)"
             },
             {
-              "method": "נוגדי קרישה",
-              "details": "קלקסן/אספירין למניעת טרומבוזות עקב זרימה מערבולתית"
+              "intervention": "חסמי ACE",
+              "purpose": "להוריד את ה-Afterload (התנגדות פריפרית)",
+              "examples": [
+                "Enalapril",
+                "Captopril"
+              ]
+            },
+            {
+              "intervention": "חסמי בטא",
+              "purpose": "להוריד את העומס על הלב ולשפר תפקוד לבבי לטווח ארוך"
             }
           ]
+        },
+        {
+          "name": "2. תמיכה אינוטרופית (Inotropic Support)",
+          "description": "ילדים עם תמונה קלינית חמורה יותר",
+          "primary_drug": {
+            "name": "מילרינון (Milrinone)",
+            "class": "Inodilator - אינודילאטור",
+            "mechanism": [
+              "מרחיב כלי דם פריפריים ובכך מוריד את התנגדות (Vasodilation)",
+              "מוריד Afterload",
+              "אפקט אינוטרופי חיובי (Positive inotropic effect - מחזק כיווץ הלב)"
+            ],
+            "dosing": {
+              "range": "0.25-0.75 mcg/kg/minute",
+              "titration": "יש להעלות מינון בהדרגה עד לאפקט הרצוי"
+            },
+            "side_effects": [
+              "הפרעות קצב (Arrhythmias)",
+              "היפוטנזיה (Hypotension)"
+            ]
+          }
+        },
+        {
+          "name": "3. תמיכה נשימתית מכנית (Mechanical Ventilation)",
+          "indication": "ילדים עם תמונה קלינית חמורה",
+          "details": "אינטובציה והנשמה מכנית במקרים של כשל נשימתי או אי יציבות המודינמית חמורה"
+        },
+        {
+          "name": "4. תמיכה מכנית לסירקולציה (Mechanical Circulatory Support)",
+          "indication": "מיוקרדיטיס פולמיננטית עם אי יציבות המודינמית חמורה",
+          "options": [
+            {
+              "method": "ECMO (Extracorporeal Membrane Oxygenation)",
+              "description": "תמיכה חיצונית לחמצון וסירקולציה",
+              "consideration": "יש לשקול ECMO בשלב מוקדם בחולים לא יציבים"
+            },
+            {
+              "method": "VAD (Ventricular Assist Device)",
+              "description": "התקן מכני לתמיכה בתפקוד החדר"
+            }
+          ]
+        },
+        {
+          "name": "5. מעקב וטיפול בהפרעות קצב (Arrhythmia Management)",
+          "monitoring": "ניטור קרדיאק רציף",
+          "management": [
+            "זיהוי מוקדם של הפרעות קצב (SVT, VT, Heart Block)",
+            "טיפול לפי פרוטוקולים ספציפיים",
+            "שיקול קוצב זמני (Temporary pacemaker) ב-Complete Heart Block"
+          ]
+        },
+        {
+          "name": "6. טיפול אימונומודולטורי (Immunomodulatory Treatment)",
+          "drug": "IVIG (Intravenous Immunoglobulin)",
+          "indication": "במקרה שישנה מעורבות אוטואימונית",
+          "purpose": "לשליטה על מחלה",
+          "dosing": "בדרך כלל 2 g/kg במנה אחת או מחולק על 2-5 ימים"
+        },
+        {
+          "name": "7. תרופות אנטי-קואגולנטיות (Anticoagulation)",
+          "rationale": "בגלל זרימה מערבולתית (Turbulent flow) שעלולה להיגרם מהדלקת - סיכון לטרומבוזות",
+          "consideration": "יישקל מתן תרופות אנטי-קואגולנטיות ומעכבי אגרגציה של טסיות",
+          "options": [
+            {
+              "drug": "אספירין (Aspirin)",
+              "type": "מעכב אגרגציה"
+            },
+            {
+              "drug": "הפרין (Heparin)",
+              "type": "אנטי-קואגולנט"
+            },
+            {
+              "drug": "קומדין (Warfarin/Coumadin)",
+              "type": "אנטי-קואגולנט פומי"
+            },
+            {
+              "drug": "קלקסן (Clexane/Enoxaparin)",
+              "type": "LMWH - אנטי-קואגולנט"
+            }
+          ],
+          "note": "⚠️ ייתכנו גם שילובים בין התרופות. אין טיפול סטנדרטי - החלטה אינדיבידואלית."
+        }
+      ]
+    },
+    {
+      "type": "treatment_summary",
+      "title": "סיכום טיפול לכשל לבבי במיוקרדיטיס",
+      "medications": [
+        {
+          "category": "משתנים (Diuretics)",
+          "drug": "Furosemide (Lasix)",
+          "purpose": "הורדת Preload"
+        },
+        {
+          "category": "חסמי ACE",
+          "examples": [
+            "Enalapril",
+            "Captopril"
+          ],
+          "purpose": "הורדת Afterload"
+        },
+        {
+          "category": "אינוטרופים",
+          "drug": "Milrinone",
+          "dosing": "0.25-0.75 mcg/kg/min",
+          "effects": [
+            "↑ Afterload",
+            "↑ כיווץ לב"
+          ],
+          "side_effects": [
+            "הפרעות קצב",
+            "היפוטנזיה"
+          ]
+        },
+        {
+          "category": "אימונומודולציה",
+          "drug": "IVIG",
+          "indication": "מעורבות אוטואימונית"
+        },
+        {
+          "category": "מניעת קרישה",
+          "options": [
+            "Aspirin",
+            "Heparin",
+            "Warfarin",
+            "Clexane"
+          ],
+          "indication": "זרימה מערבולתית"
         }
       ]
     }
   ],
   "key_points": [
-    "⚠️ מיוקרדיטיס פולמיננטית יכולה לדרדר במהירות לשוק קרדיוגני ומוות",
-    "יש לשקול ECMO בשלב מוקדם בחולים לא יציבים",
-    "הפרוגנוזה בילדים טובה יחסית אם עוברים את השלב החריף"
+    "מיוקרדיטיס = דלקת בשריר הלב → כשל לבבי, הפרעות קצב מסכנות חיים.",
+    "אטיולוגיה: בעיקר ויראלית (Enterovirus, Adenovirus, Parvovirus B19, EBV, CMV, HHV-6).",
+    "שכיחות: 1-2 מקרים/100,000 ילדים. אבחון חסר - תסמינים לא ספציפיים.",
+    "התייצגות: פרודרום ויראלי → תסמינים כלליים (קשיי נשימה, כאב בטן, הקאות) → כשל לבבי.",
+    "⚠️ מיוקרדיטיס פולמיננטית: התלקחות חריפה → שוק קרדיוגני → קריסה קרדיווסקולרית ומוות!",
+    "טיפול תומך: חמצן, נוזלים בזהירות, משתנים, חסמי ACE.",
+    "מילרינון (Milrinone): 0.25-0.75 mcg/kg/min - מוריד Afterload + אפקט אינוטרופי.",
+    "מיוקרדיטיס חמורה: שקול ECMO או VAD מוקדם!",
+    "אנטי-קואגולציה: שקול Aspirin/Heparin/Warfarin/Clexane (זרימה מערבולתית).",
+    "הפרעות קצב: SVT, VT, Complete Heart Block - דורשים מעקב וטיפול.",
+    "IVIG: במעורבות אוטואימונית.",
+    "הפרוגנוזה בילדים טובה יחסית אם עוברים את השלב החריף."
   ],
-  "last_updated": "2025-01-01",
-  "author": "PICU Team"
+  "critical_alerts": [
+    "🚨 מיוקרדיטיס פולמיננטית יכולה לדרדר במהירות למוות - זיהוי מוקדם קריטי!",
+    "🚨 תסמינים לא ספציפיים (כאב בטן, הקאות) עלולים להוביל לאבחנה שגויה!",
+    "🚨 נוזלים אגרסיביים יחמירו כשל לבבי - זהירות!",
+    "🚨 שקול ECMO/VAD בשלב מוקדם בחולים לא יציבים.",
+    "🚨 הפרעות קצב (VT, Complete Block) מסכנות חיים - ניטור רציף!"
+  ],
+  "clinical_pearls": [
+    "חשוד במיוקרדיטיס בילד עם 'גסטרואנטריטיס' + טכיקרדיה לא מוסברת.",
+    "טכיקרדיה במנוחה שלא עוברת עם חום יורד = דגל אדום למיוקרדיטיס!",
+    "קוביד/PIMS - חשבו על מיוקרדיטיס משנית.",
+    "טרופונין מוגבר + ECG חריג + אקו עם תפקוד לקוי = מיוקרדיטיס עד הוכחה אחרת.",
+    "מילרינון הוא הבחירה לתמיכה אינוטרופית (לא כמו אדרנלין בשוק ספטי).",
+    "היפרקלמיה/אלקטרוליטים חריגים בילד עם מיוקרדיטיס עלולים לגרום ל-VT/VF."
+  ],
+  "differential_diagnosis": [
+    "זיהומי נשימה (Respiratory infections)",
+    "גסטרואנטריטיס (Gastroenteritis)",
+    "אפנדיציטיס (Appendicitis)",
+    "שוק ספטי (Septic shock)",
+    "פולסו קרדיומיופתיה (Dilated cardiomyopathy)",
+    "אוטם שריר הלב (Myocardial infarction - נדיר בילדים)"
+  ],
+  "references": [
+    "Pediatric Myocarditis Management Guidelines",
+    "Heart Failure Management in Children"
+  ],
+  "last_updated": "2025-12-27",
+  "author": "PICU Team",
+  "version": "2.0"
 }

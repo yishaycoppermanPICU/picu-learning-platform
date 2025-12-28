@@ -18,6 +18,8 @@ from utils.content_manager import (
     is_editor,
     restore_user_session
 )
+from utils.styles import get_common_styles
+from utils.corrections_manager import get_all_corrections, update_correction_status
 
 # נסה לייבא מהדאטאבייס
 try:
@@ -34,19 +36,16 @@ st.set_page_config(page_title="ניהול תוכן", page_icon="⚙️", layout=
 # Restore user session if available
 restore_user_session(st)
 
-# CSS מקיף לתיקון כל בעיות היישור
+# CSS מרכזי
+st.markdown(get_common_styles(), unsafe_allow_html=True)
+
+# CSS נוסף ספציפי לניהול
 st.markdown("""
 <style>
     /* תיקון כללי */
     .main > div {
         direction: rtl;
         text-align: right;
-    }
-    
-    /* כל האלמנטים */
-    .stApp, .stApp * {
-        direction: rtl ! important;
-        text-align:  right !important;
     }
     
     /* תיקון expanders */
@@ -133,6 +132,9 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# הוספת קישור לעורך החדש
+st.info("✨ **חדש!** עכשיו יש עורך תוכן ידידותי חדש ללא JSON - [לחץ כאן לעורך החדש](http://localhost:8501/✏️_Content_Editor) 📝", icon="💡")
+
 # בדיקת הרשאות
 if not st.session_state.get('logged_in', False):
     st.error("❌ יש להתחבר למערכת כדי לגשת לדף זה")
@@ -147,7 +149,7 @@ if not is_editor(user_email):
     st.stop()
 
 # תפריט טאבים
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["✏️ עריכת תוכן קיים", "➕ הוספת שאלה", "📚 הוספת תוכן למידה", "🎬 עריכת תרחישים", "👥 ניהול עורכים"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["✏️ עריכת תוכן קיים", "➕ הוספת שאלה", "📚 הוספת תוכן למידה", "🎬 עריכת תרחישים", "👥 ניהול עורכים", "⚠️ דיווחי טעויות"])
 
 with tab1:
     st.subheader("✏️ עריכת תוכן קיים")
@@ -607,3 +609,94 @@ with st.expander("📖 הוראות שימוש מפורטות"):
     • השתמש בקיצורים מקובלים בלבד
     • הוסף מקורות אם רלוונטי
     """)
+
+with tab6:
+    st.subheader("⚠️ דיווחי טעויות מהמשתמשים")
+    
+    # Filter options
+    col1, col2 = st.columns([1, 3])
+    with col1:
+        status_filter = st.selectbox(
+            "סינון לפי סטטוס:",
+            ["הכל", "ממתין", "נבדק", "תוקן", "נדחה"],
+            key="corrections_filter"
+        )
+    
+    status_map = {
+        "הכל": None,
+        "ממתין": "pending",
+        "נבדק": "reviewed",
+        "תוקן": "fixed",
+        "נדחה": "rejected"
+    }
+    
+    corrections = get_all_corrections(status=status_map[status_filter])
+    
+    if not corrections:
+        st.info("אין דיווחים להצגה")
+    else:
+        st.markdown(f"**סה\"כ דיווחים:** {len(corrections)}")
+        
+        for corr in sorted(corrections, key=lambda x: x.get('timestamp', ''), reverse=True):
+            status_emoji = {
+                'pending': '⏳',
+                'reviewed': '👀',
+                'fixed': '✅',
+                'rejected': '❌'
+            }
+            
+            status_text = {
+                'pending': 'ממתין',
+                'reviewed': 'נבדק',
+                'fixed': 'תוקן',
+                'rejected': 'נדחה'
+            }
+            
+            corr_status = corr.get('status', 'pending')
+            
+            with st.expander(f"{status_emoji.get(corr_status, '⏳')} {corr.get('id')} - {corr.get('topic_id')} ({status_text.get(corr_status, 'ממתין')})"):
+                st.markdown(f"**קטגוריה:** {corr.get('category')}")
+                st.markdown(f"**נושא:** {corr.get('topic_id')}")
+                st.markdown(f"**מדווח:** {corr.get('user_email')}")
+                st.markdown(f"**תאריך:** {corr.get('timestamp', '').split('T')[0]}")
+                st.markdown(f"**סטטוס:** {status_text.get(corr_status, 'ממתין')}")
+                
+                st.divider()
+                st.markdown("**תיאור הטעות:**")
+                st.info(corr.get('correction_text', ''))
+                
+                st.divider()
+                
+                # Action buttons
+                col_a, col_b, col_c, col_d, col_e = st.columns(5)
+                
+                with col_a:
+                    if st.button("👀 נבדק", key=f"review_{corr['id']}"):
+                        if update_correction_status(corr['id'], 'reviewed'):
+                            st.success("עודכן!")
+                            st.rerun()
+                
+                with col_b:
+                    if st.button("✅ תוקן", key=f"fixed_{corr['id']}"):
+                        if update_correction_status(corr['id'], 'fixed'):
+                            st.success("עודכן!")
+                            st.rerun()
+                
+                with col_c:
+                    if st.button("❌ נדחה", key=f"reject_{corr['id']}"):
+                        if update_correction_status(corr['id'], 'rejected'):
+                            st.success("עודכן!")
+                            st.rerun()
+                
+                with col_d:
+                    if st.button("📖 פתח תוכן", key=f"open_{corr['id']}"):
+                        st.session_state['selected_category'] = corr.get('category')
+                        st.session_state['selected_topic'] = corr.get('topic_id')
+                        st.switch_page("pages/2_📖_Content.py")
+                
+                with col_e:
+                    if st.button("✏️ ערוך", key=f"edit_{corr['id']}"):
+                        st.session_state['edit_category'] = corr.get('category')
+                        st.session_state['edit_topic'] = corr.get('topic_id')
+                        st.rerun()
+

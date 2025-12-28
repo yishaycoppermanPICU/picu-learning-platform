@@ -12,12 +12,10 @@ serverPort = 8501
 
 [server]
 headless = true
-enableCORS = false
+enableCORS = true
 port = 8501
 maxUploadSize = 10
 enableXsrfProtection = true
 
 [runner]
 magicEnabled = true
-installTracer = false
-fixMatplotlib = true

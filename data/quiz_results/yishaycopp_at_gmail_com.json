@@ -1,0 +1,41 @@
+{
+  "email": "yishaycopp@gmail.com",
+  "quizzes": [
+    {
+      "quiz_id": "quiz_1766866593",
+      "date": "2025-12-27 20:16:33",
+      "category": "trauma",
+      "topic": null,
+      "difficulty": "all",
+      "total_questions": 10,
+      "correct_answers": 10,
+      "score_percentage": 100.0,
+      "time_taken": 39,
+      "points_earned": 0
+    },
+    {
+      "quiz_id": "quiz_1766873204",
+      "date": "2025-12-27 22:06:44",
+      "category": null,
+      "topic": null,
+      "difficulty": null,
+      "total_questions": 10,
+      "correct_answers": 10,
+      "score_percentage": 100.0,
+      "time_taken": 157,
+      "points_earned": 100.0
+    },
+    {
+      "quiz_id": "quiz_1766908902",
+      "date": "2025-12-28 08:01:42",
+      "category": "hematology",
+      "topic": null,
+      "difficulty": "all",
+      "total_questions": 20,
+      "correct_answers": 16,
+      "score_percentage": 81.81818181818183,
+      "time_taken": 343,
+      "points_earned": 162
+    }
+  ]
+}

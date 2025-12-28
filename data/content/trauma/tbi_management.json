@@ -1,101 +1,388 @@
 {
   "id": "tbi_management",
-  "title": "ניהול חבלת ראש (TBI Management)",
-  "description": "פרוטוקול מקיף לניהול לחץ תוך גולגולתי, יעדי CPP וטיפול תרופתי ב-TBI.",
+  "title": "Traumatic Brain Injury (TBI) - ניהול טראומת ראש",
+  "description": "פרוטוקול מקיף לניהול טראומת ראש בילדים: סיווג חומרה לפי Glasgow, ניהול ICP ו-CPP, הנשמה, תרופות, ניהול מטבולי וסוגי טראומות",
   "category": "trauma",
   "difficulty": "advanced",
   "order": 1,
-  "tags": ["TBI", "ICP", "CPP", "הנשמה", "בצקת מוחית", "חבלת ראש", "נוירוכירורגיה"],
+  "tags": [
+    "TBI",
+    "traumatic brain injury",
+    "טראומת ראש",
+    "חבלת ראש",
+    "ICP",
+    "CPP",
+    "Glasgow",
+    "גלזגו",
+    "intubation",
+    "הנשמה",
+    "resuscitation",
+    "החייאה",
+    "neurocritical care"
+  ],
   "content": [
     {
       "type": "definition",
-      "title": "סיווג חומרה (GCS)",
-      "text": "Mild (13-15), Moderate (9-12), Severe (<9). גלזגו < 8 מחייב אינטובציה להגנה על נתיב אוויר [cite: 486-493]."
+      "title": "הגדרה",
+      "text": "**TBI - Traumatic Brain Injury (טראומת ראש)** - פגיעה טראומטית במוח הנגרמת כתוצאה מנפילה, תאונת דרכים, או מנגנון טראומה אחר. חומרת הפגיעה נמדדת לפי סולם Glasgow Coma Scale (GCS) ומשפיעה על ניהול דרכי הנשימה, ICP ו-CPP."
+    },
+    {
+      "type": "classification",
+      "title": "סיווג חומרת טראומת ראש לפי Glasgow Coma Scale",
+      "content": {
+        "criteria": "Glasgow Coma Scale (GCS)",
+        "note": "תמיד נלך לפי התגובה המוטורית הטובה יותר",
+        "categories": [
+          {
+            "severity": "Mild (קל)",
+            "gcs": "13-15",
+            "management": "מעקב, CT במצבים נבחרים"
+          },
+          {
+            "severity": "Moderate (בינוני)",
+            "gcs": "9-12",
+            "management": "אשפוז, מעקב נוירולוגי צמוד, CT"
+          },
+          {
+            "severity": "Severe (חמור)",
+            "gcs": "<9 (מתחת ל-9)",
+            "management": "🚨 שקול אינטובציה - אובדן Protective airway reflexes",
+            "alert": "GCS <8 → אינטובציה"
+          }
+        ],
+        "deterioration_indicator": "⚠️ ירידה בערכי Glasgow ב-3+ נקודות תוך שעה → פרדיקטור למצב נשימתי מתדרדר"
+      }
     },
     {
       "type": "section",
-      "title": "יעדי טיפול (CPP & ICP)",
-      "items": [
+      "title": "CPP ו-ICP - לחץ זילוח מוחי ולחץ תוך גולגולתי",
+      "subsections": [
         {
-          "name": "נוסחת CPP",
-          "description": "CPP = MAP - ICP. המטרה היא לשמור על זילוח מוחי.",
-          "details": "יעד CPP בילדים: 40-60 mmHg. יעד ICP: מתחת ל-20 mmHg [cite: 495-499]."
+          "subtitle": "CPP - Cerebral Perfusion Pressure (לחץ זילוח מוחי)",
+          "content": "**נוסחה:** CPP = MAP - ICP\n\n**ערכים תקינים (משתנים לפי גיל):**\n- ילודים: ~40 mmHg (MAP ~37-40)\n- גיל שנה: ~60 mmHg (MAP ~60)\n- ילדים: 40-60 mmHg\n- מבוגרים: ~55 mmHg (MAP 75 - ICP 20)\n\n**מטרה:** שמירה על זילוח מוחי מספק למניעת איסכמיה"
         },
         {
-          "name": "מטרות פיזיולוגיות",
-          "management": [
-            "ראש מורם 30 מעלות (לשיפור ניקוז ורידי) [cite: 500]",
-            "צוואר ישר (למניעת לחץ על ורידי הצוואר) [cite: 500]",
-            "נורמותרמיה (מניעת חום שמעלה דרישה מטבולית) [cite: 512]",
-            "שמירה על סוכר תקין (80-200) - היפו גורם לפרכוס, היפר מחמיר בצקת [cite: 510-511]"
-          ]
+          "subtitle": "ICP - Intracranial Pressure (לחץ תוך גולגולתי)",
+          "content": "**ICP מוגבר:** ≥20 mmHg\n\n**מטרת הטיפול:** הורדת ICP כדי לשמור על CPP תקין\n\n**Gold Standard:** ICP monitor (מוניטור לחץ תוך גולגולתי) - מדידה ישירה ומעקב רציף"
         }
       ]
     },
     {
       "type": "treatment",
-      "title": "טיפול ב-ICP מוגבר",
-      "sections": [
+      "title": "ניהול ראשוני של טראומת ראש",
+      "protocol": [
         {
-          "name": "טיפול אוסמולרי",
-          "options": [
-            {
-              "method": "סליין היפרטוני (3%)",
-              "details": "מינון: 3-5 ml/kg בולוס. יעד נתרן בדם: 140-160 [cite: 515-516].",
-              "indications": ["בצקת מוחית", "עליית ICP"]
-            },
-            {
-              "method": "מניטול (20%)",
-              "details": "מינון: 0.5-1 g/kg (כ-5 ml/kg). מתן במשך 20-30 דקות.",
-              "contraindications": ["אוסמולריות בדם > 320", "הלם היפוולמי"]
-            }
-          ]
+          "step": 1,
+          "action": "הגבהת ראש ב-30 מעלות",
+          "rationale": "שיפור זרימת דם ורידית והפחתת ICP",
+          "note": "הקפד על מנח ישר של הראש - צווארון פילדלפי שלא במנח נכון יכול ללחוץ על כלי דם"
         },
         {
-          "name": "הנשמה",
-          "options": [
-            {
-              "method": "היפרוונטילציה (PCO2)",
-              "details": "PCO2 יעד: 35-40 mmHg. היפרוונטילציה אגרסיבית (PCO2 < 30) מותרת רק כמוצא אחרון להצלת חיים במצב של הרניאציה, לזמן קצר בלבד [cite: 507-508].",
-              "note": "PCO2 נמוך מדי גורם לכיווץ כלי דם ואיסכמיה מוחית."
-            }
-          ]
+          "step": 2,
+          "action": "הורדת חום (נורמותרמיה)",
+          "rationale": "הפחתת metabolic rate מוחי",
+          "target": "שמירה על נורמותרמיה - חום מעלה תצרוכת חמצן מוחית",
+          "special_note": "⚠️ במחקרים: קירור ל-35°C העלה תמותה לעומת נורמותרמיה. **יוצא מן הכלל:** במקרי HIE (Hypoxic-Ischemic Encephalopathy) בתינוקות - Mild Hypothermia 36°C למשך 48 שעות",
+          "method": "חליפת קירור במידת הצורך"
+        },
+        {
+          "step": 3,
+          "action": "מניעת פרכוסים",
+          "medication": "Keppra (Levetiracetam) - העדפה ראשונה",
+          "rationale": "פרכוסים מעלים תצרוכת מוחית ו-ICP. Keppra לא מוריד לחץ דם (לעומת תרופות אחרות)",
+          "note": "בדימומים אינטרא-פרנכימליים: ניתן אנטי-פרכוסי **מניעתי**"
+        },
+        {
+          "step": 4,
+          "action": "הערכת צורך באינטובציה",
+          "indication": "GCS <8 או ירידה ב-3+ נקודות תוך שעה",
+          "preferred_agents": "תרופות שאינן משפיעות על לחץ דם:"
         }
       ]
     },
     {
       "type": "medications",
-      "title": "תרופות נלוות",
-      "items": [
+      "title": "תרופות להרדמה ואינטובציה ב-TBI",
+      "drugs": [
         {
-          "name": "Keppra (Levetiracetam)",
-          "indication": "מניעת פרכוסים (מועדף כי לא מוריד לחץ דם) [cite: 501-502].",
-          "dosing": "10 mg/kg IV"
+          "name": "Ketamine (קטמין)",
+          "preference": "🥇 העדפה ראשונה",
+          "advantage": "לא משפיע על לחץ דם, שומר על CPP",
+          "note": "שובר מיתוס ישן - אינו מעלה ICP"
         },
         {
-          "name": "Ketamine",
-          "indication": "סדציה לאינטובציה (שומר על לחץ דם ו-CPP) [cite: 503].",
-          "dosing": "1-2 mg/kg IV"
+          "name": "Midazolam (מידזולם)",
+          "preference": "שימוש נפוץ",
+          "disadvantage": "עלול להוריד לחץ דם",
+          "note": "בישראל נשתמש במה שנמצא לידנו - **מעקב צמוד אחר לחצי דם**"
+        },
+        {
+          "name": "Propofol (פרופופול / Dropofol)",
+          "advantage": "הורדת ICP",
+          "disadvantage": "⚠️ עושה myocardial depression - הורדת לחץ דם"
+        },
+        {
+          "name": "Pentothal (פנטוטל / Thiopental)",
+          "advantage": "הורדת ICP",
+          "disadvantage": "⚠️ עושה myocardial depression - הורדת לחץ דם"
+        },
+        {
+          "name": "Etomidate (אטומידייט)",
+          "advantage": "יציבות המודינמית",
+          "contraindication": "❌ **אסור בשוק ספטי** - עושה אי-ספיקת אדרנל"
+        }
+      ],
+      "clinical_pearl": "לאחר הרדמה לחץ הדם יורד (סדציה, ירידה בטונוס). כדי לשמור על CPP כאשר ICP לא ירד מספיק, נעלה את ה-MAP באמצעות **פרסורים** (העדפה על פני inotropes בטראומה מוחית)"
+    },
+    {
+      "type": "section",
+      "title": "ניהול הנשמה ב-TBI",
+      "subsections": [
+        {
+          "subtitle": "ניהול PCO₂ - היפרוונטילציה",
+          "principle": "PCO₂ מרחיב כלי דם במוח → היפרקפניה מעלה ICP",
+          "protocol": "1️⃣ **בזמן הנשמה ידנית (לדקות ספורות):** היפרוונטילציה להורדת PCO₂ עד **30 mmHg**\n\n2️⃣ **לאחר חיבור למנשם:** PCO₂ יעד **35-40 mmHg** (על הגבול הנמוך)\n\n⚠️ **אזהרה:** היפרוונטילציה ממושכת (<30 mmHg) → איסכמיה מוחית"
+        },
+        {
+          "subtitle": "ניהול חמצן - O₂",
+          "principle": "היפוקסיה → הרחבת כלי דם מוחיים → עליה ב-ICP",
+          "target": "**סטורציות 95-100%** - מניעת היפוקסמיה מוחית",
+          "note": "חמצן מרחיב כלי דם, לכן נימנע מהיפוקסמיה אך לא נגזים בהיפראוקסיה"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "ניהול מטבולי ב-TBI",
+      "subsections": [
+        {
+          "subtitle": "גלוקוז",
+          "target": "**80-200 mg/dL**",
+          "hypoglycemia_risk": "היפוגליקמיה → פרכוסים → ↑ תצרוכת מוחית → ↑ ICP",
+          "hyperglycemia_risk": "היפרגליקמיה → גודש ובצקת → ↑ ICP",
+          "management": "מעקב צמוד ותיקון הפרעות גלוקוז"
+        },
+        {
+          "subtitle": "נתרן - היפרנתרמיה מבוקרת",
+          "principle": "נתרן היפראוסמולרי מושך נוזלים לכלי הדם ומפחית בצקת מוחית",
+          "target": "**140-160 mEq/L** (היפרנתרמיה מבוקרת)",
+          "rationale": "היפונתרמיה מעלה סיכון לפרכוסים",
+          "note": "נתרן הוא חלק מהאוסמולריות: Osmolality = 2×[Na] + [Glucose]/18 + [BUN]/2.8"
+        },
+        {
+          "subtitle": "טמפרטורה",
+          "target": "**נורמותרמיה** (36.5-37.5°C)",
+          "evidence": "מחקרים הראו: קירור ל-35°C **העלה תמותה** לעומת נורמותרמיה",
+          "exception": "HIE בילודים: Mild Hypothermia 36°C למשך 48 שעות",
+          "method": "חליפת קירור במידת הצורך"
+        }
+      ]
+    },
+    {
+      "type": "treatment",
+      "title": "טיפול תרופתי להורדת ICP",
+      "medications": [
+        {
+          "name": "3% Hypertonic Saline (סליין היפרטוני)",
+          "mechanism": "תמיסה היפראוסמולרית המושכת נוזלים לכלי הדם ומפחיתה בצקת מוחית",
+          "dose": "**5 mL/kg** במתן מהיר (בולוס)",
+          "maintenance": "0.1-1 mL/kg/hr (עירוי מתמשך)",
+          "target": "נתרן 140-160 mEq/L",
+          "contraindication": "⚠️ בדוק אוסמולריות בדם - **אל תיתן אם אוסמולריות >360 mOsm/kg**",
+          "note": "במצב אקוטי אם אין זמן לבדוק - ניתן בכל מקרה"
+        },
+        {
+          "name": "Mannitol (מניטול) 18-20%",
+          "mechanism": "רב-סוכר היפראוסמולרי המעלה אוסמולריות בדם ומושך נוזלים מהמוח",
+          "dose": "**0.5-1 g/kg (5 mL/kg)**",
+          "administration": "הרצה של 20-30 דקות",
+          "duration": "השפעה עד 24 שעות (ניתן להשאיר בחדר טמפרטורת החדר)",
+          "contraindication": "⚠️ **אסור לתת אם אוסמולריות >320 mOsm/kg**",
+          "optimization": "למקסום השפעה: לאחר מכן ניתן **Furosemide (פוסיד)** - מגביר השפעה דיורטית",
+          "note": "במצב אקוטי אם אין זמן לבדוק - ניתן בכל מקרה"
+        }
+      ],
+      "combined_therapy": "**במטופל מדרדר:** ניתן **גם מניטול וגם סליין היפרטוני** במטרה שהוא יגיע לחדר הניתוח יציב"
+    },
+    {
+      "type": "section",
+      "title": "ניהול לחץ דם ו-CPP",
+      "principle": "לאחר הרדמה לחץ הדם יורד (סדציה, ירידה בטונוס). אם ICP לא ירד מספיק, נצטרך להעלות MAP כדי לשמור על CPP תקין",
+      "management": {
+        "goal": "שמירה על CPP = MAP - ICP",
+        "method": "העלאת MAP באמצעות תרופות וזואקטיביות",
+        "preference": "**פרסורים** (Vasopressors) על פני Inotropes",
+        "rationale": "בטראומה מוחית העיקר הוא שמירה על לחץ זילוח, לא ביצועי הלב",
+        "examples": "Norepinephrine (נוראפינפרין), Phenylephrine"
+      }
+    },
+    {
+      "type": "section",
+      "title": "התערבות כירורגית",
+      "indications": [
+        "דימום תוך גולגולתי הדורש ניקוז",
+        "בצקת מוחית חמורה עם ICP בלתי נשלט"
+      ],
+      "procedures": [
+        {
+          "name": "ניקוז דימום",
+          "indication": "המטומה משמעותית (SDH, EDH, ICH)"
+        },
+        {
+          "name": "Decompressive Craniectomy (קרניאקטומי)",
+          "indication": "בצקת מוחית ללא דימום משמעותי - הסרת חלק מהגולגולת להפחתת לחץ",
+          "goal": "מניעת הרניאציה מוחית"
+        }
+      ],
+      "monroe_kellie_doctrine": "⚠️ **עקומת Monro-Kellie:** המוח יכול להתמודד עם עליית ICP עד נקודה מסוימת (אוטורגולציה). מעבר לנקודת האל-חזור → הרניאציה מוחית בלתי הפיכה",
+      "time_critical": "🚨 **קריטי זמן:** כל התהליך (הערכה + ייצוב + הגעה לחדר ניתוח) צריך להתרחש תוך **8 דקות**"
+    },
+    {
+      "type": "clinical_presentation",
+      "title": "סימנים קליניים חשובים",
+      "findings": [
+        {
+          "sign": "Cushing's Triad (טריאדת קושינג)",
+          "components": [
+            "Bradycardia (ברדיקרדיה)",
+            "Dyspnea / Irregular breathing (דיספניאה)",
+            "Hypertension (יתר לחץ דם)"
+          ],
+          "significance": "🚨 **סימן מאוחר ל-ICP מוגבה קריטי** - בדרך כלל מלווה בהרחבת אישונים",
+          "mechanism": "לחץ על גזע המוח"
+        },
+        {
+          "sign": "הרחבת אישון (Pupil dilation)",
+          "lateralization": "הרחבה חד-צדדית → הרניאציה אונקלית (uncal herniation) באותו צד",
+          "bilateral": "הרחבה דו-צדדית → הרניאציה מוחית דיפוזית או פגיעה בגזע"
+        }
+      ]
+    },
+    {
+      "type": "classification",
+      "title": "סוגי טראומות ראש",
+      "categories": [
+        {
+          "type": "DBI - Diffuse Brain Injury (פגיעה מוחית מפושטת)",
+          "description": "**הטראומת ראש החמורה הנפוצה ביותר**",
+          "mechanism": "נגרמת עקב כוחות פגיעה, האצה והאטה",
+          "characteristics": "פגיעה נפוצה ברקמת המוח ללא נגע מוקדי בולט",
+          "mild_form": "**זעזוע מוח (Concussion)** הוא צורה מתונה של DBI"
+        },
+        {
+          "type": "DAI - Diffuse Axonal Injury (פגיעה אקסונלית מפושטת)",
+          "description": "**וריאציה חמורה של DBI**",
+          "mechanism": "פגיעה וערבוב ברקמה האפורה והלבנה",
+          "characteristics": "פגיעה נרחבת באקסונים",
+          "associated_findings": "ייתכנו גם ממצאים מוקדיים: שטפי דם פרנכימליים מולטיפוקליים, SDH או EDH"
+        },
+        {
+          "type": "FBI - Focal Brain Injury (פגיעות ראש מוקדיות)",
+          "subtypes": [
+            {
+              "name": "קונטוזיה מוחית (Contusion)",
+              "mechanism": "נגרמת כתוצאה מכוחות האצה והאטה",
+              "location": "במקום החבלה (coup) או במקום החבלה הנגדי למכה (contrecoup), או שניהם",
+              "pathology": "חבורה/נזק לרקמת המוח"
+            },
+            {
+              "name": "ICH - Intracerebral/Intraparenchymal Hemorrhage (דימום תוך פרנכימלי)",
+              "mechanism": "קרע ברקמת המוח או בכלי דם",
+              "location": "בתוך רקמת המוח (הפרנכימה)",
+              "management": "בדימומים משמעותיים: אנטי-פרכוסי מניעתי"
+            },
+            {
+              "name": "SDH - Subdural Hematoma (המטומה תת-דוראלית)",
+              "location": "בין רקמת הדורה (Dura mater) לארכנואיד (Arachnoid)",
+              "mechanism": "טראומה ישירה או קרע בכלי דם מגשרים (Bridging veins) שחוצים את השכבה הדוראלית",
+              "appearance": "דימום בצורת סהרון (crescent shape) ב-CT",
+              "severity": "בדרך כלל חמור יותר מ-EDH"
+            },
+            {
+              "name": "EDH - Epidural Hematoma (המטומה אפידוראלית)",
+              "location": "למרווח שבין הדורה (Dura) לקלווריום (Calvarium - החלק העליון של הגולגולת)",
+              "mechanism": "פגיעה בעורק או וריד המניגיאלי האמצעי (MMA/MMV), ורידי Diploid, ורידי הסינוסים",
+              "appearance": "דימום בצורת עדשה דו-קמורה (biconvex/lentiform shape) ב-CT",
+              "classic_presentation": "Lucid interval - הכרה ראשונית → הרעה משנית",
+              "etymology": "💡 קלווריום = Calvary = גולגותא (המקום בו צלבו את ישו)"
+            },
+            {
+              "name": "SAH - Subarachnoid Hemorrhage (דימום תת-עכבישי)",
+              "location": "במרווח התת-עכבישי (בין Arachnoid ל-Pia mater)",
+              "mechanism": "קריעה של כלי דם קטנים בשכבת הפיה",
+              "traumatic_vs_spontaneous": "טראומטי (נפוץ) vs ספונטני (קרע של אנאוריזמה)",
+              "complications": "ספאזם כלי דם מוחיים → איסכמיה משנית"
+            }
+          ]
         }
       ]
     }
   ],
-  "critical_alerts": [
-    "⚠️ טריאדה ע\"ש קושינג (לחץ דם גבוה, ברדיקרדיה, נשימה לא סדירה) היא סימן להרניאציה קרבה [cite: 505].",
-    "⚠️ נפילת לחץ דם בחולה ראש היא קטסטרופלית - יש לשמור על MAP תקין בכל מחיר.",
-    "⚠️ היפרוונטילציה אגרסיבית (PCO2 < 30) רק במצב הרניאציה ולזמן קצר בלבד."
-  ],
   "key_points": [
-    "CPP = MAP - ICP (יעד: 40-60 mmHg בילדים)",
-    "ICP יעד: < 20 mmHg",
-    "ראש מורם 30°, צוואר ישר",
-    "סליין היפרטוני 3% עדיף על מניטול",
-    "נורמותרמיה חובה (חום מעלה דרישה מטבולית)"
+    "חומרת טראומת ראש נקבעת לפי Glasgow Coma Scale: Mild 13-15, Moderate 9-12, Severe <9",
+    "GCS <8 → שקול אינטובציה (אובדן protective airway reflexes)",
+    "ירידה של 3+ נקודות ב-GCS תוך שעה → פרדיקטור למצב נשימתי מתדרדר",
+    "CPP = MAP - ICP (יעד: 40-60 ילדים, ~55 מבוגרים). ICP תקין <20 mmHg",
+    "ניהול ראשוני: הגבהת ראש 30°, נורמותרמיה, מניעת פרכוסים (Keppra)",
+    "אינטובציה: העדפה ל-Ketamine (לא משפיע על לחץ דם). נמנע מ-Etomidate בשוק ספטי",
+    "ניהול PCO₂: היפרוונטילציה ל-30 mmHg לדקות, אח״כ יעד 35-40 mmHg",
+    "O₂: סטורציות 95-100% (מניעת היפוקסמיה שמעלה ICP)",
+    "גלוקוז: 80-200 mg/dL (היפו→פרכוסים, היפר→בצקת)",
+    "נתרן: יעד 140-160 mEq/L (היפראוסמולרי מפחית בצקת)",
+    "טמפרטורה: נורמותרמיה (קירור העלה תמותה במחקרים, חוץ מ-HIE בילודים)",
+    "הורדת ICP: 3% Hypertonic Saline 5 mL/kg או Mannitol 0.5-1 g/kg (אוסמולריות <320-360)",
+    "לאחר הרדמה לחץ דם יורד → שמור על CPP באמצעות פרסורים (לא inotropes)",
+    "טריאדת Cushing (ברדיקרדיה, נשימה לא סדירה, HTN) + הרחבת אישונים → ICP קריטי מאוחר",
+    "זמן קריטי: הערכה + ייצוב + חדר ניתוח תוך 8 דקות",
+    "DBI (diffuse) נפוצה ביותר. DAI וריאציה חמורה. FBI כוללת: קונטוזיה, ICH, SDH, EDH, SAH",
+    "EDH: biconvex, MMA injury, lucid interval. SDH: crescent, bridging veins, חמור יותר"
+  ],
+  "critical_alerts": [
+    "🚨 GCS <8 → אינטובציה מיידית",
+    "🚨 ירידה של 3+ נקודות ב-GCS תוך שעה → מטופל מדרדר",
+    "🚨 טריאדת Cushing (ברדיקרדיה, נשימה לא סדירה, HTN) + הרחבת אישונים → הרניאציה מתקרבת",
+    "🚨 היפרוונטילציה ל-PCO₂ <30 mmHg רק לדקות ספורות (מעל לכך → איסכמיה)",
+    "🚨 לאחר הרדמה לחץ דם יורד → העלה MAP עם פרסורים לשמירה על CPP",
+    "⚠️ מניטול: אסור אם אוסמולריות >320. סליין היפרטוני: אסור אם אוסמולריות >360",
+    "⚠️ Etomidate אסור בשוק ספטי (אי-ספיקת אדרנל)",
+    "⚠️ קירור ל-35°C העלה תמותה (חוץ מ-HIE בילודים 36°C למשך 48 שעות)",
+    "🔴 זמן קריטי לחדר ניתוח: 8 דקות",
+    "🔴 במטופל מדרדר: ניתן גם מניטול וגם סליין היפרטוני יחד"
+  ],
+  "clinical_pearls": [
+    "תמיד נלך לפי התגובה המוטורית הטובה יותר ב-GCS",
+    "צווארון פילדלפי לא במנח נכון יכול ללחוץ על כלי דם ולהעלות ICP",
+    "בדימומים אינטרא-פרנכימליים: אנטי-פרכוסי מניעתי (Keppra)",
+    "Ketamine לא מעלה ICP (שובר מיתוס ישן) - תרופה מצוינת ל-TBI",
+    "למקסום השפעת מניטול: לאחר מכן תן Furosemide",
+    "במצב אקוטי אם אין זמן לבדוק אוסמולריות - תן מניטול/סליין בכל מקרה",
+    "אוסמולריות = 2×[Na] + [Glucose]/18 + [BUN]/2.8",
+    "ICP monitor הוא Gold Standard - מדידה ישירה ומעקב רציף",
+    "עקומת Monro-Kellie: מעבר לנקודת האל-חזור → הרניאציה בלתי הפיכה",
+    "EDH: biconvex, lucid interval קלאסי. SDH: crescent, חמור יותר",
+    "DAI יכול להיות מלווה בממצאים מוקדיים (שטפי דם, SDH, EDH)",
+    "רוב טראומות הראש נגרמות מנפילה או תאונות דרכים"
+  ],
+  "monitoring": [
+    "Glasgow Coma Scale (GCS) - כל 15-30 דקות בשלב חריף",
+    "ICP monitor (Gold Standard) - מדידה ישירה ורציפה",
+    "Vital signs: BP, HR, SpO₂, Temperature, RR",
+    "Arterial Blood Gas (ABG): PCO₂ (יעד 35-40), PO₂, pH",
+    "אישונים: גודל, תגובה לאור, סימטריה",
+    "Glucose: 80-200 mg/dL",
+    "נתרן: יעד 140-160 mEq/L",
+    "אוסמולריות בסרום: <320-360 mOsm/kg",
+    "Neurological exam: רמת הכרה, תגובה מוטורית, רפלקסים",
+    "CT מוח: baseline ומעקב לפי מצב קליני",
+    "MAP ו-CPP: חישוב רציף (CPP = MAP - ICP)"
   ],
   "references": [
-    "מצבים מייצגים בטיפול נמרץ ילדים - עמודים 12-13 [cite: 486-527]"
+    "PALS (Pediatric Advanced Life Support) Guidelines",
+    "Brain Trauma Foundation Guidelines",
+    "Pediatric Neurocritical Care protocols",
+    "Kochanek PM, et al. Pediatric Critical Care Medicine. Guidelines for TBI in children"
   ],
-  "last_updated": "2025-01-01",
-  "author": "PICU Team",
-  "version": "1.0"
+  "version": "2.0",
+  "last_updated": "2025-12-27",
+  "author": "PICU Medical Team"
 }

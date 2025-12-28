@@ -12,6 +12,7 @@ from utils.database import (
     create_content_section, update_content_section, delete_content_section,
     get_quiz_questions, create_quiz_question, update_quiz_question, delete_quiz_question
 )
+from utils.styles import get_common_styles
 import json
 from datetime import datetime
 
@@ -25,13 +26,12 @@ st.set_page_config(
 # Restore user session
 restore_user_session(st)
 
-# Custom CSS for RTL and better styling
+# טעינת CSS מרכזי
+st.markdown(get_common_styles(), unsafe_allow_html=True)
+
+# CSS נוסף ספציפי לעורך
 st.markdown("""
 <style>
-    .main { direction: rtl; }
-    .stTextInput > div > div > input { text-align: right; }
-    .stTextArea > div > div > textarea { text-align: right; }
-    .stSelectbox > div > div > select { text-align: right; }
     .content-card {
         background: #f8f9fa;
         padding: 1rem;

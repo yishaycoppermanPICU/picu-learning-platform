@@ -2,12 +2,19 @@
   "id": "milrinone",
   "title": "מילרינון / פרימקור (Milrinone / Primacor)",
   "genericName": "Milrinone",
-  "commercialNames": ["Primacor"],
+  "commercialNames": [
+    "Primacor"
+  ],
   "category": "medications",
   "type": "inodilator",
   "difficulty": "advanced",
   "order": 30,
-  "tags": ["אינוטרופ", "וזודילטור", "לב", "אי ספיקה"],
+  "tags": [
+    "אינוטרופ",
+    "וזודילטור",
+    "לב",
+    "אי ספיקה"
+  ],
   "content": [
     {
       "type": "definition",
@@ -79,7 +86,7 @@
           "name": "ריכוז סטנדרטי",
           "preparation": [
             "1 mg/ml: אמפולה אחת (10 mg/10 ml) + 40 ml NS = 50 ml (ריכוז 0.2 mg/ml)",
-            "או: 0.6 mg/kg במזרק 50 ml להגעה למינון של 0.5 mcg/kg/min ב-2.5 ml/hr"
+            "או: 0.6mg/kg במזרק 50 ml להגעה למינון של 0.5 mcg/kg/min ב-2.5 ml/hr"
           ]
         },
         {

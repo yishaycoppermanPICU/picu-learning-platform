@@ -2,12 +2,19 @@
   "id": "norepinephrine",
   "title": "נוראפינפרין / לבופד (Norepinephrine / Levophed)",
   "genericName": "Norepinephrine",
-  "commercialNames": ["Levophed"],
+  "commercialNames": [
+    "Levophed"
+  ],
   "category": "medications",
   "type": "vasopressor",
   "difficulty": "advanced",
   "order": 31,
-  "tags": ["וזופרסור", "שוק", "לחץ דם", "ספסיס"],
+  "tags": [
+    "וזופרסור",
+    "שוק",
+    "לחץ דם",
+    "ספסיס"
+  ],
   "content": [
     {
       "type": "definition",
@@ -79,7 +86,7 @@
         {
           "name": "ריכוז סטנדרטי ב-PICU",
           "preparation": [
-            "0.6 mg/kg במזרק 50 ml",
+            "0.6mg/kg במזרק 50 ml",
             "דוגמה: ילד 20 ק\"ג → 12 mg (3 אמפולות של 4 mg) + NS עד 50 ml",
             "במינון 0.1 mcg/kg/min → קצב 0.5 ml/hr"
           ]

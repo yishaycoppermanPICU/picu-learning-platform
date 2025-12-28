@@ -3,3 +3,4 @@ pandas
 plotly
 supabase
 streamlit-quill
+extra-streamlit-components

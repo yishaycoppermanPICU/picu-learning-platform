@@ -5,7 +5,14 @@
   "category": "hematology",
   "difficulty": "advanced",
   "order": 8,
-  "tags": ["השתלה", "GVHD", "סיבוכים", "BMT", "HCT", "מח עצם"],
+  "tags": [
+    "השתלה",
+    "GVHD",
+    "סיבוכים",
+    "BMT",
+    "HCT",
+    "מח עצם"
+  ],
   "content": [
     {
       "type": "definition",
@@ -20,16 +27,34 @@
           "name": "SOS / VOD (Sinusoidal Obstruction Syndrome)",
           "description": "Hepatic Sinusoidal Obstruction Syndrome - חסימת ורידים בכבד.",
           "pathophysiology": "פגיעה בכלי דם בכבד עקב הכימותרפיה ההכנה.",
-          "signs": ["צהבת (bilirubin > 2)", "כבד מוגדל וכואב", "עלייה במשקל (>5%) עקב נוזלים", "אסציטס"],
+          "signs": [
+            "צהבת (bilirubin > 2)",
+            "כבד מוגדל וכואב",
+            "עלייה במשקל (>5%) עקב נוזלים",
+            "אסציטס"
+          ],
           "diagnosis": "קריטריונים קליניים + אקו דופלר (הפחתת זרימה בוורידי כבד)",
-          "treatment": ["Defibrotide (תרופה ספציפית)", "תמיכה בנוזלים זהירה", "דיורטיקה"]
+          "treatment": [
+            "Defibrotide (תרופה ספציפית)",
+            "תמיכה בנוזלים זהירה",
+            "דיורטיקה"
+          ]
         },
         {
           "name": "TMA (Transplant-associated Thrombotic Microangiopathy)",
           "description": "מיקרואנגיופתיה פקקתית הקשורה להשתלה.",
-          "signs": ["אנמיה המוליטית", "טרומבוציטופניה", "אי ספיקת כליות", "יתר לחץ דם"],
+          "signs": [
+            "אנמיה המוליטית",
+            "טרומבוציטופניה",
+            "אי ספיקת כליות",
+            "יתר לחץ דם"
+          ],
           "diagnosis": "שברי תאים (schistocytes) במריחת דם, LDH מוגבר, המוגלובין נמוך",
-          "treatment": ["הפסקת תרופות מעכבות חיסון (Calcineurin inhibitors)", "פלזמפרזיס במקרים קשים", "Eculizumab (אנטי-C5)"]
+          "treatment": [
+            "הפסקת תרופות מעכבות חיסון (Calcineurin inhibitors)",
+            "פלזמפרזיס במקרים קשים",
+            "Eculizumab (אנטי-C5)"
+          ]
         },
         {
           "name": "Acute GVHD (Graft vs Host Disease)",
@@ -95,7 +120,11 @@
         {
           "name": "ממאירות משנית (Secondary Malignancy)",
           "description": "התפתחות סרטן חדש עקב הטיפול הקודם.",
-          "types": ["MDS/AML משני", "לימפומות (EBV-driven PTLD)", "גידולים מוצקים"],
+          "types": [
+            "MDS/AML משני",
+            "לימפומות (EBV-driven PTLD)",
+            "גידולים מוצקים"
+          ],
           "risk_factors": "הקרנה, גיל צעיר בזמן ההשתלה",
           "prevention": "מעקב ממושך, הימנעות מחשיפה נוספת להקרנה"
         },
@@ -118,7 +147,12 @@
         {
           "parameter": "זיהומים ויראליים",
           "test": "PCR כמותי",
-          "pathogens": ["CMV", "EBV", "Adenovirus", "BK Virus"],
+          "pathogens": [
+            "CMV",
+            "EBV",
+            "Adenovirus",
+            "BK Virus"
+          ],
           "frequency": "PCR תקופתי בדם/שתן פעם בשבוע בחודשים הראשונים [cite: 129]."
         },
         {
@@ -133,7 +167,10 @@
         },
         {
           "parameter": "תפקודי כבד וכליות",
-          "tests": ["בילירובין, ALT/AST", "קריאטינין, BUN"],
+          "tests": [
+            "בילירובין, ALT/AST",
+            "קריאטינין, BUN"
+          ],
           "frequency": "שבועי בטווח הקצר"
         }
       ]

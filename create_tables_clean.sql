@@ -1,4 +1,4 @@
--- PICU Learning Platform Database Schema - CLEAN VERSION
+ש-- PICU Learning Platform Database Schema - CLEAN VERSION
 -- Run this after running drop_tables.sql
 
 -- Enable UUID extension

@@ -18,7 +18,7 @@
           "options": [
             {
               "method": "IV / PO",
-              "details": "1-2 mg/kg/day מחולק ל-1-2 מנות. מקסימום 60 mg/day"
+              "details": "1-2mg/kg/day מחולק ל-1-2 מנות. מקסימום 60 mg/day"
             }
           ]
         },
@@ -27,7 +27,7 @@
           "options": [
             {
               "method": "IV Pulse",
-              "details": "30 mg/kg/day פולס ל-3 ימים. מקסימום 1000 mg/dose"
+              "details": "30mg/kg/day פולס ל-3 ימים. מקסימום 1000 mg/dose"
             }
           ]
         }

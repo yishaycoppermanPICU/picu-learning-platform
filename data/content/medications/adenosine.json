@@ -2,12 +2,18 @@
   "id": "adenosine",
   "title": "אדנוזין (Adenosine)",
   "genericName": "Adenosine",
-  "commercialNames": ["Adenocor"],
+  "commercialNames": [
+    "Adenocor"
+  ],
   "category": "medications",
   "type": "antiarrhythmic",
   "difficulty": "advanced",
   "order": 15,
-  "tags": ["הפרעות קצב", "SVT", "החייאה"],
+  "tags": [
+    "הפרעות קצב",
+    "SVT",
+    "החייאה"
+  ],
   "content": [
     {
       "type": "definition",
@@ -34,15 +40,15 @@
           "options": [
             {
               "method": "מנה ראשונה",
-              "details": "0.1 mg/kg. מקסימום למנה ראשונה: 6 mg"
+              "details": "0.1mg/kg. מקסימום למנה ראשונה: 6 mg"
             },
             {
               "method": "מנה שנייה (אם אין תגובה)",
-              "details": "0.2 mg/kg. מקסימום למנה שנייה: 12 mg"
+              "details": "0.2mg/kg. מקסימום למנה שנייה: 12 mg"
             },
             {
               "method": "מנה שלישית (חריג)",
-              "details": "0.3 mg/kg. מקסימום 12 mg"
+              "details": "0.3mg/kg. מקסימום 12 mg"
             }
           ]
         },

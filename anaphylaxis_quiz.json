@@ -1,0 +1,259 @@
+{
+  "questions": [
+    {
+      "id": "anaphylaxis_001",
+      "category": "resuscitation",
+      "topic": "anaphylaxis",
+      "difficulty": "medium",
+      "question": "מהו אחוז המקרים של אנפילקסיס בהם לא מופיעות תופעות עוריות כלל?",
+      "options": [
+        "50% מהמקרים",
+        "1-2% מהמקרים",
+        "10-20% מהמקרים",
+        "תמיד יש תופעות עוריות באנפילקסיס"
+      ],
+      "correct_answer": 2,
+      "explanation": "בטקסט נכתב תחת סימנים וסימפטומים: 'ל10-20% מהמקרים אין תופעות על העור כלל'.",
+      "time_limit": 90,
+      "points": 10
+    },
+    {
+      "id": "anaphylaxis_002",
+      "category": "resuscitation",
+      "topic": "anaphylaxis",
+      "difficulty": "medium",
+      "question": "מהי הקונטראינדיקציה (התווית נגד) המוחלטת למתן אדרנלין במצב של אנפילקסיס?",
+      "options": [
+        "מחלת לב ידועה",
+        "גיל מתחת לשנה",
+        "הריון",
+        "לא קיימת אף קונטראינדיקציה מוחלטת"
+      ],
+      "correct_answer": 3,
+      "explanation": "תחת הטיפול האקוטי נכתב: 'לא קיימת אף קונטראינדיקציה מוחלטת למתן אדרנלין במצב של אנפילקסיס'.",
+      "time_limit": 90,
+      "points": 10
+    },
+    {
+      "id": "anaphylaxis_003",
+      "category": "resuscitation",
+      "topic": "anaphylaxis",
+      "difficulty": "easy",
+      "question": "מהו המינון המקסימלי למנה של אדרנלין IM בילדים גדולים (מעל 50 ק\"ג)?",
+      "options": [
+        "0.3 mg",
+        "0.5 mg",
+        "1 mg",
+        "0.15 mg"
+      ],
+      "correct_answer": 1,
+      "explanation": "הטקסט מציין: 'אדרנלין IM לפי 0.01mg/kg ובילדים גדולים (מעל 50 ק״ג) מקסימום למנה 0.5mg'.",
+      "time_limit": 90,
+      "points": 8
+    },
+    {
+      "id": "anaphylaxis_004",
+      "category": "resuscitation",
+      "topic": "anaphylaxis",
+      "difficulty": "hard",
+      "question": "מהי ההנחיה לגבי אינטובציה במטופל עם אנפילקסיס המפתח חסימת דרכי אוויר?",
+      "options": [
+        "יש להמתין להשפעת הסטרואידים לפני ביצוע אינטובציה",
+        "האינטובציה פשוטה לביצוע וניתן לבצעה על ידי כל איש צוות",
+        "יש לבצע אינטובציה מיידית על ידי איש הצוות המיומן ביותר, עקב חשש מאנגיואדמה וקושי בביצוע",
+        "עדיף להשתמש במסכת חמצן בלבד ולהימנע מאינטובציה בכל מחיר"
+      ],
+      "correct_answer": 2,
+      "explanation": "הטקסט מדגיש: 'אינטובציה מיידית לאור התפתחות חסימת דרכי אוויר... האינטובציה עלולה להיות קשה וצריכה להתבצע על ידי איש הצוות המיומן ביותר'.",
+      "time_limit": 90,
+      "points": 12
+    },
+    {
+      "id": "anaphylaxis_005",
+      "category": "resuscitation",
+      "topic": "anaphylaxis",
+      "difficulty": "medium",
+      "question": "מתי יש לעבור להכנת אדרנלין IV (תוך ורידי) במקום IM (תוך שרירי) בטיפול הראשוני?",
+      "options": [
+        "מיד עם הגעת המטופל",
+        "אם הפרפוזיה אינה טובה גם לאחר שלוש הזרקות IM",
+        "אם המטופל מקיא",
+        "אם יש פריחה מפושטת בכל הגוף"
+      ],
+      "correct_answer": 1,
+      "explanation": "ההנחיה בטקסט היא: 'במידה והפרפוזיה אינה טובה גם לאחר שלוש הזרקות מכינים אדרנלין IV'.",
+      "time_limit": 90,
+      "points": 10
+    },
+    {
+      "id": "anaphylaxis_006",
+      "category": "resuscitation",
+      "topic": "anaphylaxis",
+      "difficulty": "medium",
+      "question": "מהו המינון המקסימלי המצטבר של נוזלים (בולוסים) שניתן לתת בהחייאת נוזלים באנפילקסיס?",
+      "options": [
+        "20 ml/kg",
+        "40 ml/kg",
+        "60 ml/kg",
+        "100 ml/kg"
+      ],
+      "correct_answer": 3,
+      "explanation": "הטקסט מציין: 'בולוס של NS לפי 20ml/kg... ובמידת הצורך בולוס נוסף... (עד 100ml/kg)'.",
+      "time_limit": 90,
+      "points": 10
+    },
+    {
+      "id": "anaphylaxis_007",
+      "category": "resuscitation",
+      "topic": "anaphylaxis",
+      "difficulty": "hard",
+      "question": "מהי האינדיקציה למתן סלבוטמול (ונטולין) באנפילקסיס, ומהו המינון המינימלי למנה?",
+      "options": [
+        "לכל מקרה של אנפילקסיס; מינימום 5 mg",
+        "לברונכוספאזם עמיד לאפינפרין IM; מינימום 2.5 mg למנה",
+        "רק אם יש היסטוריה של אסתמה; מינימום 1 mg",
+        "לטיפול בפריחה עורית; מינימום 0.5 mg"
+      ],
+      "correct_answer": 1,
+      "explanation": "הטקסט מפרט: 'לברונכוספאזם עמיד לאפינפרין IM, יש להכין ונטולין לפי 0.15mg/kg (מינימום למנה 2.5mg)'.",
+      "time_limit": 90,
+      "points": 12
+    },
+    {
+      "id": "anaphylaxis_008",
+      "category": "resuscitation",
+      "topic": "anaphylaxis",
+      "difficulty": "medium",
+      "question": "מהו התפקיד של ואזופרסין בטיפול באנפילקסיס על פי הטקסט?",
+      "options": [
+        "תחליף מלא לאדרנלין במטופלים עם מחלות לב",
+        "קו ראשון לטיפול לפני אדרנלין",
+        "תוספת לאדרנלין במטופלים שלא מגיבים מספיק, אך לעולם לא במקומו",
+        "טיפול בבחילות והקאות נלוות"
+      ],
+      "correct_answer": 2,
+      "explanation": "הטקסט מדגיש: 'ואזופרסין תמיד יגיע כתוספת לאדרנלין ולא במקומו'.",
+      "time_limit": 90,
+      "points": 10
+    },
+    {
+      "id": "anaphylaxis_009",
+      "category": "resuscitation",
+      "topic": "anaphylaxis",
+      "difficulty": "easy",
+      "question": "איזו תרופה ממשפחת האנטיהיסטמינים H1 מוזכרת בטקסט, ומה המינון המומלץ?",
+      "options": [
+        "לורטדין PO",
+        "פמוטידין IV לפי 0.25 mg/kg",
+        "דיפנהידרמין IV לפי 1 mg/kg",
+        "כלורפנירמין IM"
+      ],
+      "correct_answer": 2,
+      "explanation": "תחת אנטיהיסטמין H1 נכתב: 'לשקול מתן IV של דיפנהידרמין לפי 1mg/kg'. (פמוטידין הוא H2).",
+      "time_limit": 90,
+      "points": 8
+    },
+    {
+      "id": "anaphylaxis_010",
+      "category": "resuscitation",
+      "topic": "anaphylaxis",
+      "difficulty": "medium",
+      "question": "מהו המינון של אדרנלין במתן מתמשך (Continuous infusion) לסימפטומים עיקשים?",
+      "options": [
+        "0.01 mg/kg",
+        "0.1-1 mcg/kg/min",
+        "10 mcg/min קבוע",
+        "1 mg/kg/min"
+      ],
+      "correct_answer": 1,
+      "explanation": "תחת טיפול בסימפטומים עיקשים נכתב: 'יש לחבר אדרנלין במתן מתמשך במינון של 0.1-1mcg/kg/minuet'.",
+      "time_limit": 90,
+      "points": 10
+    },
+    {
+      "id": "anaphylaxis_011",
+      "category": "resuscitation",
+      "topic": "anaphylaxis",
+      "difficulty": "easy",
+      "question": "איזה מהבאים נחשב ל\"סימן מסוכן\" באנפילקסיס הקשור למערכת העיכול?",
+      "options": [
+        "שלשול מימי",
+        "עצירות",
+        "כאב ברום הבטן והקאות",
+        "צרבת קלה"
+      ],
+      "correct_answer": 2,
+      "explanation": "ברשימת הסימנים המסוכנים מופיע: 'כאב ברום הבטן, הקאות'.",
+      "time_limit": 90,
+      "points": 8
+    },
+    {
+      "id": "anaphylaxis_012",
+      "category": "resuscitation",
+      "topic": "anaphylaxis",
+      "difficulty": "easy",
+      "question": "מהי תנוחת ההשכבה המומלצת למטופל עם אנפילקסיס?",
+      "options": [
+        "ישיבה זקופה ב-90 מעלות",
+        "שכיבה על צד שמאל בלבד",
+        "להשכיב את המטופל, ואם אפשר גם להרים את הרגליים",
+        "עמידה כדי לשפר את הנשימה"
+      ],
+      "correct_answer": 2,
+      "explanation": "בהנחיות הטיפול נכתב: 'להשכיב את המטופל, ואם אפשר גם להרים את הרגליים'.",
+      "time_limit": 90,
+      "points": 8
+    },
+    {
+      "id": "anaphylaxis_013",
+      "category": "resuscitation",
+      "topic": "anaphylaxis",
+      "difficulty": "medium",
+      "question": "מהו קצב המתן של פמוטידין (אנטיהיסטמין H2) דרך הוריד?",
+      "options": [
+        "בולוס מהיר (Push)",
+        "במשך 2 דקות לפחות",
+        "במשך שעה",
+        "בעירוי מתמשך ל-24 שעות"
+      ],
+      "correct_answer": 1,
+      "explanation": "הטקסט מציין לגבי פמוטידין: 'במשך 2 דקות לפחות'.",
+      "time_limit": 90,
+      "points": 10
+    },
+    {
+      "id": "anaphylaxis_014",
+      "category": "resuscitation",
+      "topic": "anaphylaxis",
+      "difficulty": "easy",
+      "question": "מהו המינון המקסימלי של סולומדרול (מתילפרדניזולון) למנה?",
+      "options": [
+        "50 mg",
+        "60 mg",
+        "100 mg",
+        "125 mg"
+      ],
+      "correct_answer": 3,
+      "explanation": "תחת גלוקוקורטיקואיד נכתב: 'מקסימום 125mg'.",
+      "time_limit": 90,
+      "points": 8
+    },
+    {
+      "id": "anaphylaxis_015",
+      "category": "resuscitation",
+      "topic": "anaphylaxis",
+      "difficulty": "medium",
+      "question": "באיזה מקרה ספציפי מציין הטקסט כי חובה לנטר גם את תפוקת השתן?",
+      "options": [
+        "בכל מקרה של פריחה עורית",
+        "במטופלים שקיבלו החזר נוזלים בגלל שוק היפוטנסיבי משמעותי",
+        "רק אם המטופל קיבל סטרואידים",
+        "רק אם המטופל מונשם"
+      ],
+      "correct_answer": 1,
+      "explanation": "תחת סעיף ניטור נכתב: 'ובמטופלים שקיבלו החזר נוזלים בגלל שוק היפוטנסיבי משמעותי, גם ניטור שתן'.",
+      "time_limit": 90,
+      "points": 10
+    }
+  ]
+}

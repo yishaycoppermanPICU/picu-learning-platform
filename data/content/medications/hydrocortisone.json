@@ -2,12 +2,19 @@
   "id": "hydrocortisone",
   "title": "הידרוקורטיזון (Hydrocortisone)",
   "genericName": "Hydrocortisone",
-  "commercialNames": ["Solu-Cortef"],
+  "commercialNames": [
+    "Solu-Cortef"
+  ],
   "category": "medications",
   "type": "corticosteroid",
   "difficulty": "intermediate",
   "order": 1,
-  "tags": ["שוק", "ספסיס", "אדרנל", "סטרואידים"],
+  "tags": [
+    "שוק",
+    "ספסיס",
+    "אדרנל",
+    "סטרואידים"
+  ],
   "content": [
     {
       "type": "definition",
@@ -41,7 +48,7 @@
           "options": [
             {
               "method": "מנה סטנדרטית",
-              "details": "2 mg/kg IV Bolus. מקסימום למנה: 100 mg"
+              "details": " 2mg/kg IV Bolus. מקסימום למנה:  100mg"
             }
           ]
         },
@@ -50,7 +57,7 @@
           "options": [
             {
               "method": "תינוקות וילדים",
-              "details": "2-3 mg/kg IV Stat, לאחר מכן מינון אחזקה כל 6 שעות"
+              "details": " 2-3mg/kg IV Stat, לאחר מכן מינון אחזקה כל 6 שעות"
             }
           ]
         }
@@ -61,6 +68,6 @@
     "תרופת הבחירה לשוק ספטי שאינו מגיב לנוראדרנלין/אדרנלין (חשד לאי ספיקת אדרנל יחסית)",
     "בשוק נותנים בבולוס מהיר"
   ],
-  "last_updated": "2025-01-01",
+  "last_updated": "2025-12-28",
   "author": "PICU Team"
 }

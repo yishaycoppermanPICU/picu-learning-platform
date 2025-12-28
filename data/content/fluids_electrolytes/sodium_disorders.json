@@ -5,7 +5,13 @@
   "category": "fluids_electrolytes",
   "difficulty": "advanced",
   "order": 2,
-  "tags": ["נתרן", "נוזלים", "בצקת מוחית", "התייבשות", "אלקטרוליטים"],
+  "tags": [
+    "נתרן",
+    "נוזלים",
+    "בצקת מוחית",
+    "התייבשות",
+    "אלקטרוליטים"
+  ],
   "content": [
     {
       "type": "definition",

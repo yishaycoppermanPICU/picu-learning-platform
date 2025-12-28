@@ -5,7 +5,12 @@
   "category": "medications",
   "difficulty": "intermediate",
   "order": 72,
-  "tags": ["אלקטרוליטים", "אסידוזיס", "היפרקלמיה", "ביקרבונט"],
+  "tags": [
+    "אלקטרוליטים",
+    "אסידוזיס",
+    "היפרקלמיה",
+    "ביקרבונט"
+  ],
   "content": [
     {
       "type": "indications",
@@ -80,7 +85,11 @@
         {
           "effect": "אלקלוזיס מטבולית",
           "description": "תיקון יתר → pH גבוה מדי.",
-          "symptoms": ["בלבול", "פרכוסים", "הפרעות קצב"],
+          "symptoms": [
+            "בלבול",
+            "פרכוסים",
+            "הפרעות קצב"
+          ],
           "prevention": "תקן לאט. בדוק גזים לאחר מנה."
         },
         {
@@ -102,7 +111,9 @@
         {
           "effect": "היפוקלצמיה (Ionized Calcium)",
           "description": "pH גבוה מוריד Ionized Calcium.",
-          "symptoms": ["טטניה"],
+          "symptoms": [
+            "טטניה"
+          ],
           "management": "בדוק Ionized Calcium."
         }
       ]

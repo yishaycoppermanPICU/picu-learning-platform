@@ -1,0 +1,174 @@
+{
+  "questions": [
+    {
+      "id": "blood_products_001",
+      "category": "hematology",
+      "topic": "blood_products_admin",
+      "difficulty": "medium",
+      "question": "מדוע אין לתת טסיות (PLT) באמצעות מכשיר IVAC?",
+      "options": [
+        "המכשיר גורם לקרישת הטסיות בצנרת",
+        "דחיפת הנוזל דרך הצינור ב-IVAC הורסת את הטרומבוציטים",
+        "ה-IVAC אינו מדויק במינונים קטנים של טסיות",
+        "המכשיר מחמם את הטסיות ופוגע ביעילותן"
+      ],
+      "correct_answer": 1,
+      "explanation": "בטקסט נכתב במפורש תחת דרך מתן טסיות: 'אין לתת טרומבוציטים בIVAC משום שדחיפת הנוזל דרך הצינור הורסת את הטרומבוציטים'.",
+      "time_limit": 90,
+      "points": 10
+    },
+    {
+      "id": "blood_products_002",
+      "category": "hematology",
+      "topic": "blood_products_admin",
+      "difficulty": "easy",
+      "question": "איזה סוג פלזמה (FFP) ייחשב כ'אוניברסלי' ויינתן למטופל שסוג דמו אינו ידוע?",
+      "options": [
+        "סוג O",
+        "סוג A",
+        "סוג B",
+        "סוג AB"
+      ],
+      "correct_answer": 3,
+      "explanation": "לפי הטקסט, למנת פלזמה מסוג AB אין שום אנטיגן, ולכן 'ניתן מנת פלזמה מסוג AB לכל מטופל שאנחנו לא יודעים מה סוג הדם שלו'.",
+      "time_limit": 90,
+      "points": 8
+    },
+    {
+      "id": "blood_products_003",
+      "category": "hematology",
+      "topic": "blood_products_admin",
+      "difficulty": "medium",
+      "question": "מהו תוקף מנת Cryoprecipitate (CRYO) לאחר הפשרה?",
+      "options": [
+        "24 שעות",
+        "5 ימים",
+        "6 שעות בלבד",
+        "4 שעות מקסימום"
+      ],
+      "correct_answer": 2,
+      "explanation": "הטקסט מציין כי 'בהפשרה המנה מתאימה ל-6 שעות בלבד'.",
+      "time_limit": 90,
+      "points": 10
+    },
+    {
+      "id": "blood_products_004",
+      "category": "hematology",
+      "topic": "blood_products_admin",
+      "difficulty": "hard",
+      "question": "מהו הדגש הייחודי בדרך המתן של Granulocytes בהשוואה לשאר מוצרי הדם המוזכרים?",
+      "options": [
+        "חובה לתת אותם עם פילטר כפול",
+        "יש לתת אותם רק בגרביטציה",
+        "יש לתת אותם ב-IVAC ללא פילטר, כיוון שהם נתקעים בפילטר דם",
+        "יש לחמם אותם לטמפרטורת הגוף לפני המתן"
+      ],
+      "correct_answer": 2,
+      "explanation": "תחת Granulocytes נכתב: 'דרך מתן: IVAC ללא פילטר, הם נתקעים בפילטר דם'.",
+      "time_limit": 120,
+      "points": 12
+    },
+    {
+      "id": "blood_products_005",
+      "category": "hematology",
+      "topic": "blood_products_admin",
+      "difficulty": "easy",
+      "question": "מהו משך הזמן המקסימלי המותר למתן מנת כדוריות דחוסות (PC)?",
+      "options": [
+        "שעה אחת",
+        "שעתיים",
+        "שלוש שעות",
+        "ארבע שעות"
+      ],
+      "correct_answer": 3,
+      "explanation": "תחת סעיף PC נכתב: 'משך מתן: מקסימום ארבע שעות'.",
+      "time_limit": 90,
+      "points": 8
+    },
+    {
+      "id": "blood_products_006",
+      "category": "hematology",
+      "topic": "blood_products_admin",
+      "difficulty": "medium",
+      "question": "אילו פקטורים ומרכיבים מצויים במוצר הדם Cryoprecipitate?",
+      "options": [
+        "רק פקטור 8 ופיברינוגן",
+        "פיברינוגן, פקטור 8, פקטור 13, פקטור פון וילברנד ופיברונקטין",
+        "כל פקטורי הקרישה הקיימים בפלזמה",
+        "טסיות ופקטורי קרישה ויטמין K תלויים"
+      ],
+      "correct_answer": 1,
+      "explanation": "הטקסט מפרט את תכולת ה-CRYO: 'פיברינוגן (פקטור I), פקטור VIII, פקטור XIII, פקטור פון וילברנד ופיברונקטין'.",
+      "time_limit": 120,
+      "points": 10
+    },
+    {
+      "id": "blood_products_007",
+      "category": "hematology",
+      "topic": "blood_products_admin",
+      "difficulty": "medium",
+      "question": "על פי 'המאזכר במחלקה' המוזכר בטקסט, באילו זמנים יש לבצע ניטור סימנים בעת מתן דם (PC)?",
+      "options": [
+        "בתחילה ובסיום בלבד",
+        "כל 5 דקות במשך העירוי",
+        "בתחילת מתן -> לאחר רבע שעה -> לאחר שעה -> לאחר שעתיים",
+        "בתחילת מתן -> לאחר חצי שעה -> בסיום העירוי"
+      ],
+      "correct_answer": 2,
+      "explanation": "הטקסט מבדיל בין נוהל משרד הבריאות לבין המאזכר במחלקה. לפי המאזכר במחלקה: 'מדידת סימנים בתחילת מתן -> לאחר רבע שעה -> לאחר שעה ->לאחר שעתיים'.",
+      "time_limit": 120,
+      "points": 10
+    },
+    {
+      "id": "blood_products_008",
+      "category": "hematology",
+      "topic": "blood_products_admin",
+      "difficulty": "easy",
+      "question": "מהם תנאי האחסון והתוקף של טסיות (PLT)?",
+      "options": [
+        "הקפאה במינוס 20 מעלות, תוקף לשנה",
+        "אוויר חדר, תוקף עד חמישה ימים מרגע ההנפקה",
+        "קירור ב-4 מעלות, תוקף ל-35 ימים",
+        "אוויר חדר, תוקף ל-24 שעות בלבד"
+      ],
+      "correct_answer": 1,
+      "explanation": "תחת סעיף טסיות נכתב: 'טסיות מאוחסנות באוויר חדר וטובות למתן עד חמישה ימים מרגע ההנפקה'.",
+      "time_limit": 90,
+      "points": 8
+    },
+    {
+      "id": "blood_products_009",
+      "category": "hematology",
+      "topic": "blood_products_admin",
+      "difficulty": "medium",
+      "question": "עבור איזה מהמוצרים הבאים מצוין בטקסט כי אין צורך בהקרנה לפני מתן?",
+      "options": [
+        "טסיות (PLT)",
+        "כדוריות דחוסות (PC)",
+        "FFP (Fresh Frozen Plasma)",
+        "כל מוצרי הדם חייבים הקרנה"
+      ],
+      "correct_answer": 2,
+      "explanation": "בטסיות וב-PC נכתב 'חייבת הקרנה'. ב-FFP נכתב במפורש: 'אין צורך בהקרנה'.",
+      "time_limit": 90,
+      "points": 10
+    },
+    {
+      "id": "blood_products_010",
+      "category": "hematology",
+      "topic": "blood_products_admin",
+      "difficulty": "medium",
+      "question": "מה ניתן לעשות עם מנת FFP שהופשרה?",
+      "options": [
+        "חובה להשתמש בה מיד, ואסור להקפיאה שנית",
+        "ניתן להשתמש בה תוך 6 שעות בלבד",
+        "ניתן להקפיא אותה שוב עד 24 שעות מרגע ההפשרה",
+        "היא טובה לשימוש בטמפרטורת החדר למשך 5 ימים"
+      ],
+      "correct_answer": 2,
+      "explanation": "בטקסט נכתב לגבי FFP: 'לאחר הפשרה ניתן להקפיא שוב עד 24 שעות מרגע ההפשרה'.",
+      "time_limit": 90,
+      "points": 10
+    }
+  ]
+}

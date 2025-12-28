@@ -1,11 +1,17 @@
 {
   "scenario_id": "hidden_enemy_01",
-  "title": "האויב הנסתר (The Hidden Enemy)",
-  "description": "תסמינים ויראליים המסתירים לוקמיה, ספסיס ותסמונת פירוק הגידול",
+  "title": "תרחיש מתגלגל 1",
+  "description": "תרחיש קליני מורכב עם התפתחות הדרגתית",
+  "background_image": "תמונת חדר טיפול נמרץ ילדים.png",
+  "background_settings": {
+    "overlay_opacity": 0.6,
+    "blur_amount": 3,
+    "gradient": true
+  },
   "difficulty": "hard",
   "estimated_time": 25,
   "category": "oncology_hematology",
-  "tags": ["לוקמיה", "TLS", "ספסיס", "שוק", "החייאה", "היפרקלמיה"],
+  "tags": ["אבחון", "טיפול", "החייאה", "ניהול משבר"],
   "learning_objectives": [
     "זיהוי מוקדם של ממאירות המטולוגית המוסווית כמחלה ויראלית",
     "ניהול שוק ספטי בילדים עם נויטרופניה",
@@ -25,6 +31,8 @@
       "id": 1,
       "type": "checklist_selection",
       "title": "הכנת החדר (Room Preparation)",
+      "image": "",
+      "_image_note": "להוסיף תמונה: שים שם קובץ (לדוגמה: 'room_prep_stage1.jpg') או URL. התמונה תוצג בראש השלב.",
       "time_limit": 120,
       "context": {
         "text": "🚨 שיחה ממיון: ילד בן 6, חום 39.5°C, הקאות, טכיקרדיה. קיבל 2 ליטר נוזלים במיון. מועבר כעת ל-PICU. הכינו את החדר!",
@@ -35,96 +43,162 @@
       "items": [
         {
           "id": "ambu_bag",
-          "name": "אמבו בג + מסכה (גודל מתאים)",
+          "name": "🫁 אמבו",
           "is_required": true,
           "type": "standard",
-          "category": "airway"
+          "category": "ניהול דרכי אוויר"
         },
         {
           "id": "guedel",
-          "name": "Oropharyngeal Airway (Guedel)",
+          "name": "👄 AW (Airway)",
           "is_required": true,
           "type": "standard",
-          "category": "airway"
+          "category": "ניהול דרכי אוויר"
         },
         {
-          "id": "resus_drugs",
-          "name": "תרופות החייאה (אדרנלין/אטרופין אמפולות)",
+          "id": "suction",
+          "name": "🔧 סקשן",
           "is_required": true,
           "type": "standard",
-          "category": "drugs"
+          "category": "ניהול דרכי אוויר"
+        },
+        {
+          "id": "oxygen_source",
+          "name": "💨 חמצן",
+          "is_required": true,
+          "type": "standard",
+          "category": "ניהול דרכי אוויר"
+        },
+        {
+          "id": "epinephrine",
+          "name": "💉 אדרנלין",
+          "is_required": true,
+          "type": "standard",
+          "category": "תרופות החייאה"
+        },
+        {
+          "id": "midazolam_resus",
+          "name": "💊 מידזולם",
+          "is_required": true,
+          "type": "standard",
+          "category": "תרופות החייאה"
+        },
+        {
+          "id": "atropine",
+          "name": "💧 אטרופין",
+          "is_required": true,
+          "type": "standard",
+          "category": "תרופות החייאה"
+        },
+        {
+          "id": "rocuronium_resus",
+          "name": "🚫 רוקורוניום",
+          "is_required": true,
+          "type": "standard",
+          "category": "תרופות החייאה"
+        },
+        {
+          "id": "ketamine_resus",
+          "name": "💊 קטמין",
+          "is_required": false,
+          "type": "distractor",
+          "category": "תרופות החייאה",
+          "note": "לא חיוני להחייאה ראשונית - משמש לאינדוקציה"
+        },
+        {
+          "id": "fentanyl_resus",
+          "name": "💊 פנטניל",
+          "is_required": false,
+          "type": "distractor",
+          "category": "תרופות החייאה",
+          "note": "לא חיוני להחייאה ראשונית - משמש להרגעה"
+        },
+        {
+          "id": "morphine_resus",
+          "name": "💊 מורפין",
+          "is_required": false,
+          "type": "distractor",
+          "category": "תרופות החייאה",
+          "note": "לא חיוני להחייאה ראשונית - משמש לשיכוך כאב"
         },
         {
           "id": "cpr_sheet",
-          "name": "טבלת תרופות החייאה לפי משקל",
+          "name": "📊 טבלת תרופות לפי משקל",
           "is_required": true,
           "type": "standard",
-          "category": "protocol"
+          "category": "פרוטוקולים"
         },
         {
           "id": "blood_consent",
-          "name": "טופס הסכמה למוצרי דם",
+          "name": "📋 טופס הסכמה לדם",
           "is_required": true,
           "type": "standard",
-          "category": "admin"
+          "category": "מינהלי"
         },
         {
           "id": "id_bands",
-          "name": "צמידי זיהוי (צהוב/אדום/ירוק)",
+          "name": "🎫 צמידי זיהוי",
           "is_required": true,
           "type": "standard",
-          "category": "safety"
+          "category": "בטיחות"
+        },
+        {
+          "id": "urinary_catheter",
+          "name": "🧪 קטטר שתן",
+          "is_required": true,
+          "type": "standard",
+          "category": "ניטור"
         },
         {
           "id": "syringe_pumps",
-          "name": "משאבות מזרקים (סט של 3)",
+          "name": "⚙️ משאבות מזרקים (3)",
           "is_required": true,
           "type": "specific",
-          "category": "equipment"
+          "category": "ציוד"
         },
         {
           "id": "norepinephrine",
-          "name": "מזרק נוראפינפרין מוכן",
+          "name": "💉 נוראפינפרין",
           "is_required": true,
           "type": "specific",
-          "category": "drugs"
+          "category": "תרופות"
         },
         {
           "id": "fluid_warmer",
-          "name": "מחמם נוזלים",
+          "name": "🌡️ מחמם נוזלים",
           "is_required": true,
           "type": "specific",
-          "category": "equipment"
+          "category": "ציוד"
         },
         {
           "id": "monitor_cables",
-          "name": "כבלי מוניטור (ECG/SpO2/NIBP)",
+          "name": "🔌 כבלי מוניטור",
           "is_required": true,
           "type": "specific",
-          "category": "monitoring"
+          "category": "ניטור"
         },
         {
           "id": "defib_pads",
-          "name": "רפידות דפיברילטור",
+          "name": "⚡ רפידות דפיברילטור",
           "is_required": false,
           "type": "distractor",
-          "category": "equipment",
+          "category": "ציוד",
           "penalty": "time"
         },
         {
           "id": "chest_tube",
-          "name": "ערכת חזה (Chest Tube Kit)",
+          "name": "🧰 ערכת צינור חזה",
           "is_required": false,
           "type": "distractor",
-          "category": "procedure",
+          "category": "פרוצדורות",
           "penalty": "time"
         },
         {
           "id": "lp_tray",
-          "name": "ערכת דקירת מותן (LP)",
+          "name": "🔬 ערכת דקירת מותן",
           "is_required": false,
           "type": "distractor",
-          "category": "procedure",
+          "category": "פרוצדורות",
           "penalty": "time"
         },
         {
@@ -308,12 +382,82 @@
       ]
     },
     {
+      "id": 2.5,
+      "type": "interactive_examination",
+      "title": "בדיקה פיזיקלית מפורטת",
+      "context": {
+        "text": "לפני שנמשיך בטיפול, בצע בדיקה פיזיקלית מלאה של המטופל. לחץ על אזורים שונים בגוף כדי לבצע את הבדיקה.",
+        "clinical_note": "המטופל רדום, מגיב לכאב, חיוור מאוד. נשימה מהירה ורדודה.",
+        "clinical_images": [
+          {
+            "file": "petechiae.jpg",
+            "caption": "פטכיות מפושטות על בית החזה",
+            "description": "פטכיות - נקודות דימום קטנות שלא נעלמות בלחיצה"
+          }
+        ]
+      },
+      "patient_findings": {
+        "fontanelle": {
+          "description": "מרפק בולט מעט",
+          "status_class": "abnormal",
+          "interpretation": "אפשרית עליה קלה בלחץ תוך גולגולתי - אך המטופל בן 6 ולא אמור להיות מרפק פתוח. זהו ממצא מופיע בבדיקה למטרות לימוד."
+        },
+        "pupils": {
+          "left": {
+            "size": 4,
+            "reactive": true,
+            "description": "אישון שמאל תקין - 4mm מגיב לאור"
+          },
+          "right": {
+            "size": 4,
+            "reactive": true,
+            "description": "אישון ימין תקין - 4mm מגיב לאור"
+          },
+          "symmetry": "✅ אישונים סימטריים ומגיבים",
+          "interpretation": "אין סימן לפגיעה נוירולוגית מוקדית"
+        },
+        "abdomen": {
+          "rigidity": "רכה",
+          "rigidity_class": "normal",
+          "tenderness": "כבד מוגדל 3 ס\"מ מתחת לקצה הצלעות, כואב בלחיצה",
+          "tenderness_class": "abnormal",
+          "guarding": "אין הגנה",
+          "additional_findings": "טחול מוגדל מעט (1-2 ס\"מ). הפטוספלנומגליה מעידה על אינפילטרציה לוקמית."
+        },
+        "heart": {
+          "sounds": "S1+S2 תקינים, טכיקרדיה 155 bpm",
+          "sounds_class": "abnormal",
+          "murmur": "אין אוושה",
+          "interpretation": "טכיקרדיה מפצה על מצב שוק/חום. לא נשמעים קולות לב חריגים."
+        },
+        "chest_drain": {
+          "output": "אין נקז חזה במטופל זה",
+          "status_class": "normal",
+          "color": "N/A",
+          "note": "לא הוכנס נקז - אין אינדיקציה"
+        },
+        "skin": {
+          "color": "חיוור מאוד, עור קר היקפית (קר למגע בידיים ורגליים)",
+          "color_class": "critical",
+          "temperature": "קר היקפית, חם מרכזית (Temp 39.5°C)",
+          "petechiae": "פטכיות מפושטות על בית החזה והגפיים - לא נעלמות בלחיצה",
+          "petechiae_class": "critical",
+          "turgor": "טורגור תקין - עור חוזר מיד למצבו",
+          "capillary_refill": "CRT > 3 שניות (מאוחר) - סימן לשוק",
+          "appearance": "קוטיס-שיש (Cutis Marmorata) - מפות של כלי דם על העור",
+          "interpretation": "⚠️ פטכיות + חיוורון → טרומבוציטופניה + אנמיה חמורות. CRT מושהה + קר היקפית מעידים על מצב שוק. קוטיס-שיש מצביע על ווזוקונסטריקציה היקפית."
+        }
+      },
+      "learning_note": "ממצאים אלו מעידים על: 1) ממאירות המטולוגית (פטכיות + הפטוספלנומגליה), 2) מצב שוק (טכיקרדיה + CRT מושהה + חיוורון), 3) אנמיה חמורה.",
+      "next_stage": 3
+    },
+    {
       "id": 3,
       "type": "branching_choice",
       "title": "ניהול שוק (Shock Management)",
       "time_limit": 60,
       "context": {
-        "text": "שוק עמיד לנוזלים (Fluid Refractory Shock). הריאות רטובות, כבד מוגדל, לחץ דם נמוך.",
+        "text": "שוק עמיד לנוזלים (Fluid Refractory Shock). בצקת ריאות, כבד מוגדל, לחץ דם נמוך.",
         "vitals": "HR 165, BP 65/35, Sat 90%, CVP elevated",
         "physical_exam": "רעשים בשתי הריאות, כבד +4 ס\"מ, קצוות קרים, Capillary refill 4 שניות",
         "labs_pending": "ממתינים לתוצאות מעבדה"

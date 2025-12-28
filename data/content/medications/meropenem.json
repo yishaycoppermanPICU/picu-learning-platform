@@ -5,7 +5,12 @@
   "category": "medications",
   "difficulty": "advanced",
   "order": 54,
-  "tags": ["אנטיביוטיקה", "carbapenem", "pseudomonas", "טווח רחב"],
+  "tags": [
+    "אנטיביוטיקה",
+    "carbapenem",
+    "pseudomonas",
+    "טווח רחב"
+  ],
   "content": [
     {
       "type": "indications",
@@ -28,10 +33,10 @@
           "items": [
             {
               "age": "ילדים מעל 3 חודשים",
-              "dosage": "20 mg/kg/dose",
+              "dosage": "20mg/kg/dose",
               "frequency": "כל 8 שעות",
               "max": "1 גרם למנה",
-              "notes": "מינון יומי: 60 mg/kg/day."
+              "notes": "מינון יומי: 60mg/kg/day."
             }
           ]
         },
@@ -39,7 +44,7 @@
           "name": "מניינגיטיס / Pseudomonas",
           "items": [
             {
-              "dosage": "40 mg/kg/dose",
+              "dosage": "40mg/kg/dose",
               "frequency": "כל 8 שעות",
               "max": "2 גרם למנה",
               "notes": "מינון גבוה לחדירה טובה ל-CSF ולכיסוי Pseudomonas."
@@ -51,12 +56,12 @@
           "items": [
             {
               "age": "< 7 ימים",
-              "dosage": "20 mg/kg",
+              "dosage": "20mg/kg",
               "frequency": "כל 12 שעות"
             },
             {
               "age": "7-28 ימים",
-              "dosage": "20 mg/kg",
+              "dosage": "20mg/kg",
               "frequency": "כל 8 שעות"
             }
           ]
@@ -84,7 +89,11 @@
         },
         {
           "name": "לא מכסה",
-          "list": ["MRSA", "Enterococcus faecium (VRE)", "Stenotrophomonas"]
+          "list": [
+            "MRSA",
+            "Enterococcus faecium (VRE)",
+            "Stenotrophomonas"
+          ]
         }
       ]
     },
@@ -100,7 +109,12 @@
         {
           "effect": "פרכוסים (Seizures)",
           "description": "נדיר, אבל חמור - במיוחד במינונים גבוהים או אי ספיקת כליות.",
-          "risk_factors": ["מניינגיטיס", "אי ספיקת כליות", "הפרעות קצב", "מינון גבוה"],
+          "risk_factors": [
+            "מניינגיטיס",
+            "אי ספיקת כליות",
+            "הפרעות קצב",
+            "מינון גבוה"
+          ],
           "management": "התאם מינון בחולי כליות. שקול EEG במצב לא ברור."
         },
         {
@@ -165,7 +179,7 @@
   ],
   "key_points": [
     "מרופנם הוא אנטיביוטיקה טווח רחב ביותר - מכסה Pseudomonas ואנאירובים.",
-    "מינון כללי: 20 mg/kg q8h. במניינגיטיס/Pseudomonas: 40 mg/kg q8h.",
+    "מינון כללי: 20mg/kg q8h. במניינגיטיס/Pseudomonas: 40mg/kg q8h.",
     "לא מכסה MRSA - שלב עם Vancomycin אם יש חשד.",
     "אינטראקציה מסוכנת עם Valproic Acid (דפלפט) - מוריד רמות.",
     "סיכון נמוך לפרכוסים (בניגוד ל-Imipenem)."

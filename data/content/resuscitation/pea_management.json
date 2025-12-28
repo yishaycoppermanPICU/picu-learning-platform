@@ -1,0 +1,260 @@
+{
+  "id": "pea_management",
+  "title": "PEA - Pulseless Electrical Activity",
+  "description": "זיהוי וטיפול ב-PEA - פעילות חשמלית ללא דופק, וגורמים רברסיביליים.",
+  "category": "resuscitation",
+  "difficulty": "advanced",
+  "order": 5,
+  "tags": [
+    "החייאה",
+    "PEA",
+    "דום לב",
+    "CPR",
+    "גורמים הפיכים"
+  ],
+  "content": [
+    {
+      "type": "definition",
+      "title": "הגדרה",
+      "text": "PEA (Pulseless Electrical Activity) היא הפרעת קצב המוגדרת כקצב חשמלי מסודר כלשהו המופיע ב-ECG, אך ללא פעילות לבבית אפקטיבית (אין דופק מישוש). ישנם גורמים רברסאביליים (הפיכים) ל-PEA שתיקונם עשוי להחזיר פעילות אפקטיבית בשילוב החייאה."
+    },
+    {
+      "type": "section",
+      "title": "מאפיינים קליניים",
+      "items": [
+        {
+          "name": "ממצאים",
+          "characteristics": [
+            "ECG מראה קצב חשמלי מסודר (QRS complexes)",
+            "אין דופק מישוש (פריפרי או מרכזי)",
+            "אין תפוקת לב אפקטיבית",
+            "המטופל חסר הכרה ואינו נושם"
+          ]
+        },
+        {
+          "name": "הבדל מ-Asystole",
+          "description": "ב-Asystole אין כלל פעילות חשמלית (קו ישר), ב-PEA יש פעילות חשמלית אך ללא מכניקה"
+        }
+      ]
+    },
+    {
+      "type": "causes",
+      "title": "גורמים הפיכים ל-PEA - ה-H's וה-T's",
+      "mnemonic": "ניתן לזכור את הגורמים כסימני ה-H וה-T",
+      "categories": [
+        {
+          "category": "ה-H's (Hypos and Hypers)",
+          "causes": [
+            {
+              "name": "Hypovolemia (היפוולמיה)",
+              "description": "מחסור בנפח דם",
+              "treatment": "החזר נוזלים/דם מהיר"
+            },
+            {
+              "name": "Hypoxia (היפוקסיה)",
+              "description": "חוסר חמצן",
+              "treatment": "הנשמה עם 100% חמצן, בדוק צינורית"
+            },
+            {
+              "name": "Hydrogen ion (Acidosis) - חמצת",
+              "description": "חומציות יתר בדם",
+              "treatment": "הנשמה, תיקון הגורם, שקול ביקרבונט"
+            },
+            {
+              "name": "Hypokalemia (היפוקלמיה)",
+              "description": "אשלגן נמוך",
+              "treatment": "מתן אשלגן IV"
+            },
+            {
+              "name": "Hyperkalemia (היפרקלמיה)",
+              "description": "אשלגן גבוה",
+              "treatment": "סידן, אינסולין+גלוקוז, ביקרבונט, דיאליזה"
+            },
+            {
+              "name": "Hypoglycemia (היפוגליקמיה)",
+              "description": "סוכר נמוך",
+              "treatment": "מתן גלוקוז IV"
+            },
+            {
+              "name": "Hypothermia (היפותרמיה)",
+              "description": "טמפרטורת גוף נמוכה",
+              "treatment": "חימום מדורג"
+            }
+          ]
+        },
+        {
+          "category": "ה-T's (Mechanical/Toxic)",
+          "causes": [
+            {
+              "name": "Toxins (טוקסינים)",
+              "description": "הרעלות",
+              "examples": [
+                "תרופות קרדיוטוקסיות",
+                "סמים",
+                "הרעלות"
+              ],
+              "treatment": "תרופת נגד ספציפית, הידבקות גיפטית"
+            },
+            {
+              "name": "Tamponade - Cardiac (טמפונדה לבבית)",
+              "description": "נוזל/דם בפריקרד הלוחץ על הלב",
+              "treatment": "פריקרדיוצנטזה דחופה"
+            },
+            {
+              "name": "Tension Pneumothorax (טנשן פנאומוטורקס)",
+              "description": "אוויר בלחץ בחזה",
+              "treatment": "דקומפרסיה במחט/צינורית חזה"
+            },
+            {
+              "name": "Thrombosis - Coronary (תרומבוזיס לבבי)",
+              "description": "קריש בכלי דם של הלב",
+              "treatment": "תרומבוליזה (נדיר בילדים)"
+            },
+            {
+              "name": "Thrombosis - Pulmonary (תרומבוזיס ריאתי)",
+              "description": "תסחיף ריאתי",
+              "treatment": "תרומבוליזה"
+            },
+            {
+              "name": "Trauma (טראומה)",
+              "description": "פגיעה טראומטית",
+              "treatment": "טיפול בפגיעות, שליטה על דימום"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "treatment",
+      "title": "פרוטוקול טיפול ב-PEA",
+      "sections": [
+        {
+          "name": "1. החייאה בסיסית (CPR)",
+          "critical": true,
+          "steps": [
+            "התחל CPR מיידית - לחיצות חזה איכותיות",
+            "קצב: 100-120 לחיצות לדקה",
+            "עומק: לפחות שליש עומק החזה (4 ס\"מ בתינוקות, 5 ס\"מ בילדים)",
+            "אפשר חזרה מלאה של דופן החזה בין לחיצות",
+            "הנשמה: 100% חמצן"
+          ],
+          "note": "⚠️ אין להלם (Shock) ב-PEA! הלם מיועד רק ל-VF/VT"
+        },
+        {
+          "name": "2. אדרנלין (Epinephrine)",
+          "drug": "Epinephrine",
+          "route": "IV/IO",
+          "dose": "0.01 mg/kg (0.1 מ\"ל/ק\"ג של 1:10,000)",
+          "max_dose": "1 mg",
+          "repeat": "כל 3-5 דקות במהלך ההחייאה",
+          "note": "מתן מוקדם ומהיר של אדרנלין חיוני!"
+        },
+        {
+          "name": "3. חיפוש וטיפול בגורם ההפיך",
+          "critical": true,
+          "approach": "עבור באופן שיטתי על כל ה-H's וה-T's",
+          "steps": [
+            "Hypovolemia? → בולוס נוזלים/דם 20 ml/kg",
+            "Hypoxia? → בדוק צינורית, שפר הנשמה, 100% O2",
+            "H+ (Acidosis)? → שפר הנשמה, שקול ביקרבונט",
+            "Hypo/Hyperkalemia? → בדוק אלקטרוליטים, טפל בהתאם",
+            "Hypoglycemia? → בדוק סוכר, תן גלוקוז",
+            "Hypothermia? → חמם את המטופל",
+            "Toxins? → נוגדן/תרופת נגד ספציפית",
+            "Tamponade? → פריקרדיוצנטזה",
+            "Tension Pneumothorax? → דקומפרסיה במחט",
+            "Thrombosis? → שקול תרומבוליזה",
+            "Trauma? → שלוט על דימום, טפל בפגיעות"
+          ]
+        },
+        {
+          "name": "4. שיקולים נוספים",
+          "items": [
+            "בדוק מיקום צינורית אנדוטרכיאלית",
+            "ודא גישה וסקולרית תקינה (IV/IO)",
+            "שקול אולטרסאונד בזמן אמת (Point-of-care US) לזיהוי גורמים",
+            "הימנע מהפסקות בלחיצות חזה"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "monitoring",
+      "title": "מעקב והערכה",
+      "items": [
+        {
+          "parameter": "ECG רציף",
+          "purpose": "זיהוי שינוי לקצב אחר (VF/VT/Asystole/ROSC)"
+        },
+        {
+          "parameter": "ETCO2 (End-Tidal CO2)",
+          "purpose": "מדד לאיכות ההחייאה ולסיכוי להחלמה",
+          "target": "> 10-20 mmHg מצביע על CPR איכותי"
+        },
+        {
+          "parameter": "בדיקות מעבדה חוזרות",
+          "tests": [
+            "גזים בדם",
+            "אלקטרוליטים",
+            "סוכר",
+            "לקטט"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "clinical_pearls",
+      "title": "פנינים קליניות",
+      "items": [
+        "PEA אינה הפרעת קצב 'שוקבילית' - אין להלם!",
+        "ההצלחה ב-PEA תלויה בזיהוי וטיפול בגורם ההפיך.",
+        "היפרקלמיה היא גורם נפוץ ל-PEA בילדים עם אי ספיקת כליות.",
+        "טנשן פנאומוטורקס וטמפונדה - חשוב לזכור בטראומה!",
+        "ETCO2 נמוך מאוד (<10) במהלך החייאה = פרוגנוזה גרועה.",
+        "בטראומה - חשבו על המוטורקס מאסיבי כגורם ל-PEA."
+      ]
+    }
+  ],
+  "key_points": [
+    "PEA = קצב חשמלי מסודר ב-ECG ללא דופק או תפוקת לב אפקטיבית.",
+    "❌ אין להלם ב-PEA! רק החייאה + אדרנלין + טיפול בגורם.",
+    "גורמים הפיכים: ה-H's וה-T's - חייבים לזכור ולחפש שיטתית!",
+    "ה-H's: Hypovolemia, Hypoxia, H+ (Acidosis), Hypo/Hyperkalemia, Hypoglycemia, Hypothermia.",
+    "ה-T's: Toxins, Tamponade, Tension Pneumothorax, Thrombosis (coronary/pulmonary), Trauma.",
+    "טיפול: CPR איכותי + אדרנלין כל 3-5 דקות + תיקון הגורם ההפיך.",
+    "ההצלחה תלויה בזיהוי מהיר של הגורם והתערבות ספציפית."
+  ],
+  "critical_alerts": [
+    "🚨 אין להלם ב-PEA - זה בזבוז זמן קריטי!",
+    "🚨 היפרקלמיה חמורה עלולה לגרום ל-PEA - טפל בסידן IV מיידית!",
+    "🚨 טמפונדה/טנשן פנאומוטורקס - התערבות פרוצדורלית דחופה (ניקוז/דקומפרסיה)!",
+    "🚨 אדרנלין מוקדם חיוני - כל 3-5 דקות!"
+  ],
+  "mnemonic": {
+    "title": "דרך לזכור - ה-H's וה-T's",
+    "H_causes": [
+      "Hypovolemia - היפוולמיה",
+      "Hypoxia - היפוקסיה",
+      "Hydrogen ion (Acidosis) - חמצת",
+      "Hypokalemia - היפוקלמיה",
+      "Hyperkalemia - היפרקלמיה",
+      "Hypoglycemia - היפוגליקמיה",
+      "Hypothermia - היפותרמיה"
+    ],
+    "T_causes": [
+      "Toxins - טוקסינים",
+      "Tamponade - טמפונדה",
+      "Tension Pneumothorax - טנשן פנאומוטורקס",
+      "Thrombosis (coronary) - תרומבוזיס לבבי",
+      "Thrombosis (pulmonary) - תסחיף ריאתי",
+      "Trauma - טראומה"
+    ]
+  },
+  "references": [
+    "PALS Guidelines - Pediatric Advanced Life Support",
+    "AHA Pediatric Resuscitation Guidelines"
+  ],
+  "last_updated": "2025-12-27",
+  "author": "PICU Team",
+  "version": "1.0"
+}

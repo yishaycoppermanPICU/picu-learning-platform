@@ -1,0 +1,13 @@
+{
+  "corrections": [
+    {
+      "id": "corr_0001",
+      "category": "medications",
+      "topic_id": "furosemide",
+      "user_email": "yishaycopp@gmail.com",
+      "correction_text": "הסדר של המינונים כתוב לא נכון",
+      "timestamp": "2025-12-28T08:19:37.421125",
+      "status": "pending"
+    }
+  ]
+}

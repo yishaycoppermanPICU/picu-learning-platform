@@ -25,7 +25,7 @@
       "items": [
         {
           "name": "מינון פומי",
-          "description": "0.5-3 mg/kg/dose כל 6-12 שעות",
+          "description": "0.5-3mg/kg/dose כל 6-12 שעות",
           "management": ["⚠️ אין לשלב עם ניטרטים (סכנת נפילת ל\"ד חמורה)"]
         }
       ]

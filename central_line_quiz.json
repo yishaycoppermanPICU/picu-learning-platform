@@ -1,0 +1,174 @@
+{
+  "questions": [
+    {
+      "id": "central_line_001",
+      "category": "monitoring",
+      "topic": "central_line_management",
+      "difficulty": "easy",
+      "question": "אילו מהצנתרים הבאים מוגדרים כצנתרים 'עם תעלה' (Tunneled)?",
+      "options": [
+        "PICC ו-CVC",
+        "Port-a-cath ו-Mediporat",
+        "Hickman, Permacath, Broviac",
+        "רק Hickman ו-PICC"
+      ],
+      "correct_answer": 2,
+      "explanation": "הטקסט מסווג את הצנתרים לקטגוריות, ותחת הקטגוריה 'עם תעלה' מופיעים: Hickman, Permacath, Broviac.",
+      "time_limit": 90,
+      "points": 8
+    },
+    {
+      "id": "central_line_002",
+      "category": "monitoring",
+      "topic": "central_line_management",
+      "difficulty": "easy",
+      "question": "מדוע לא מומלץ להחדיר צנתר מרכזי (CVC) בוריד הפמורלי?",
+      "options": [
+        "בשל קושי טכני בהחדרה",
+        "בשל חשש לזיהום",
+        "בשל חוסר נוחות למטופל בזמן הליכה",
+        "בשל הסיכון לפגיעה בעורק הפמורלי"
+      ],
+      "correct_answer": 1,
+      "explanation": "תחת סעיף CVC נכתב במפורש: 'לא מומלץ בוריד פמורלי בשל חשש לזיהום'.",
+      "time_limit": 90,
+      "points": 8
+    },
+    {
+      "id": "central_line_003",
+      "category": "monitoring",
+      "topic": "central_line_management",
+      "difficulty": "easy",
+      "question": "מהו משך השימוש המוגדר עבור צנתר מסוג PICC?",
+      "options": [
+        "עד 6 שבועות",
+        "3-12 חודשים",
+        "שנה ומעלה",
+        "עד 96 שעות"
+      ],
+      "correct_answer": 1,
+      "explanation": "תחת סעיף PICC מוגדר משך השימוש: '3-12 חודשים'.",
+      "time_limit": 90,
+      "points": 8
+    },
+    {
+      "id": "central_line_004",
+      "category": "monitoring",
+      "topic": "central_line_management",
+      "difficulty": "medium",
+      "question": "מהי תדירות שטיפת הצנתר הנדרשת בצנתר מסוג פורט (Port-a-Cath)?",
+      "options": [
+        "כל 24 שעות",
+        "כל שבוע",
+        "כל 6-8 שבועות",
+        "כל 3-12 חודשים"
+      ],
+      "correct_answer": 2,
+      "explanation": "תחת עקרונות הטיפול בפורט נכתב: 'הקפדה על שטיפת הצנתר כל 6-8 שבועות'.",
+      "time_limit": 90,
+      "points": 10
+    },
+    {
+      "id": "central_line_005",
+      "category": "monitoring",
+      "topic": "central_line_management",
+      "difficulty": "medium",
+      "question": "כל כמה זמן יש להחליף מערכת עירוי ששימשה להזלפת פרופופול, על פי הנוהג במחלקה המוזכר בטקסט?",
+      "options": [
+        "כל 24 שעות",
+        "כל 12 שעות",
+        "כל 6 שעות",
+        "כל 96 שעות"
+      ],
+      "correct_answer": 2,
+      "explanation": "בטקסט נכתב: 'החלפת מערכת עירוי ששימשה להזלפת פרופופול, כל 6-12 שעות (במחלקה נהוג 6 שעות)'.",
+      "time_limit": 90,
+      "points": 10
+    },
+    {
+      "id": "central_line_006",
+      "category": "monitoring",
+      "topic": "central_line_management",
+      "difficulty": "easy",
+      "question": "מתי תבוצע החלפת החבישה הראשונית בצנתר מרכזי?",
+      "options": [
+        "מיד עם רחצה ראשונה",
+        "לאחר 24 שעות",
+        "לאחר 48 שעות",
+        "לאחר 7 ימים"
+      ],
+      "correct_answer": 1,
+      "explanation": "תחת הנחיות החלפת חבישה לצנתר מרכזי נכתב: 'החלפת חבישה ראשונית תעשה לאחר 24 שעות'.",
+      "time_limit": 90,
+      "points": 8
+    },
+    {
+      "id": "central_line_007",
+      "category": "monitoring",
+      "topic": "central_line_management",
+      "difficulty": "medium",
+      "question": "מהו הפרוטוקול להחלפת ציוד (סט, ברזים וונטילים) בפגים ותינוקות מתחת לגיל חודשיים?",
+      "options": [
+        "כל 96 שעות כמו במבוגרים",
+        "כל 12 שעות",
+        "כל 24 שעות",
+        "כל 7 ימים"
+      ],
+      "correct_answer": 2,
+      "explanation": "המשפט האחרון בטקסט קובע: 'בפגים ותינוקות מתחת לגיל חודשיים, החלפת סט, ברזים וונטילים כל 24 שעות'.",
+      "time_limit": 90,
+      "points": 10
+    },
+    {
+      "id": "central_line_008",
+      "category": "monitoring",
+      "topic": "central_line_management",
+      "difficulty": "easy",
+      "question": "מהי התדירות להחלפת חבישה שקופה חצי נושמת (טגדרם) בצנתר פריפרי?",
+      "options": [
+        "כל 24 שעות",
+        "כל 48 שעות",
+        "כל 3-7 ימים",
+        "רק כאשר היא מתלכלכת"
+      ],
+      "correct_answer": 2,
+      "explanation": "תחת החלפת חבישה לצנתר פריפרי נכתב: 'חבישה שקופה חצי נושמת (טגדרם) – תוחלף כל 3-7 ימים'.",
+      "time_limit": 90,
+      "points": 8
+    },
+    {
+      "id": "central_line_009",
+      "category": "monitoring",
+      "topic": "central_line_management",
+      "difficulty": "medium",
+      "question": "עבור אילו מטופלים מתאים במיוחד השימוש בצנתר היקמן (Hickman)?",
+      "options": [
+        "מטופלים הזקוקים לטיפול קצר טווח בנוזלים בלבד",
+        "מטופלים הזקוקים לניטור לחץ תוך ורידי (CVP) בלבד לזמן קצר",
+        "מושתלי מח עצם, תאי אב ומטופלים אונקולוגים המצריכים טיפול ממושך",
+        "מטופלים בחדר מיון הזקוקים לעירוי דחוף"
+      ],
+      "correct_answer": 2,
+      "explanation": "תחת שימושים מרכזיים להיקמן נכתב: 'מתאים... למושתלי מח עצם ותאי אב, ולמטופלים המטולוגים ואונקולגים המצריכים טיפול כימי וזיקינטי תוך ורידי ממושך'.",
+      "time_limit": 90,
+      "points": 10
+    },
+    {
+      "id": "central_line_010",
+      "category": "monitoring",
+      "topic": "central_line_management",
+      "difficulty": "easy",
+      "question": "כל כמה זמן יש להחליף ונטיל שנמצא בשימוש קבוע?",
+      "options": [
+        "כל 24 שעות",
+        "כל 72 שעות",
+        "כל 96 שעות",
+        "אחת ל-7 ימים"
+      ],
+      "correct_answer": 2,
+      "explanation": "תחת סעיף החלפת ונטיל נכתב: 'בשימוש קבוע כל 96 שעות' (ללא שימוש זה אחת ל-7 ימים).",
+      "time_limit": 90,
+      "points": 8
+    }
+  ]
+}

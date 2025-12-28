@@ -180,10 +180,30 @@ def save_quiz_result(user_email: str, quiz_data: Dict) -> bool:
     
     user_data['quizzes'].append(quiz_result)
     
-    # Save
+    # Save to file
     try:
         with open(user_file, 'w', encoding='utf-8') as f:
             json.dump(user_data, f, ensure_ascii=False, indent=2)
+        
+        # עדכון ניקוד המשתמש במסד הנתונים
+        try:
+            from utils.database import init_supabase
+            supabase = init_supabase()
+            if supabase:
+                # קבלת הניקוד הנוכחי
+                current_user = supabase.table('users').select('score').eq('email', user_email).execute()
+                current_score = 0
+                if current_user.data and len(current_user.data) > 0:
+                    current_score = current_user.data[0].get('score', 0)
+                
+                # הוספת הנקודות החדשות
+                new_score = current_score + int(quiz_data.get('points_earned', 0))
+                
+                # עדכון במסד הנתונים
+                supabase.table('users').update({'score': new_score}).eq('email', user_email).execute()
+        except Exception as db_error:
+            print(f"Warning: Could not update user score in database: {db_error}")
+        
         return True
     except Exception as e:
         print(f"Error saving quiz result: {e}")

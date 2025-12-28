@@ -9,95 +9,253 @@ from datetime import datetime
 sys.path.append(str(Path(__file__).parent.parent))
 
 from utils.content_manager import restore_user_session
+from utils.styles import get_common_styles
 
 st.set_page_config(
     page_title="תרחישים מתגלגלים",
     page_icon="🎬",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="collapsed"
 )
 
 # Restore user session if available
 restore_user_session(st)
 
-# CSS
+# CSS מרכזי
+st.markdown(get_common_styles(), unsafe_allow_html=True)
+
+# CSS נוסף ספציפי לדף
 st.markdown("""
 <style>
-    .stApp {
-        direction: rtl;
-        text-align: right;
+    /* סיידבר סגור תמיד */
+    [data-testid="stSidebar"] {
+        display: none !important;
     }
     
-    h1, h2, h3, h4, h5, h6, p, label, span, li {
-        text-align: right;
-        direction: rtl;
+    [data-testid="collapsedControl"] {
+        display: none !important;
+    }
+    
+    /* רקע כללי - חזק וברור */
+    .main {
+        background: linear-gradient(135deg, #1a1f2e 0%, #2a2f3e 50%, #1f2329 100%) !important;
+    }
+    
+    .main * {
+        color: #ffffff !important;
+        font-size: 1.3rem !important;
+    }
+    
+    /* הגדלת כל הפונטים */
+    body {
+        font-size: 1.3rem !important;
+    }
+    
+    h1 {
+        font-size: 3rem !important;
+    }
+    
+    h2 {
+        font-size: 2.5rem !important;
+    }
+    
+    h3 {
+        font-size: 2rem !important;
+    }
+    
+    p, div, span, label {
+        font-size: 1.3rem !important;
+    }
+    
+    button {
+        font-size: 1.2rem !important;
+    }
+    
+    /* כרטיס התרחיש */
+    .scenario-container {
+        background: rgba(46, 54, 72, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        margin: 1rem 0;
+        box-shadow: 
+            0 10px 40px rgba(0,0,0,0.5),
+            inset 0 1px 0 rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.1);
     }
     
     .scenario-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 2rem;
-        border-radius: 10px;
+        background: rgba(102, 126, 234, 0.95);
+        backdrop-filter: blur(10px);
+        color: #ffffff !important;
+        padding: 2.5rem;
+        border-radius: 15px;
         text-align: center;
         margin-bottom: 2rem;
+        box-shadow: 
+            0 8px 32px rgba(102, 126, 234, 0.4),
+            inset 0 1px 0 rgba(255,255,255,0.2);
     }
     
+    .scenario-header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    /* כרטיס שלב */
     .stage-card {
-        background: white;
-        padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        margin: 1rem 0;
-        border-right: 4px solid #667eea;
+        background: linear-gradient(145deg, #2a3548 0%, #1f2937 100%);
+        padding: 2.5rem;
+        border-radius: 15px;
+        box-shadow: 
+            0 8px 24px rgba(0,0,0,0.4),
+            inset 0 1px 0 rgba(255,255,255,0.1);
+        margin: 1.5rem 0;
+        border-right: 5px solid #667eea;
+        color: #e5e7eb;
     }
     
+    /* רשימת בדיקה */
     .checklist-item {
-        background: #f8f9fa;
-        padding: 1rem;
-        margin: 0.5rem 0;
-        border-radius: 5px;
-        border-right: 3px solid #28a745;
+        background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+        padding: 1.2rem;
+        margin: 0.8rem 0;
+        border-radius: 10px;
+        border-right: 4px solid #10b981;
+        color: #f3f4f6;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        transition: all 0.3s ease;
     }
     
-    .patient-vitals {
-        background: #fff3cd;
-        padding: 1rem;
-        border-radius: 5px;
-        border: 2px solid #ffc107;
-        margin: 1rem 0;
+    .checklist-item:hover {
+        transform: translateX(-5px);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
     }
     
+    /* אזהרה קריטית */
     .critical-warning {
-        background: #f8d7da;
-        color: #721c24;
-        padding: 1rem;
-        border-radius: 5px;
-        border: 2px solid #dc3545;
-        margin: 1rem 0;
+        background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);
+        color: #fecaca;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 2px solid #dc2626;
+        margin: 1.5rem 0;
         font-weight: bold;
+        font-size: 1.1rem;
+        box-shadow: 
+            0 8px 24px rgba(220, 38, 38, 0.4),
+            inset 0 1px 0 rgba(255,255,255,0.1);
+        animation: pulse-warning 2s ease-in-out infinite;
     }
     
+    @keyframes pulse-warning {
+        0%, 100% { box-shadow: 0 8px 24px rgba(220, 38, 38, 0.4); }
+        50% { box-shadow: 0 8px 32px rgba(220, 38, 38, 0.7); }
+    }
+    
+    /* הודעת הצלחה */
     .success-message {
-        background: #d4edda;
-        color: #155724;
-        padding: 1rem;
-        border-radius: 5px;
-        border: 2px solid #28a745;
-        margin: 1rem 0;
+        background: linear-gradient(135deg, #065f46 0%, #064e3b 100%);
+        color: #d1fae5;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 2px solid #10b981;
+        margin: 1.5rem 0;
+        font-weight: 600;
+        box-shadow: 
+            0 8px 24px rgba(16, 185, 129, 0.4),
+            inset 0 1px 0 rgba(255,255,255,0.1);
     }
     
+    /* טיימר */
     .timer {
         position: fixed;
         top: 80px;
         left: 20px;
-        background: #dc3545;
+        background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
         color: white;
-        padding: 1rem;
-        border-radius: 10px;
+        padding: 1.2rem 1.5rem;
+        border-radius: 12px;
         font-size: 1.5rem;
         font-weight: bold;
         z-index: 1000;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        box-shadow: 
+            0 8px 24px rgba(220, 38, 38, 0.6),
+            inset 0 1px 0 rgba(255,255,255,0.2);
+        animation: pulse-timer 1s ease-in-out infinite;
     }
+    
+    @keyframes pulse-timer {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    
+    /* כפתורים משופרים */
+    .stButton>button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        transition: all 0.3s ease;
+    }
+    
+    .stButton>button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(102, 126, 234, 0.6);
+    }
+    
+    /* תיבות סימון - טקסט כהה וקריא */
+    .stCheckbox {
+        background: rgba(255, 255, 255, 0.15) !important;
+        padding: 0.8rem;
+        border-radius: 8px;
+        margin: 0.5rem 0;
+    }
+    
+    .stCheckbox label {
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        font-size: 1.05rem !important;
+    }
+    
+    .stCheckbox label span {
+        color: #ffffff !important;
+    }
+    
+    /* כותרות - טקסט ממש כהה */
+    h1, h2, h3, h4, h5, h6 {
+        color: #ffffff !important;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        font-weight: 700 !important;
+    }
+    
+    /* פסקאות וטקסט - כל הטקסט כהה */
+    p, li, span, div, label, a {
+        color: #ffffff !important;
+        font-weight: 500 !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+    
+    /* טקסט חזק יותר */
+    strong, b {
+        color: #ffffff !important;
+        font-weight: 800 !important;
+    }
+    
+    /* תיבות מידע - טקסט כהה */
+    .stAlert, .stInfo, .stWarning, .stSuccess, .stError {
+        background: rgba(255, 255, 255, 0.2) !important;
+        color: #ffffff !important;
+        color: #f3f4f6 !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -143,6 +301,123 @@ if not st.session_state.get('logged_in', False):
 
 user = st.session_state.get('user', {})
 
+# Add background image if scenario has one
+def add_background_image(scenario):
+    """הוסף תמונת רקע לתרחיש אם קיימת"""
+    bg_image = scenario.get('background_image', '')
+    if bg_image:
+        import base64
+        img_path = Path(__file__).parent.parent / "data" / "scenarios" / "images" / bg_image
+        if img_path.exists():
+            try:
+                from PIL import Image
+                import io
+                
+                # Compress and encode image
+                img = Image.open(img_path)
+                if img.width > 1920:
+                    ratio = 1920 / img.width
+                    new_size = (1920, int(img.height * ratio))
+                    img = img.resize(new_size, Image.Resampling.LANCZOS)
+                
+                buffer = io.BytesIO()
+                img.save(buffer, format='JPEG', quality=75, optimize=True)
+                img_base64 = base64.b64encode(buffer.getvalue()).decode()
+                
+                st.markdown(f"""
+                <style>
+                    .stApp {{
+                        background-image: url(data:image/jpeg;base64,{img_base64});
+                        background-size: cover;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-attachment: fixed;
+                    }}
+                    .stApp::before {{
+                        content: "";
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.5);
+                        z-index: -1;
+                    }}
+                </style>
+                """, unsafe_allow_html=True)
+            except Exception as e:
+                st.warning(f"לא ניתן לטעון תמונת רקע: {e}")
+    if bg_image:
+        # Settings
+        settings = scenario.get('background_settings', {})
+        overlay_opacity = settings.get('overlay_opacity', 0.6)
+        
+        # Display image using st.image with custom CSS
+        bg_path = Path(__file__).parent.parent / "data" / "scenarios" / "images" / bg_image
+        
+        if bg_path.exists():
+            # Use custom HTML/CSS for background
+            st.markdown(f"""
+            <style>
+                [data-testid="stAppViewContainer"] {{
+                    background: linear-gradient(180deg, 
+                        rgba(26,31,46,{overlay_opacity}) 0%, 
+                        rgba(31,35,41,{overlay_opacity + 0.1}) 100%);
+                }}
+                
+                [data-testid="stAppViewContainer"]::before {{
+                    content: '';
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-image: url('data:image/png;base64,__IMAGE_PLACEHOLDER__');
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    z-index: -1;
+                    opacity: 0.4;
+                }}
+                
+                .main {{
+                    background: transparent !important;
+                }}
+            </style>
+            """, unsafe_allow_html=True)
+        
+        elif bg_image.startswith('http'):
+            # URL image
+            gradient_css = ""
+            if use_gradient:
+                gradient_css = "linear-gradient(180deg, rgba(10,14,39,0.7) 0%, rgba(10,14,39,0.9) 100%),"
+            
+            st.markdown(f"""
+            <style>
+                .main {{
+                    background: 
+                        {gradient_css}
+                        url({bg_image});
+                    background-size: cover;
+                    background-position: center;
+                    background-attachment: fixed;
+                    background-repeat: no-repeat;
+                }}
+                
+                .main::before {{
+                    content: '';
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(10, 14, 39, {overlay_opacity});
+                    backdrop-filter: blur({blur_amount}px);
+                    z-index: -1;
+                }}
+            </style>
+            """, unsafe_allow_html=True)
+
 # Header
 st.markdown("""
 <div class="scenario-header">
@@ -158,11 +433,64 @@ if not scenarios:
     st.warning("לא נמצאו תרחישים זמינים. נא ליצור קבצי תרחישים בתיקייה data/scenarios/")
     st.stop()
 
+# Add background image to main selection page too
+default_bg = Path(__file__).parent.parent / "data" / "scenarios" / "images" / "תמונת חדר טיפול נמרץ ילדים.png"
+if default_bg.exists():
+    try:
+        import base64
+        from PIL import Image
+        import io
+        
+        img = Image.open(default_bg)
+        if img.width > 1920:
+            ratio = 1920 / img.width
+            new_size = (1920, int(img.height * ratio))
+            img = img.resize(new_size, Image.Resampling.LANCZOS)
+        
+        buffer = io.BytesIO()
+        img.save(buffer, format='JPEG', quality=75, optimize=True)
+        img_base64 = base64.b64encode(buffer.getvalue()).decode()
+        
+        st.markdown(f"""
+        <style>
+            .stApp {{
+                background-image: url(data:image/jpeg;base64,{img_base64});
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }}
+            .stApp::before {{
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: -1;
+            }}
+        </style>
+        """, unsafe_allow_html=True)
+    except:
+        pass
+
 # Scenario Selection Screen
 if not st.session_state.scenario_active:
     st.markdown("### 🎯 בחר תרחיש")
     
     for scenario in scenarios:
+        # כל תרחיש בקופסה חצי שקופה
+        st.markdown("""
+        <div style="background: rgba(30, 35, 50, 0.9); 
+                    backdrop-filter: blur(10px);
+                    border-radius: 15px; 
+                    padding: 2rem; 
+                    margin: 1.5rem 0;
+                    border: 1px solid rgba(102, 126, 234, 0.3);
+                    box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+        """, unsafe_allow_html=True)
+        
         with st.container():
             col1, col2, col3 = st.columns([3, 1, 1])
             
@@ -193,14 +521,22 @@ if not st.session_state.scenario_active:
                     st.session_state.selections = {}
                     st.session_state.score = 0
                     st.session_state.stage_start_time = datetime.now()
+                    
+                    # Apply background image
+                    add_background_image(scenario)
+                    
                     st.rerun()
-            
-            st.markdown("---")
+        
+        st.markdown("</div>", unsafe_allow_html=True)
+        st.markdown("---")
 
 # Active Scenario Screen
 else:
     scenario = st.session_state.current_scenario
     current_stage_idx = st.session_state.current_stage
+    
+    # Apply background image for active scenario
+    add_background_image(scenario)
     
     # Check if scenario is complete or if we're at conclusion stage
     if current_stage_idx >= len(scenario['stages']):
@@ -292,20 +628,135 @@ else:
         else:
             st.markdown('<div class="timer">⏱️ הזמן תם!</div>', unsafe_allow_html=True)
     
-    # Display patient vitals
+    # Display patient vitals on monitor (left side, smaller)
     if st.session_state.patient_state:
-        st.markdown(f"""
-        <div class="patient-vitals">
-            <h4>פרמטרים המודינמיים</h4>
-            <p><strong>BP:</strong> {st.session_state.patient_state.get('bp', 'N/A')} | 
-            <strong>HR:</strong> {st.session_state.patient_state.get('hr', 'N/A')} | 
-            <strong>SpO2:</strong> {st.session_state.patient_state.get('sat', 'N/A')}% |
-            <strong>RR:</strong> {st.session_state.patient_state.get('rr', 'N/A')}</p>
-        </div>
-        """, unsafe_allow_html=True)
+        from utils.monitor_display import create_monitor_display
+        from utils.icu_sounds import create_icu_ambient_sound
+        import random
+        
+        # Create three columns: left for monitor, middle for images, right for text
+        mon_col, img_col, info_col = st.columns([1, 1, 2])
+        
+        with mon_col:
+            # Add slight variation to vitals for realism (±1-2)
+            # Use stage number as seed for consistency within same stage
+            random.seed(current_stage_idx * 100)
+            
+            def add_variation(value, variation_range=2):
+                """הוסף וריאציה קלה לערך"""
+                if value == '--' or not isinstance(value, (int, float)):
+                    return value
+                variation = random.randint(-variation_range, variation_range)
+                return max(0, int(value + variation))
+            
+            def vary_bp(bp_str):
+                """הוסף וריאציה ללחץ דם"""
+                if bp_str == '--/--' or '/' not in str(bp_str):
+                    return bp_str
+                try:
+                    sys, dia = map(int, str(bp_str).split('/'))
+                    sys_var = random.randint(-3, 3)
+                    dia_var = random.randint(-2, 2)
+                    return f"{max(40, sys + sys_var)}/{max(20, dia + dia_var)}"
+                except:
+                    return bp_str
+            
+            vitals = {
+                'hr': add_variation(st.session_state.patient_state.get('hr', '--'), 3),
+                'bp': vary_bp(st.session_state.patient_state.get('bp', '--/--')),
+                'sat': add_variation(st.session_state.patient_state.get('sat', '--'), 1),
+                'rr': add_variation(st.session_state.patient_state.get('rr', '--'), 2),
+                'temp': st.session_state.patient_state.get('temp', '--')
+            }
+            
+            # Scale down monitor for side display
+            st.markdown('<div style="transform: scale(0.65); transform-origin: top left;">', unsafe_allow_html=True)
+            create_monitor_display(vitals)
+            st.markdown('</div>', unsafe_allow_html=True)
+            
+            # Add ICU ambient sounds
+            create_icu_ambient_sound(vitals)
+        
+        with img_col:
+            # Display clinical images between monitor and text
+            if 'context' in stage:
+                context = stage['context']
+                if isinstance(context, dict) and 'clinical_images' in context:
+                    st.markdown("### 📸 ממצאים")
+                    for img_info in context['clinical_images']:
+                        img_path = Path(__file__).parent.parent / "data" / "scenarios" / "images" / img_info['file']
+                        if img_path.exists():
+                            st.image(str(img_path), caption=img_info.get('caption', ''), use_container_width=True)
+                        else:
+                            st.markdown(f"""
+                            <div style="background: rgba(102, 126, 234, 0.2); 
+                                        padding: 1rem; 
+                                        border-radius: 8px; 
+                                        border: 2px dashed rgba(102, 126, 234, 0.5);
+                                        text-align: center;
+                                        margin: 1rem 0;">
+                                <p style="font-size: 1rem !important;">🔍 {img_info.get('description', img_info['file'])}</p>
+                            </div>
+                            """, unsafe_allow_html=True)
+        
+        with info_col:
+            # Display clinical information in right column
+            st.markdown("""
+            <div style="background: rgba(0, 0, 0, 0.7); padding: 2rem; border-radius: 15px; margin-top: 1rem;">
+            """, unsafe_allow_html=True)
+            
+            # Context information
+            if 'context' in stage:
+                context = stage['context']
+                if isinstance(context, dict):
+                    if 'text' in context:
+                        st.markdown(f"### 📋 מצב קליני")
+                        st.markdown(f"<p style='font-size: 1.4rem !important;'>{context['text']}</p>", unsafe_allow_html=True)
+                    
+                    if 'physical_exam' in context:
+                        st.markdown(f"### 🔍 בדיקה גופנית")
+                        st.markdown(f"<p style='font-size: 1.3rem !important;'>{context['physical_exam']}</p>", unsafe_allow_html=True)
+                    
+                    if 'labs' in context:
+                        st.markdown(f"### 🧪 בדיקות מעבדה")
+                        st.markdown(f"<p style='font-size: 1.3rem !important;'>{context['labs']}</p>", unsafe_allow_html=True)
+                    
+                    if 'labs_pending' in context:
+                        st.markdown(f"### ⏳ ממתין לתוצאות")
+                        st.markdown(f"<p style='font-size: 1.3rem !important;'>{context['labs_pending']}</p>", unsafe_allow_html=True)
+                    
+                    if 'abg' in context:
+                        st.markdown(f"### 💨 גזי דם (ABG)")
+                        st.markdown(f"<p style='font-size: 1.3rem !important; font-family: monospace;'>{context['abg']}</p>", unsafe_allow_html=True)
+                
+                else:
+                    st.markdown(f"### 📋 מצב")
+                    st.markdown(f"<p style='font-size: 1.4rem !important;'>{context}</p>", unsafe_allow_html=True)
+            
+            st.markdown('</div>', unsafe_allow_html=True)
     
-    # Display stage content
+    # Display stage content with semi-transparent background
+    st.markdown("""
+    <div style="background: rgba(30, 35, 50, 0.9); 
+                backdrop-filter: blur(10px);
+                border-radius: 15px; 
+                padding: 2rem; 
+                margin: 1.5rem 0;
+                border: 1px solid rgba(102, 126, 234, 0.3);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+    """, unsafe_allow_html=True)
+    
     st.markdown(f"## שלב {current_stage_idx + 1}: {stage['title']}")
+    
+    # Display stage image if exists
+    if stage.get('image'):
+        image_path = Path(__file__).parent.parent / "data" / "scenarios" / "images" / stage['image']
+        if image_path.exists():
+            st.image(str(image_path), use_container_width=True)
+        else:
+            # If it's a URL
+            if stage['image'].startswith('http'):
+                st.image(stage['image'], use_container_width=True)
     
     # Handle conclusion stage specially
     if stage.get('type') == 'conclusion':
@@ -370,18 +821,27 @@ else:
         
         st.stop()  # Don't process further
     
-    # Display context for non-conclusion stages
-    if 'context' in stage:
-        context = stage['context']
-        if isinstance(context, dict):
-            st.markdown(f"**מצב קליני:** {context.get('text', '')}")
-            if 'vitals' in context:
-                st.info(f"סימנים חיוניים: {context['vitals']}")
-        else:
-            st.markdown(f"**מצב:** {context}")
+    
+    # Display stage content
+    st.markdown(f"## שלב {current_stage_idx + 1}: {stage['title']}")
     
     # Handle different stage types
-    if stage['type'] == 'checklist_selection':
+    if stage['type'] == 'interactive_examination':
+        # Interactive physical examination with real image
+        from utils.interactive_patient_image import create_interactive_patient_with_image
+        
+        st.markdown("### 🩺 בדיקה פיזיקלית אינטראקטיבית")
+        
+        patient_findings = stage.get('patient_findings', {})
+        create_interactive_patient_with_image(patient_findings)
+        
+        # Continue button
+        if st.button("המשך ➡️", type="primary", use_container_width=True):
+            st.session_state.current_stage += 1
+            st.session_state.stage_start_time = datetime.now()
+            st.rerun()
+    
+    elif stage['type'] == 'checklist_selection':
         st.markdown("### בחר את הפריטים הנחוצים:")
         st.markdown(stage.get('instructions', ''))
         
@@ -475,9 +935,15 @@ else:
     elif stage['type'] == 'branching_choice':
         st.markdown(f"### {stage.get('question', '')}")
         
-        # Display options as buttons
-        options = stage.get('options', [])
+        # Shuffle options to randomize order
+        import random
+        options = stage.get('options', [])[:]  # Create a copy
         
+        # Create a seed based on stage ID to keep shuffling consistent per stage
+        random.seed(stage.get('id', 0))
+        random.shuffle(options)
+        
+        # Display options as buttons
         for idx, option in enumerate(options):
             if st.button(option['text'], key=f"option_{idx}", use_container_width=True):
                 # Display feedback
@@ -560,6 +1026,9 @@ else:
                 import time
                 time.sleep(1.5)
                 st.rerun()
+    
+    # Close the semi-transparent div for stage content
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # Sidebar with scenario info
 with st.sidebar:

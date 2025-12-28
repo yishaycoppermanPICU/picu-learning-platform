@@ -4,9 +4,19 @@ import pandas as pd
 from datetime import datetime
 import json
 import os
+import extra_streamlit_components as stx
 
 # ייבוא פונקציות ניהול תוכן
 from utils.content_manager import get_user_by_email, save_user, update_last_login
+from utils.styles import get_common_styles
+from utils.weekly_content import (
+    get_current_weekly_content,
+    get_week_start_end,
+    format_hebrew_date,
+    get_user_weekly_stats,
+    check_weekly_completion
+)
+from utils.badges import get_badge_html, get_badge_card_html
 
 # ייבוא פונקציות מסד נתונים
 try:
@@ -16,7 +26,8 @@ try:
         get_institutions,
         create_user,
         authenticate_user,
-        get_leaderboard
+        get_leaderboard,
+        get_content_item
     )
     DB_CONNECTED = True
 except Exception as e:
@@ -25,70 +36,17 @@ except Exception as e:
 
 # הגדרות עמוד
 st.set_page_config(
-    page_title="PICU Learning Platform",
+    page_title="PICU Learning Platform - פלטפורמת לימוד טיפול נמרץ ילדים",
     page_icon="🏥",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="auto"  # אוטומטי - פתוח בדסקטופ, סגור במובייל
 )
 
-# CSS פשוט אבל יעיל
-st.markdown("""
-<style>
-    /* RTL גלובלי */
-    .stApp {
-        direction: rtl;
-    }
-    
-    /* הזזת סרגל צד לימין */
-    section[data-testid="stSidebar"] {
-        right: 0;
-        left: auto;
-    }
-    
-    section[data-testid="stSidebar"] > div {
-        right: 0;
-        left: auto;
-    }
-    
-    /* תיקון התוכן הראשי */
-    .main .block-container {
-        padding-right: 5rem;
-        padding-left: 1rem;
-    }
-    
-    /* טקסט ימין */
-    h1, h2, h3, h4, h5, h6, p, label, span {
-        text-align: right;
-        direction: rtl;
-    }
-    
-    /* תיקון טאבים */
-    .stTabs [data-baseweb="tab-list"] {
-        flex-direction: row-reverse;
-    }
-    
-    /* תיקון שדות קלט */
-    input, textarea, select {
-        direction: rtl;
-        text-align: right;
-    }
-    
-    /* הכותרת הראשית */
-    .main-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 2rem;
-        border-radius: 10px;
-        margin-bottom: 2rem;
-        color: white;
-        text-align: center;
-    }
-    
-    .main-header h1, .main-header p {
-        color: white;
-        margin: 0;
-    }
-</style>
-""", unsafe_allow_html=True)
+# טעינת CSS מרכזי
+st.markdown(get_common_styles(), unsafe_allow_html=True)
+
+# יצירת cookie manager לשמירת מייל
+cookie_manager = stx.CookieManager()
 
 # אתחול session state
 if 'logged_in' not in st.session_state:
@@ -100,10 +58,11 @@ if 'user_scores' not in st.session_state:
 
 # בדיקה אם יש משתמש שמור (שחזור לאחר רענון)
 try:
-    query_params = st.query_params
-    if 'user_email' in query_params and not st.session_state.logged_in:
+    # טעינת המייל השמור מ-cookies
+    saved_email = cookie_manager.get('user_email')
+    
+    if saved_email and not st.session_state.logged_in:
         # Try to restore user session
-        saved_email = query_params['user_email']
         existing_user = get_user_by_email(saved_email)
         
         if existing_user:
@@ -121,9 +80,60 @@ try:
 except:
     pass
 
-# כותרת ראשית
-st.title("🏥 פלטפורמת למידה PICU")
-st.markdown("### פלטפורמת למידה מתקדמת לטיפול נמרץ ילדים")
+# כותרת ראשית - מותאמת למובייל
+st.markdown("""
+<style>
+/* תיקון כפתור התפריט למובייל - אייקון המבורגר */
+@media (max-width: 768px) {
+    button[kind="header"]::before,
+    button[data-testid="collapsedControl"]::before {
+        content: "☰" !important;
+        font-size: 28px !important;
+        color: #667eea !important;
+        line-height: 1 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    button[kind="header"] svg,
+    button[data-testid="collapsedControl"] svg {
+        display: none !important;
+    }
+    
+    button[kind="header"],
+    button[data-testid="collapsedControl"] {
+        width: 48px !important;
+        height: 48px !important;
+        background: white !important;
+        border: 2px solid #667eea !important;
+        border-radius: 10px !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+    }
+    
+    .main-title {
+        font-size: 1.3rem !important;
+        line-height: 1.4 !important;
+        text-align: center;
+    }
+    .main-subtitle {
+        font-size: 0.9rem !important;
+        text-align: center;
+    }
+}
+.main-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+.main-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+}
+</style>
+<div class="main-title">🏥 ישי קופרמן | טיפול נמרץ ילדים</div>
+<div class="main-subtitle">פלטפורמת למידה מתקדמת לצוותי PICU</div>
+""", unsafe_allow_html=True)
 
 # בדיקת חיבור למסד נתונים
 if DB_CONNECTED:
@@ -142,7 +152,9 @@ with st.sidebar:
         
         # Initialize session state for form fields
         if 'form_email' not in st.session_state:
-            st.session_state.form_email = ""
+            # נסה לטעון מייל שמור מ-cookies
+            saved_email = cookie_manager.get('user_email')
+            st.session_state.form_email = saved_email if saved_email else ""
         if 'form_name' not in st.session_state:
             st.session_state.form_name = ""
         if 'form_hospital' not in st.session_state:
@@ -231,8 +243,8 @@ with st.sidebar:
                     
                     username = email.split('@')[0].replace('.', '_').replace('-', '_')
                     
-                    # Save email to query params for persistence
-                    st.query_params['user_email'] = email
+                    # שמירת המייל ב-cookies (נשמר 30 ימים)
+                    cookie_manager.set('user_email', email, expires_at=datetime.now() + pd.Timedelta(days=30))
                     
                     if DB_CONNECTED:
                         try:
@@ -293,18 +305,15 @@ with st.sidebar:
         if 'institutions' in user and user['institutions']:
             st.info(f"מוסד: {user['institutions'].get('name', '')} 🏥")
         
-        col1, col2 = st.columns(2)
-        with col1:
-            if st.button("הנתונים שלי 📊", use_container_width=True):
-                st.switch_page("pages/3_📊_Statistics.py")
-        with col2:
-            if st.button("התנתק 🚪", use_container_width=True):
-                # Clear query params
-                if 'user_email' in st.query_params:
-                    del st.query_params['user_email']
-                st.session_state.logged_in = False
-                st.session_state.user = None
-                st.rerun()
+        if st.button("📊 הנתונים שלי", use_container_width=True):
+            st.switch_page("pages/3_📊_Statistics.py")
+        
+        if st.button("🚪 התנתק", use_container_width=True):
+            # מחיקת המייל מה-cookies
+            cookie_manager.delete('user_email')
+            st.session_state.logged_in = False
+            st.session_state.user = None
+            st.rerun()
     
     st.divider()
     
@@ -321,7 +330,122 @@ if st.session_state.logged_in:
     st.markdown("### ברוכים הבאים לפלטפורמת הלמידה! 🎯")
     
     user = st.session_state.user
+    user_email = user.get('email', '')
     st.markdown(f"**שלום {user.get('full_name', 'משתמש')}!** 👋")
+    
+    st.divider()
+    
+    # ===== תוכן שבועי מומלץ =====
+    weekly_content = get_current_weekly_content()
+    week_start, week_end = get_week_start_end()
+    
+    # בדיקה אם השלים את התוכן השבועי
+    is_completed = False
+    if user_email:
+        is_completed = check_weekly_completion(user_email)
+    
+    # כרטיס תוכן שבועי בולט
+    completion_badge = "✅ הושלם!" if is_completed else "📌 ממתין"
+    completion_color = "#28a745" if is_completed else "#ffc107"
+    
+    week_title = weekly_content['title']
+    week_desc = weekly_content['description']
+    week_icon = weekly_content['icon']
+    week_num = weekly_content['week_number']
+    start_date = format_hebrew_date(week_start)
+    end_date = format_hebrew_date(week_end).split(',')[1].strip()
+    
+    weekly_html = f'''<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; color: white; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">
+        <div style="text-align: center;">
+            <h1 style="color: white; font-size: 3rem; margin: 0;">{week_icon}</h1>
+            <h2 style="color: white; margin: 0.5rem 0;">תוכן מומלץ השבוע</h2>
+            <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem; margin: 0.3rem 0;">שבוע {week_num} • {start_date} - {end_date}</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem;">
+            <h3 style="color: white; text-align: center; margin: 0 0 1rem 0;">{week_title}</h3>
+            <p style="color: rgba(255,255,255,0.95); text-align: center; line-height: 1.8; margin: 0 0 1rem 0;">{week_desc}</p>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <span style="background: {completion_color}; color: white; padding: 0.5rem 1.5rem; border-radius: 20px; font-weight: 600; font-size: 1rem;">{completion_badge}</span>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <p style="color: rgba(255,255,255,0.9); font-size: 0.95rem;">💡 <strong>משימת השבוע:</strong> למד את הנושא המומלץ והשלם מבחן עם ציון מעל 80% לקבלת תג מצטיין!</p>
+        </div>
+    </div>'''
+    
+    st.markdown(weekly_html, unsafe_allow_html=True)
+    
+    # כפתורי פעולה לתוכן השבועי
+    st.markdown("##### 🎯 פעולות לתוכן השבועי")
+    col1, col2, col3 = st.columns(3)
+    
+    # Callback functions for buttons
+    def start_weekly_quiz():
+        st.session_state['selected_quiz_category'] = weekly_content.get('quiz_category', weekly_content['category'])
+        st.session_state['weekly_quiz'] = True
+    
+    def view_weekly_topic():
+        st.session_state['selected_topic_id'] = weekly_content['topic_id']
+        st.session_state['view_weekly_content'] = True
+    
+    with col1:
+        if st.button(f"📖 למד: {weekly_content['title'][:20]}...", type="primary", use_container_width=True, key="weekly_learn", on_click=view_weekly_topic):
+            st.switch_page("pages/9_📖_Content_DB.py")
+    
+    with col2:
+        if st.button(f"✍️ התמחה בנושא: מבחן", use_container_width=True, key="weekly_quiz_btn", on_click=start_weekly_quiz):
+            st.switch_page("pages/6_📝_Quizzes.py")
+    
+    with col3:
+        if st.button("🏆 תגי ההישגים שלי", use_container_width=True):
+            st.switch_page("pages/3_📊_Statistics.py")
+    
+    # בדיקה אם יש מבחן שמור
+    if st.session_state.get('quiz_paused') and st.session_state.get('quiz_active') and st.session_state.get('quiz_questions'):
+        st.divider()
+        st.warning("📝 יש לך מבחן שמור שלא הושלם!")
+        
+        topic_title = st.session_state.quiz_config.get('topic_title', 'מבחן')
+        current = st.session_state.current_question + 1
+        total = len(st.session_state.quiz_questions)
+        answered = len([a for a in st.session_state.quiz_answers if not a.get('skipped')])
+        
+        st.info(f"""
+        **{topic_title}**
+        
+        📊 התקדמות: שאלה {current} מתוך {total}
+        
+        ✅ נענית על {answered} שאלות
+        """)
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("▶️ המשך מבחן", type="primary", use_container_width=True):
+                st.session_state['quiz_paused'] = False
+                st.switch_page("pages/6_📝_Quizzes.py")
+        with col2:
+            if st.button("🗑️ מחק ותתחיל מחדש", use_container_width=True):
+                st.session_state.quiz_active = False
+                st.session_state.quiz_questions = []
+                st.session_state.current_question = 0
+                st.session_state.quiz_answers = []
+                st.session_state['quiz_paused'] = False
+                st.session_state['weekly_quiz'] = False
+                if 'selected_topic_for_quiz' in st.session_state:
+                    del st.session_state['selected_topic_for_quiz']
+                st.success("✅ המבחן נמחק")
+                st.rerun()
+    
+    # הצגת תגים קיימים אם יש
+    if user_email:
+        user_stats = get_user_weekly_stats(user_email)
+        if user_stats['total_badges'] > 0:
+            st.markdown("### התגים שלך השבוע 🎖️")
+            badges_html = ""
+            recent_badges = user_stats.get('badges', [])[-3:]  # 3 האחרונים
+            for badge in recent_badges:
+                badges_html += get_badge_html('excellence', 'medium')
+            st.markdown(badges_html, unsafe_allow_html=True)
     
     st.divider()
     
@@ -381,9 +505,17 @@ if st.session_state.logged_in:
         else:
             st.metric("ציון ממוצע", "—")
     with col3:
-        st.metric("זמן למידה", "0 שעות")
+        if user_email:
+            user_stats = get_user_weekly_stats(user_email)
+            st.metric("שבועות שהושלמו", user_stats['completed_weeks'])
+        else:
+            st.metric("שבועות שהושלמו", "0")
     with col4:
-        st.metric("דירוג במוסד", "—")
+        if user_email:
+            user_stats = get_user_weekly_stats(user_email)
+            st.metric("תגי מצטיין", user_stats['total_badges'])
+        else:
+            st.metric("תגי מצטיין", "0")
     
     st.divider()
     
@@ -391,7 +523,8 @@ if st.session_state.logged_in:
     with st.expander("💡 עצות למידה"):
         st.write("**כיצד להפיק את המרב מהפלטפורמה:**")
         st.write("- התחל עם נושאים בסיסיים ועבור לנושאים מתקדמים")
-        st.write("- הקדש לפחות 15-30 דקות ביום ללמידה")
+        st.write("- הקדש לפחות 5 דקות ביום ללמידה")
+        st.write("- השלם את התוכן המומלץ מדי שבוע לצבירת תגים")
         st.write("- חזור על חומרים שקשים לך")
         st.write("- השתמש בחומרים כהשלמה לניסיון הקליני")
         st.write("- שתף ידע עם עמיתים")

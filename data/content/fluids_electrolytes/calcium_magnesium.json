@@ -5,7 +5,13 @@
   "category": "fluids_electrolytes",
   "difficulty": "intermediate",
   "order": 3,
-  "tags": ["סידן", "מגנזיום", "אלקטרוליטים", "הפרעות קצב", "טטניה"],
+  "tags": [
+    "סידן",
+    "מגנזיום",
+    "אלקטרוליטים",
+    "הפרעות קצב",
+    "טטניה"
+  ],
   "content": [
     {
       "type": "section",

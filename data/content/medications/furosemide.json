@@ -2,12 +2,20 @@
   "id": "furosemide",
   "title": "פורוסמיד / פוסיד (Furosemide)",
   "genericName": "Furosemide",
-  "commercialNames": ["Fusid", "Lasix"],
+  "commercialNames": [
+    "Fusid",
+    "Lasix"
+  ],
   "category": "medications",
   "type": "diuretic",
   "difficulty": "beginner",
   "order": 1,
-  "tags": ["בצקת", "כליות", "אי ספיקת לב", "משתנים"],
+  "tags": [
+    "בצקת",
+    "כליות",
+    "אי ספיקת לב",
+    "משתנים"
+  ],
   "content": [
     {
       "type": "definition",
@@ -23,7 +31,7 @@
           "options": [
             {
               "method": "IV / PO",
-              "details": "0.5-2 mg/kg/dose. מינון מקובל: 1 mg/kg. מקסימום למנה: 20 mg (חריג: 40 mg)"
+              "details": "מינון מקובל:  1mg/kg למנה. טווח:  0.5-2mg/kg למנה. מקסימום למנה: 20mg (במקרים חריגים: 40mg)"
             }
           ]
         }
@@ -58,6 +66,6 @@
     "פוסיד גורם לאיבוד אשלגן - יש לבדוק רמות אשלגן ולתת תוסף (Slow K / KCl) במידת הצורך",
     "אין להפסיק בבת אחת בטיפול כרוני (חשש לריבאונד)"
   ],
-  "last_updated": "2025-01-01",
+  "last_updated": "2025-12-28",
   "author": "PICU Team"
 }

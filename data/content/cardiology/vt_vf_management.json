@@ -1,0 +1,410 @@
+{
+  "id": "vt_vf_management",
+  "title": "VT ו-VF - הפרעות קצב חדריות מסכנות חיים",
+  "description": "זיהוי וטיפול בטכיקרדיה חדרית (VT) ופרפור חדרים (VF) - פרוטוקול מלא לילדים.",
+  "category": "cardiology",
+  "difficulty": "advanced",
+  "order": 2,
+  "tags": [
+    "הפרעות קצב",
+    "VT",
+    "VF",
+    "pVT",
+    "החייאה",
+    "דפיברילציה",
+    "קרדיולוגיה"
+  ],
+  "content": [
+    {
+      "type": "definition",
+      "title": "הגדרות",
+      "conditions": [
+        {
+          "name": "VT - Ventricular Tachycardia (טכיקרדיה חדרית)",
+          "definition": "הפרעת קצב ממקור חדרי, המתייצגת עם או בלי דופק. VT נחשב לגורם למוות פתאומי.",
+          "characteristics": [
+            "VT עם דופק - יכול להיות בקצב כמעט רגיל עד כמעט 200 BPM",
+            "קצב מהיר מפצה על הירידה ב-Stroke volume",
+            "VT ללא פיצוי מוביל ל-VF או pVT (pulseless VT)"
+          ]
+        },
+        {
+          "name": "pVT - Pulseless Ventricular Tachycardia (טכיקרדיה חדרית ללא דופק)",
+          "definition": "VT ללא דופק מישוש - מצב מסכן חיים מיידי",
+          "note": "הטיפול זהה ל-VF"
+        },
+        {
+          "name": "VF - Ventricular Fibrillation (פרפור חדרים)",
+          "definition": "הפרעת קצב המוגדרת כפעילות חשמלית לא מסודרת וללא דופק",
+          "note": "הטיפול הדפיניטיבי הינו החייאה ושוק לא מסונכרן (דפיברילציה)"
+        }
+      ]
+    },
+    {
+      "type": "causes",
+      "title": "גורמים ל-VT",
+      "categories": [
+        {
+          "category": "מחלות לבביות",
+          "causes": [
+            "מחלה לבבית נסתרת (Underlying cardiac disease)",
+            "ניתוחי לב (Post-cardiac surgery)",
+            "מיוקרדיטיס (Myocarditis)",
+            "קרדיומיופתיה (Cardiomyopathy)"
+          ]
+        },
+        {
+          "category": "הפרעות חשמליות",
+          "causes": [
+            "תסמונת QT ממושך (Long QT syndrome)",
+            "הפרעות הולכה מולדות"
+          ]
+        },
+        {
+          "category": "הפרעות אלקטרוליטים",
+          "causes": [
+            "היפרקלמיה (Hyperkalemia)",
+            "היפוקלצמיה (Hypocalcemia)",
+            "היפומגנזמיה (Hypomagnesemia)"
+          ]
+        },
+        {
+          "category": "אחר",
+          "causes": [
+            "הרעלת טוקסינים (Toxic ingestions)",
+            "תרופות פרו-אריתמוגניות"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "algorithm",
+      "title": "אלגוריתם טיפול בטכיקרדיה פדיאטרית (2020 Update)",
+      "subtitle": "Pediatric Tachycardia with a Pulse",
+      "initial_assessment": {
+        "steps": [
+          "שמירה על דרכי אוויר פתוחות, סיוע בנשימה",
+          "מתן חמצן",
+          "מוניטור קרדיאק לזיהוי קצב, מעקב דופק, לחץ דם ואוקסימטריה",
+          "גישה וסקולרית IV/IO",
+          "12-Lead ECG אם זמין"
+        ]
+      },
+      "evaluation_steps": [
+        {
+          "step": "1",
+          "question": "הערכת קצב עם 12-lead ECG או מוניטור",
+          "branches": [
+            {
+              "condition": "Probable Sinus Tachycardia",
+              "criteria": [
+                "גלי P נוכחים/תקינים",
+                "RR interval משתנה",
+                "קצב תינוקות בדרך כלל <220/min",
+                "קצב ילדים בדרך כלל <180/min"
+              ],
+              "action": "חפש וטפל בגורם"
+            },
+            {
+              "condition": "Cardiopulmonary Compromise?",
+              "signs": [
+                "שינוי במצב מנטלי (Acutely altered mental status)",
+                "סימני שוק (Signs of shock)",
+                "היפוטנזיה (Hypotension)"
+              ],
+              "yes_action": "הערך QRS duration",
+              "no_action": "הערך QRS duration"
+            }
+          ]
+        },
+        {
+          "step": "2",
+          "evaluation": "QRS Duration",
+          "categories": [
+            {
+              "name": "QRS Narrow (≤0.09 sec)",
+              "subcategories": [
+                {
+                  "name": "Probable Supraventricular Tachycardia",
+                  "criteria": [
+                    "גלי P נעדרים/אבנורמליים",
+                    "RR interval לא משתנה",
+                    "קצב תינוקות בדרך כלל ≥220/min",
+                    "קצב ילדים בדרך כלל ≥180/min",
+                    "היסטוריה של שינוי פתאומי בקצב"
+                  ],
+                  "treatment_stable": "אם יש גישה IV/IO - תן אדנוזין. אם אין גישה או אדנוזין לא זמין/לא יעיל - שקול קרדיווורסיה מסונכרנת",
+                  "treatment_unstable": "קרדיווורסיה מסונכרנת. התייעצות עם מומחה מומלצת לפני מתן תרופות נוספות"
+                },
+                {
+                  "name": "Possible Ventricular Tachycardia",
+                  "note": "נדיר ב-QRS צר",
+                  "treatment": "קרדיווורסיה מסונכרנת. התייעצות עם מומחה מומלצת"
+                }
+              ]
+            },
+            {
+              "name": "QRS Wide (>0.09 sec)",
+              "subcategories": [
+                {
+                  "name": "Probable Supraventricular Tachycardia",
+                  "criteria": [
+                    "גלי P נעדרים/אבנורמליים",
+                    "RR interval לא משתנה",
+                    "קצב תינוקות בדרך כלל ≥220/min",
+                    "קצב ילדים בדרך כלל ≥180/min",
+                    "היסטוריה של שינוי פתאומי בקצב"
+                  ],
+                  "treatment": "שקול גירוי ואגלי. אם יש גישה IV/IO - תן אדנוזין",
+                  "note": "התייעצות עם מומחה מומלצת"
+                },
+                {
+                  "name": "Possible Ventricular Tachycardia",
+                  "criteria": [
+                    "אם הקצב רגולרי ו-QRS מונומורפי - שקול אדנוזין"
+                  ],
+                  "treatment_stable": "התייעצות עם מומחה מומלצת",
+                  "treatment_unstable": "קרדיווורסיה מסונכרנת מיידית"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "treatment",
+      "title": "פרוטוקול טיפול - VT עם דופק",
+      "subtitle": "Ventricular Tachycardia with Pulse",
+      "sections": [
+        {
+          "name": "VT עם פיצוי (יציב)",
+          "definition": "קצב כמעט רגיל עד כמעט 200 BPM, פיצוי המודינמי",
+          "treatment": [
+            {
+              "method": "שיקול אדנוזין",
+              "indication": "במקרים מסוימים של VT מונומורפי עם QRS רחב",
+              "dosing": "0.1 mg/kg (מקס 6 mg) → 0.2 mg/kg (מקס 12 mg)",
+              "note": "התייעצות עם מומחה מומלצת"
+            },
+            {
+              "method": "קרדיווורסיה מסונכרנת (Synchronized Cardioversion)",
+              "indication": "כאשר יש פיצוי אך נדרש טיפול מיידי",
+              "dosing": {
+                "first_dose": "0.5-1 J/kg",
+                "second_dose": "2 J/kg (אם השוק לא אפקטיבי)"
+              },
+              "preparation": [
+                "סדציה אם המטופל בהכרה",
+                "ודא שהמכשיר במצב SYNC (מסונכרן)",
+                "ניטור רציף"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "VT ללא פיצוי (לא יציב)",
+          "definition": "שינוי הכרה, היפוטנזיה, סימני שוק",
+          "treatment": "קרדיווורסיה מסונכרנת מיידית - ראה פרוטוקול למעלה"
+        }
+      ]
+    },
+    {
+      "type": "treatment",
+      "title": "פרוטוקול טיפול - VF / pVT (ללא דופק)",
+      "subtitle": "Ventricular Fibrillation / Pulseless Ventricular Tachycardia",
+      "critical_note": "🚨 מצב מסכן חיים מיידי - דפיברילציה חייבת להינתן בהקדם!",
+      "protocol": {
+        "sequence": [
+          {
+            "step": "1",
+            "action": "דפיברילציה (שוק לא מסונכרן)",
+            "dose": "2 J/kg",
+            "note": "התחל CPR מיידית אם אין דפיברילטור זמין"
+          },
+          {
+            "step": "2",
+            "action": "המשך החייאה (CPR)",
+            "duration": "2 דקות",
+            "details": [
+              "לחיצות חזה איכותיות 100-120/דקה",
+              "עומק מספיק (שליש עומק החזה)",
+              "הנשמה עם 100% חמצן",
+              "אל תבדוק דופק לפני תום 2 הדקות"
+            ]
+          },
+          {
+            "step": "3",
+            "action": "דפיברילציה שנייה",
+            "dose": "4 J/kg (מינון גבוה יותר)",
+            "note": "בדוק קצב ב-ECG לפני השוק"
+          },
+          {
+            "step": "4",
+            "action": "המשך החייאה וסבבים נוספים",
+            "details": [
+              "2 דקות CPR",
+              "בדיקת דופק וקצב",
+              "שוק נוסף לפי הוראת רופא"
+            ]
+          },
+          {
+            "step": "5",
+            "action": "שוקים נוספים - הסלמה",
+            "doses": "בין 4-10 J/kg או מינון מבוגרים בדפיברילטור בי-פאזי (200 J)",
+            "note": "המשך לפי הוראות PALS"
+          },
+          {
+            "step": "6",
+            "action": "תרופות במהלך ההחייאה",
+            "medications": [
+              {
+                "drug": "Epinephrine (אדרנלין)",
+                "dose": "0.01 mg/kg IV/IO",
+                "max": "1 mg",
+                "timing": "כל 3-5 דקות"
+              },
+              {
+                "drug": "Amiodarone (אמיאודרון)",
+                "dose": "5 mg/kg IV Push",
+                "indication": "לאחר שוק שלישי אם VF/pVT נמשך",
+                "note": "ניתן לחזור עד 2 מנות נוספות"
+              }
+            ]
+          },
+          {
+            "step": "7",
+            "action": "המשך החייאה",
+            "end_points": [
+              "עד התייצבות המטופל (ROSC - Return of Spontaneous Circulation)",
+              "או קביעת מוות"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "comparison",
+      "title": "השוואה: שוק מסונכרן VS לא מסונכרן",
+      "table": [
+        {
+          "parameter": "שוק מסונכרן (Synchronized Cardioversion)",
+          "indication": "VT עם דופק",
+          "mechanism": "השוק ניתן בסנכרון עם QRS",
+          "prevents": "מונע שוק על גל T (עלול לגרום ל-VF)",
+          "doses": "0.5-1 J/kg → 2 J/kg",
+          "sedation": "נדרשת (אם המטופל בהכרה)"
+        },
+        {
+          "parameter": "דפיברילציה (Unsynchronized Shock)",
+          "indication": "VF / pVT (ללא דופק)",
+          "mechanism": "שוק מיידי ללא סנכרון",
+          "prevents": "אין זמן לסנכרון - מצב חירום",
+          "doses": "2 J/kg → 4 J/kg → 4-10 J/kg",
+          "sedation": "לא רלוונטי (חוסר הכרה)"
+        }
+      ]
+    },
+    {
+      "type": "monitoring",
+      "title": "מעקב וניטור",
+      "parameters": [
+        {
+          "name": "ECG רציף",
+          "purpose": "זיהוי מיידי של שינויים בקצב",
+          "alerts": [
+            "VF",
+            "pVT",
+            "Asystole",
+            "ROSC"
+          ]
+        },
+        {
+          "name": "דופק",
+          "assessment": "בדיקה כל 2 דקות במהלך החייאה (לא קודם!)"
+        },
+        {
+          "name": "ETCO2",
+          "target": ">10-20 mmHg מצביע על CPR איכותי",
+          "significance": "עליה פתאומית עשויה להצביע על ROSC"
+        },
+        {
+          "name": "אלקטרוליטים",
+          "tests": [
+            "אשלגן (K+)",
+            "סידן (Ca2+)",
+            "מגנזיום (Mg2+)"
+          ],
+          "action": "תקן חריגות מיידית"
+        }
+      ]
+    },
+    {
+      "type": "clinical_pearls",
+      "title": "פנינים קליניות",
+      "items": [
+        "VT עם QRS רחב קשה להבדיל מ-SVT עם הולכה אבנורמלית - השוו ל-ECG קודם!",
+        "בספק בין VT ל-SVT במטופל לא יציב - טפל כמו VT (קרדיווורסיה מסונכרנת).",
+        "אדנוזין עלול לעזור באבחנה של VT מונומורפי, אך התייעץ עם מומחה.",
+        "VF/pVT דורשים דפיברילציה מיידית - כל דקה עיכוב מורידה סיכוי להצלחה!",
+        "תקן אלקטרוליטים תוך כדי החייאה - במיוחד K+, Ca2+, Mg2+.",
+        "היפרקלמיה חמורה היא גורם נפוץ ל-VT/VF בילדים עם אי ספיקת כליות.",
+        "תסמונת QT ממושך - תן מגנזיום סולפט (25-50 mg/kg, מקס 2 גרם)."
+      ]
+    },
+    {
+      "type": "medications",
+      "title": "סיכום תרופות",
+      "drugs": [
+        {
+          "name": "אדנוזין (Adenosine)",
+          "indication": "VT מונומורפי עם דופק (לשיקול)",
+          "dose": "0.1 mg/kg (מקס 6 mg) → 0.2 mg/kg (מקס 12 mg)",
+          "note": "התייעצות עם מומחה מומלצת"
+        },
+        {
+          "name": "אדרנלין (Epinephrine)",
+          "indication": "VF/pVT במהלך החייאה",
+          "dose": "0.01 mg/kg IV/IO (מקס 1 mg)",
+          "frequency": "כל 3-5 דקות"
+        },
+        {
+          "name": "אמיאודרון (Amiodarone)",
+          "indication": "VF/pVT עמיד לדפיברילציה",
+          "dose": "5 mg/kg IV Push (לאחר שוק שלישי)",
+          "max": "עד 3 מנות (15 mg/kg סה\"כ)"
+        },
+        {
+          "name": "מגנזיום סולפט (Magnesium Sulfate)",
+          "indication": "Torsades de Pointes, QT ממושך, היפומגנזמיה",
+          "dose": "25-50 mg/kg IV (מקס 2 גרם)"
+        }
+      ]
+    }
+  ],
+  "key_points": [
+    "VT = טכיקרדיה חדרית (עם או בלי דופק), VF = פרפור חדרים (תמיד ללא דופק).",
+    "VT עם דופק (יציב): שקול אדנוזין או קרדיווורסיה מסונכרנת 0.5-1 J/kg → 2 J/kg.",
+    "VT ללא דופק (pVT) ו-VF: דפיברילציה מיידית! 2 J/kg → 4 J/kg → 4-10 J/kg.",
+    "🚨 שוק מסונכרן (SYNC) ל-VT עם דופק, שוק לא מסונכרן ל-VF/pVT.",
+    "CPR איכותי בין שוקים - 2 דקות מלאות, אל תפסיק לבדוק דופק!",
+    "אדרנלין כל 3-5 דקות, אמיאודרון 5 mg/kg לאחר שוק שלישי.",
+    "תקן אלקטרוליטים: היפרקלמיה, היפוקלצמיה, היפומגנזמיה גורמים ל-VT/VF.",
+    "גורמים ל-VT: מחלת לב, ניתוחי לב, QT ממושך, מיוקרדיטיס, אלקטרוליטים, טוקסינים."
+  ],
+  "critical_alerts": [
+    "🚨 VF/pVT = דפיברילציה מיידית! כל דקה עיכוב מורידה סיכויי הישרדות.",
+    "🚨 אל תבלבל: SYNC למטופל עם דופק, ללא SYNC למטופל ללא דופק!",
+    "🚨 אל תבדוק דופק במהלך 2 דקות CPR - זה בזבוז זמן קריטי!",
+    "🚨 QRS רחב + לא יציב? טפל כמו VT - קרדיווורסיה מסונכרנת מיידית!",
+    "🚨 היפרקלמיה חמורה עלולה לגרום ל-VT/VF - סידן IV מיידית!"
+  ],
+  "references": [
+    "AHA Pediatric Advanced Life Support (PALS) Guidelines 2020",
+    "Circulation 2020; 142:S469-S523 - Pediatric Tachycardia Algorithm",
+    "Pediatric Cardiac Arrest and Arrhythmia Management"
+  ],
+  "last_updated": "2025-12-27",
+  "author": "PICU Team",
+  "version": "1.0"
+}
