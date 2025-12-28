@@ -96,16 +96,42 @@ st.markdown("""
 # Quiz Setup Screen
 if not st.session_state.quiz_active:
     
-    # Check if coming from a specific topic
+    # Check if coming from a specific topic - auto-start quiz
     from_topic = st.session_state.get('quiz_topic')
     from_category = st.session_state.get('quiz_category')
     
     if from_topic:
-        st.info(f"🎯 מבחן ממוקד: {from_topic}")
-        if st.button("🔙 חזור לבחירה כללית"):
+        # Auto-start quiz with all available questions for this topic
+        all_questions = get_all_questions()
+        topic_questions = [q for q in all_questions if q.get('topic') == from_topic]
+        
+        if len(topic_questions) > 0:
+            # Start quiz automatically with all topic questions
+            import random
+            random.shuffle(topic_questions)
+            st.session_state.quiz_questions = topic_questions
+            st.session_state.quiz_active = True
+            st.session_state.current_question = 0
+            st.session_state.quiz_answers = []
+            st.session_state.quiz_start_time = time.time()
+            st.session_state.quiz_config = {
+                'category': from_category,
+                'difficulty': 'all',
+                'quiz_type': 'all',
+                'show_timer': True,
+                'from_topic': from_topic
+            }
+            # Clear topic filter
             st.session_state['quiz_topic'] = None
             st.session_state['quiz_category'] = None
             st.rerun()
+        else:
+            st.error(f"❌ לא נמצאו שאלות עבור נושא: {from_topic}")
+            if st.button("🔙 חזור לספרייה"):
+                st.session_state['quiz_topic'] = None
+                st.session_state['quiz_category'] = None
+                st.switch_page("pages/1_📚_Library.py")
+            st.stop()
     
     st.markdown("### 🎯 הגדר את המבחן שלך")
     
