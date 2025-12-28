@@ -360,11 +360,306 @@ with tab1:
 # ==================== TAB 2: Quiz Questions ====================
 with tab2:
     st.subheader("❓ ניהול שאלות Quiz")
-    st.info("🚧 בפיתוח - ממשק לניהול שאלות")
     
-    # Get all questions
-    questions = get_quiz_questions()
-    st.write(f"📊 סה\"כ שאלות: {len(questions)}")
+    # Load questions from JSON file
+    import json
+    from pathlib import Path
+    
+    questions_file = Path(__file__).parent.parent / "data" / "questions.json"
+    
+    def load_questions():
+        try:
+            with open(questions_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                return data.get('questions', [])
+        except Exception as e:
+            st.error(f"שגיאה בטעינת שאלות: {e}")
+            return []
+    
+    def save_questions(questions_list):
+        try:
+            with open(questions_file, 'w', encoding='utf-8') as f:
+                json.dump({"questions": questions_list}, f, ensure_ascii=False, indent=2)
+            return True
+        except Exception as e:
+            st.error(f"שגיאה בשמירת שאלות: {e}")
+            return False
+    
+    questions = load_questions()
+    
+    # Action selector
+    col1, col2 = st.columns([2, 1])
+    
+    with col2:
+        action = st.radio("בחר פעולה:", ["הצג הכל", "חפש", "הוסף חדשה", "ערוך", "מחק"], key="quiz_action")
+    
+    with col1:
+        if action == "הצג הכל":
+            st.markdown(f"### 📋 כל השאלות ({len(questions)} שאלות)")
+            
+            # Filters
+            filter_col1, filter_col2, filter_col3 = st.columns(3)
+            
+            with filter_col1:
+                filter_category = st.selectbox("סנן לפי קטגוריה:", 
+                    ["הכל"] + list(set(q.get('category', 'unknown') for q in questions)),
+                    key="filter_cat"
+                )
+            
+            with filter_col2:
+                filter_difficulty = st.selectbox("סנן לפי רמת קושי:",
+                    ["הכל", "beginner", "intermediate", "advanced"],
+                    key="filter_diff"
+                )
+            
+            with filter_col3:
+                filter_topic = st.selectbox("סנן לפי נושא:",
+                    ["הכל"] + list(set(q.get('topic', 'unknown') for q in questions if q.get('topic'))),
+                    key="filter_topic"
+                )
+            
+            # Apply filters
+            filtered = questions
+            if filter_category != "הכל":
+                filtered = [q for q in filtered if q.get('category') == filter_category]
+            if filter_difficulty != "הכל":
+                filtered = [q for q in filtered if q.get('difficulty') == filter_difficulty]
+            if filter_topic != "הכל":
+                filtered = [q for q in filtered if q.get('topic') == filter_topic]
+            
+            st.markdown(f"**מציג {len(filtered)} שאלות**")
+            
+            # Display questions
+            for idx, q in enumerate(filtered[:20]):  # Show first 20
+                with st.expander(f"#{idx+1} - {q.get('question', '')[:80]}..."):
+                    st.markdown(f"**שאלה:** {q.get('question', '')}")
+                    st.markdown(f"**ID:** `{q.get('id', '')}`")
+                    st.markdown(f"**קטגוריה:** {q.get('category', '')} | **נושא:** {q.get('topic', '')} | **קושי:** {q.get('difficulty', '')}")
+                    
+                    st.markdown("**אפשרויות:**")
+                    for i, opt in enumerate(q.get('options', [])):
+                        if i == q.get('correct_answer', -1):
+                            st.success(f"{i+1}. ✅ {opt}")
+                        else:
+                            st.markdown(f"{i+1}. {opt}")
+                    
+                    st.info(f"**הסבר:** {q.get('explanation', '')}")
+                    st.caption(f"זמן: {q.get('time_limit', 60)}s | נקודות: {q.get('points', 2)}")
+            
+            if len(filtered) > 20:
+                st.warning(f"מציג 20 שאלות ראשונות מתוך {len(filtered)}")
+        
+        elif action == "חפש":
+            st.markdown("### 🔍 חיפוש שאלה")
+            
+            search_term = st.text_input("הקלד טקסט לחיפוש:", key="search_q")
+            
+            if search_term:
+                results = [q for q in questions if 
+                          search_term.lower() in q.get('question', '').lower() or
+                          search_term.lower() in q.get('id', '').lower() or
+                          search_term.lower() in q.get('explanation', '').lower()]
+                
+                st.markdown(f"**נמצאו {len(results)} תוצאות**")
+                
+                for q in results[:10]:
+                    with st.expander(f"{q.get('id', '')} - {q.get('question', '')[:60]}..."):
+                        st.markdown(f"**שאלה:** {q.get('question', '')}")
+                        st.markdown(f"**קטגוריה:** {q.get('category', '')} | **נושא:** {q.get('topic', '')}")
+                        
+                        for i, opt in enumerate(q.get('options', [])):
+                            if i == q.get('correct_answer', -1):
+                                st.success(f"✅ {opt}")
+                            else:
+                                st.markdown(f"- {opt}")
+        
+        elif action == "הוסף חדשה":
+            st.markdown("### ➕ הוסף שאלה חדשה")
+            
+            with st.form("new_question_form", clear_on_submit=True):
+                q_id = st.text_input("ID (ייחודי) *", placeholder="med_085")
+                q_text = st.text_area("שאלה *", height=100)
+                
+                st.markdown("**אפשרויות תשובה:**")
+                opt1 = st.text_input("אפשרות 1 *")
+                opt2 = st.text_input("אפשרות 2 *")
+                opt3 = st.text_input("אפשרות 3 *")
+                opt4 = st.text_input("אפשרות 4 *")
+                
+                correct = st.selectbox("תשובה נכונה *", [0, 1, 2, 3], 
+                                      format_func=lambda x: f"אפשרות {x+1}")
+                
+                explanation = st.text_area("הסבר *", height=100)
+                
+                col_a, col_b, col_c = st.columns(3)
+                with col_a:
+                    category = st.selectbox("קטגוריה *", [
+                        "hematology", "resuscitation", "infections", 
+                        "medications", "cardiology", "monitoring", "trauma"
+                    ])
+                with col_b:
+                    topic = st.text_input("נושא", placeholder="arrhythmias")
+                with col_c:
+                    difficulty = st.selectbox("קושי *", 
+                        ["beginner", "intermediate", "advanced"])
+                
+                col_d, col_e = st.columns(2)
+                with col_d:
+                    time_limit = st.number_input("זמן (שניות)", value=60, min_value=10)
+                with col_e:
+                    points = st.number_input("נקודות", value=2, min_value=1)
+                
+                tags_input = st.text_input("תגיות (מופרדות בפסיק)", placeholder="tag1, tag2")
+                
+                if st.form_submit_button("💾 הוסף שאלה", use_container_width=True):
+                    if not all([q_id, q_text, opt1, opt2, opt3, opt4, explanation, category]):
+                        st.error("❌ יש למלא את כל השדות המסומנים ב-*")
+                    elif any(q.get('id') == q_id for q in questions):
+                        st.error(f"❌ שאלה עם ID '{q_id}' כבר קיימת")
+                    else:
+                        new_q = {
+                            "question": q_text,
+                            "options": [opt1, opt2, opt3, opt4],
+                            "correct_answer": correct,
+                            "explanation": explanation,
+                            "category": category,
+                            "topic": topic if topic else None,
+                            "difficulty": difficulty,
+                            "id": q_id,
+                            "time_limit": time_limit,
+                            "points": points,
+                            "tags": [t.strip() for t in tags_input.split(",")] if tags_input else []
+                        }
+                        
+                        questions.append(new_q)
+                        if save_questions(questions):
+                            st.success("✅ השאלה נוספה בהצלחה!")
+                            st.rerun()
+                        else:
+                            st.error("❌ שגיאה בשמירה")
+        
+        elif action == "ערוך":
+            st.markdown("### ✏️ ערוך שאלה")
+            
+            # Select question by ID or search
+            search_or_id = st.text_input("חפש לפי ID או טקסט:", key="edit_search")
+            
+            if search_or_id:
+                matches = [q for q in questions if 
+                          search_or_id.lower() in q.get('id', '').lower() or
+                          search_or_id.lower() in q.get('question', '').lower()]
+                
+                if matches:
+                    selected_q = st.selectbox("בחר שאלה:",
+                        matches,
+                        format_func=lambda x: f"{x.get('id', '')} - {x.get('question', '')[:50]}...")
+                    
+                    if selected_q:
+                        with st.form("edit_question_form"):
+                            st.markdown(f"**עריכת שאלה: {selected_q.get('id', '')}**")
+                            
+                            q_id = st.text_input("ID", value=selected_q.get('id', ''), disabled=True)
+                            q_text = st.text_area("שאלה", value=selected_q.get('question', ''), height=100)
+                            
+                            st.markdown("**אפשרויות תשובה:**")
+                            opts = selected_q.get('options', ['', '', '', ''])
+                            opt1 = st.text_input("אפשרות 1", value=opts[0] if len(opts) > 0 else '')
+                            opt2 = st.text_input("אפשרות 2", value=opts[1] if len(opts) > 1 else '')
+                            opt3 = st.text_input("אפשרות 3", value=opts[2] if len(opts) > 2 else '')
+                            opt4 = st.text_input("אפשרות 4", value=opts[3] if len(opts) > 3 else '')
+                            
+                            correct = st.selectbox("תשובה נכונה", [0, 1, 2, 3],
+                                                  index=selected_q.get('correct_answer', 0),
+                                                  format_func=lambda x: f"אפשרות {x+1}")
+                            
+                            explanation = st.text_area("הסבר", value=selected_q.get('explanation', ''), height=100)
+                            
+                            col_a, col_b, col_c = st.columns(3)
+                            with col_a:
+                                categories = ["hematology", "resuscitation", "infections", 
+                                            "medications", "cardiology", "monitoring", "trauma"]
+                                cat_idx = categories.index(selected_q.get('category', 'resuscitation')) if selected_q.get('category') in categories else 0
+                                category = st.selectbox("קטגוריה", categories, index=cat_idx)
+                            with col_b:
+                                topic = st.text_input("נושא", value=selected_q.get('topic', ''))
+                            with col_c:
+                                difficulties = ["beginner", "intermediate", "advanced"]
+                                diff_idx = difficulties.index(selected_q.get('difficulty', 'intermediate')) if selected_q.get('difficulty') in difficulties else 1
+                                difficulty = st.selectbox("קושי", difficulties, index=diff_idx)
+                            
+                            col_d, col_e = st.columns(2)
+                            with col_d:
+                                time_limit = st.number_input("זמן", value=selected_q.get('time_limit', 60))
+                            with col_e:
+                                points = st.number_input("נקודות", value=selected_q.get('points', 2))
+                            
+                            current_tags = ', '.join(selected_q.get('tags', []))
+                            tags_input = st.text_input("תגיות", value=current_tags)
+                            
+                            if st.form_submit_button("💾 שמור שינויים", use_container_width=True):
+                                # Update question
+                                updated_q = {
+                                    "question": q_text,
+                                    "options": [opt1, opt2, opt3, opt4],
+                                    "correct_answer": correct,
+                                    "explanation": explanation,
+                                    "category": category,
+                                    "topic": topic if topic else None,
+                                    "difficulty": difficulty,
+                                    "id": selected_q.get('id'),
+                                    "time_limit": time_limit,
+                                    "points": points,
+                                    "tags": [t.strip() for t in tags_input.split(",")] if tags_input else []
+                                }
+                                
+                                # Replace in list
+                                for i, q in enumerate(questions):
+                                    if q.get('id') == selected_q.get('id'):
+                                        questions[i] = updated_q
+                                        break
+                                
+                                if save_questions(questions):
+                                    st.success("✅ השאלה עודכנה!")
+                                    st.rerun()
+                else:
+                    st.warning("לא נמצאו שאלות תואמות")
+        
+        elif action == "מחק":
+            st.markdown("### 🗑️ מחק שאלה")
+            st.warning("⚠️ פעולה זו בלתי הפיכה!")
+            
+            search_del = st.text_input("חפש שאלה למחיקה:", key="del_search")
+            
+            if search_del:
+                matches = [q for q in questions if 
+                          search_del.lower() in q.get('id', '').lower() or
+                          search_del.lower() in q.get('question', '').lower()]
+                
+                if matches:
+                    selected_q = st.selectbox("בחר שאלה למחיקה:",
+                        matches,
+                        format_func=lambda x: f"{x.get('id', '')} - {x.get('question', '')[:50]}...")
+                    
+                    if selected_q:
+                        with st.expander("📋 פרטי השאלה"):
+                            st.markdown(f"**שאלה:** {selected_q.get('question', '')}")
+                            st.markdown(f"**ID:** {selected_q.get('id', '')}")
+                            for i, opt in enumerate(selected_q.get('options', [])):
+                                if i == selected_q.get('correct_answer', -1):
+                                    st.success(f"✅ {opt}")
+                                else:
+                                    st.markdown(f"- {opt}")
+                        
+                        if st.button("🗑️ אשר מחיקה", type="primary"):
+                            questions = [q for q in questions if q.get('id') != selected_q.get('id')]
+                            if save_questions(questions):
+                                st.success("✅ השאלה נמחקה!")
+                                st.rerun()
+                else:
+                    st.warning("לא נמצאו שאלות תואמות")
+    
+    st.divider()
+    st.info(f"📊 סה\"כ שאלות במערכת: {len(questions)}")
 
 # ==================== TAB 3: Statistics ====================
 with tab3:

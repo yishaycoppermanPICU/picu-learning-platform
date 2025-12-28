@@ -321,10 +321,22 @@ else:
     st.divider()
     
     # Navigation buttons
-    col1, col2, col3 = st.columns([1, 2, 1])
+    col1, col2, col3, col4 = st.columns([1, 1, 2, 1])
     
     with col1:
-        if st.button("⏭️ דלג על שאלה"):
+        # Previous question button
+        if st.session_state.current_question > 0:
+            if st.button("⬅️ שאלה קודמת"):
+                # Remove last answer if exists
+                if st.session_state.quiz_answers:
+                    st.session_state.quiz_answers.pop()
+                st.session_state.current_question -= 1
+                st.rerun()
+        else:
+            st.empty()  # Placeholder when no previous question
+    
+    with col2:
+        if st.button("⏭️ דלג"):
             st.session_state.quiz_answers.append({
                 'question_id': question['id'],
                 'user_answer': None,
@@ -336,7 +348,7 @@ else:
                 st.session_state.quiz_active = False
             st.rerun()
     
-    with col2:
+    with col3:
         if st.button("✅ אשר תשובה ועבור הלאה", type="primary", use_container_width=True):
             st.session_state.quiz_answers.append({
                 'question_id': question['id'],
@@ -348,6 +360,9 @@ else:
             if st.session_state.current_question >= len(st.session_state.quiz_questions):
                 st.session_state.quiz_active = False
             st.rerun()
+    
+    with col4:
+        pass  # Empty for symmetry
     
     with col3:
         if st.button("🚫 צא מהמבחן"):
