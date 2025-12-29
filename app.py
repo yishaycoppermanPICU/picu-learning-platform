@@ -83,23 +83,35 @@ except:
 # כותרת ראשית - מותאמת למובייל
 st.markdown("""
 <style>
-/* חסימה מוחלטת של קישור GitHub - שכבת חסימה */
-header a[href*="github"]::before {
-    content: "" !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 80px !important;
-    z-index: 9999 !important;
-    pointer-events: none !important;
-}
-
-header a[href*="github"] {
+/* חסימה מוחלטת של קישור GitHub וכל הסביבה שלו */
+header[data-testid="stHeader"],
+header[data-testid="stHeader"] *,
+header a,
+header a *,
+[data-testid="stHeader"] a,
+[data-testid="stHeader"] a * {
     pointer-events: none !important;
     cursor: default !important;
-    opacity: 0 !important;
+}
+
+header a[href*="github"],
+header a[href*="github"] * {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+/* כפתור המבורגר צריך לעבוד */
+button[kind="header"],
+button[data-testid="collapsedControl"],
+button[kind="header"] *,
+button[data-testid="collapsedControl"] * {
+    pointer-events: all !important;
+    cursor: pointer !important;
 }
 
 /* תיקון כפתור התפריט למובייל - אייקון המבורגר */
