@@ -10,10 +10,11 @@ def get_common_styles():
     /* ================= Import Fonts ================= */
     @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap');
     
-    /* חסימה של קישור GitHub בלבד - כולל הכפתור */
+    /* חסימה של קישור GitHub וכפתורים מיותרים */
     header a[href*="github"],
     header a[href*="github"] *,
-    header button[kind="header"]:has(a[href*="github"]),
+    header button[kind="header"],
+    header button[kind="header"] *,
     header > div > div > a {
         display: none !important;
         visibility: hidden !important;
@@ -25,9 +26,8 @@ def get_common_styles():
         pointer-events: none !important;
     }
     
-    /* כפתור פתיחת סיידבר */
-    button[data-testid="collapsedControl"],
-    button[kind="header"] {
+    /* כפתור פתיחת סיידבר - רק הכפתור האמיתי */
+    button[data-testid="collapsedControl"] {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
         border: none !important;
         border-radius: 12px !important;
@@ -44,8 +44,7 @@ def get_common_styles():
         color: transparent !important;
     }
     
-    button[data-testid="collapsedControl"]:hover,
-    button[kind="header"]:hover {
+    button[data-testid="collapsedControl"]:hover {
         transform: scale(1.05) !important;
         box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
     }
@@ -55,12 +54,7 @@ def get_common_styles():
     button[data-testid="collapsedControl"] span,
     button[data-testid="collapsedControl"] svg,
     button[data-testid="collapsedControl"] [data-icon],
-    button[data-testid="collapsedControl"] > div,
-    button[kind="header"] *,
-    button[kind="header"] span,
-    button[kind="header"] svg,
-    button[kind="header"] [data-icon],
-    button[kind="header"] > div {
+    button[data-testid="collapsedControl"] > div {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
@@ -71,9 +65,8 @@ def get_common_styles():
         left: -9999px !important;
     }
     
-    /* אייקון תפריט מעוצב */
-    button[data-testid="collapsedControl"]::before,
-    button[kind="header"]::before {
+    /* אייקון תפריט */
+    button[data-testid="collapsedControl"]::before {
         content: "תפריט" !important;
         position: absolute !important;
         top: 50% !important;
