@@ -60,12 +60,40 @@ def get_common_styles():
         display: none !important;
     }
     
-    /* השארת רק האייקון החזותי */
+    /* עיצוב כפתור הסיידבר - בולט ויפה */
+    button[data-testid="collapsedControl"],
+    button[kind="header"] {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        border: none !important;
+        border-radius: 12px !important;
+        width: 48px !important;
+        height: 48px !important;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+        transition: all 0.3s ease !important;
+        position: relative !important;
+        margin: 0.5rem !important;
+    }
+    
+    button[data-testid="collapsedControl"]:hover,
+    button[kind="header"]:hover {
+        transform: scale(1.05) !important;
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
+    }
+    
+    /* אייקון מעוצב בתוך הכפתור */
     button[data-testid="collapsedControl"]::before,
     button[kind="header"]::before {
-        content: "☰" !important;
-        font-size: 1.5rem !important;
-        color: white !important;
+        content: "" !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 24px !important;
+        height: 24px !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z'/%3E%3C/svg%3E") !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
         display: block !important;
     }
     
