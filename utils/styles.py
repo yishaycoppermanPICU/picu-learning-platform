@@ -71,6 +71,16 @@ def get_common_styles():
         font-family: 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
     
+    /* ================= Header כהה ================= */
+    header[data-testid="stHeader"] {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+    }
+    
+    header[data-testid="stHeader"] * {
+        color: white !important;
+    }
+    
     /* ================= Typography - גדלים מוגדלים ================= */
     * {
         font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif !important;
