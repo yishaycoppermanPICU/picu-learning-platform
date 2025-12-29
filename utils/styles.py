@@ -7,24 +7,6 @@ def get_common_styles():
     """החזרת CSS משותף לכל הדפים"""
     return """
 <style>
-    /* ================= הסתרת קישור GitHub וכלים מפריעים ================= */
-    /* הסתרה מוחלטת של קישורי GitHub ב-Streamlit Cloud */
-    a[href*="github.com"],
-    a[href*="github"],
-    [data-testid="stToolbar"] a,
-    header a,
-    [data-testid="stToolbar"],
-    [data-testid="stDecoration"],
-    .stActionButton {
-        display: none !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
-        opacity: 0 !important;
-        position: absolute !important;
-        top: -9999px !important;
-        z-index: -1 !important;
-    }
-    
     /* ================= RTL & Basic Layout ================= */
     .stApp {
         direction: rtl;

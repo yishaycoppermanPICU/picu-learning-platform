@@ -83,26 +83,6 @@ except:
 # כותרת ראשית - מותאמת למובייל
 st.markdown("""
 <style>
-/* הסתרת וביטול קישור GitHub לחלוטין - Streamlit Cloud */
-a[href*="github.com"],
-a[href*="github"],
-[data-testid="stToolbar"] a,
-header a {
-    display: none !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    opacity: 0 !important;
-    position: absolute !important;
-    top: -9999px !important;
-}
-
-/* הסתרת כל הכלים בהדר שעלולים להפריע */
-[data-testid="stToolbar"],
-[data-testid="stDecoration"] {
-    display: none !important;
-    visibility: hidden !important;
-}
-
 /* תיקון כפתור התפריט למובייל - אייקון המבורגר */
 @media (max-width: 768px) {
     button[kind="header"]::before,
