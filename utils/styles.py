@@ -52,6 +52,23 @@ def get_common_styles():
         cursor: pointer !important;
     }
     
+    /* הסתרת טקסט keyboard_double_arrow שמופיע בכפתור */
+    button[data-testid="collapsedControl"] *[data-icon],
+    button[data-testid="collapsedControl"] span,
+    button[kind="header"] span {
+        font-size: 0 !important;
+        display: none !important;
+    }
+    
+    /* השארת רק האייקון החזותי */
+    button[data-testid="collapsedControl"]::before,
+    button[kind="header"]::before {
+        content: "☰" !important;
+        font-size: 1.5rem !important;
+        color: white !important;
+        display: block !important;
+    }
+    
     /* ================= RTL & Basic Layout ================= */
     .stApp {
         direction: rtl;

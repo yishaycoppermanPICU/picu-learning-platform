@@ -486,8 +486,8 @@ if st.session_state.logged_in:
                 <line x1="62" y1="50" x2="73" y2="50" stroke="#667eea" stroke-width="1.5"/>
                 <line x1="62" y1="60" x2="73" y2="60" stroke="#667eea" stroke-width="1.5"/>
             </svg>
-            <h2 style='color: white; font-size: 2rem; margin: 1rem 0 0.5rem 0; font-weight: 700;'>ספריית תוכן</h2>
-            <p style='color: rgba(255,255,255,0.95); font-size: 1.1rem;'>חומרי למידה מקצועיים ומעודכנים</p>
+            <h2 style='color: white; font-size: 2.8rem; margin: 1rem 0 0.5rem 0; font-weight: 700;'>ספריית תוכן</h2>
+            <p style='color: rgba(255,255,255,0.95); font-size: 1.3rem; font-weight: 500;'>חומרי למידה מקצועיים ומעודכנים</p>
         </div>
         """, unsafe_allow_html=True)
         if st.button("כניסה לספרייה", key="library_btn", use_container_width=True, type="primary"):
@@ -512,8 +512,8 @@ if st.session_state.logged_in:
                 <circle cx="70" cy="45" r="3" fill="white"/>
                 <circle cx="75" cy="50" r="3" fill="white"/>
             </svg>
-            <h2 style='color: white; font-size: 2rem; margin: 1rem 0 0.5rem 0; font-weight: 700;'>הנתונים שלי</h2>
-            <p style='color: rgba(255,255,255,0.95); font-size: 1.1rem;'>מעקב התקדמות וסטטיסטיקות</p>
+            <h2 style='color: white; font-size: 2.8rem; margin: 1rem 0 0.5rem 0; font-weight: 700;'>הנתונים שלי</h2>
+            <p style='color: rgba(255,255,255,0.95); font-size: 1.3rem; font-weight: 500;'>מעקב התקדמות וסטטיסטיקות</p>
         </div>
         """, unsafe_allow_html=True)
         if st.button("צפייה בסטטיסטיקות", key="stats_btn", use_container_width=True, type="primary"):
@@ -530,8 +530,8 @@ if st.session_state.logged_in:
                 <circle cx="50" cy="50" r="15" fill="none" stroke="white" stroke-width="2" opacity="0.5"/>
                 <text x="50" y="58" font-size="20" font-weight="bold" fill="#4facfe" text-anchor="middle">1</text>
             </svg>
-            <h2 style='color: white; font-size: 2rem; margin: 1rem 0 0.5rem 0; font-weight: 700;'>לוח הישגים</h2>
-            <p style='color: rgba(255,255,255,0.95); font-size: 1.1rem;'>תחרות בין-מוסדית</p>
+            <h2 style='color: white; font-size: 2.8rem; margin: 1rem 0 0.5rem 0; font-weight: 700;'>לוח הישגים</h2>
+            <p style='color: rgba(255,255,255,0.95); font-size: 1.3rem; font-weight: 500;'>תחרות בין-מוסדית</p>
         </div>
         """, unsafe_allow_html=True)
         if st.button("לוח התוצאות", key="leaderboard_btn", use_container_width=True, type="primary"):
