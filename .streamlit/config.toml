@@ -19,3 +19,11 @@ enableXsrfProtection = true
 
 [runner]
 magicEnabled = true
+
+[ui]
+hideTopBar = false
+hideSidebarNav = false
+
+[client]
+toolbarMode = "minimal"
+showErrorDetails = true

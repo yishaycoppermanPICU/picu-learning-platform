@@ -83,6 +83,26 @@ except:
 # כותרת ראשית - מותאמת למובייל
 st.markdown("""
 <style>
+/* הסתרת וביטול קישור GitHub לחלוטין - Streamlit Cloud */
+a[href*="github.com"],
+a[href*="github"],
+[data-testid="stToolbar"] a,
+header a {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    top: -9999px !important;
+}
+
+/* הסתרת כל הכלים בהדר שעלולים להפריע */
+[data-testid="stToolbar"],
+[data-testid="stDecoration"] {
+    display: none !important;
+    visibility: hidden !important;
+}
+
 /* תיקון כפתור התפריט למובייל - אייקון המבורגר */
 @media (max-width: 768px) {
     button[kind="header"]::before,
@@ -109,6 +129,11 @@ st.markdown("""
         border: 2px solid #667eea !important;
         border-radius: 10px !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+        z-index: 999999 !important;
+        position: fixed !important;
+        top: 4.5rem !important;
+        right: 1rem !important;
+        pointer-events: all !important;
     }
     
     .main-title {
@@ -244,29 +269,45 @@ with st.sidebar:
                     username = email.split('@')[0].replace('.', '_').replace('-', '_')
                     
                     # שמירת המייל ב-cookies (נשמר 30 ימים)
-                    cookie_manager.set('user_email', email, expires_at=datetime.now() + pd.Timedelta(days=30))
+                    try:
+                        cookie_manager.set('user_email', email, expires_at=datetime.now() + pd.Timedelta(days=30))
+                    except:
+                        pass  # אם יש בעיה עם cookies, ממשיכים בלי
+                    
+                    # עדכון session state מיידי
+                    st.session_state.logged_in = True
                     
                     if DB_CONNECTED:
                         try:
                             existing = authenticate_user(username)
                             if existing:
-                                st.session_state.logged_in = True
                                 st.session_state.user = existing
                                 update_last_login(email)
                                 st.success(f"ברוך שובך, {existing['full_name']} 👋")
-                                st.rerun()
                             else: 
                                 new_user = create_user(username, email, full_name, institution)
                                 if new_user: 
-                                    st.session_state.logged_in = True
                                     st.session_state.user = new_user
                                     st.success(f"ברוך הבא, {full_name} 🎉")
                                     st.balloons()
-                                    st.rerun()
+                                else:
+                                    # אם נכשל ליצור במסד, ניצור משתמש מקומי
+                                    st.session_state.user = {
+                                        'username': username,
+                                        'full_name': full_name,
+                                        'email': email,
+                                        'institutions': {'name': institution}
+                                    }
                         except Exception as e:
-                            st.error(f"שגיאה: {e}")
+                            # במקרה של שגיאה, ניצור משתמש מקומי
+                            st.session_state.user = {
+                                'username': username,
+                                'full_name': full_name,
+                                'email': email,
+                                'institutions': {'name': institution}
+                            }
+                            st.warning(f"התחברת במצב מקומי")
                     else:
-                        st.session_state.logged_in = True
                         st.session_state.user = {
                             'username': username,
                             'full_name': full_name,
@@ -274,7 +315,9 @@ with st.sidebar:
                             'institutions': {'name': institution}
                         }
                         st.success(f"ברוך הבא, {full_name}!")
-                        st.rerun()
+                    
+                    # רענון מיידי
+                    st.rerun()
                 else:
                     if not email:
                         st.error("נא להזין כתובת מייל תחילה ❌")

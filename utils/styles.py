@@ -7,6 +7,24 @@ def get_common_styles():
     """החזרת CSS משותף לכל הדפים"""
     return """
 <style>
+    /* ================= הסתרת קישור GitHub וכלים מפריעים ================= */
+    /* הסתרה מוחלטת של קישורי GitHub ב-Streamlit Cloud */
+    a[href*="github.com"],
+    a[href*="github"],
+    [data-testid="stToolbar"] a,
+    header a,
+    [data-testid="stToolbar"],
+    [data-testid="stDecoration"],
+    .stActionButton {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        opacity: 0 !important;
+        position: absolute !important;
+        top: -9999px !important;
+        z-index: -1 !important;
+    }
+    
     /* ================= RTL & Basic Layout ================= */
     .stApp {
         direction: rtl;
@@ -65,8 +83,8 @@ def get_common_styles():
             align-items: center !important;
             justify-content: center !important;
             position: fixed !important;
-            top: 0.75rem !important;
-            right: 0.75rem !important;
+            top: 4.5rem !important;
+            right: 1rem !important;
             z-index: 999999 !important;
             background: white !important;
             border: 2px solid #667eea !important;
@@ -77,6 +95,8 @@ def get_common_styles():
             height: 44px !important;
             min-width: 44px !important;
             min-height: 44px !important;
+            pointer-events: all !important;
+            cursor: pointer !important;
         }
         
         /* הסרת כל האייקונים הקיימים */

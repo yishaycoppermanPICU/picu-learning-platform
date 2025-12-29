@@ -73,13 +73,21 @@ if st.session_state.get('view_weekly_content') and st.session_state.get('selecte
                 section_type = section.get('section_type', 'text')
                 title = section.get('title', '')
                 content = section.get('content', '')
-                metadata = section.get('metadata', {})
+                metadata = section.get('metadata')
+                if metadata is None:
+                    metadata = {}
+                elif isinstance(metadata, str):
+                    try:
+                        import json
+                        metadata = json.loads(metadata)
+                    except:
+                        metadata = {}
                 
                 # Create expander with section title
                 with st.expander(f"**{title}**", expanded=False):
                     # Display content based on type
                     if section_type == 'alert':
-                        alert_type = metadata.get('alert_type', 'info')
+                        alert_type = metadata.get('alert_type', 'info') if isinstance(metadata, dict) else 'info'
                         alert_class = f"alert-{alert_type}"
                         st.markdown(f'<div class="alert-box {alert_class}">{content}</div>', unsafe_allow_html=True)
                     
@@ -195,13 +203,21 @@ if selected_category in categories:
                     section_type = section.get('section_type', 'text')
                     title = section.get('title', '')
                     content = section.get('content', '')
-                    metadata = section.get('metadata', {})
+                    metadata = section.get('metadata')
+                    if metadata is None:
+                        metadata = {}
+                    elif isinstance(metadata, str):
+                        try:
+                            import json
+                            metadata = json.loads(metadata)
+                        except:
+                            metadata = {}
                     
                     # Create expander with section title
                     with st.expander(f"**{title}**", expanded=False):
                         # Display content based on type
                         if section_type == 'alert':
-                            alert_type = metadata.get('alert_type', 'info')
+                            alert_type = metadata.get('alert_type', 'info') if isinstance(metadata, dict) else 'info'
                             alert_class = f"alert-{alert_type}"
                             st.markdown(f'<div class="alert-box {alert_class}">{content}</div>', unsafe_allow_html=True)
                         
