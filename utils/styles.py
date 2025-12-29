@@ -7,6 +7,15 @@ def get_common_styles():
     """החזרת CSS משותף לכל הדפים"""
     return """
 <style>
+    /* הסתרת קישור GitHub בלבד */
+    header a[href*="github"],
+    header svg[class*="github"],
+    header [data-testid="stHeader"] a,
+    [data-testid="stHeader"] > div > div > div > a {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    
     /* ================= RTL & Basic Layout ================= */
     .stApp {
         direction: rtl;
@@ -65,8 +74,8 @@ def get_common_styles():
             align-items: center !important;
             justify-content: center !important;
             position: fixed !important;
-            top: 4.5rem !important;
-            right: 1rem !important;
+            top: 0.75rem !important;
+            right: 0.75rem !important;
             z-index: 999999 !important;
             background: white !important;
             border: 2px solid #667eea !important;

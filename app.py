@@ -83,6 +83,15 @@ except:
 # כותרת ראשית - מותאמת למובייל
 st.markdown("""
 <style>
+/* הסתרת קישור GitHub בלבד */
+header a[href*="github"],
+header svg[class*="github"],
+header [data-testid="stHeader"] a,
+[data-testid="stHeader"] > div > div > div > a {
+    display: none !important;
+    visibility: hidden !important;
+}
+
 /* תיקון כפתור התפריט למובייל - אייקון המבורגר */
 @media (max-width: 768px) {
     button[kind="header"]::before,
@@ -111,8 +120,8 @@ st.markdown("""
         box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
         z-index: 999999 !important;
         position: fixed !important;
-        top: 4.5rem !important;
-        right: 1rem !important;
+        top: 0.75rem !important;
+        right: 0.75rem !important;
         pointer-events: all !important;
     }
     
