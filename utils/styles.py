@@ -52,12 +52,36 @@ def get_common_styles():
         left: auto;
     }
     
+    /* כל הטקסטים בסיידבר יהיו לבנים */
+    section[data-testid="stSidebar"] *,
     section[data-testid="stSidebar"] h1,
     section[data-testid="stSidebar"] h2,
     section[data-testid="stSidebar"] h3,
+    section[data-testid="stSidebar"] h4,
+    section[data-testid="stSidebar"] h5,
+    section[data-testid="stSidebar"] h6,
     section[data-testid="stSidebar"] p,
-    section[data-testid="stSidebar"] label {
+    section[data-testid="stSidebar"] label,
+    section[data-testid="stSidebar"] span,
+    section[data-testid="stSidebar"] div,
+    section[data-testid="stSidebar"] a,
+    section[data-testid="stSidebar"] .stMarkdown,
+    section[data-testid="stSidebar"] .stMarkdown * {
         color: white !important;
+    }
+    
+    /* כפתורים בסיידבר */
+    section[data-testid="stSidebar"] button {
+        color: white !important;
+        border-color: white !important;
+    }
+    
+    /* שדות קלט בסיידבר */
+    section[data-testid="stSidebar"] input,
+    section[data-testid="stSidebar"] textarea,
+    section[data-testid="stSidebar"] select {
+        color: #333 !important;
+        background: white !important;
     }
     
     /* תצוגה רגילה בדסקטופ */
