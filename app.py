@@ -36,7 +36,7 @@ except Exception as e:
 
 # הגדרות עמוד
 st.set_page_config(
-    page_title="PICU Learning Platform - פלטפורמת לימוד טיפול נמרץ ילדים",
+    page_title="ישי קופרמן | טיפול נמרץ ילדים",
     page_icon="🏥",
     layout="wide",
     initial_sidebar_state="auto"  # אוטומטי - פתוח בדסקטופ, סגור במובייל
