@@ -123,7 +123,7 @@ if st.session_state.get('view_weekly_content') and st.session_state.get('selecte
         st.divider()
         if st.button("✍️ עבור למבחן בנושא זה", type="primary", use_container_width=True):
             st.session_state['selected_quiz_category'] = full_topic.get('category')
-            st.switch_page("pages/6_בחנים.py")
+            st.switch_page("pages/5_בחנים.py")
     else:
         st.error("לא ניתן לטעון את הנושא")
     

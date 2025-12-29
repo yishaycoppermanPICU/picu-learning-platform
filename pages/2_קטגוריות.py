@@ -571,5 +571,5 @@ with col2:
     if st.button("📝 בחן את עצמך בנושא זה", type="primary", use_container_width=True):
         st.session_state['quiz_topic'] = topic_id
         st.session_state['quiz_category'] = category
-        st.switch_page("pages/6_בחנים.py")
+        st.switch_page("pages/5_בחנים.py")
 

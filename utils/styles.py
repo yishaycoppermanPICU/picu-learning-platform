@@ -10,9 +10,11 @@ def get_common_styles():
     /* ================= Import Fonts ================= */
     @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap');
     
-    /* חסימה של קישור GitHub בלבד */
+    /* חסימה של קישור GitHub בלבד - כולל הכפתור */
     header a[href*="github"],
-    header a[href*="github"] * {
+    header a[href*="github"] *,
+    header button[kind="header"]:has(a[href*="github"]),
+    header > div > div > a {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
@@ -23,46 +25,8 @@ def get_common_styles():
         pointer-events: none !important;
     }
     
-    /* הסתרת תכונות data-key וטקסט key שעשוי להופיע */
-    [data-key]::after,
-    [data-testid*="key"]::after,
-    button::before {
-        content: none !important;
-        display: none !important;
-    }
-    
-    /* הסתרת כל טקסט שיכול להיות key */
-    *[data-key],
-    *[data-testid*="key"] {
-        position: relative;
-    }
-    
-    /* מניעת תצוגה של מאפיינים של Streamlit */
-    [class*="st-emotion-cache"]::before,
-    [class*="st-emotion-cache"]::after {
-        content: none !important;
-    }
-    
-    /* מאפשר לכפתור הסיידבר המקורי לעבוד */
-    button[kind="header"],
-    button[data-testid="collapsedControl"],
-    button[kind="header"] *,
-    button[data-testid="collapsedControl"] * {
-        pointer-events: all !important;
-        cursor: pointer !important;
-    }
-    
-    /* הסתרת טקסט keyboard_double_arrow שמופיע בכפתור */
-    button[data-testid="collapsedControl"] *[data-icon],
-    button[data-testid="collapsedControl"] span,
-    button[kind="header"] span {
-        font-size: 0 !important;
-        display: none !important;
-    }
-    
-    /* עיצוב כפתור הסיידבר - בולט ויפה */
-    button[data-testid="collapsedControl"],
-    button[kind="header"] {
+    /* כפתור פתיחת סיידבר בלבד - רק המקורי */
+    button[data-testid="collapsedControl"] {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
         border: none !important;
         border-radius: 12px !important;
@@ -72,29 +36,32 @@ def get_common_styles():
         transition: all 0.3s ease !important;
         position: relative !important;
         margin: 0.5rem !important;
+        pointer-events: all !important;
+        cursor: pointer !important;
     }
     
-    button[data-testid="collapsedControl"]:hover,
-    button[kind="header"]:hover {
+    button[data-testid="collapsedControl"]:hover {
         transform: scale(1.05) !important;
         box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
     }
     
-    /* אייקון מעוצב בתוך הכפתור */
-    button[data-testid="collapsedControl"]::before,
-    button[kind="header"]::before {
-        content: "" !important;
+    /* הסתרת הטקסט המקורי */
+    button[data-testid="collapsedControl"] span,
+    button[data-testid="collapsedControl"] *[data-icon] {
+        font-size: 0 !important;
+        color: transparent !important;
+    }
+    
+    /* אייקון המבורגר מעוצב */
+    button[data-testid="collapsedControl"]::before {
+        content: "☰" !important;
         position: absolute !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
-        width: 24px !important;
-        height: 24px !important;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z'/%3E%3C/svg%3E") !important;
-        background-size: contain !important;
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-        display: block !important;
+        font-size: 1.8rem !important;
+        color: white !important;
+        line-height: 1 !important;
     }
     
     /* ================= RTL & Basic Layout ================= */

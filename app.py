@@ -402,11 +402,11 @@ if st.session_state.logged_in:
     
     with col1:
         if st.button(f"📖 למד: {weekly_content['title'][:20]}...", type="primary", use_container_width=True, key="weekly_learn", on_click=view_weekly_topic):
-            st.switch_page("pages/9_נושאי_לימוד.py")
+            st.switch_page("pages/7_נושאי_לימוד.py")
     
     with col2:
         if st.button(f"✍️ התמחה בנושא: מבחן", use_container_width=True, key="weekly_quiz_btn", on_click=start_weekly_quiz):
-            st.switch_page("pages/6_בחנים.py")
+            st.switch_page("pages/5_בחנים.py")
     
     with col3:
         if st.button("🏆 תגי ההישגים שלי", use_container_width=True):
@@ -434,7 +434,7 @@ if st.session_state.logged_in:
         with col1:
             if st.button("▶️ המשך מבחן", type="primary", use_container_width=True):
                 st.session_state['quiz_paused'] = False
-                st.switch_page("pages/6_בחנים.py")
+                st.switch_page("pages/5_בחנים.py")
         with col2:
             if st.button("🗑️ מחק ותתחיל מחדש", use_container_width=True):
                 st.session_state.quiz_active = False

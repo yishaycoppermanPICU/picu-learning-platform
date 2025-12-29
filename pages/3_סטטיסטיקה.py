@@ -230,7 +230,7 @@ with tab3:
     else:
         st.info("עדיין לא ביצעת מבחנים 📝")
         if st.button("התחל מבחן ראשון 🚀", type="primary"):
-            st.switch_page("pages/6_בחנים.py")
+            st.switch_page("pages/5_בחנים.py")
 
 with tab4:
     st.markdown("### ההתקדמות שלך בנושאי הלמידה 📚")
