@@ -81,6 +81,41 @@ def get_common_styles():
         color: white !important;
     }
     
+    /* ================= אימוג'ים בצד שמאל ================= */
+    /* כפתורים - אימוג'י בצד שמאל */
+    button, .stButton button {
+        display: flex !important;
+        flex-direction: row-reverse !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.5rem !important;
+    }
+    
+    /* כותרות עם אימוג'ים */
+    h1, h2, h3, h4, h5, h6 {
+        display: flex !important;
+        flex-direction: row-reverse !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+    }
+    
+    /* פריטי סיידבר */
+    section[data-testid="stSidebar"] a,
+    section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a {
+        display: flex !important;
+        flex-direction: row-reverse !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+    }
+    
+    /* labels ואלמנטים אחרים */
+    label, .stMarkdown p {
+        display: inline-flex !important;
+        flex-direction: row-reverse !important;
+        align-items: center !important;
+        gap: 0.3rem !important;
+    }
+    
     /* ================= Typography - גדלים מוגדלים ================= */
     * {
         font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif !important;
