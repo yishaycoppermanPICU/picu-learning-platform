@@ -567,7 +567,7 @@ if st.session_state.logged_in:
     st.divider()
     
     # מידע נוסף
-    with st.expander("💡 עצות למידה"):
+    with st.expander("💡 עצות למידה", expanded=False):
         st.write("**כיצד להפיק את המרב מהפלטפורמה:**")
         st.write("- התחל עם נושאים בסיסיים ועבור לנושאים מתקדמים")
         st.write("- הקדש לפחות 5 דקות ביום ללמידה")
@@ -592,7 +592,7 @@ else:
     with col3:
         st.info("### תחרות ארצית 🏆\nהשווה את עצמך לעמיתים מכל הארץ")
     
-    with st.expander("מידע על הפלטפורמה"):
+    with st.expander("מידע על הפלטפורמה", expanded=False):
         st.write("**מטרת הפלטפורמה:**")
         st.write("פלטפורמה זו נוצרה כדי להעשיר ולחדד את הידע של צוותי טיפול נמרץ ילדים.")
         st.write("")
