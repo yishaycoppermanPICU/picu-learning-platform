@@ -9,6 +9,20 @@ def get_common_styles():
 <style>
     /* ================= Import Fonts ================= */
     @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+    /* תיקון ke / אייקונים שבורים: הסתרת anchor של כותרות והבטחת טעינת פונט אייקונים */
+    h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"],
+    h4 a[href^="#"], h5 a[href^="#"], h6 a[href^="#"],
+    h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        pointer-events: none !important;
+    }
     
     /* חסימה של קישור GitHub וכפתורים מיותרים */
     header a[href*="github"],
