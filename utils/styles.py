@@ -30,8 +30,8 @@ def get_common_styles():
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
         border: none !important;
         border-radius: 12px !important;
-        width: 48px !important;
-        height: 48px !important;
+        width: 70px !important;
+        height: 40px !important;
         box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
         transition: all 0.3s ease !important;
         position: relative !important;
@@ -64,18 +64,20 @@ def get_common_styles():
     
     /* אייקון תפריט מעוצב */
     button[data-testid="collapsedControl"]::before {
-        content: "☰" !important;
+        content: "תפריט" !important;
         position: absolute !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
-        font-size: 2rem !important;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
         color: white !important;
         line-height: 1 !important;
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
         z-index: 999 !important;
+        font-family: 'Heebo', sans-serif !important;
     }
     
     /* ================= RTL & Basic Layout ================= */
