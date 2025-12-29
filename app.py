@@ -469,10 +469,25 @@ if st.session_state.logged_in:
     with col1:
         st.markdown("""
         <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-                    padding: 2rem; border-radius: 10px; text-align: center; color: white;'>
-            <h2 style='color: white;'>📚</h2>
-            <h3 style='color: white;'>ספריית תוכן</h3>
-            <p style='color: white;'>חומרי למידה מקצועיים ומעודכנים</p>
+                    padding: 2.5rem; border-radius: 16px; text-align: center; color: white;
+                    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);'>
+            <svg width="80" height="80" viewBox="0 0 100 100" style="margin-bottom: 1rem;">
+                <rect x="20" y="15" width="15" height="70" fill="white" opacity="0.9" rx="2"/>
+                <rect x="40" y="20" width="15" height="65" fill="white" opacity="0.95" rx="2"/>
+                <rect x="60" y="25" width="15" height="60" fill="white" rx="2"/>
+                <circle cx="27.5" cy="30" r="2" fill="#667eea"/>
+                <circle cx="47.5" cy="35" r="2" fill="#667eea"/>
+                <circle cx="67.5" cy="40" r="2" fill="#667eea"/>
+                <line x1="22" y1="40" x2="33" y2="40" stroke="#667eea" stroke-width="1.5"/>
+                <line x1="22" y1="50" x2="33" y2="50" stroke="#667eea" stroke-width="1.5"/>
+                <line x1="22" y1="60" x2="33" y2="60" stroke="#667eea" stroke-width="1.5"/>
+                <line x1="42" y1="45" x2="53" y2="45" stroke="#667eea" stroke-width="1.5"/>
+                <line x1="42" y1="55" x2="53" y2="55" stroke="#667eea" stroke-width="1.5"/>
+                <line x1="62" y1="50" x2="73" y2="50" stroke="#667eea" stroke-width="1.5"/>
+                <line x1="62" y1="60" x2="73" y2="60" stroke="#667eea" stroke-width="1.5"/>
+            </svg>
+            <h2 style='color: white; font-size: 2rem; margin: 1rem 0 0.5rem 0; font-weight: 700;'>ספריית תוכן</h2>
+            <p style='color: rgba(255,255,255,0.95); font-size: 1.1rem;'>חומרי למידה מקצועיים ומעודכנים</p>
         </div>
         """, unsafe_allow_html=True)
         if st.button("כניסה לספרייה", key="library_btn", use_container_width=True, type="primary"):
@@ -481,10 +496,24 @@ if st.session_state.logged_in:
     with col2:
         st.markdown("""
         <div style='background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); 
-                    padding: 2rem; border-radius: 10px; text-align: center; color: white;'>
-            <h2 style='color: white;'>📊</h2>
-            <h3 style='color: white;'>הנתונים שלי</h3>
-            <p style='color: white;'>מעקב התקדמות וסטטיסטיקות</p>
+                    padding: 2.5rem; border-radius: 16px; text-align: center; color: white;
+                    box-shadow: 0 8px 24px rgba(240, 147, 251, 0.3);'>
+            <svg width="80" height="80" viewBox="0 0 100 100" style="margin-bottom: 1rem;">
+                <rect x="15" y="15" width="70" height="70" fill="none" stroke="white" stroke-width="3" rx="4"/>
+                <line x1="15" y1="35" x2="85" y2="35" stroke="white" stroke-width="2"/>
+                <line x1="35" y1="35" x2="35" y2="85" stroke="white" stroke-width="2"/>
+                <polyline points="45,65 50,55 55,60 60,50 65,55 70,45 75,50" 
+                          fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="45" cy="65" r="3" fill="white"/>
+                <circle cx="50" cy="55" r="3" fill="white"/>
+                <circle cx="55" cy="60" r="3" fill="white"/>
+                <circle cx="60" cy="50" r="3" fill="white"/>
+                <circle cx="65" cy="55" r="3" fill="white"/>
+                <circle cx="70" cy="45" r="3" fill="white"/>
+                <circle cx="75" cy="50" r="3" fill="white"/>
+            </svg>
+            <h2 style='color: white; font-size: 2rem; margin: 1rem 0 0.5rem 0; font-weight: 700;'>הנתונים שלי</h2>
+            <p style='color: rgba(255,255,255,0.95); font-size: 1.1rem;'>מעקב התקדמות וסטטיסטיקות</p>
         </div>
         """, unsafe_allow_html=True)
         if st.button("צפייה בסטטיסטיקות", key="stats_btn", use_container_width=True, type="primary"):
@@ -493,10 +522,16 @@ if st.session_state.logged_in:
     with col3:
         st.markdown("""
         <div style='background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); 
-                    padding: 2rem; border-radius: 10px; text-align: center; color: white;'>
-            <h2 style='color: white;'>🏆</h2>
-            <h3 style='color: white;'>לוח הישגים</h3>
-            <p style='color: white;'>תחרות בין-מוסדית</p>
+                    padding: 2.5rem; border-radius: 16px; text-align: center; color: white;
+                    box-shadow: 0 8px 24px rgba(79, 172, 254, 0.3);'>
+            <svg width="80" height="80" viewBox="0 0 100 100" style="margin-bottom: 1rem;">
+                <path d="M 50 20 L 60 45 L 85 45 L 65 60 L 75 85 L 50 70 L 25 85 L 35 60 L 15 45 L 40 45 Z" 
+                      fill="white" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+                <circle cx="50" cy="50" r="15" fill="none" stroke="white" stroke-width="2" opacity="0.5"/>
+                <text x="50" y="58" font-size="20" font-weight="bold" fill="#4facfe" text-anchor="middle">1</text>
+            </svg>
+            <h2 style='color: white; font-size: 2rem; margin: 1rem 0 0.5rem 0; font-weight: 700;'>לוח הישגים</h2>
+            <p style='color: rgba(255,255,255,0.95); font-size: 1.1rem;'>תחרות בין-מוסדית</p>
         </div>
         """, unsafe_allow_html=True)
         if st.button("לוח התוצאות", key="leaderboard_btn", use_container_width=True, type="primary"):

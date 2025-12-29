@@ -600,6 +600,63 @@ def get_common_styles():
         gap: 0.8rem !important;
     }
     
+    /* ================= ניגודיות צבעים - טקסט על רקע ================= */
+    /* טקסט לבן על רקעים כהים ומעברי צבע */
+    [style*="background: linear-gradient"] h1,
+    [style*="background: linear-gradient"] h2,
+    [style*="background: linear-gradient"] h3,
+    [style*="background: linear-gradient"] h4,
+    [style*="background: linear-gradient"] p,
+    [style*="background: linear-gradient"] span,
+    [style*="background: linear-gradient"] div,
+    [style*="background: linear-gradient"] label {
+        color: white !important;
+    }
+    
+    /* טקסט כהה על רקעים בהירים */
+    [style*="background: white"] h1,
+    [style*="background: white"] h2,
+    [style*="background: white"] h3,
+    [style*="background: white"] h4,
+    [style*="background: white"] p,
+    [style*="background: white"] span,
+    [style*="background: white"] div {
+        color: #2c3e50 !important;
+    }
+    
+    [style*="background: #f"] h1,
+    [style*="background: #f"] h2,
+    [style*="background: #f"] h3,
+    [style*="background: #f"] h4,
+    [style*="background: #f"] p,
+    [style*="background: #f"] span,
+    [style*="background: #f"] div {
+        color: #2c3e50 !important;
+    }
+    
+    /* כפתורים - טקסט לבן תמיד */
+    button, button * {
+        color: white !important;
+    }
+    
+    /* הודעות success/info/warning - טקסט כהה */
+    .stSuccess, .stInfo, .stWarning {
+        color: #2c3e50 !important;
+    }
+    
+    .stSuccess *, .stInfo *, .stWarning * {
+        color: #2c3e50 !important;
+    }
+    
+    /* הודעות error - טקסט כהה */
+    .stError {
+        color: #721c24 !important;
+    }
+    
+    .stError * {
+        color: #721c24 !important;
+    }
+    
     .stRadio > div > label {
         font-size: 1.05rem !important;
         padding: 0.6rem 1rem !important;
