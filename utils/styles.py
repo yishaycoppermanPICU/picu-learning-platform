@@ -7,6 +7,9 @@ def get_common_styles():
     """החזרת CSS משותף לכל הדפים"""
     return """
 <style>
+    /* ================= Import Fonts ================= */
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap');
+    
     /* חסימה של קישור GitHub בלבד */
     header a[href*="github"],
     header a[href*="github"] * {
@@ -33,11 +36,55 @@ def get_common_styles():
     .stApp {
         direction: rtl;
         background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+        font-family: 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    
+    /* ================= Typography - גדלים מוגדלים ================= */
+    * {
+        font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    }
+    
+    h1 {
+        font-size: 2.5rem !important;
+        font-weight: 700 !important;
+        line-height: 1.3 !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    h2 {
+        font-size: 2rem !important;
+        font-weight: 600 !important;
+        line-height: 1.4 !important;
+        margin-bottom: 0.8rem !important;
+    }
+    
+    h3 {
+        font-size: 1.6rem !important;
+        font-weight: 600 !important;
+        line-height: 1.4 !important;
+        margin-bottom: 0.7rem !important;
+    }
+    
+    h4 {
+        font-size: 1.3rem !important;
+        font-weight: 500 !important;
+    }
+    
+    p, li, span, div {
+        font-size: 1.1rem !important;
+        line-height: 1.8 !important;
+        color: #2c3e50;
     }
     
     h1, h2, h3, h4, h5, h6, p, label, span, li, div {
         text-align: right;
         direction: rtl;
+    }
+    
+    /* טקסט בתוך כפתורים */
+    button, button * {
+        font-size: 1.05rem !important;
+        font-weight: 500 !important;
     }
     
     /* ================= Sidebar ================= */
@@ -141,65 +188,104 @@ def get_common_styles():
     .main .block-container {
         padding-right: 3rem;
         padding-left: 1rem;
-        padding-bottom: 4rem; /* מרווח לזכויות יוצרים */
-        max-width: 1200px;
+        padding-top: 2rem;
+        padding-bottom: 4rem;
+        max-width: 1400px;
     }
     
-    /* ================= Headers ================= */
+    /* ================= Headers - משופרים ================= */
     .main-header {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 2.5rem;
-        border-radius: 15px;
-        margin-bottom: 2rem;
+        padding: 3rem 2.5rem;
+        border-radius: 20px;
+        margin-bottom: 2.5rem;
         color: white;
         text-align: center;
-        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.35);
+        position: relative;
+        overflow: hidden;
     }
     
-    .main-header h1, .main-header p {
+    .main-header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    
+    .main-header h1 {
         color: white !important;
         margin: 0.5rem 0;
+        font-size: 3rem !important;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
     
-    /* ================= Cards ================= */
+    .main-header p {
+        color: rgba(255,255,255,0.95) !important;
+        margin: 0.5rem 0;
+        font-size: 1.2rem !important;
+    }
+    
+    /* ================= Cards - עיצוב משופר ================= */
     .category-card {
         background: white;
-        padding: 1.5rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        margin-bottom: 1rem;
-        border-right: 5px solid #667eea;
-        transition: all 0.3s ease;
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        margin-bottom: 1.5rem;
+        border-right: 6px solid #667eea;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
     }
     
     .category-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        transform: translateY(-5px) translateX(-3px);
+        box-shadow: 0 12px 35px rgba(102, 126, 234, 0.25);
+        border-right-color: #764ba2;
+    }
+    
+    .category-card h3 {
+        font-size: 1.8rem !important;
+        margin-bottom: 1rem !important;
     }
     
     .topic-card {
         background: white;
-        padding: 1.2rem;
-        border-radius: 10px;
-        border-right: 4px solid #667eea;
-        margin-bottom: 0.8rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        transition: all 0.3s ease;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border-right: 5px solid #667eea;
+        margin-bottom: 1rem;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .topic-card:hover {
-        transform: translateX(-5px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transform: translateX(-8px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        border-right-color: #764ba2;
     }
     
-    /* ================= Content Sections ================= */
+    .topic-card h4 {
+        font-size: 1.4rem !important;
+    }
+    
+    /* ================= Content Sections - משופר ================= */
     .content-section {
         background: white;
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin: 1.5rem 0;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-        border-right: 4px solid #667eea;
+        padding: 2rem;
+        border-radius: 16px;
+        margin: 2rem 0;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        border-right: 5px solid #667eea;
+        transition: all 0.3s ease;
+    }
+    
+    .content-section:hover {
+        box-shadow: 0 6px 25px rgba(0,0,0,0.12);
     }
     
     .section-header {
@@ -207,110 +293,137 @@ def get_common_styles():
         align-items: center;
         justify-content: space-between;
         cursor: pointer;
-        padding: 1rem;
+        padding: 1.5rem;
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        border-radius: 8px;
-        margin-bottom: 0.5rem;
+        border-radius: 12px;
+        margin-bottom: 1rem;
         transition: all 0.3s ease;
-        border-right: 3px solid #667eea;
+        border-right: 4px solid #667eea;
     }
     
     .section-header:hover {
         background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
-        transform: translateX(-3px);
+        transform: translateX(-5px);
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     }
     
     .section-title {
-        font-size: 1.2rem;
-        font-weight: 600;
+        font-size: 1.5rem !important;
+        font-weight: 600 !important;
         color: #2c3e50;
         margin: 0;
     }
     
     .section-preview {
         color: #6c757d;
-        font-size: 0.95rem;
+        font-size: 1.05rem !important;
         margin: 0.5rem 0 0 0;
-        line-height: 1.6;
+        line-height: 1.8 !important;
     }
     
-    /* ================= Alert Boxes ================= */
+    /* ================= Alert Boxes - משופר ================= */
     .alert-box {
-        padding: 1.2rem;
-        border-radius: 10px;
-        margin: 1rem 0;
-        border-right: 5px solid;
+        padding: 1.5rem 1.8rem;
+        border-radius: 12px;
+        margin: 1.5rem 0;
+        border-right: 6px solid;
+        font-size: 1.1rem !important;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
     }
     
     .alert-warning {
-        background: #fff3cd;
+        background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
         border-color: #ffc107;
         color: #856404;
     }
     
     .alert-info {
-        background: #d1ecf1;
+        background: linear-gradient(135deg, #e3f2fd 0%, #d1ecf1 100%);
         border-color: #17a2b8;
         color: #0c5460;
     }
     
     .alert-success {
-        background: #d4edda;
+        background: linear-gradient(135deg, #e8f5e9 0%, #d4edda 100%);
         border-color: #28a745;
         color: #155724;
     }
     
     .alert-danger {
-        background: #f8d7da;
+        background: linear-gradient(135deg, #ffebee 0%, #f8d7da 100%);
         border-color: #dc3545;
         color: #721c24;
     }
     
-    /* ================= Stat Boxes ================= */
+    /* ================= Stat Boxes - משופר ================= */
     .stat-box {
         background: white;
-        padding: 1.5rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        padding: 2rem 1.8rem;
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
         text-align: center;
-        border-top: 4px solid #667eea;
+        border-top: 5px solid #667eea;
+        transition: all 0.3s ease;
+    }
+    
+    .stat-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     }
     
     .stat-box h3 {
         color: #667eea;
-        font-size: 2.5rem;
+        font-size: 3rem !important;
+        font-weight: 700 !important;
         margin: 0.5rem 0;
     }
     
     .stat-box p {
         color: #6c757d;
         margin: 0;
+        font-size: 1.15rem !important;
     }
     
-    /* ================= Buttons ================= */
+    /* ================= Buttons - משופר ================= */
     .stButton > button {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        color: white !important;
         border: none;
-        padding: 0.6rem 2rem;
-        border-radius: 8px;
-        font-weight: 500;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        padding: 0.8rem 2.5rem !important;
+        border-radius: 12px;
+        font-weight: 600 !important;
+        font-size: 1.1rem !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.35);
     }
     
     .stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.45);
+        background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
     }
     
-    /* ================= Inputs ================= */
+    .stButton > button:active {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.35);
+    }
+    
+    /* ================= Inputs - משופר ================= */
     input, textarea, select {
         direction: rtl;
         text-align: right;
-        border-radius: 8px;
+        border-radius: 10px;
         border: 2px solid #e9ecef;
-        padding: 0.5rem;
+        padding: 0.75rem 1rem !important;
+        font-size: 1.05rem !important;
+        transition: all 0.3s ease;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        outline: none;
+    }
     }
     
     input:focus, textarea:focus, select:focus {
@@ -376,21 +489,179 @@ def get_common_styles():
     pre {
         background: #282c34;
         color: #abb2bf;
-        padding: 1rem;
-        border-radius: 8px;
+        padding: 1.5rem;
+        border-radius: 12px;
         overflow-x: auto;
         direction: ltr;
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+    }
+    
+    /* ================= Tables - עיצוב משופר ================= */
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin: 1.5rem 0;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    
+    thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    th {
+        color: white !important;
+        font-weight: 600 !important;
+        font-size: 1.15rem !important;
+        padding: 1.2rem 1rem !important;
+        text-align: right !important;
+    }
+    
+    td {
+        padding: 1rem !important;
+        font-size: 1.05rem !important;
+        border-bottom: 1px solid #e9ecef;
+        text-align: right !important;
+    }
+    
+    tbody tr {
+        background: white;
+        transition: all 0.3s ease;
+    }
+    
+    tbody tr:hover {
+        background: #f8f9fa;
+        transform: scale(1.01);
+    }
+    
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+    
+    /* ================= Streamlit Components - משופר ================= */
+    .stMarkdown {
+        font-size: 1.1rem !important;
+    }
+    
+    .stSelectbox label, .stMultiSelect label, .stTextInput label {
+        font-size: 1.15rem !important;
+        font-weight: 500 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .stRadio label {
+        font-size: 1.15rem !important;
+        font-weight: 500 !important;
+    }
+    
+    .stRadio > div {
+        gap: 0.8rem !important;
+    }
+    
+    .stRadio > div > label {
+        font-size: 1.05rem !important;
+        padding: 0.6rem 1rem !important;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .stRadio > div > label:hover {
+        background: #f8f9fa;
+    }
+    
+    /* הודעות מערכת */
+    .stAlert {
+        border-radius: 12px !important;
+        padding: 1.5rem !important;
+        font-size: 1.1rem !important;
+    }
+    
+    .stSuccess {
+        background: linear-gradient(135deg, #e8f5e9 0%, #d4edda 100%) !important;
+        border-right: 5px solid #28a745 !important;
+    }
+    
+    .stError {
+        background: linear-gradient(135deg, #ffebee 0%, #f8d7da 100%) !important;
+        border-right: 5px solid #dc3545 !important;
+    }
+    
+    .stWarning {
+        background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%) !important;
+        border-right: 5px solid #ffc107 !important;
+    }
+    
+    .stInfo {
+        background: linear-gradient(135deg, #e3f2fd 0%, #d1ecf1 100%) !important;
+        border-right: 5px solid #17a2b8 !important;
+    }
+    
+    /* Metrics */
+    [data-testid="stMetricValue"] {
+        font-size: 2.5rem !important;
+        font-weight: 700 !important;
+    }
+    
+    [data-testid="stMetricLabel"] {
+        font-size: 1.15rem !important;
+    }
+    
+    /* Progress Bar */
+    .stProgress > div > div {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%) !important;
+        height: 12px !important;
+        border-radius: 6px !important;
+    }
+    
+    /* Divider */
+    hr {
+        margin: 2rem 0 !important;
+        border: none !important;
+        height: 2px !important;
+        background: linear-gradient(90deg, transparent 0%, #e9ecef 50%, transparent 100%) !important;
     }
     
     /* ================= Responsive ================= */
     @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem !important;
+        }
+        
+        h2 {
+            font-size: 1.6rem !important;
+        }
+        
+        h3 {
+            font-size: 1.3rem !important;
+        }
+        
+        p, li, span, div {
+            font-size: 1rem !important;
+        }
+        
         .main .block-container {
             padding-right: 1rem;
             padding-left: 1rem;
         }
         
         .main-header {
+            padding: 2rem 1.5rem;
+        }
+        
+        .main-header h1 {
+            font-size: 2rem !important;
+        }
+        
+        .category-card, .topic-card, .content-section {
             padding: 1.5rem;
+        }
+        
+        .stButton > button {
+            padding: 0.7rem 1.5rem !important;
+            font-size: 1rem !important;
         }
     }
 </style>
