@@ -12,6 +12,15 @@ def get_common_styles():
     @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
     @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
+    :root {
+        --navy: #1f2f3d;
+        --slate: #2c4156;
+        --teal: #0d8a7b;
+        --teal-light: #1ab0a0;
+        --orange-accent: #f5a524;
+        --bg: #f5f7fb;
+    }
+
     /* תיקון ke / אייקונים שבורים: הסתרת anchor של כותרות והבטחת טעינת פונט אייקונים */
     h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"],
     h4 a[href^="#"], h5 a[href^="#"], h6 a[href^="#"],
@@ -42,12 +51,12 @@ def get_common_styles():
     
     /* כפתור פתיחת סיידבר - רק הכפתור האמיתי */
     button[data-testid="collapsedControl"] {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%) !important;
         border: none !important;
         border-radius: 12px !important;
         width: 70px !important;
         height: 40px !important;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+        box-shadow: 0 4px 15px rgba(13, 138, 123, 0.35) !important;
         transition: all 0.3s ease !important;
         position: relative !important;
         margin: 0.5rem !important;
@@ -61,7 +70,7 @@ def get_common_styles():
     
     button[data-testid="collapsedControl"]:hover {
         transform: scale(1.05) !important;
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
+        box-shadow: 0 6px 20px rgba(13, 138, 123, 0.5) !important;
     }
     
     /* הסתרה מוחלטת של כל התוכן המקורי */
@@ -102,14 +111,14 @@ def get_common_styles():
     /* ================= RTL & Basic Layout ================= */
     .stApp {
         direction: rtl;
-        background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+        background: linear-gradient(135deg, #f8fbff 0%, var(--bg) 100%);
         font-family: 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
     
     /* ================= Header כהה ================= */
     header[data-testid="stHeader"] {
-        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+        background: linear-gradient(135deg, var(--navy) 0%, var(--slate) 100%) !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.12) !important;
     }
     
     header[data-testid="stHeader"] * {
@@ -168,7 +177,7 @@ def get_common_styles():
     section[data-testid="stSidebar"] {
         right: 0;
         left: auto;
-        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(180deg, var(--navy) 0%, var(--teal) 100%);
     }
     
     section[data-testid="stSidebar"] > div {
@@ -291,15 +300,16 @@ def get_common_styles():
     
     /* ================= Headers - משופרים ================= */
     .main-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
         padding: 3rem 2.5rem;
         border-radius: 20px;
         margin-bottom: 2.5rem;
         color: white;
         text-align: center;
-        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.35);
+        box-shadow: 0 15px 40px rgba(31, 47, 61, 0.28);
         position: relative;
         overflow: hidden;
+        border-bottom: 4px solid var(--orange-accent);
     }
     
     .main-header::before {
@@ -333,15 +343,15 @@ def get_common_styles():
         border-radius: 16px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         margin-bottom: 1.5rem;
-        border-right: 6px solid #667eea;
+        border-right: 4px solid var(--orange-accent);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
     }
     
     .category-card:hover {
         transform: translateY(-5px) translateX(-3px);
-        box-shadow: 0 12px 35px rgba(102, 126, 234, 0.25);
-        border-right-color: #764ba2;
+        box-shadow: 0 12px 35px rgba(13, 138, 123, 0.25);
+        border-right-color: var(--teal);
     }
     
     .category-card h3 {
@@ -353,7 +363,7 @@ def get_common_styles():
         background: white;
         padding: 1.5rem;
         border-radius: 12px;
-        border-right: 5px solid #667eea;
+        border-right: 4px solid var(--orange-accent);
         margin-bottom: 1rem;
         box-shadow: 0 3px 12px rgba(0,0,0,0.06);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -362,7 +372,7 @@ def get_common_styles():
     .topic-card:hover {
         transform: translateX(-8px);
         box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-        border-right-color: #764ba2;
+        border-right-color: var(--teal);
     }
     
     .topic-card h4 {
@@ -376,7 +386,7 @@ def get_common_styles():
         border-radius: 16px;
         margin: 2rem 0;
         box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        border-right: 5px solid #667eea;
+        border-right: 4px solid var(--orange-accent);
         transition: all 0.3s ease;
     }
     
@@ -390,17 +400,17 @@ def get_common_styles():
         justify-content: space-between;
         cursor: pointer;
         padding: 1.5rem;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        background: linear-gradient(135deg, #f9fbff 0%, #eef2f7 100%);
         border-radius: 12px;
         margin-bottom: 1rem;
         transition: all 0.3s ease;
-        border-right: 4px solid #667eea;
+        border-right: 4px solid var(--orange-accent);
     }
-    
+
     .section-header:hover {
-        background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+        background: linear-gradient(135deg, #eef2f7 0%, #e3e8ef 100%);
         transform: translateX(-5px);
-        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 3px 10px rgba(31, 47, 61, 0.12);
     }
     
     .section-title {
@@ -458,7 +468,7 @@ def get_common_styles():
         border-radius: 16px;
         box-shadow: 0 6px 20px rgba(0,0,0,0.1);
         text-align: center;
-        border-top: 5px solid #667eea;
+        border-top: 5px solid var(--orange-accent);
         transition: all 0.3s ease;
     }
     
@@ -468,7 +478,7 @@ def get_common_styles():
     }
     
     .stat-box h3 {
-        color: #667eea;
+        color: var(--teal);
         font-size: 3rem !important;
         font-weight: 700 !important;
         margin: 0.5rem 0;
@@ -482,7 +492,7 @@ def get_common_styles():
     
     /* ================= Buttons - משופר ================= */
     .stButton > button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
         color: white !important;
         border: none;
         padding: 0.8rem 2.5rem !important;
@@ -490,18 +500,18 @@ def get_common_styles():
         font-weight: 600 !important;
         font-size: 1.1rem !important;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.35);
+        box-shadow: 0 5px 15px rgba(13, 138, 123, 0.35);
     }
     
     .stButton > button:hover {
         transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.45);
-        background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
+        box-shadow: 0 8px 25px rgba(13, 138, 123, 0.45);
+        background: linear-gradient(135deg, #0b7c6f 0%, #139c8c 100%);
     }
     
     .stButton > button:active {
         transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.35);
+        box-shadow: 0 4px 12px rgba(13, 138, 123, 0.35);
     }
     
     /* ================= Inputs - משופר ================= */
@@ -516,15 +526,15 @@ def get_common_styles():
     }
     
     input:focus, textarea:focus, select:focus {
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        border-color: var(--teal);
+        box-shadow: 0 0 0 3px rgba(13, 138, 123, 0.12);
         outline: none;
     }
     }
     
     input:focus, textarea:focus, select:focus {
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        border-color: var(--teal);
+        box-shadow: 0 0 0 3px rgba(13, 138, 123, 0.12);
     }
     
     /* ================= Tabs ================= */
@@ -540,15 +550,15 @@ def get_common_styles():
     }
     
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
         color: white;
     }
     
     /* ================= Expander ================= */
     .streamlit-expanderHeader {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        background: linear-gradient(135deg, #f9fbff 0%, #eef2f7 100%);
         border-radius: 8px;
-        border-right: 3px solid #667eea;
+        border-right: 3px solid var(--orange-accent);
     }
     
     .streamlit-expanderHeader:hover {
@@ -559,7 +569,7 @@ def get_common_styles():
     hr {
         border: none;
         height: 2px;
-        background: linear-gradient(90deg, transparent 0%, #667eea 50%, transparent 100%);
+        background: linear-gradient(90deg, transparent 0%, var(--orange-accent) 50%, transparent 100%);
         margin: 2rem 0;
     }
     
@@ -605,7 +615,7 @@ def get_common_styles():
     }
     
     thead {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
     }
     
     th {
@@ -764,7 +774,7 @@ def get_common_styles():
     
     /* Progress Bar */
     .stProgress > div > div {
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%) !important;
+        background: linear-gradient(90deg, var(--teal) 0%, var(--teal-light) 100%) !important;
         height: 12px !important;
         border-radius: 6px !important;
     }
