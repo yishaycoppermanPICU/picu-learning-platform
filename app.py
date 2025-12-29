@@ -83,7 +83,7 @@ try:
 except:
     pass
 
-# כותרת ראשית - מותאמת למובייל
+# כותרת ראשית - לוגו ללא רקע, מיושר לימין (RTL)
 st.markdown("""
 <style>
 /* חסימה מוחלטת של קישור GitHub בלבד */
@@ -107,20 +107,23 @@ button[data-testid="collapsedControl"] * {
     pointer-events: all !important;
     cursor: pointer !important;
 }
-
-.main-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-}
-.main-subtitle {
-    font-size: 1.2rem;
-    color: #666;
-}
 </style>
-<div class="main-title">🏥 ישי קופרמן | טיפול נמרץ ילדים</div>
-<div class="main-subtitle">פלטפורמת למידה מתקדמת לצוותי PICU</div>
 """, unsafe_allow_html=True)
+
+header_col1, header_col2, header_col3 = st.columns([1.2, 2, 1])
+with header_col1:
+    logo_path = "לוגו רשמי ישי ללא רקע.png"
+    if os.path.exists(logo_path):
+        st.image(logo_path, width=240)
+    elif os.path.exists("לוגו רשמי של ישי.png"):
+        st.image("לוגו רשמי של ישי.png", width=240)
+
+with header_col2:
+    st.markdown("""
+    <div style="text-align: right; padding-top: 12px;">
+        <p style="margin: 0; font-size: 1.2rem; color: #444;">פלטפורמת למידה מתקדמת לצוותי PICU</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 # בדיקת חיבור למסד נתונים
 if DB_CONNECTED:
