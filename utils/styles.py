@@ -8,12 +8,22 @@ def get_common_styles():
     return """
 <style>
     /* הסתרת קישור GitHub בלבד */
-    header a[href*="github"],
-    header svg[class*="github"],
-    header [data-testid="stHeader"] a,
-    [data-testid="stHeader"] > div > div > div > a {
+    header a[href*="github"]::before {
+        content: "" !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 80px !important;
+        z-index: 9999 !important;
+        pointer-events: none !important;
+    }
+    
+    header a[href*="github"] {
+        pointer-events: none !important;
+        cursor: default !important;
+        opacity: 0 !important;
         display: none !important;
-        visibility: hidden !important;
     }
     
     /* ================= RTL & Basic Layout ================= */
@@ -74,8 +84,8 @@ def get_common_styles():
             align-items: center !important;
             justify-content: center !important;
             position: fixed !important;
-            top: 0.75rem !important;
-            right: 0.75rem !important;
+            top: 5rem !important;
+            right: 1rem !important;
             z-index: 999999 !important;
             background: white !important;
             border: 2px solid #667eea !important;

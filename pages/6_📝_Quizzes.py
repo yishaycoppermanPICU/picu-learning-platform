@@ -16,12 +16,16 @@ from utils.quiz_manager import (
     get_all_questions
 )
 from utils.content_manager import get_all_categories
+from utils.styles import get_common_styles
 
 st.set_page_config(
     page_title="מבחנים",
     page_icon="📝",
     layout="wide"
 )
+
+# טעינת CSS מרכזי
+st.markdown(get_common_styles(), unsafe_allow_html=True)
 
 # CSS
 st.markdown("""
