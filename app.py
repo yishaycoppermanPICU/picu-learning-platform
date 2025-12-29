@@ -83,17 +83,7 @@ except:
 # כותרת ראשית - מותאמת למובייל
 st.markdown("""
 <style>
-/* חסימה מוחלטת של קישור GitHub וכל הסביבה שלו */
-header[data-testid="stHeader"],
-header[data-testid="stHeader"] *,
-header a,
-header a *,
-[data-testid="stHeader"] a,
-[data-testid="stHeader"] a * {
-    pointer-events: none !important;
-    cursor: default !important;
-}
-
+/* חסימה מוחלטת של קישור GitHub בלבד */
 header a[href*="github"],
 header a[href*="github"] * {
     display: none !important;
@@ -103,9 +93,10 @@ header a[href*="github"] * {
     height: 0 !important;
     position: absolute !important;
     left: -9999px !important;
+    pointer-events: none !important;
 }
 
-/* כפתור המבורגר צריך לעבוד */
+/* מאפשר לכפתור הסיידבר המקורי לעבוד */
 button[kind="header"],
 button[data-testid="collapsedControl"],
 button[kind="header"] *,
@@ -114,41 +105,7 @@ button[data-testid="collapsedControl"] * {
     cursor: pointer !important;
 }
 
-/* תיקון כפתור התפריט למובייל - אייקון המבורגר */
-@media (max-width: 768px) {
-    button[kind="header"]::before,
-    button[data-testid="collapsedControl"]::before {
-        content: "☰" !important;
-        font-size: 28px !important;
-        color: #667eea !important;
-        line-height: 1 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-    
-    button[kind="header"] svg,
-    button[data-testid="collapsedControl"] svg {
-        display: none !important;
-    }
-    
-    button[kind="header"],
-    button[data-testid="collapsedControl"] {
-        width: 48px !important;
-        height: 48px !important;
-        background: white !important;
-        border: 2px solid #667eea !important;
-        border-radius: 10px !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
-        z-index: 999999 !important;
-        position: fixed !important;
-        top: 5rem !important;
-        right: 1rem !important;
-        pointer-events: all !important;
-        cursor: pointer !important;
-    }
-    
-    .main-title {
+.main-title {
         font-size: 1.3rem !important;
         line-height: 1.4 !important;
         text-align: center;

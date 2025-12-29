@@ -7,17 +7,7 @@ def get_common_styles():
     """החזרת CSS משותף לכל הדפים"""
     return """
 <style>
-    /* חסימה מוחלטת של קישור GitHub וכל הסביבה שלו */
-    header[data-testid="stHeader"],
-    header[data-testid="stHeader"] *,
-    header a,
-    header a *,
-    [data-testid="stHeader"] a,
-    [data-testid="stHeader"] a * {
-        pointer-events: none !important;
-        cursor: default !important;
-    }
-    
+    /* חסימה של קישור GitHub בלבד */
     header a[href*="github"],
     header a[href*="github"] * {
         display: none !important;
@@ -27,9 +17,10 @@ def get_common_styles():
         height: 0 !important;
         position: absolute !important;
         left: -9999px !important;
+        pointer-events: none !important;
     }
     
-    /* כפתור המבורגר צריך לעבוד */
+    /* מאפשר לכפתור הסיידבר המקורי לעבוד */
     button[kind="header"],
     button[data-testid="collapsedControl"],
     button[kind="header"] *,
@@ -89,56 +80,7 @@ def get_common_styles():
             display: none !important;
         }
         
-        /* כפתור ההמבורגר תמיד נראה - גירסה משופרת */
-        button[kind="header"],
-        button[data-testid="collapsedControl"] {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            position: fixed !important;
-            top: 5rem !important;
-            right: 1rem !important;
-            z-index: 999999 !important;
-            background: white !important;
-            border: 2px solid #667eea !important;
-            border-radius: 8px !important;
-            padding: 0 !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25) !important;
-            width: 44px !important;
-            height: 44px !important;
-            min-width: 44px !important;
-            min-height: 44px !important;
-            pointer-events: all !important;
-            cursor: pointer !important;
-        }
-        
-        /* הסרת כל האייקונים הקיימים */
-        button[kind="header"] svg,
-        button[data-testid="collapsedControl"] svg,
-        button[kind="header"] img,
-        button[data-testid="collapsedControl"] img {
-            display: none !important;
-            opacity: 0 !important;
-            visibility: hidden !important;
-        }
-        
-        /* יצירת אייקון המבורגר - גירסה משופרת */
-        button[kind="header"]::after,
-        button[data-testid="collapsedControl"]::after {
-            content: "" !important;
-            display: block !important;
-            position: absolute !important;
-            top: 50% !important;
-            left: 50% !important;
-            transform: translate(-50%, -50%) !important;
-            width: 24px !important;
-            height: 3px !important;
-            background: #667eea !important;
-            border-radius: 3px !important;
-            box-shadow: 
-                0 -8px 0 0 #667eea, 
-                0 8px 0 0 #667eea !important;
-        }
+        /* כפתור הסיידבר המקורי עובד רגיל */
         
         /* הסיידבר כשהוא פתוח */
         section[data-testid="stSidebar"][aria-expanded="true"] {
