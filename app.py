@@ -113,14 +113,17 @@ button[data-testid="collapsedControl"] * {
 header_col1, header_col2, header_col3 = st.columns([1.2, 2, 1])
 with header_col1:
     logo_path = "לוגו רשמי ישי ללא רקע.png"
+    fallback_logo = "לוגו רשמי של ישי.png"
     if os.path.exists(logo_path):
-        st.image(logo_path, width=240)
-    elif os.path.exists("לוגו רשמי של ישי.png"):
-        st.image("לוגו רשמי של ישי.png", width=240)
+        st.image(logo_path, width=260)
+    elif os.path.exists(fallback_logo):
+        st.image(fallback_logo, width=260)
+    else:
+        st.warning("לא נמצא קובץ הלוגו", icon="⚠️")
 
 with header_col2:
     st.markdown("""
-    <div style="text-align: right; padding-top: 12px;">
+    <div style="text-align: right; padding-top: 18px;">
         <p style="margin: 0; font-size: 1.2rem; color: #444;">פלטפורמת למידה מתקדמת לצוותי PICU</p>
     </div>
     """, unsafe_allow_html=True)
