@@ -355,7 +355,8 @@ else:
         options=range(len(question['options'])),
         format_func=lambda x: f"{x+1}. {question['options'][x]}",
         label_visibility="collapsed",
-        key=f"q_{st.session_state.current_question}"
+        key=f"q_{st.session_state.current_question}",
+        index=None
     )
     
     st.divider()
@@ -389,7 +390,11 @@ else:
             st.rerun()
     
     with col3:
-        if st.button("✅ אשר תשובה ועבור הלאה", type="primary", use_container_width=True):
+        # Disable button if no answer selected
+        button_disabled = selected_answer is None
+        button_label = "✅ אשר תשובה ועבור הלאה" if not button_disabled else "⚠️ בחר תשובה תחילה"
+        
+        if st.button(button_label, type="primary", use_container_width=True, disabled=button_disabled):
             st.session_state.quiz_answers.append({
                 'question_id': question['id'],
                 'user_answer': selected_answer,
