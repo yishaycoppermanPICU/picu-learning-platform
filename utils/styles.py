@@ -25,8 +25,9 @@ def get_common_styles():
         pointer-events: none !important;
     }
     
-    /* כפתור פתיחת סיידבר בלבד - רק המקורי */
-    button[data-testid="collapsedControl"] {
+    /* כפתור פתיחת סיידבר */
+    button[data-testid="collapsedControl"],
+    button[kind="header"] {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
         border: none !important;
         border-radius: 12px !important;
@@ -39,9 +40,12 @@ def get_common_styles():
         pointer-events: all !important;
         cursor: pointer !important;
         overflow: hidden !important;
+        font-size: 0 !important;
+        color: transparent !important;
     }
     
-    button[data-testid="collapsedControl"]:hover {
+    button[data-testid="collapsedControl"]:hover,
+    button[kind="header"]:hover {
         transform: scale(1.05) !important;
         box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
     }
@@ -51,7 +55,12 @@ def get_common_styles():
     button[data-testid="collapsedControl"] span,
     button[data-testid="collapsedControl"] svg,
     button[data-testid="collapsedControl"] [data-icon],
-    button[data-testid="collapsedControl"] > div {
+    button[data-testid="collapsedControl"] > div,
+    button[kind="header"] *,
+    button[kind="header"] span,
+    button[kind="header"] svg,
+    button[kind="header"] [data-icon],
+    button[kind="header"] > div {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
@@ -63,7 +72,8 @@ def get_common_styles():
     }
     
     /* אייקון תפריט מעוצב */
-    button[data-testid="collapsedControl"]::before {
+    button[data-testid="collapsedControl"]::before,
+    button[kind="header"]::before {
         content: "תפריט" !important;
         position: absolute !important;
         top: 50% !important;
