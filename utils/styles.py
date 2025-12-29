@@ -23,6 +23,26 @@ def get_common_styles():
         pointer-events: none !important;
     }
     
+    /* הסתרת תכונות data-key וטקסט key שעשוי להופיע */
+    [data-key]::after,
+    [data-testid*="key"]::after,
+    button::before {
+        content: none !important;
+        display: none !important;
+    }
+    
+    /* הסתרת כל טקסט שיכול להיות key */
+    *[data-key],
+    *[data-testid*="key"] {
+        position: relative;
+    }
+    
+    /* מניעת תצוגה של מאפיינים של Streamlit */
+    [class*="st-emotion-cache"]::before,
+    [class*="st-emotion-cache"]::after {
+        content: none !important;
+    }
+    
     /* מאפשר לכפתור הסיידבר המקורי לעבוד */
     button[kind="header"],
     button[data-testid="collapsedControl"],
@@ -131,6 +151,22 @@ def get_common_styles():
         background: white !important;
     }
     
+    /* הסתרת תוכן הסיידבר כשהוא מכווץ */
+    section[data-testid="stSidebar"][aria-expanded="false"] .stMarkdown,
+    section[data-testid="stSidebar"][aria-expanded="false"] button,
+    section[data-testid="stSidebar"][aria-expanded="false"] form,
+    section[data-testid="stSidebar"][aria-expanded="false"] input,
+    section[data-testid="stSidebar"][aria-expanded="false"] > div > div:not([data-testid="collapsedControl"]) {
+        display: none !important;
+    }
+    
+    /* הסיידבר כשהוא מכווץ - רק אייקון */
+    section[data-testid="stSidebar"][aria-expanded="false"] {
+        min-width: 0 !important;
+        width: auto !important;
+        overflow: hidden !important;
+    }
+    
     /* תצוגה רגילה בדסקטופ */
     @media (min-width: 769px) {
         section[data-testid="stSidebar"] {
@@ -139,8 +175,11 @@ def get_common_styles():
             width: auto !important;
         }
         
-        section[data-testid="stSidebar"][aria-expanded="false"] {
-            display: block !important;
+        /* גם בדסקטופ - הסתרת תוכן כשסגור */
+        section[data-testid="stSidebar"][aria-expanded="false"] .stMarkdown,
+        section[data-testid="stSidebar"][aria-expanded="false"] button:not([data-testid="collapsedControl"]),
+        section[data-testid="stSidebar"][aria-expanded="false"] form {
+            display: none !important;
         }
     }
     

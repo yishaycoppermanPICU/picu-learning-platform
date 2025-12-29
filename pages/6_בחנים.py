@@ -63,6 +63,59 @@ st.markdown("""
         padding: 1rem;
         margin: 0.5rem 0;
     }
+    
+    /* עיצוב תשובות במבחן - מלבנים במקום עיגולים */
+    div[role="radiogroup"] label {
+        background: white;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 1.2rem 1.5rem;
+        margin: 0.8rem 0;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    /* מצב hover */
+    div[role="radiogroup"] label:hover {
+        border-color: #667eea;
+        background: #f8f9ff;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        transform: translateX(-2px);
+    }
+    
+    /* מצב נבחר - מלבן כהה */
+    div[role="radiogroup"] label:has(input:checked) {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: #667eea;
+        color: white;
+        font-weight: 600;
+        box-shadow: 0 6px 16px rgba(102, 126, 234, 0.3);
+    }
+    
+    /* הסתרת העיגול המקורי */
+    div[role="radiogroup"] input[type="radio"] {
+        display: none !important;
+    }
+    
+    /* אייקון ✓ כשנבחר */
+    div[role="radiogroup"] label:has(input:checked)::before {
+        content: "✓";
+        display: inline-block;
+        margin-left: 0.8rem;
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: white;
+    }
+    
+    /* טקסט התשובה */
+    div[role="radiogroup"] label > div {
+        flex: 1;
+        font-size: 1.15rem !important;
+        line-height: 1.6 !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -367,7 +420,7 @@ else:
     with col1:
         # Previous question button
         if st.session_state.current_question > 0:
-            if st.button("⬅️ שאלה קודמת"):
+            if st.button("◀ שאלה קודמת", use_container_width=True):
                 # Remove last answer if exists
                 if st.session_state.quiz_answers:
                     st.session_state.quiz_answers.pop()
@@ -377,7 +430,7 @@ else:
             st.empty()  # Placeholder when no previous question
     
     with col2:
-        if st.button("⏭️ דלג"):
+        if st.button("⏩ דלג", use_container_width=True):
             st.session_state.quiz_answers.append({
                 'question_id': question['id'],
                 'user_answer': None,
