@@ -56,6 +56,7 @@ def get_common_styles():
         overflow: hidden !important;
         font-size: 0 !important;
         color: transparent !important;
+        font-family: 'Material Icons', 'Material Symbols Outlined' !important;
     }
     
     button[data-testid="collapsedControl"]:hover {
@@ -78,23 +79,24 @@ def get_common_styles():
         position: absolute !important;
         left: -9999px !important;
     }
-    
-    /* אייקון תפריט */
+
+    /* אייקון תפריט (Material Icon) כדי למנוע טקסט ke */
     button[data-testid="collapsedControl"]::before {
-        content: "תפריט" !important;
+        content: "keyboard_double_arrow_left" !important;
         position: absolute !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
-        font-size: 1rem !important;
-        font-weight: 600 !important;
+        font-size: 24px !important;
+        font-weight: 400 !important;
         color: white !important;
         line-height: 1 !important;
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
         z-index: 999 !important;
-        font-family: 'Heebo', sans-serif !important;
+        font-family: 'Material Icons', 'Material Symbols Outlined' !important;
+        -webkit-font-feature-settings: 'liga' !important;
     }
     
     /* ================= RTL & Basic Layout ================= */
