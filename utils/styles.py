@@ -38,6 +38,7 @@ def get_common_styles():
         margin: 0.5rem !important;
         pointer-events: all !important;
         cursor: pointer !important;
+        overflow: hidden !important;
     }
     
     button[data-testid="collapsedControl"]:hover {
@@ -45,23 +46,36 @@ def get_common_styles():
         box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
     }
     
-    /* הסתרת הטקסט המקורי */
+    /* הסתרה מוחלטת של כל התוכן המקורי */
+    button[data-testid="collapsedControl"] *,
     button[data-testid="collapsedControl"] span,
-    button[data-testid="collapsedControl"] *[data-icon] {
+    button[data-testid="collapsedControl"] svg,
+    button[data-testid="collapsedControl"] [data-icon],
+    button[data-testid="collapsedControl"] > div {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
         font-size: 0 !important;
-        color: transparent !important;
+        width: 0 !important;
+        height: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
     }
     
-    /* אייקון המבורגר מעוצב */
+    /* אייקון תפריט מעוצב */
     button[data-testid="collapsedControl"]::before {
         content: "☰" !important;
         position: absolute !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
-        font-size: 1.8rem !important;
+        font-size: 2rem !important;
         color: white !important;
         line-height: 1 !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 999 !important;
     }
     
     /* ================= RTL & Basic Layout ================= */
