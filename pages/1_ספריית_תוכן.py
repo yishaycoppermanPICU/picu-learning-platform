@@ -85,7 +85,7 @@ for category in categories:
                     if st.button("פתח", key=f"view_{category['id']}_{topic['id']}"):
                         st.session_state['selected_category'] = category['id']
                         st.session_state['selected_topic'] = topic['id']
-                        st.switch_page("pages/2_📖_Content.py")
+                        st.switch_page("pages/2_קטגוריות.py")
             
             st.divider()
 
