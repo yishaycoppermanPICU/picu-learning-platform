@@ -815,10 +815,10 @@ function toggleSection(sectionId) {
     
     if (content.style.display === 'none' || content.style.display === '') {
         content.style.display = 'block';
-        icon.innerHTML = '▼';
+        icon.innerHTML = '🔽';
     } else {
         content.style.display = 'none';
-        icon.innerHTML = '◄';
+        icon.innerHTML = '◀';
     }
 }
 

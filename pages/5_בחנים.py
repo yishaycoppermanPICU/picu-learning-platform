@@ -367,7 +367,7 @@ else:
     with col1:
         # Previous question button
         if st.session_state.current_question > 0:
-            if st.button("◀ שאלה קודמת", use_container_width=True):
+            if st.button("⬅️ שאלה קודמת", use_container_width=True):
                 # Remove last answer if exists
                 if st.session_state.quiz_answers:
                     st.session_state.quiz_answers.pop()

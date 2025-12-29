@@ -228,7 +228,7 @@ with st.sidebar:
             agree = st.checkbox("מאשר/ת שימוש למטרות למידה ✓")
             
             # כפתור - אימוג'י בסוף
-            submitted = st.form_submit_button("התחבר למערכת ◀", type="primary", use_container_width=True)
+            submitted = st.form_submit_button("🔐 התחבר למערכת", type="primary", use_container_width=True)
             
             if submitted: 
                 if full_name and email and institution and institution != "" and agree:
@@ -432,7 +432,7 @@ if st.session_state.logged_in:
         
         col1, col2 = st.columns(2)
         with col1:
-            if st.button("▶️ המשך מבחן", type="primary", use_container_width=True):
+            if st.button("➡️ המשך מבחן", type="primary", use_container_width=True):
                 st.session_state['quiz_paused'] = False
                 st.switch_page("pages/5_בחנים.py")
         with col2:
