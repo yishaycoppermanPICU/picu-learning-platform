@@ -692,7 +692,7 @@ with tab6:
                     if st.button("📖 פתח תוכן", key=f"open_{corr['id']}"):
                         st.session_state['selected_category'] = corr.get('category')
                         st.session_state['selected_topic'] = corr.get('topic_id')
-                        st.switch_page("pages/2_📖_Content.py")
+                        st.switch_page("pages/2_קטגוריות.py")
                 
                 with col_e:
                     if st.button("✏️ ערוך", key=f"edit_{corr['id']}"):

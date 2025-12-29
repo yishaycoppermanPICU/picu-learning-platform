@@ -527,7 +527,7 @@ if not st.session_state.quiz_active and st.session_state.quiz_answers:
             st.rerun()
     with col2:
         if st.button("📊 לסטטיסטיקות", use_container_width=True):
-            st.switch_page("pages/3_📊_Statistics.py")
+            st.switch_page("pages/3_סטטיסטיקה.py")
 
 # Back button
 if not st.session_state.quiz_active:
