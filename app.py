@@ -318,7 +318,7 @@ with st.sidebar:
             st.info(f"מוסד: {user['institutions'].get('name', '')} 🏥")
         
         if st.button("📊 הנתונים שלי", use_container_width=True):
-            st.switch_page("pages/3_📊_Statistics.py")
+            st.switch_page("pages/3_סטטיסטיקה.py")
         
         if st.button("🚪 התנתק", use_container_width=True):
             # מחיקת המייל מה-cookies
@@ -402,15 +402,15 @@ if st.session_state.logged_in:
     
     with col1:
         if st.button(f"📖 למד: {weekly_content['title'][:20]}...", type="primary", use_container_width=True, key="weekly_learn", on_click=view_weekly_topic):
-            st.switch_page("pages/9_📖_Content_DB.py")
+            st.switch_page("pages/9_נושאי_לימוד.py")
     
     with col2:
         if st.button(f"✍️ התמחה בנושא: מבחן", use_container_width=True, key="weekly_quiz_btn", on_click=start_weekly_quiz):
-            st.switch_page("pages/6_📝_Quizzes.py")
+            st.switch_page("pages/6_בחנים.py")
     
     with col3:
         if st.button("🏆 תגי ההישגים שלי", use_container_width=True):
-            st.switch_page("pages/3_📊_Statistics.py")
+            st.switch_page("pages/3_סטטיסטיקה.py")
     
     # בדיקה אם יש מבחן שמור
     if st.session_state.get('quiz_paused') and st.session_state.get('quiz_active') and st.session_state.get('quiz_questions'):
@@ -434,7 +434,7 @@ if st.session_state.logged_in:
         with col1:
             if st.button("▶️ המשך מבחן", type="primary", use_container_width=True):
                 st.session_state['quiz_paused'] = False
-                st.switch_page("pages/6_📝_Quizzes.py")
+                st.switch_page("pages/6_בחנים.py")
         with col2:
             if st.button("🗑️ מחק ותתחיל מחדש", use_container_width=True):
                 st.session_state.quiz_active = False
@@ -476,7 +476,7 @@ if st.session_state.logged_in:
         </div>
         """, unsafe_allow_html=True)
         if st.button("כניסה לספרייה", key="library_btn", use_container_width=True, type="primary"):
-            st.switch_page("pages/1_📚_Library.py")
+            st.switch_page("pages/1_ספריית_תוכן.py")
     
     with col2:
         st.markdown("""
@@ -488,7 +488,7 @@ if st.session_state.logged_in:
         </div>
         """, unsafe_allow_html=True)
         if st.button("צפייה בסטטיסטיקות", key="stats_btn", use_container_width=True, type="primary"):
-            st.switch_page("pages/3_📊_Statistics.py")
+            st.switch_page("pages/3_סטטיסטיקה.py")
     
     with col3:
         st.markdown("""
@@ -500,7 +500,7 @@ if st.session_state.logged_in:
         </div>
         """, unsafe_allow_html=True)
         if st.button("לוח התוצאות", key="leaderboard_btn", use_container_width=True, type="primary"):
-            st.switch_page("pages/4_🏆_Leaderboard.py")
+            st.switch_page("pages/4_דירוג.py")
     
     st.divider()
     
