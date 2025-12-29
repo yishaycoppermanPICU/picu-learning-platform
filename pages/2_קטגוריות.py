@@ -35,7 +35,7 @@ topic_id = st.session_state.get('selected_topic')
 if not category or not topic_id:
     st.warning("לא נבחר נושא לצפייה")
     if st.button("🏠 חזור לספרייה"):
-        st.switch_page("pages/1_📚_Library.py")
+        st.switch_page("pages/1_ספריית_תוכן.py")
     st.stop()
 
 # Get topic content
@@ -44,7 +44,7 @@ topic = get_topic(category, topic_id)
 if not topic:
     st.error(f"❌ לא נמצא תוכן עבור: {topic_id} בקטגוריה {category}")
     if st.button("🏠 חזור לספרייה"):
-        st.switch_page("pages/1_📚_Library.py")
+        st.switch_page("pages/1_ספריית_תוכן.py")
     st.stop()
 
 # Navigation buttons
@@ -61,7 +61,7 @@ with col1:
         if 'content_edit_mode' in st.session_state:
             del st.session_state['content_edit_mode']
         # Return to category topics list
-        st.switch_page("pages/1_📚_Library.py")
+        st.switch_page("pages/1_ספריית_תוכן.py")
 
 with col2:
     pass  # Empty space
@@ -571,5 +571,5 @@ with col2:
     if st.button("📝 בחן את עצמך בנושא זה", type="primary", use_container_width=True):
         st.session_state['quiz_topic'] = topic_id
         st.session_state['quiz_category'] = category
-        st.switch_page("pages/6_📝_Quizzes.py")
+        st.switch_page("pages/6_בחנים.py")
 

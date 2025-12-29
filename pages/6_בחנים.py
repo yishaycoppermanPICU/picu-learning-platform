@@ -170,7 +170,7 @@ if not st.session_state.quiz_active:
             if st.button("🔙 חזור לספרייה"):
                 st.session_state['quiz_topic'] = None
                 st.session_state['quiz_category'] = None
-                st.switch_page("pages/1_📚_Library.py")
+                st.switch_page("pages/1_ספריית_תוכן.py")
             st.stop()
     
     st.markdown("### 🎯 הגדר את המבחן שלך")
