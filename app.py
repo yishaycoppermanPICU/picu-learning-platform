@@ -42,6 +42,9 @@ st.set_page_config(
     initial_sidebar_state="auto"  # אוטומטי - פתוח בדסקטופ, סגור במובייל
 )
 
+# טעינת Material Icons (תיקון סופי ל-ke / אייקונים שבורים)
+st.markdown('<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">', unsafe_allow_html=True)
+
 # טעינת CSS מרכזי
 st.markdown(get_common_styles(), unsafe_allow_html=True)
 
@@ -105,16 +108,6 @@ button[data-testid="collapsedControl"] * {
     cursor: pointer !important;
 }
 
-.main-title {
-        font-size: 1.3rem !important;
-        line-height: 1.4 !important;
-        text-align: center;
-    }
-    .main-subtitle {
-        font-size: 0.9rem !important;
-        text-align: center;
-    }
-}
 .main-title {
     font-size: 2.5rem;
     font-weight: bold;
@@ -356,8 +349,8 @@ if st.session_state.logged_in:
     if user_email:
         is_completed = check_weekly_completion(user_email)
     
-    # כרטיס תוכן שבועי בולט
-    completion_badge = "✅ הושלם!" if is_completed else "📌 ממתין"
+    # כרטיס תוכן שבועי בולט (לבן, קריא, ללא אימוג'ים)
+    completion_badge = "הושלם" if is_completed else "ממתין לביצוע"
     completion_color = "#28a745" if is_completed else "#ffc107"
     
     week_title = weekly_content['title']
@@ -367,28 +360,25 @@ if st.session_state.logged_in:
     start_date = format_hebrew_date(week_start)
     end_date = format_hebrew_date(week_end).split(',')[1].strip()
     
-    weekly_html = f'''<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; color: white; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">
+    weekly_html = f'''<div style="background: #FFFFFF; border-radius: 10px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #E0E0E0; border-top: 4px solid #00796B; margin-bottom: 2rem;">
         <div style="text-align: center;">
-            <h1 style="color: white; font-size: 3rem; margin: 0;">{week_icon}</h1>
-            <h2 style="color: white; margin: 0.5rem 0;">תוכן מומלץ השבוע</h2>
-            <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem; margin: 0.3rem 0;">שבוע {week_num} • {start_date} - {end_date}</p>
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">{week_icon}</div>
+            <h2 style="color: #333333; font-size: 1.9rem; font-weight: 700; margin: 0;">תוכן מומלץ השבוע</h2>
+            <p style="color: #666666; font-size: 1rem; margin-top: 0.3rem;">שבוע {week_num} • {start_date} - {end_date}</p>
         </div>
-        <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem;">
-            <h3 style="color: white; text-align: center; margin: 0 0 1rem 0;">{week_title}</h3>
-            <p style="color: rgba(255,255,255,0.95); text-align: center; line-height: 1.8; margin: 0 0 1rem 0;">{week_desc}</p>
-            <div style="text-align: center; margin-top: 1.5rem;">
-                <span style="background: {completion_color}; color: white; padding: 0.5rem 1.5rem; border-radius: 20px; font-weight: 600; font-size: 1rem;">{completion_badge}</span>
-            </div>
+        <div style="margin: 1.5rem 0; padding: 1.5rem; background: #F8F9FA; border-radius: 8px; border: 1px solid #EEEEEE;">
+            <h3 style="color: #00796B; text-align: center; margin: 0 0 0.5rem 0; font-size: 1.4rem; font-weight: 600;">{week_title}</h3>
+            <p style="color: #333333; text-align: center; line-height: 1.6; font-size: 1.05rem; margin: 0;">{week_desc}</p>
         </div>
-        <div style="text-align: center; margin-top: 1.5rem;">
-            <p style="color: rgba(255,255,255,0.9); font-size: 0.95rem;">💡 <strong>משימת השבוע:</strong> למד את הנושא המומלץ והשלם מבחן עם ציון מעל 80% לקבלת תג מצטיין!</p>
+        <div style="text-align: center;">
+            <span style="background: {completion_color}; color: white; padding: 0.5rem 1.5rem; border-radius: 6px; font-weight: 600; font-size: 1rem;">{completion_badge}</span>
         </div>
     </div>'''
     
     st.markdown(weekly_html, unsafe_allow_html=True)
     
     # כפתורי פעולה לתוכן השבועי
-    st.markdown("##### 🎯 פעולות לתוכן השבועי")
+    st.markdown("##### פעולות לתוכן השבועי")
     col1, col2, col3 = st.columns(3)
     
     # Callback functions for buttons
@@ -401,15 +391,15 @@ if st.session_state.logged_in:
         st.session_state['view_weekly_content'] = True
     
     with col1:
-        if st.button(f"📖 למד: {weekly_content['title'][:20]}...", type="primary", use_container_width=True, key="weekly_learn", on_click=view_weekly_topic):
+        if st.button(f"למד: {weekly_content['title'][:20]}...", type="primary", use_container_width=True, key="weekly_learn", on_click=view_weekly_topic):
             st.switch_page("pages/7_נושאי_לימוד.py")
     
     with col2:
-        if st.button(f"✍️ התמחה בנושא: מבחן", use_container_width=True, key="weekly_quiz_btn", on_click=start_weekly_quiz):
+        if st.button(f"מבחן בנושא", use_container_width=True, key="weekly_quiz_btn", on_click=start_weekly_quiz):
             st.switch_page("pages/5_בחנים.py")
     
     with col3:
-        if st.button("🏆 תגי ההישגים שלי", use_container_width=True):
+        if st.button("תגי ההישגים שלי", use_container_width=True):
             st.switch_page("pages/3_סטטיסטיקה.py")
     
     # בדיקה אם יש מבחן שמור
