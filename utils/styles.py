@@ -182,9 +182,9 @@ def get_common_styles():
     }
 
     .app-header-logo {
-        max-width: 300px;
-        width: 60vw;
-        min-width: 260px;
+        max-width: 600px;
+        width: 100vw;
+        min-width: 520px;
         margin-top: 0;
         align-self: center;
     }
@@ -193,7 +193,7 @@ def get_common_styles():
         width: 100%;
         height: auto;
         display: block;
-        max-height: 600px;
+        max-height: 1200px;
         object-fit: contain;
     }
 
@@ -229,12 +229,12 @@ def get_common_styles():
         }
         .app-header-logo {
             order: -1;
-            width: 90vw;
-            max-width: 500px;
-            min-width: 260px;
+            width: 100vw;
+            max-width: 1000px;
+            min-width: 520px;
             margin-top: 0;
         }
-        .app-header-logo img { max-height: 480px; }
+        .app-header-logo img { max-height: 960px; }
         .app-header-text { margin-top: 0; }
         .hero-topline { font-size: 1.55rem; line-height: 1.05; }
         .hero-tagline { font-size: 0.98rem; }
