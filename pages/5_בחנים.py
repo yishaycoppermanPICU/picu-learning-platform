@@ -103,16 +103,20 @@ if not st.session_state.quiz_active:
     # Check if coming from weekly content - auto-start quiz
     if st.session_state.get('weekly_quiz') and st.session_state.get('selected_quiz_category'):
         selected_category = st.session_state.get('selected_quiz_category')
+        weekly_topic = st.session_state.get('weekly_topic_id')
+        weekly_title = st.session_state.get('weekly_title', 'מבחן שבועי')
         
-        # Get questions for this category
-        from utils.quiz_manager import get_questions_by_category
-        category_questions = get_questions_by_category(selected_category)
+        # Prefer topic-specific questions if available
+        from utils.quiz_manager import get_questions_by_category, get_questions_by_topic
+        if weekly_topic:
+            questions = get_questions_by_topic(weekly_topic)
+        else:
+            questions = get_questions_by_category(selected_category)
         
-        if len(category_questions) > 0:
-            # Start quiz automatically with 15 questions
+        if len(questions) > 0:
             import random
-            random.shuffle(category_questions)
-            quiz_questions = category_questions[:min(15, len(category_questions))]
+            random.shuffle(questions)
+            quiz_questions = questions[:min(15, len(questions))]
             
             st.session_state.quiz_questions = quiz_questions
             st.session_state.quiz_active = True
@@ -125,16 +129,16 @@ if not st.session_state.quiz_active:
                 'quiz_type': 'all',
                 'show_timer': True,
                 'num_questions': len(quiz_questions),
-                'topic_title': 'מבחן שבועי',
+                'topic_title': weekly_title,
                 'weekly': True
             }
-            # Clear flags
             st.session_state['weekly_quiz'] = False
             st.rerun()
         else:
-            st.error(f"❌ לא נמצאו שאלות עבור קטגוריה זו")
+            st.error("❌ לא נמצאו שאלות עבור השבוע הנוכחי")
             st.session_state['weekly_quiz'] = False
             st.session_state['selected_quiz_category'] = None
+            st.session_state['weekly_topic_id'] = None
     
     # Check if coming from a specific topic - auto-start quiz
     from_topic = st.session_state.get('quiz_topic')

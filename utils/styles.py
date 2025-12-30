@@ -169,6 +169,23 @@ def get_common_styles():
         font-weight: 600 !important;
         color: #304050 !important;
     }
+
+    /* Header topline/tagline responsive */
+    .hero-topline {
+        font-size: 2.4rem;
+        line-height: 1.15;
+    }
+    .hero-tagline {
+        font-size: 1.1rem;
+        line-height: 1.3;
+    }
+
+    @media (max-width: 600px) {
+        .hero-title h1 { font-size: 2.6rem !important; }
+        .hero-title p { font-size: 1.15rem !important; }
+        .hero-topline { font-size: 2rem; }
+        .hero-tagline { font-size: 1rem; }
+    }
     
     /* ================= Typography - גדלים מוגדלים ================= */
     body, .stApp,

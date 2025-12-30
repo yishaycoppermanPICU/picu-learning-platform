@@ -123,15 +123,15 @@ with header_col1:
 
     logo_to_show = next((path for path in logo_candidates if os.path.exists(path)), None)
     if logo_to_show:
-        st.image(logo_to_show, width=260)
+        st.image(logo_to_show, width=320)
     else:
         st.warning("לא נמצא קובץ הלוגו", icon="⚠️")
 
 with header_col2:
     st.markdown("""
     <div style="text-align: right; padding-top: 8px;">
-        <h1 style="margin: 0; font-size: 2.4rem; font-weight: 800; color: #1f2933; letter-spacing: -0.5px;">ישי קופרמן | טיפול נמרץ ילדים</h1>
-        <p style="margin: 6px 0 0 0; font-size: 1.15rem; color: #444; font-weight: 500;">פלטפורמת למידה מתקדמת לצוותי PICU</p>
+        <h1 class="hero-topline" style="margin: 0; font-weight: 800; color: #1f2933; letter-spacing: -0.5px;">ישי קופרמן | טיפול נמרץ ילדים</h1>
+        <p class="hero-tagline" style="margin: 6px 0 0 0; color: #444; font-weight: 500;">פלטפורמת למידה מתקדמת לצוותי PICU</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -345,8 +345,6 @@ with st.sidebar:
 
 # תוכן ראשי
 if st.session_state.logged_in:
-    st.markdown("### ברוכים הבאים לפלטפורמת הלמידה! 🎯")
-    
     user = st.session_state.user
     user_email = user.get('email', '')
     st.markdown(f"**שלום {user.get('full_name', 'משתמש')}!** 👋")
@@ -397,6 +395,8 @@ if st.session_state.logged_in:
     # Callback functions for buttons
     def start_weekly_quiz():
         st.session_state['selected_quiz_category'] = weekly_content.get('quiz_category', weekly_content['category'])
+        st.session_state['weekly_topic_id'] = weekly_content.get('topic_id')
+        st.session_state['weekly_title'] = weekly_content.get('title')
         st.session_state['weekly_quiz'] = True
     
     def view_weekly_topic():
