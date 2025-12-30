@@ -4,7 +4,10 @@ import pandas as pd
 from datetime import datetime
 import json
 import os
+import streamlit.components.v1 as components
 import extra_streamlit_components as stx
+from urllib.parse import quote
+import re
 
 # ייבוא פונקציות ניהול תוכן
 from utils.content_manager import get_user_by_email, save_user, update_last_login
@@ -461,81 +464,160 @@ if st.session_state.logged_in:
     
     st.divider()
     
-    # כרטיסיות ראשיות עם כפתורים מובילים
+    # כרטיסיות ראשיות בעיצוב "ספרייה רפואית" – קליקים על כל הכרטיס
     st.markdown("### ניווט מהיר 🚀")
-    
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.markdown("""
-        <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-                    padding: 2.5rem; border-radius: 16px; text-align: center; color: white;
-                    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);'>
-            <svg width="80" height="80" viewBox="0 0 100 100" style="margin-bottom: 1rem;">
-                <rect x="20" y="15" width="15" height="70" fill="white" opacity="0.9" rx="2"/>
-                <rect x="40" y="20" width="15" height="65" fill="white" opacity="0.95" rx="2"/>
-                <rect x="60" y="25" width="15" height="60" fill="white" rx="2"/>
-                <circle cx="27.5" cy="30" r="2" fill="#667eea"/>
-                <circle cx="47.5" cy="35" r="2" fill="#667eea"/>
-                <circle cx="67.5" cy="40" r="2" fill="#667eea"/>
-                <line x1="22" y1="40" x2="33" y2="40" stroke="#667eea" stroke-width="1.5"/>
-                <line x1="22" y1="50" x2="33" y2="50" stroke="#667eea" stroke-width="1.5"/>
-                <line x1="22" y1="60" x2="33" y2="60" stroke="#667eea" stroke-width="1.5"/>
-                <line x1="42" y1="45" x2="53" y2="45" stroke="#667eea" stroke-width="1.5"/>
-                <line x1="42" y1="55" x2="53" y2="55" stroke="#667eea" stroke-width="1.5"/>
-                <line x1="62" y1="50" x2="73" y2="50" stroke="#667eea" stroke-width="1.5"/>
-                <line x1="62" y1="60" x2="73" y2="60" stroke="#667eea" stroke-width="1.5"/>
-            </svg>
-            <h2 style='color: white; font-size: 2.8rem; margin: 1rem 0 0.5rem 0; font-weight: 700;'>ספריית תוכן</h2>
-            <p style='color: rgba(255,255,255,0.95); font-size: 1.3rem; font-weight: 500;'>חומרי למידה מקצועיים ומעודכנים</p>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("כניסה לספרייה", key="library_btn", use_container_width=True, type="primary"):
-            st.switch_page("pages/1_ספריית_תוכן.py")
-    
-    with col2:
-        st.markdown("""
-        <div style='background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); 
-                    padding: 2.5rem; border-radius: 16px; text-align: center; color: white;
-                    box-shadow: 0 8px 24px rgba(240, 147, 251, 0.3);'>
-            <svg width="80" height="80" viewBox="0 0 100 100" style="margin-bottom: 1rem;">
-                <rect x="15" y="15" width="70" height="70" fill="none" stroke="white" stroke-width="3" rx="4"/>
-                <line x1="15" y1="35" x2="85" y2="35" stroke="white" stroke-width="2"/>
-                <line x1="35" y1="35" x2="35" y2="85" stroke="white" stroke-width="2"/>
-                <polyline points="45,65 50,55 55,60 60,50 65,55 70,45 75,50" 
-                          fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="45" cy="65" r="3" fill="white"/>
-                <circle cx="50" cy="55" r="3" fill="white"/>
-                <circle cx="55" cy="60" r="3" fill="white"/>
-                <circle cx="60" cy="50" r="3" fill="white"/>
-                <circle cx="65" cy="55" r="3" fill="white"/>
-                <circle cx="70" cy="45" r="3" fill="white"/>
-                <circle cx="75" cy="50" r="3" fill="white"/>
-            </svg>
-            <h2 style='color: white; font-size: 2.8rem; margin: 1rem 0 0.5rem 0; font-weight: 700;'>הנתונים שלי</h2>
-            <p style='color: rgba(255,255,255,0.95); font-size: 1.3rem; font-weight: 500;'>מעקב התקדמות וסטטיסטיקות</p>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("צפייה בסטטיסטיקות", key="stats_btn", use_container_width=True, type="primary"):
-            st.switch_page("pages/3_סטטיסטיקה.py")
-    
-    with col3:
-        st.markdown("""
-        <div style='background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); 
-                    padding: 2.5rem; border-radius: 16px; text-align: center; color: white;
-                    box-shadow: 0 8px 24px rgba(79, 172, 254, 0.3);'>
-            <svg width="80" height="80" viewBox="0 0 100 100" style="margin-bottom: 1rem;">
-                <path d="M 50 20 L 60 45 L 85 45 L 65 60 L 75 85 L 50 70 L 25 85 L 35 60 L 15 45 L 40 45 Z" 
-                      fill="white" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-                <circle cx="50" cy="50" r="15" fill="none" stroke="white" stroke-width="2" opacity="0.5"/>
-                <text x="50" y="58" font-size="20" font-weight="bold" fill="#4facfe" text-anchor="middle">1</text>
-            </svg>
-            <h2 style='color: white; font-size: 2.8rem; margin: 1rem 0 0.5rem 0; font-weight: 700;'>לוח הישגים</h2>
-            <p style='color: rgba(255,255,255,0.95); font-size: 1.3rem; font-weight: 500;'>תחרות בין-מוסדית</p>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("לוח התוצאות", key="leaderboard_btn", use_container_width=True, type="primary"):
-            st.switch_page("pages/4_דירוג.py")
+
+    nav_cards = [
+        {
+            "title": "ספריית תוכן",
+            "desc": "חומרי למידה מקצועיים ומעודכנים",
+            "svg": """
+                <svg width='56' height='56' viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                    <rect x='18' y='24' width='84' height='72' rx='10' stroke='#1f2f3d' stroke-width='5' opacity='0.9'/>
+                    <path d='M24 44h72' stroke='#0d8a7b' stroke-width='5' stroke-linecap='round'/>
+                    <path d='M36 86l12-18 10 10 14-22 12 14 10-18' stroke='#f5a524' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/>
+                    <circle cx='36' cy='86' r='4' fill='#1f2f3d'/>
+                    <circle cx='48' cy='68' r='4' fill='#1f2f3d'/>
+                    <circle cx='58' cy='78' r='4' fill='#1f2f3d'/>
+                    <circle cx='72' cy='56' r='4' fill='#1f2f3d'/>
+                    <circle cx='84' cy='70' r='4' fill='#1f2f3d'/>
+                    <circle cx='94' cy='52' r='4' fill='#1f2f3d'/>
+                </svg>
+            """,
+            "page": "pages/1_ספריית_תוכן.py"
+        },
+        {
+            "title": "הנתונים שלי",
+            "desc": "מעקב התקדמות וסטטיסטיקות",
+            "svg": """
+                <svg width='56' height='56' viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                    <rect x='24' y='20' width='20' height='80' rx='3' fill='#1ab0a0' opacity='0.85'/>
+                    <rect x='48' y='24' width='20' height='76' rx='3' fill='#1f2f3d' opacity='0.9'/>
+                    <rect x='72' y='30' width='20' height='70' rx='3' fill='#0d8a7b' opacity='0.9'/>
+                    <path d='M26 42h16M26 54h16M50 50h16M74 58h16' stroke='white' stroke-width='3' stroke-linecap='round' opacity='0.9'/>
+                    <circle cx='32' cy='32' r='3' fill='white'/>
+                    <circle cx='56' cy='36' r='3' fill='white'/>
+                    <circle cx='80' cy='42' r='3' fill='white'/>
+                </svg>
+            """,
+            "page": "pages/3_סטטיסטיקה.py"
+        },
+        {
+            "title": "לוח הישגים",
+            "desc": "תחרות בין-מוסדית",
+            "svg": """
+                <svg width='56' height='56' viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                    <path d='M40 24h40v32a20 20 0 0 1-40 0V24z' fill='#1f2f3d'/>
+                    <path d='M36 24h48v10H36z' fill='#0d8a7b'/>
+                    <circle cx='60' cy='46' r='12' fill='#f5a524'/>
+                    <path d='M52 92l8-24 8 24' stroke='#1f2f3d' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/>
+                    <rect x='44' y='92' width='32' height='10' rx='3' fill='#1ab0a0'/>
+                </svg>
+            """,
+            "page": "pages/4_דירוג.py"
+        }
+    ]
+
+    def _page_param(page_path: str) -> str:
+        """Convert page file name to Streamlit page query param."""
+        fname = page_path.split('/')[-1]
+        stem = fname[:-3] if fname.endswith('.py') else fname
+        if re.match(r"^\d+_", stem):
+            stem = stem.split('_', 1)[1]
+        page_title = stem.replace('_', ' ')
+        return quote(page_title)
+
+    st.markdown(
+        """
+<style>
+.nav-card-box {
+    background: #ffffff;
+    border: 1.5px solid #e6e9ed;
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.05);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    direction: rtl;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.nav-card-box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(13,138,123,0.08), transparent 45%);
+    pointer-events: none;
+}
+.nav-card-box::after {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--teal, #0d8a7b) 0%, var(--teal-light, #1ab0a0) 100%);
+    border-radius: 0 10px 10px 0;
+}
+.nav-card-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.08);
+    border-color: var(--teal, #0d8a7b);
+}
+.nav-illus {
+    flex: 0 0 88px;
+    height: 88px;
+    border-radius: 12px;
+    background: radial-gradient(circle at 30% 30%, rgba(13,138,123,0.18), transparent 60%),
+                radial-gradient(circle at 70% 70%, rgba(31,47,61,0.12), transparent 65%);
+    display: grid;
+    place-items: center;
+}
+.nav-copy h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.32rem;
+    font-weight: 800;
+    color: #1b2735;
+    letter-spacing: -0.2px;
+}
+.nav-copy p {
+    margin: 0;
+    font-size: 1.05rem;
+    color: #3b4a5a;
+    font-weight: 500;
+}
+.nav-button {
+    margin-top: 0.4rem;
+}
+</style>
+""",
+        unsafe_allow_html=True,
+    )
+
+    cols = st.columns(3)
+    for idx, card in enumerate(nav_cards):
+        with cols[idx % 3]:
+            st.markdown(
+                f"""
+<div class='nav-card-box'>
+    <div class='nav-illus'>{card['svg']}</div>
+    <div class='nav-copy'>
+        <h3>{card['title']}</h3>
+        <p>{card['desc']}</p>
+    </div>
+</div>
+""",
+                unsafe_allow_html=True,
+            )
+            if st.button(
+                "פתח",
+                key=f"nav-card-{idx}",
+                type="secondary",
+                use_container_width=True,
+            ):
+                st.switch_page(card["page"])
     
     st.divider()
     

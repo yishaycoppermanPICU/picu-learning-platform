@@ -124,53 +124,113 @@ def get_common_styles():
     header[data-testid="stHeader"] * {
         color: white !important;
     }
+
+    /* Hero title under header */
+    .hero-title {
+        position: relative;
+        margin: 0 auto 1.5rem auto;
+        padding: 1.4rem 1.8rem;
+        max-width: 920px;
+        background: linear-gradient(135deg, rgba(255,255,255,0.82) 0%, rgba(232,240,244,0.92) 100%);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 14px 32px rgba(0,0,0,0.08);
+        border: 2px solid rgba(245, 165, 36, 0.35);
+        direction: rtl;
+        text-align: center;
+    }
+
+    .hero-title__bg {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 20% 30%, rgba(26, 176, 160, 0.12), transparent 55%),
+                    radial-gradient(circle at 80% 10%, rgba(31, 47, 61, 0.12), transparent 50%),
+                    radial-gradient(circle at 50% 90%, rgba(245, 165, 36, 0.10), transparent 55%);
+        filter: blur(6px);
+        pointer-events: none;
+    }
+
+    .hero-title__content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-title h1 {
+        margin: 0.2rem 0 0 0;
+        font-size: 3.4rem !important;
+        font-weight: 800 !important;
+        color: #1b2735 !important;
+        letter-spacing: -0.6px;
+    }
+
+    .hero-title p {
+        margin: 0.5rem 0 0 0;
+        font-size: 1.45rem !important;
+        font-weight: 600 !important;
+        color: #304050 !important;
+    }
     
     /* ================= Typography - גדלים מוגדלים ================= */
-    * {
+    body, .stApp,
+    h1, h2, h3, h4, h5, h6,
+    p, li, label, span, div,
+    input, textarea, select,
+    .stMarkdown, .stMarkdown * {
         font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    }
+
+    /* שמירה על פונט אייקונים */
+    .material-icons, .material-symbols-outlined {
+        font-family: 'Material Icons', 'Material Symbols Outlined' !important;
+        -webkit-font-feature-settings: 'liga';
     }
     
     h1 {
-        font-size: 2.5rem !important;
-        font-weight: 700 !important;
-        line-height: 1.3 !important;
-        margin-bottom: 1rem !important;
+        font-size: 2.9rem !important;
+        font-weight: 800 !important;
+        line-height: 1.25 !important;
+        margin-bottom: 1.1rem !important;
     }
     
     h2 {
-        font-size: 2rem !important;
-        font-weight: 600 !important;
-        line-height: 1.4 !important;
-        margin-bottom: 0.8rem !important;
+        font-size: 2.2rem !important;
+        font-weight: 700 !important;
+        line-height: 1.35 !important;
+        margin-bottom: 0.9rem !important;
     }
     
     h3 {
-        font-size: 1.6rem !important;
-        font-weight: 600 !important;
-        line-height: 1.4 !important;
-        margin-bottom: 0.7rem !important;
+        font-size: 1.85rem !important;
+        font-weight: 700 !important;
+        line-height: 1.35 !important;
+        margin-bottom: 0.8rem !important;
     }
     
     h4 {
-        font-size: 1.3rem !important;
-        font-weight: 500 !important;
+        font-size: 1.5rem !important;
+        font-weight: 600 !important;
     }
     
     p, li, span, div {
-        font-size: 1.1rem !important;
-        line-height: 1.8 !important;
-        color: #2c3e50;
+        font-size: 1.2rem !important;
+        line-height: 1.9 !important;
+        color: #1f2f3d;
     }
     
     h1, h2, h3, h4, h5, h6, p, label, span, li, div {
         text-align: right;
         direction: rtl;
     }
+
+    /* שמירה על סדר אמוג'י/חיצים בטקסט RTL */
+    .stMarkdown p, .stMarkdown li, .stMarkdown span {
+        unicode-bidi: plaintext;
+    }
     
     /* טקסט בתוך כפתורים */
     button, button * {
-        font-size: 1.05rem !important;
-        font-weight: 500 !important;
+        font-size: 1.15rem !important;
+        font-weight: 600 !important;
     }
     
     /* ================= Sidebar ================= */
@@ -325,8 +385,8 @@ def get_common_styles():
     
     .main-header h1 {
         color: white !important;
-        margin: 0.5rem 0;
-        font-size: 3rem !important;
+        margin: 0.4rem 0;
+        font-size: 3.2rem !important;
         text-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
     
@@ -338,20 +398,32 @@ def get_common_styles():
     
     /* ================= Cards - עיצוב משופר ================= */
     .category-card {
-        background: white;
-        padding: 2rem;
-        border-radius: 16px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        margin-bottom: 1.5rem;
-        border-right: 4px solid var(--orange-accent);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background: rgba(255,255,255,0.85);
+        padding: 1.5rem 1.75rem;
+        border-radius: 14px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        margin-bottom: 1.2rem;
+        border: 2px solid rgba(245, 165, 36, 0.6);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         position: relative;
+        overflow: hidden;
+    }
+    
+    .category-card::after {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        background: radial-gradient(circle at 20% 20%, rgba(26, 176, 160, 0.08), transparent 60%),
+                    radial-gradient(circle at 80% 0%, rgba(31, 47, 61, 0.06), transparent 55%);
+        transform: rotate(-4deg);
+        pointer-events: none;
+        transition: opacity 0.3s ease;
     }
     
     .category-card:hover {
-        transform: translateY(-5px) translateX(-3px);
-        box-shadow: 0 12px 35px rgba(13, 138, 123, 0.25);
-        border-right-color: var(--teal);
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 18px 36px rgba(0,0,0,0.16);
+        border-color: var(--teal);
     }
     
     .category-card h3 {
@@ -360,19 +432,33 @@ def get_common_styles():
     }
     
     .topic-card {
-        background: white;
-        padding: 1.5rem;
+        background: rgba(255,255,255,0.9);
+        padding: 1.25rem 1.5rem;
         border-radius: 12px;
-        border-right: 4px solid var(--orange-accent);
-        margin-bottom: 1rem;
-        box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1.5px solid rgba(245, 165, 36, 0.7);
+        margin-bottom: 0.9rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .topic-card::after {
+        content: "";
+        position: absolute;
+        right: -20%;
+        top: -20%;
+        width: 60%;
+        height: 60%;
+        background: radial-gradient(circle, rgba(26, 176, 160, 0.08) 0%, transparent 70%);
+        pointer-events: none;
+        transition: opacity 0.3s ease;
     }
     
     .topic-card:hover {
-        transform: translateX(-8px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-        border-right-color: var(--teal);
+        transform: translateY(-4px) translateX(-4px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.14);
+        border-color: var(--teal);
     }
     
     .topic-card h4 {
@@ -381,17 +467,31 @@ def get_common_styles():
     
     /* ================= Content Sections - משופר ================= */
     .content-section {
-        background: white;
-        padding: 2rem;
+        background: rgba(255,255,255,0.94);
+        padding: 2.2rem;
         border-radius: 16px;
         margin: 2rem 0;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        border-right: 4px solid var(--orange-accent);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        border: 2px solid rgba(245, 165, 36, 0.55);
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
     }
-    
+
+    .content-section::after {
+        content: "";
+        position: absolute;
+        left: -30%;
+        bottom: -40%;
+        width: 70%;
+        height: 70%;
+        background: radial-gradient(circle, rgba(13, 138, 123, 0.1) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
     .content-section:hover {
-        box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+        box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+        border-color: var(--teal);
     }
     
     .section-header {
@@ -414,16 +514,16 @@ def get_common_styles():
     }
     
     .section-title {
-        font-size: 1.5rem !important;
-        font-weight: 600 !important;
-        color: #2c3e50;
+        font-size: 1.65rem !important;
+        font-weight: 700 !important;
+        color: #1f2f3d;
         margin: 0;
     }
-    
+
     .section-preview {
-        color: #6c757d;
-        font-size: 1.05rem !important;
-        margin: 0.5rem 0 0 0;
+        color: #4d5b6a;
+        font-size: 1.15rem !important;
+        margin: 0.45rem 0 0 0;
         line-height: 1.8 !important;
     }
     
@@ -775,8 +875,8 @@ def get_common_styles():
     /* Progress Bar */
     .stProgress > div > div {
         background: linear-gradient(90deg, var(--teal) 0%, var(--teal-light) 100%) !important;
-        height: 12px !important;
-        border-radius: 6px !important;
+        height: 14px !important;
+        border-radius: 7px !important;
     }
     
     /* Divider */

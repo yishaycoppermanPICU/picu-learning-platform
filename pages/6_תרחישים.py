@@ -36,13 +36,13 @@ st.markdown("""
         display: none !important;
     }
     
-    /* רקע כללי - חזק וברור */
+    /* רקע כללי - חזק וברור, מותאם לפלטה החדשה */
     .main {
-        background: linear-gradient(135deg, #1a1f2e 0%, #2a2f3e 50%, #1f2329 100%) !important;
+        background: linear-gradient(135deg, var(--navy) 0%, #10212a 50%, var(--slate) 100%) !important;
     }
     
     .main * {
-        color: #ffffff !important;
+        color: #e9f5f3 !important;
         font-size: 1.3rem !important;
     }
     
@@ -85,7 +85,7 @@ st.markdown("""
     }
     
     .scenario-header {
-        background: rgba(102, 126, 234, 0.95);
+        background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
         backdrop-filter: blur(10px);
         color: #ffffff !important;
         padding: 2.5rem;
@@ -93,8 +93,9 @@ st.markdown("""
         text-align: center;
         margin-bottom: 2rem;
         box-shadow: 
-            0 8px 32px rgba(102, 126, 234, 0.4),
+            0 8px 32px rgba(13, 138, 123, 0.35),
             inset 0 1px 0 rgba(255,255,255,0.2);
+        border-bottom: 4px solid var(--orange-accent);
     }
     
     .scenario-header h1 {
@@ -106,24 +107,24 @@ st.markdown("""
     
     /* כרטיס שלב */
     .stage-card {
-        background: linear-gradient(145deg, #2a3548 0%, #1f2937 100%);
+        background: linear-gradient(145deg, #1f2a35 0%, #12202a 100%);
         padding: 2.5rem;
         border-radius: 15px;
         box-shadow: 
             0 8px 24px rgba(0,0,0,0.4),
-            inset 0 1px 0 rgba(255,255,255,0.1);
+            inset 0 1px 0 rgba(255,255,255,0.08);
         margin: 1.5rem 0;
-        border-right: 5px solid #667eea;
+        border-right: 5px solid var(--orange-accent);
         color: #e5e7eb;
     }
     
     /* רשימת בדיקה */
     .checklist-item {
-        background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+        background: linear-gradient(135deg, #1f2f3d 0%, #152632 100%);
         padding: 1.2rem;
         margin: 0.8rem 0;
         border-radius: 10px;
-        border-right: 4px solid #10b981;
+        border-right: 4px solid var(--orange-accent);
         color: #f3f4f6;
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         transition: all 0.3s ease;
@@ -131,7 +132,7 @@ st.markdown("""
     
     .checklist-item:hover {
         transform: translateX(-5px);
-        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+        box-shadow: 0 6px 20px rgba(13, 138, 123, 0.3);
     }
     
     /* אזהרה קריטית */
