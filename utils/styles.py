@@ -174,8 +174,8 @@ def get_common_styles():
     .app-header-bar {
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
-        justify-content: flex-end;
+        align-items: flex-start;
+        justify-content: flex-start;
         gap: 0.6rem;
         padding: 0;
         direction: rtl;
@@ -193,12 +193,14 @@ def get_common_styles():
         width: 100%;
         height: auto;
         display: block;
+        max-height: 64px;
+        object-fit: contain;
     }
 
     .app-header-text {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         gap: 4px;
         text-align: right;
         margin-top: -6px;
@@ -209,11 +211,13 @@ def get_common_styles():
         font-size: 2rem;
         line-height: 1.05;
         margin: 0;
+        text-align: right;
     }
     .hero-tagline {
         font-size: 1rem;
         line-height: 1.2;
         margin: 0;
+        text-align: right;
     }
 
     @media (max-width: 768px) {
@@ -229,7 +233,7 @@ def get_common_styles():
             margin-top: -14px;
         }
         .app-header-text { margin-top: -10px; }
-        .hero-topline { font-size: 1.65rem; line-height: 1.0; }
+        .hero-topline { font-size: 1.6rem; line-height: 1.0; }
         .hero-tagline { font-size: 0.9rem; }
     }
 
@@ -241,6 +245,8 @@ def get_common_styles():
     @media (max-width: 600px) {
         .hero-title h1 { font-size: 2.5rem !important; }
         .hero-title p { font-size: 1.1rem !important; }
+        .hero-topline { font-size: 1.45rem; }
+        .hero-tagline { font-size: 0.85rem; }
     }
     
     /* ================= Typography - גדלים מוגדלים ================= */

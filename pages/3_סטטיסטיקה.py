@@ -43,6 +43,7 @@ st.markdown("""
     /* tabs visibility */
     .stTabs [data-baseweb="tab-list"] {
         gap: 0.5rem;
+        flex-direction: row-reverse;
     }
     .stTabs [data-baseweb="tab"] {
         background: #f1f5f9;
@@ -50,6 +51,7 @@ st.markdown("""
         border-radius: 10px;
         padding: 0.5rem 0.85rem;
         border: 1px solid #d7dde4;
+        text-align: right;
     }
     .stTabs [aria-selected="true"] {
         background: linear-gradient(135deg, #0d8a7b 0%, #1ab0a0 100%) !important;

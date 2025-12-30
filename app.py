@@ -128,12 +128,12 @@ if logo_to_show:
     st.markdown(
         f"""
         <div class="app-header-bar">
-            <div class="app-header-logo">
-                <img src="data:image/png;base64,{logo_base64}" alt="לוגו ישי קופרמן" class="app-header-logo-img" />
-            </div>
             <div class="app-header-text">
                 <h1 class="hero-topline">ישי קופרמן | טיפול נמרץ ילדים</h1>
                 <p class="hero-tagline">פלטפורמת למידה מתקדמת לצוותי PICU</p>
+            </div>
+            <div class="app-header-logo">
+                <img src="data:image/png;base64,{logo_base64}" alt="לוגו ישי קופרמן" class="app-header-logo-img" />
             </div>
         </div>
         """,
