@@ -16,6 +16,7 @@ WEEKLY_CONTENT = {
         "category": "resuscitation",
         "description": "למידה מעמיקה של פרוטוקול הזהב בטיפול בספסיס בילדים",
         "quiz_category": "resuscitation",
+        "quiz_topic": "sepsis_protocol",
         "min_quiz_score": 80,
         "icon": "🦠"
     },
@@ -25,6 +26,7 @@ WEEKLY_CONTENT = {
         "category": "resuscitation",
         "description": "זיהוי וטיפול בשוק היפובולמי-המורגי בילדים",
         "quiz_category": "resuscitation",
+        "quiz_topic": "hypovolemic_shock",
         "min_quiz_score": 80,
         "icon": "🚨"
     },
@@ -34,6 +36,7 @@ WEEKLY_CONTENT = {
         "category": "hematology",
         "description": "המופגוציטיק לימפוהיסטיאוציטוזיס - אבחון וטיפול",
         "quiz_category": "hematology",
+        "quiz_topic": "hlh_syndrome",
         "min_quiz_score": 80,
         "icon": "🩸"
     },
@@ -43,6 +46,7 @@ WEEKLY_CONTENT = {
         "category": "trauma",
         "description": "ניהול טראומטי של פגיעות ראש בילדים",
         "quiz_category": "trauma",
+        "quiz_topic": "tbi_management",
         "min_quiz_score": 80,
         "icon": "🤕"
     },
@@ -52,6 +56,7 @@ WEEKLY_CONTENT = {
         "category": "hematology",
         "description": "זיהוי מוקדם וטיפול בתסמונת תמוגת גידול",
         "quiz_category": "hematology",
+        "quiz_topic": "tumor_lysis_syndrome",
         "min_quiz_score": 80,
         "icon": "🩸"
     },
@@ -61,6 +66,7 @@ WEEKLY_CONTENT = {
         "category": "immunology",
         "description": "חוסר חיסוני משולב חמור - טיפול מיידי",
         "quiz_category": "immunology",
+        "quiz_topic": "scid_management",
         "min_quiz_score": 80,
         "icon": "🛡️"
     },
@@ -70,6 +76,7 @@ WEEKLY_CONTENT = {
         "category": "hematology",
         "description": "סיבוכים וטיפול בהשתלת מח עצם",
         "quiz_category": "hematology",
+        "quiz_topic": "hct_complications",
         "min_quiz_score": 80,
         "icon": "🩺"
     },
@@ -79,6 +86,7 @@ WEEKLY_CONTENT = {
         "category": "hematology",
         "description": "פרוטוכולים למתן בטוח של מוצרי דם",
         "quiz_category": "hematology",
+        "quiz_topic": "blood_products_admin",
         "min_quiz_score": 80,
         "icon": "🩸"
     }

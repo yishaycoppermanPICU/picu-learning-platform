@@ -58,8 +58,8 @@ if st.session_state.get('view_weekly_content') and st.session_state.get('selecte
         
         if full_topic.get('description'):
             st.markdown(f"""
-            <div class="content-section" style="background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%); border-color: #17a2b8;">
-                <p style="font-size: 1.1rem; line-height: 1.8; margin: 0; color: #0c5460;">{full_topic['description']}</p>
+            <div class="content-section" style="background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%); border-color: #17a2b8; color: #0f172a;">
+                <p style="font-size: 1.2rem; line-height: 1.85; margin: 0; color: #0f172a; font-weight: 600;">{full_topic['description']}</p>
             </div>
             """, unsafe_allow_html=True)
         
@@ -188,8 +188,8 @@ if selected_category in categories:
             
             if full_topic.get('description'):
                 st.markdown(f"""
-                <div class="content-section" style="background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%); border-color: #17a2b8;">
-                    <p style="font-size: 1.1rem; line-height: 1.8; margin: 0; color: #0c5460;">{full_topic['description']}</p>
+                <div class="content-section" style="background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%); border-color: #17a2b8; color: #0f172a;">
+                    <p style="font-size: 1.2rem; line-height: 1.85; margin: 0; color: #0f172a; font-weight: 600;">{full_topic['description']}</p>
                 </div>
                 """, unsafe_allow_html=True)
             

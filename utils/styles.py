@@ -170,21 +170,72 @@ def get_common_styles():
         color: #304050 !important;
     }
 
+    /* Header layout + responsive text */
+    .app-header-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: flex-end;
+        gap: 0.85rem;
+        padding: 6px 0 0 0;
+        direction: rtl;
+    }
+
+    .app-header-logo {
+        max-width: 320px;
+        width: 32vw;
+        min-width: 190px;
+        margin-top: -6px;
+    }
+
+    .app-header-logo img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .app-header-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 6px;
+        text-align: right;
+    }
+
     /* Header topline/tagline responsive */
     .hero-topline {
-        font-size: 2.4rem;
-        line-height: 1.15;
+        font-size: 2.2rem;
+        line-height: 1.1;
     }
     .hero-tagline {
-        font-size: 1.1rem;
-        line-height: 1.3;
+        font-size: 1.05rem;
+        line-height: 1.25;
+    }
+
+    @media (max-width: 768px) {
+        .app-header-bar {
+            align-items: flex-start;
+            gap: 0.65rem;
+            padding-top: 4px;
+        }
+        .app-header-logo {
+            width: 60vw;
+            max-width: 260px;
+            min-width: 160px;
+            margin-top: -10px;
+        }
+        .hero-topline { font-size: 1.8rem; line-height: 1.05; }
+        .hero-tagline { font-size: 0.95rem; }
+    }
+
+    @media (min-width: 769px) {
+        .app-header-bar { align-items: center; }
+        .app-header-logo { margin-top: -8px; }
     }
 
     @media (max-width: 600px) {
         .hero-title h1 { font-size: 2.6rem !important; }
         .hero-title p { font-size: 1.15rem !important; }
-        .hero-topline { font-size: 2rem; }
-        .hero-tagline { font-size: 1rem; }
     }
     
     /* ================= Typography - גדלים מוגדלים ================= */
@@ -232,6 +283,12 @@ def get_common_styles():
         font-size: 1.2rem !important;
         line-height: 1.9 !important;
         color: #1f2f3d;
+    }
+
+    .stCaption, .stCaption * {
+        color: #111827 !important;
+        font-size: 0.98rem !important;
+        line-height: 1.5 !important;
     }
     
     h1, h2, h3, h4, h5, h6, p, label, span, li, div {

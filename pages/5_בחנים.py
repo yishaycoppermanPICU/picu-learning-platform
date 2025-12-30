@@ -104,13 +104,17 @@ if not st.session_state.quiz_active:
     if st.session_state.get('weekly_quiz') and st.session_state.get('selected_quiz_category'):
         selected_category = st.session_state.get('selected_quiz_category')
         weekly_topic = st.session_state.get('weekly_topic_id')
+        weekly_topic_slug = st.session_state.get('weekly_topic_slug')
         weekly_title = st.session_state.get('weekly_title', 'מבחן שבועי')
         
         # Prefer topic-specific questions if available
         from utils.quiz_manager import get_questions_by_category, get_questions_by_topic
-        if weekly_topic:
+        questions = []
+        if weekly_topic_slug:
+            questions = get_questions_by_topic(weekly_topic_slug)
+        if not questions and weekly_topic:
             questions = get_questions_by_topic(weekly_topic)
-        else:
+        if not questions:
             questions = get_questions_by_category(selected_category)
         
         if len(questions) > 0:
@@ -130,15 +134,18 @@ if not st.session_state.quiz_active:
                 'show_timer': True,
                 'num_questions': len(quiz_questions),
                 'topic_title': weekly_title,
+                'topic': weekly_topic_slug or weekly_topic,
                 'weekly': True
             }
             st.session_state['weekly_quiz'] = False
+            st.session_state['weekly_topic_slug'] = None
             st.rerun()
         else:
             st.error("❌ לא נמצאו שאלות עבור השבוע הנוכחי")
             st.session_state['weekly_quiz'] = False
             st.session_state['selected_quiz_category'] = None
             st.session_state['weekly_topic_id'] = None
+            st.session_state['weekly_topic_slug'] = None
     
     # Check if coming from a specific topic - auto-start quiz
     from_topic = st.session_state.get('quiz_topic')

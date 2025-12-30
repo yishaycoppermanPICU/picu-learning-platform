@@ -4,6 +4,7 @@ import pandas as pd
 from datetime import datetime
 import json
 import os
+import base64
 import streamlit.components.v1 as components
 import extra_streamlit_components as stx
 from urllib.parse import quote
@@ -113,27 +114,33 @@ button[data-testid="collapsedControl"] * {
 </style>
 """, unsafe_allow_html=True)
 
-header_col1, header_col2, header_col3 = st.columns([1.2, 3, 0.2])
-with header_col1:
-    logo_candidates = [
-        "לוגו רשמי ישי רקע שקוף.png",
-        "לוגו רשמי ישי ללא רקע.png",
-        "לוגו רשמי של ישי.png",
-    ]
+logo_candidates = [
+    "לוגו רשמי ישי רקע שקוף.png",
+    "לוגו רשמי ישי ללא רקע.png",
+    "לוגו רשמי של ישי.png",
+]
 
-    logo_to_show = next((path for path in logo_candidates if os.path.exists(path)), None)
-    if logo_to_show:
-        st.image(logo_to_show, width=320)
-    else:
-        st.warning("לא נמצא קובץ הלוגו", icon="⚠️")
+logo_to_show = next((path for path in logo_candidates if os.path.exists(path)), None)
 
-with header_col2:
-    st.markdown("""
-    <div style="text-align: right; padding-top: 8px;">
-        <h1 class="hero-topline" style="margin: 0; font-weight: 800; color: #1f2933; letter-spacing: -0.5px;">ישי קופרמן | טיפול נמרץ ילדים</h1>
-        <p class="hero-tagline" style="margin: 6px 0 0 0; color: #444; font-weight: 500;">פלטפורמת למידה מתקדמת לצוותי PICU</p>
-    </div>
-    """, unsafe_allow_html=True)
+if logo_to_show:
+    with open(logo_to_show, "rb") as logo_file:
+        logo_base64 = base64.b64encode(logo_file.read()).decode()
+    st.markdown(
+        f"""
+        <div class="app-header-bar">
+            <div class="app-header-logo">
+                <img src="data:image/png;base64,{logo_base64}" alt="לוגו ישי קופרמן" class="app-header-logo-img" />
+            </div>
+            <div class="app-header-text">
+                <h1 class="hero-topline">ישי קופרמן | טיפול נמרץ ילדים</h1>
+                <p class="hero-tagline">פלטפורמת למידה מתקדמת לצוותי PICU</p>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+else:
+    st.warning("לא נמצא קובץ הלוגו", icon="⚠️")
 
 # בדיקת חיבור למסד נתונים
 if DB_CONNECTED:
@@ -397,6 +404,7 @@ if st.session_state.logged_in:
         st.session_state['selected_quiz_category'] = weekly_content.get('quiz_category', weekly_content['category'])
         st.session_state['weekly_topic_id'] = weekly_content.get('topic_id')
         st.session_state['weekly_title'] = weekly_content.get('title')
+        st.session_state['weekly_topic_slug'] = weekly_content.get('quiz_topic')
         st.session_state['weekly_quiz'] = True
     
     def view_weekly_topic():
