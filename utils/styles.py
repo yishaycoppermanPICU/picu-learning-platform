@@ -193,7 +193,7 @@ def get_common_styles():
         width: 100%;
         height: auto;
         display: block;
-        max-height: 64px;
+        max-height: 78px;
         object-fit: contain;
     }
 
@@ -222,18 +222,20 @@ def get_common_styles():
 
     @media (max-width: 768px) {
         .app-header-bar {
+            flex-direction: column-reverse;
             align-items: flex-start;
-            gap: 0.45rem;
+            gap: 0.35rem;
             padding-top: 2px;
         }
         .app-header-logo {
-            width: 58vw;
-            max-width: 240px;
+            width: 62vw;
+            max-width: 260px;
             min-width: 150px;
-            margin-top: -14px;
+            margin-top: 0;
         }
-        .app-header-text { margin-top: -10px; }
-        .hero-topline { font-size: 1.6rem; line-height: 1.0; }
+        .app-header-logo img { max-height: 82px; }
+        .app-header-text { margin-top: 0; }
+        .hero-topline { font-size: 1.55rem; line-height: 1.0; }
         .hero-tagline { font-size: 0.9rem; }
     }
 

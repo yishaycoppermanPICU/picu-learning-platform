@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 import plotly.express as px
 from datetime import datetime, timedelta
@@ -44,6 +45,8 @@ st.markdown("""
     .stTabs [data-baseweb="tab-list"] {
         gap: 0.5rem;
         flex-direction: row-reverse;
+        direction: rtl;
+        justify-content: flex-end;
     }
     .stTabs [data-baseweb="tab"] {
         background: #f1f5f9;
@@ -59,9 +62,7 @@ st.markdown("""
         border-color: #0d8a7b !important;
         box-shadow: 0 6px 14px rgba(13,138,123,0.25);
     }
-    .stTabs [aria-selected="false"] p {
-        color: #0f172a !important;
-    }
+    .stTabs [aria-selected="false"] p { color: #0f172a !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -126,14 +127,14 @@ with tab1:
         padding: 1.5rem;
         border-radius: 12px;
         border-right: 5px solid {status_color};
-        color: #0f172a;
+        color: #0b1525;
     ">
         <h3 style="margin: 0 0 1rem 0;">📅 תוכן השבוע הנוכחי</h3>
         <div style="display: flex; align-items: center; gap: 1rem;">
             <span style="font-size: 3rem;">{weekly_content['icon']}</span>
             <div>
-                <h4 style="margin: 0; color: #0f172a;">{weekly_content['title']}</h4>
-                <p style="color: #0f172a; margin: 0.3rem 0; font-weight: 600;">{weekly_content['description']}</p>
+                <h4 style="margin: 0; color: #0b1525;">{weekly_content['title']}</h4>
+                <p style="color: #0b1525; margin: 0.3rem 0; font-weight: 700;">{weekly_content['description']}</p>
                 <span style="
                     background: {status_color};
                     color: white;
@@ -199,10 +200,14 @@ with tab2:
             
             # התקדמות לתגים נוספים
             st.markdown("#### התקדמות לתגים נוספים")
-            st.markdown(get_progress_badges_html(
-                weekly_stats['completed_weeks'],
-                weekly_stats['total_badges']
-            ), unsafe_allow_html=True)
+            components.html(
+                get_progress_badges_html(
+                    weekly_stats['completed_weeks'],
+                    weekly_stats['total_badges']
+                ),
+                height=220,
+                scrolling=False
+            )
             
             # הישגים זמינים
             achievements = calculate_user_achievements(weekly_stats, badges_list)
