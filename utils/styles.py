@@ -183,8 +183,8 @@ def get_common_styles():
 
     .app-header-logo {
         max-width: 300px;
-        width: 30vw;
-        min-width: 170px;
+        width: 40vw;
+        min-width: 200px;
         margin-top: 0;
         align-self: center;
     }
@@ -193,7 +193,7 @@ def get_common_styles():
         width: 100%;
         height: auto;
         display: block;
-        max-height: 100px;
+        max-height: 200px;
         object-fit: contain;
     }
 
@@ -224,20 +224,20 @@ def get_common_styles():
         .app-header-bar {
             flex-direction: column;
             align-items: flex-start;
-            gap: 0.5rem;
-            padding-top: 4px;
+            gap: 0.6rem;
+            padding-top: 6px;
         }
         .app-header-logo {
             order: -1;
-            width: 74vw;
-            max-width: 320px;
-            min-width: 180px;
+            width: 82vw;
+            max-width: 380px;
+            min-width: 200px;
             margin-top: 0;
         }
-        .app-header-logo img { max-height: 110px; }
+        .app-header-logo img { max-height: 160px; }
         .app-header-text { margin-top: 0; }
-        .hero-topline { font-size: 1.6rem; line-height: 1.05; }
-        .hero-tagline { font-size: 1rem; }
+        .hero-topline { font-size: 1.55rem; line-height: 1.05; }
+        .hero-tagline { font-size: 0.98rem; }
     }
 
     @media (min-width: 769px) {
