@@ -174,18 +174,19 @@ def get_common_styles():
     .app-header-bar {
         display: flex;
         flex-wrap: wrap;
-        align-items: flex-start;
+        align-items: center;
         justify-content: flex-end;
-        gap: 0.85rem;
-        padding: 6px 0 0 0;
+        gap: 0.6rem;
+        padding: 0;
         direction: rtl;
     }
 
     .app-header-logo {
-        max-width: 320px;
-        width: 32vw;
-        min-width: 190px;
-        margin-top: -6px;
+        max-width: 300px;
+        width: 28vw;
+        min-width: 170px;
+        margin-top: -12px;
+        align-self: flex-start;
     }
 
     .app-header-logo img {
@@ -198,44 +199,48 @@ def get_common_styles():
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 6px;
+        gap: 4px;
         text-align: right;
+        margin-top: -6px;
     }
 
     /* Header topline/tagline responsive */
     .hero-topline {
-        font-size: 2.2rem;
-        line-height: 1.1;
+        font-size: 2rem;
+        line-height: 1.05;
+        margin: 0;
     }
     .hero-tagline {
-        font-size: 1.05rem;
-        line-height: 1.25;
+        font-size: 1rem;
+        line-height: 1.2;
+        margin: 0;
     }
 
     @media (max-width: 768px) {
         .app-header-bar {
             align-items: flex-start;
-            gap: 0.65rem;
-            padding-top: 4px;
+            gap: 0.45rem;
+            padding-top: 2px;
         }
         .app-header-logo {
-            width: 60vw;
-            max-width: 260px;
-            min-width: 160px;
-            margin-top: -10px;
+            width: 58vw;
+            max-width: 240px;
+            min-width: 150px;
+            margin-top: -14px;
         }
-        .hero-topline { font-size: 1.8rem; line-height: 1.05; }
-        .hero-tagline { font-size: 0.95rem; }
+        .app-header-text { margin-top: -10px; }
+        .hero-topline { font-size: 1.65rem; line-height: 1.0; }
+        .hero-tagline { font-size: 0.9rem; }
     }
 
     @media (min-width: 769px) {
         .app-header-bar { align-items: center; }
-        .app-header-logo { margin-top: -8px; }
+        .app-header-logo { margin-top: -10px; }
     }
 
     @media (max-width: 600px) {
-        .hero-title h1 { font-size: 2.6rem !important; }
-        .hero-title p { font-size: 1.15rem !important; }
+        .hero-title h1 { font-size: 2.5rem !important; }
+        .hero-title p { font-size: 1.1rem !important; }
     }
     
     /* ================= Typography - גדלים מוגדלים ================= */
@@ -427,9 +432,15 @@ def get_common_styles():
     .main .block-container {
         padding-right: 3rem;
         padding-left: 1rem;
-        padding-top: 2rem;
+        padding-top: 1.4rem;
         padding-bottom: 4rem;
         max-width: 1400px;
+    }
+
+    @media (max-width: 768px) {
+        .main .block-container {
+            padding-top: 0.6rem;
+        }
     }
     
     /* ================= Headers - משופרים ================= */
@@ -550,6 +561,13 @@ def get_common_styles():
         transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
+        color: #0f172a !important;
+    }
+
+    .content-section * {
+        color: #0f172a !important;
+        font-size: 1.12rem !important;
+        line-height: 1.85 !important;
     }
 
     .content-section::after {
