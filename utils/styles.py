@@ -224,21 +224,21 @@ def get_common_styles():
         .app-header-bar {
             flex-direction: column;
             align-items: flex-start;
-            gap: 0.35rem;
+            gap: 0.3rem;
             padding-top: 0;
         }
         .app-header-logo {
             order: -1;
-            width: 92vw;
-            max-width: 420px;
-            min-width: 180px;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            width: 82vw;
+            max-width: 360px;
+            min-width: 160px;
+            margin-top: 16px;
+            margin-bottom: 16px;
         }
-        .app-header-logo img { max-height: clamp(240px, 40vh, 440px); }
+        .app-header-logo img { max-height: clamp(180px, 32vh, 300px); }
         .app-header-text { margin-top: 0; }
-        .hero-topline { font-size: 1.18rem; line-height: 1.08; white-space: nowrap; }
-        .hero-tagline { font-size: 0.9rem; }
+        .hero-topline { font-size: 1.12rem; line-height: 1.08; white-space: nowrap; }
+        .hero-tagline { font-size: 0.88rem; }
     }
 
     @media (min-width: 769px) {
