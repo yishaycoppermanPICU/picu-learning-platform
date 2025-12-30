@@ -39,6 +39,27 @@ st.markdown("""
         border-radius: 10px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+
+    /* tabs visibility */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 0.5rem;
+    }
+    .stTabs [data-baseweb="tab"] {
+        background: #f1f5f9;
+        color: #0f172a !important;
+        border-radius: 10px;
+        padding: 0.5rem 0.85rem;
+        border: 1px solid #d7dde4;
+    }
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #0d8a7b 0%, #1ab0a0 100%) !important;
+        color: white !important;
+        border-color: #0d8a7b !important;
+        box-shadow: 0 6px 14px rgba(13,138,123,0.25);
+    }
+    .stTabs [aria-selected="false"] p {
+        color: #0f172a !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -141,7 +162,8 @@ with tab1:
         xaxis_title="תאריך",
         yaxis_title="ציון (%)",
         hovermode='x unified',
-        font=dict(size=14)
+        font=dict(size=14),
+        title_x=0
     )
     st.plotly_chart(fig, use_container_width=True)
 
@@ -203,13 +225,30 @@ with tab3:
         # הצגת טבלה
         history_data = []
         for quiz in quiz_history:
+            # timestamp fallback handling
+            ts_raw = quiz.get('timestamp') or quiz.get('date') or quiz.get('created_at')
+            dt = datetime.now()
+            if ts_raw:
+                try:
+                    dt = datetime.fromisoformat(str(ts_raw).replace('Z', '+00:00'))
+                except Exception:
+                    try:
+                        dt = datetime.fromtimestamp(float(ts_raw))
+                    except Exception:
+                        dt = datetime.now()
+            total_q = quiz.get('total_questions') or len(quiz.get('questions', [])) or 0
+            correct_q = quiz.get('correct_answers', 0)
+            score_pct = quiz.get('score_percentage')
+            if score_pct is None and total_q:
+                score_pct = (correct_q / total_q) * 100
+            time_taken = quiz.get('time_taken', 0) or 0
             history_data.append({
-                'תאריך': datetime.fromisoformat(quiz['timestamp']).strftime('%d/%m/%Y %H:%M'),
+                'תאריך': dt.strftime('%d/%m/%Y %H:%M'),
                 'קטגוריה': quiz.get('category', 'כללי'),
                 'רמת קושי': quiz.get('difficulty', 'כללי'),
-                'שאלות': f"{quiz['correct_answers']}/{quiz['total_questions']}",
-                'ציון': f"{quiz['score_percentage']:.0f}/100",
-                'זמן': f"{quiz['time_taken']//60}:{quiz['time_taken']%60:02d}"
+                'שאלות': f"{correct_q}/{total_q}",
+                'ציון': f"{(score_pct or 0):.0f}/100",
+                'זמן': f"{int(time_taken)//60}:{int(time_taken)%60:02d}"
             })
         
         df = pd.DataFrame(history_data)
