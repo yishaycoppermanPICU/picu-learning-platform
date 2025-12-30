@@ -481,15 +481,13 @@ if st.session_state.logged_in:
             "desc": "חומרי למידה מקצועיים ומעודכנים",
             "svg": """
                 <svg width='56' height='56' viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                    <rect x='18' y='24' width='84' height='72' rx='10' stroke='#1f2f3d' stroke-width='5' opacity='0.9'/>
-                    <path d='M24 44h72' stroke='#0d8a7b' stroke-width='5' stroke-linecap='round'/>
-                    <path d='M36 86l12-18 10 10 14-22 12 14 10-18' stroke='#f5a524' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/>
-                    <circle cx='36' cy='86' r='4' fill='#1f2f3d'/>
-                    <circle cx='48' cy='68' r='4' fill='#1f2f3d'/>
-                    <circle cx='58' cy='78' r='4' fill='#1f2f3d'/>
-                    <circle cx='72' cy='56' r='4' fill='#1f2f3d'/>
-                    <circle cx='84' cy='70' r='4' fill='#1f2f3d'/>
-                    <circle cx='94' cy='52' r='4' fill='#1f2f3d'/>
+                    <rect x='22' y='18' width='24' height='84' rx='6' fill='#1f2f3d' opacity='0.9'/>
+                    <rect x='50' y='22' width='24' height='80' rx='6' fill='#0d8a7b' opacity='0.9'/>
+                    <rect x='78' y='28' width='20' height='74' rx='6' fill='#f5a524' opacity='0.9'/>
+                    <path d='M22 36h24M22 52h24M50 46h24M78 54h20' stroke='white' stroke-width='4' stroke-linecap='round' opacity='0.9'/>
+                    <circle cx='34' cy='26' r='3' fill='white'/>
+                    <circle cx='62' cy='30' r='3' fill='white'/>
+                    <circle cx='88' cy='38' r='3' fill='white'/>
                 </svg>
             """,
             "page": "pages/1_ספריית_תוכן.py"
@@ -499,13 +497,15 @@ if st.session_state.logged_in:
             "desc": "מעקב התקדמות וסטטיסטיקות",
             "svg": """
                 <svg width='56' height='56' viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                    <rect x='24' y='20' width='20' height='80' rx='3' fill='#1ab0a0' opacity='0.85'/>
-                    <rect x='48' y='24' width='20' height='76' rx='3' fill='#1f2f3d' opacity='0.9'/>
-                    <rect x='72' y='30' width='20' height='70' rx='3' fill='#0d8a7b' opacity='0.9'/>
-                    <path d='M26 42h16M26 54h16M50 50h16M74 58h16' stroke='white' stroke-width='3' stroke-linecap='round' opacity='0.9'/>
-                    <circle cx='32' cy='32' r='3' fill='white'/>
-                    <circle cx='56' cy='36' r='3' fill='white'/>
-                    <circle cx='80' cy='42' r='3' fill='white'/>
+                    <rect x='20' y='26' width='80' height='68' rx='10' stroke='#1f2f3d' stroke-width='5' opacity='0.9'/>
+                    <path d='M28 46h64' stroke='#0d8a7b' stroke-width='5' stroke-linecap='round'/>
+                    <path d='M40 88l12-18 10 10 14-22 12 14 8-18' stroke='#f5a524' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/>
+                    <circle cx='40' cy='88' r='4' fill='#1f2f3d'/>
+                    <circle cx='52' cy='70' r='4' fill='#1f2f3d'/>
+                    <circle cx='62' cy='80' r='4' fill='#1f2f3d'/>
+                    <circle cx='76' cy='58' r='4' fill='#1f2f3d'/>
+                    <circle cx='88' cy='72' r='4' fill='#1f2f3d'/>
+                    <circle cx='96' cy='54' r='4' fill='#1f2f3d'/>
                 </svg>
             """,
             "page": "pages/3_סטטיסטיקה.py"
