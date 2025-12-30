@@ -146,8 +146,8 @@ def get_progress_badges_html(completed_weeks, total_badges):
         {'weeks': 20, 'badge': 'champion', 'reached': completed_weeks >= 20}
     ]
     
-    html = '<div style="margin: 1rem 0; padding: 1rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px;">'
-    html += '<div style="display:flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;">'
+    html = '<div style="margin: 1rem 0; padding: 1rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; direction: rtl;">'
+    html += '<div style="display:flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: flex-start; direction: rtl;">'
     
     for milestone in milestones:
         badge = BADGE_TYPES[milestone['badge']]

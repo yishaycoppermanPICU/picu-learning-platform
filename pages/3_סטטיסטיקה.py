@@ -44,9 +44,9 @@ st.markdown("""
     /* tabs visibility */
     .stTabs [data-baseweb="tab-list"] {
         gap: 0.5rem;
-        flex-direction: row-reverse;
+        flex-direction: row;
         direction: rtl;
-        justify-content: flex-end;
+        justify-content: flex-start;
     }
     .stTabs [data-baseweb="tab"] {
         background: #f1f5f9;
@@ -55,7 +55,13 @@ st.markdown("""
         padding: 0.5rem 0.85rem;
         border: 1px solid #d7dde4;
         text-align: right;
+        direction: rtl;
     }
+    .stTabs [data-baseweb="tab"]:nth-child(1) { order: 5; }
+    .stTabs [data-baseweb="tab"]:nth-child(2) { order: 4; }
+    .stTabs [data-baseweb="tab"]:nth-child(3) { order: 3; }
+    .stTabs [data-baseweb="tab"]:nth-child(4) { order: 2; }
+    .stTabs [data-baseweb="tab"]:nth-child(5) { order: 1; }
     .stTabs [aria-selected="true"] {
         background: linear-gradient(135deg, #0d8a7b 0%, #1ab0a0 100%) !important;
         color: white !important;
@@ -205,7 +211,7 @@ with tab2:
                     weekly_stats['completed_weeks'],
                     weekly_stats['total_badges']
                 ),
-                height=220,
+                height=260,
                 scrolling=False
             )
             

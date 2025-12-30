@@ -183,17 +183,17 @@ def get_common_styles():
 
     .app-header-logo {
         max-width: 300px;
-        width: 28vw;
+        width: 30vw;
         min-width: 170px;
-        margin-top: -12px;
-        align-self: flex-start;
+        margin-top: 0;
+        align-self: center;
     }
 
     .app-header-logo img {
         width: 100%;
         height: auto;
         display: block;
-        max-height: 78px;
+        max-height: 100px;
         object-fit: contain;
     }
 
@@ -222,26 +222,27 @@ def get_common_styles():
 
     @media (max-width: 768px) {
         .app-header-bar {
-            flex-direction: column-reverse;
+            flex-direction: column;
             align-items: flex-start;
-            gap: 0.35rem;
-            padding-top: 2px;
+            gap: 0.5rem;
+            padding-top: 4px;
         }
         .app-header-logo {
-            width: 62vw;
-            max-width: 260px;
-            min-width: 150px;
+            order: -1;
+            width: 74vw;
+            max-width: 320px;
+            min-width: 180px;
             margin-top: 0;
         }
-        .app-header-logo img { max-height: 82px; }
+        .app-header-logo img { max-height: 110px; }
         .app-header-text { margin-top: 0; }
-        .hero-topline { font-size: 1.55rem; line-height: 1.0; }
-        .hero-tagline { font-size: 0.9rem; }
+        .hero-topline { font-size: 1.6rem; line-height: 1.05; }
+        .hero-tagline { font-size: 1rem; }
     }
 
     @media (min-width: 769px) {
         .app-header-bar { align-items: center; }
-        .app-header-logo { margin-top: -10px; }
+        .app-header-logo { margin-top: 0; }
     }
 
     @media (max-width: 600px) {
