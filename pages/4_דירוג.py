@@ -191,7 +191,7 @@ with col2:
         names='מוסד',
         title='התפלגות משתתפים - חמשת המובילים'
     )
-    fig.update_layout(height=400)
+    fig.update_layout(height=400, title_x=1, title_xanchor='right')
     st.plotly_chart(fig, use_container_width=True)
 
 # הוסף מידע נוסף

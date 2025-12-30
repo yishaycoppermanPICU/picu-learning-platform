@@ -386,7 +386,7 @@ if st.session_state.logged_in:
         </div>
         <div style="margin: 1.5rem 0; padding: 1.5rem; background: #F8F9FA; border-radius: 8px; border: 1px solid #EEEEEE;">
             <h3 style="color: #00796B; text-align: center; margin: 0 0 0.5rem 0; font-size: 1.4rem; font-weight: 600;">{week_title}</h3>
-            <p style="color: #333333; text-align: center; line-height: 1.6; font-size: 1.05rem; margin: 0;">{week_desc}</p>
+            <p style="color: #0f172a; text-align: center; line-height: 1.7; font-size: 1.2rem; margin: 0; font-weight: 700;">{week_desc}</p>
         </div>
         <div style="text-align: center;">
             <span style="background: {completion_color}; color: white; padding: 0.5rem 1.5rem; border-radius: 6px; font-weight: 600; font-size: 1rem;">{completion_badge}</span>

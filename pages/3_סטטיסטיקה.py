@@ -124,13 +124,14 @@ with tab1:
         padding: 1.5rem;
         border-radius: 12px;
         border-right: 5px solid {status_color};
+        color: #0f172a;
     ">
         <h3 style="margin: 0 0 1rem 0;">📅 תוכן השבוע הנוכחי</h3>
         <div style="display: flex; align-items: center; gap: 1rem;">
             <span style="font-size: 3rem;">{weekly_content['icon']}</span>
             <div>
-                <h4 style="margin: 0;">{weekly_content['title']}</h4>
-                <p style="color: #6c757d; margin: 0.3rem 0;">{weekly_content['description']}</p>
+                <h4 style="margin: 0; color: #0f172a;">{weekly_content['title']}</h4>
+                <p style="color: #0f172a; margin: 0.3rem 0; font-weight: 600;">{weekly_content['description']}</p>
                 <span style="
                     background: {status_color};
                     color: white;
