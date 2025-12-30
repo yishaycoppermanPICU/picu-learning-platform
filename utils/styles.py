@@ -229,16 +229,16 @@ def get_common_styles():
         }
         .app-header-logo {
             order: -1;
-            width: 92vw;
-            max-width: 420px;
+            width: 96vw;
+            max-width: 540px;
             min-width: 170px;
             margin-top: 10px;
             margin-bottom: 10px;
         }
-        .app-header-logo img { max-height: clamp(240px, 28vh, 340px); }
+        .app-header-logo img { max-height: clamp(400px, 70vh, 640px); }
         .app-header-text { margin-top: 0; }
-        .hero-topline { font-size: 0.95rem; line-height: 1.08; white-space: nowrap; }
-        .hero-tagline { font-size: 0.84rem; }
+        .hero-topline { font-size: 0.48rem; line-height: 1.1; white-space: nowrap; }
+        .hero-tagline { font-size: 0.78rem; }
     }
 
     @media (min-width: 769px) {
