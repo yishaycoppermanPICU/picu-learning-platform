@@ -50,7 +50,9 @@ def get_common_styles():
     }
     
     /* כפתור פתיחת סיידבר - רק הכפתור האמיתי */
-    button[data-testid="collapsedControl"] {
+    button[data-testid="collapsedControl"],
+    button[kind="header"],
+    section[data-testid="stSidebar"] button[kind="header"] {
         background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%) !important;
         border: none !important;
         border-radius: 12px !important;
@@ -81,12 +83,20 @@ def get_common_styles():
     button[data-testid="collapsedControl"] [data-icon],
     button[data-testid="collapsedControl"] > div,
     button[data-testid="collapsedControl"] > span,
+    button[kind="header"] *,
+    button[kind="header"] span,
+    button[kind="header"] svg,
+    section[data-testid="stSidebar"] button *,
+    section[data-testid="stSidebar"] button span,
+    section[data-testid="stSidebar"] button svg,
     button[data-testid="collapsedControl"] path,
     button[data-testid="collapsedControl"]::after {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
-        font-size: 0 !important;
+        font-size: 0 !important;,
+    button[kind="header"]::before,
+    section[data-testid="stSidebar"] button[kind="header"]::before
         width: 0 !important;
         height: 0 !important;
         position: absolute !important;
@@ -1279,34 +1289,50 @@ document.addEventListener('DOMContentLoaded', function() {
 // תיקון אייקוני חצים אחרי טעינת הדף
 (function() {
     function fixIcons() {
-        // תיקון כפתור סיידבר
-        const sidebarBtn = document.querySelector('button[data-testid="collapsedControl"]');
-        if (sidebarBtn) {
-            // הסתרת כל התוכן הפנימי
-            sidebarBtn.innerHTML = '';
-            sidebarBtn.style.fontSize = '0';
-            sidebarBtn.style.textIndent = '-9999px';
-        }
+        // תיקון כפתור סיידבר - כל הסוגים האפשריים
+        const sidebarBtns = document.querySelectorAll(
+            'button[data-testid="collapsedControl"], button[kind="header"], section[data-testid="stSidebar"] button'
+        );
+        sidebarBtns.forEach(btn => {
+            if (btn) {
+                // הסתרת כל התוכן הפנימי
+                const children = btn.querySelectorAll('*');
+                children.forEach(child => {
+                    child.style.display = 'none';
+                    child.style.visibility = 'hidden';
+                    child.style.fontSize = '0';
+                });
+                btn.style.fontSize = '0';
+                btn.style.textIndent = '-9999px';
+                btn.textContent = '';
+            }
+        });
         
         // תיקון expanders - הסתרת SVG
-        const expanders = document.querySelectorAll('[data-testid="stExpander"] svg');
-        expanders.forEach(svg => {
+        const expanderSvgs = document.querySelectorAll('[data-testid="stExpander"] svg');
+        expanderSvgs.forEach(svg => {
             svg.style.display = 'none';
             svg.style.visibility = 'hidden';
+            svg.style.opacity = '0';
         });
     }
     
     // הרצה ראשונית
-    fixIcons();
+    setTimeout(fixIcons, 100);
     
     // הרצה אחרי שהדף נטען לגמרי
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', fixIcons);
+        document.addEventListener('DOMContentLoaded', () => setTimeout(fixIcons, 100));
+    } else {
+        setTimeout(fixIcons, 100);
     }
     
     // הרצה כל פעם שמשהו משתנה (למקרה ש-Streamlit מרנדר מחדש)
-    const observer = new MutationObserver(fixIcons);
+    const observer = new MutationObserver(() => setTimeout(fixIcons, 50));
     observer.observe(document.body, { childList: true, subtree: true });
+    
+    // הרצה נוספת אחרי 1 שניה (אחרי שה-RTL עושה את שלו)
+    setTimeout(fixIcons, 1000);
 })();
 </script>
 """
