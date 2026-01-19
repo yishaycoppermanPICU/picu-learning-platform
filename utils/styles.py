@@ -73,12 +73,14 @@ def get_common_styles():
         box-shadow: 0 6px 20px rgba(13, 138, 123, 0.5) !important;
     }
     
-    /* הסתרה מוחלטת של כל התוכן המקורי */
+    /* הסתרה מוחלטת של כל התוכן המקורי - חזק יותר */
     button[data-testid="collapsedControl"] *,
     button[data-testid="collapsedControl"] span,
     button[data-testid="collapsedControl"] svg,
     button[data-testid="collapsedControl"] [data-icon],
-    button[data-testid="collapsedControl"] > div {
+    button[data-testid="collapsedControl"] > div,
+    button[data-testid="collapsedControl"] > span,
+    button[data-testid="collapsedControl"] path {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
@@ -88,15 +90,22 @@ def get_common_styles():
         position: absolute !important;
         left: -9999px !important;
     }
+    
+    /* הסתרת הטקסט עצמו */
+    button[data-testid="collapsedControl"] {
+        text-indent: -9999px !important;
+        line-height: 0 !important;
+    }
 
-    /* אייקון תפריט (Material Icon) כדי למנוע טקסט ke */
+    /* אייקון תפריט (חץ Unicode פשוט) כדי למנוע טקסט שבור */
     button[data-testid="collapsedControl"]::before {
-        content: "keyboard_double_arrow_left" !important;
+        content: "☰" !important;
+        text-indent: 0 !important;
         position: absolute !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
-        font-size: 24px !important;
+        font-size: 28px !important;
         font-weight: 400 !important;
         color: white !important;
         line-height: 1 !important;
@@ -104,8 +113,6 @@ def get_common_styles():
         visibility: visible !important;
         opacity: 1 !important;
         z-index: 999 !important;
-        font-family: 'Material Icons', 'Material Symbols Outlined' !important;
-        -webkit-font-feature-settings: 'liga' !important;
     }
     
     /* ================= RTL & Basic Layout ================= */
@@ -269,6 +276,55 @@ def get_common_styles():
     .material-icons, .material-symbols-outlined {
         font-family: 'Material Icons', 'Material Symbols Outlined' !important;
         -webkit-font-feature-settings: 'liga';
+    }
+    
+    /* ================= תיקון אייקוני Expander - חצים במקום טקסט ================= */
+    
+    /* הסתרת כל הטקסט והאייקונים המקוריים */
+    [data-testid="stExpander"] svg,
+    [data-testid="stExpander"] details summary svg,
+    [data-testid="stExpander"] summary svg,
+    .streamlit-expanderHeader svg {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+    
+    /* עיצוב החץ */
+    [data-testid="stExpander"] details summary::before,
+    [data-testid="stExpander"] summary::before,
+    details[data-testid="stExpander"] > summary::before,
+    .streamlit-expanderHeader::before {
+        font-family: 'Material Icons', 'Material Symbols Outlined' !important;
+        -webkit-font-feature-settings: 'liga' !important;
+        font-feature-settings: 'liga' !important;
+        font-size: 1.5rem !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
+        margin-left: 0.5rem !important;
+        line-height: 1 !important;
+        color: inherit !important;
+    }
+    
+    /* החלפת הטקסט בחץ Unicode פשוט שעובד תמיד */
+    [data-testid="stExpander"] details[open] summary::before,
+    details[data-testid="stExpander"][open] > summary::before {
+        content: "▼" !important;
+    }
+    
+    [data-testid="stExpander"] details:not([open]) summary::before,
+    details[data-testid="stExpander"]:not([open]) > summary::before {
+        content: "◀" !important;
+    }
+    
+    /* סידור מחדש של הסאמרי */
+    [data-testid="stExpander"] summary,
+    [data-testid="stExpander"] details summary {
+        display: flex !important;
+        align-items: center !important;
+        direction: rtl !important;
     }
     
     h1 {
