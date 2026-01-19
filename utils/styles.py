@@ -65,7 +65,8 @@ def get_common_styles():
         overflow: hidden !important;
         font-size: 0 !important;
         color: transparent !important;
-        font-family: 'Material Icons', 'Material Symbols Outlined' !important;
+        text-indent: -9999px !important;
+        line-height: 0 !important;
     }
     
     button[data-testid="collapsedControl"]:hover {
@@ -80,7 +81,8 @@ def get_common_styles():
     button[data-testid="collapsedControl"] [data-icon],
     button[data-testid="collapsedControl"] > div,
     button[data-testid="collapsedControl"] > span,
-    button[data-testid="collapsedControl"] path {
+    button[data-testid="collapsedControl"] path,
+    button[data-testid="collapsedControl"]::after {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
@@ -91,12 +93,6 @@ def get_common_styles():
         left: -9999px !important;
     }
     
-    /* הסתרת הטקסט עצמו */
-    button[data-testid="collapsedControl"] {
-        text-indent: -9999px !important;
-        line-height: 0 !important;
-    }
-
     /* אייקון תפריט (חץ Unicode פשוט) כדי למנוע טקסט שבור */
     button[data-testid="collapsedControl"]::before {
         content: "☰" !important;
@@ -106,7 +102,7 @@ def get_common_styles():
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
         font-size: 28px !important;
-        font-weight: 400 !important;
+        font-weight: 700 !important;
         color: white !important;
         line-height: 1 !important;
         display: block !important;
@@ -292,20 +288,31 @@ def get_common_styles():
         height: 0 !important;
     }
     
+    /* הסתרת הטקסט של streamlit עצמו */
+    [data-testid="stExpander"] summary,
+    [data-testid="stExpander"] details summary {
+        font-size: 0 !important;
+    }
+    
+    /* הצגת הטקסט שלנו */
+    [data-testid="stExpander"] summary > *:not(svg),
+    [data-testid="stExpander"] details summary > *:not(svg) {
+        font-size: 1rem !important;
+    }
+    
     /* עיצוב החץ */
     [data-testid="stExpander"] details summary::before,
     [data-testid="stExpander"] summary::before,
     details[data-testid="stExpander"] > summary::before,
     .streamlit-expanderHeader::before {
-        font-family: 'Material Icons', 'Material Symbols Outlined' !important;
-        -webkit-font-feature-settings: 'liga' !important;
-        font-feature-settings: 'liga' !important;
-        font-size: 1.5rem !important;
+        font-family: Arial, sans-serif !important;
+        font-size: 1.2rem !important;
         display: inline-block !important;
         vertical-align: middle !important;
         margin-left: 0.5rem !important;
         line-height: 1 !important;
         color: inherit !important;
+        font-weight: 700 !important;
     }
     
     /* החלפת הטקסט בחץ Unicode פשוט שעובד תמיד */
