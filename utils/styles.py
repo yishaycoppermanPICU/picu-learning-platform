@@ -114,6 +114,7 @@ def get_common_styles():
     /* ================= RTL & Basic Layout ================= */
     .stApp {
         direction: rtl;
+
         background: linear-gradient(135deg, #f8fbff 0%, var(--bg) 100%);
         font-family: 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
@@ -1096,6 +1097,67 @@ def get_common_styles():
         }
     }
 </style>
+
+<script>
+// תיקון חזק לאייקונים - רץ מיד ואחרי כל עדכון
+(function() {
+    function fixIcons() {
+        // תיקון כפתור סיידבר
+        const sidebarBtn = document.querySelector('button[data-testid="collapsedControl"]');
+        if (sidebarBtn) {
+            // הסרת כל הטקסט הפנימי
+            const textNodes = [];
+            sidebarBtn.childNodes.forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    textNodes.push(node);
+                }
+            });
+            textNodes.forEach(node => node.remove());
+            
+            // וידוא שהכפתור ריק מטקסט
+            if (sidebarBtn.textContent && sidebarBtn.textContent.trim() !== '') {
+                sidebarBtn.textContent = '';
+            }
+        }
+        
+        // תיקון expanders
+        document.querySelectorAll('[data-testid="stExpander"] summary').forEach(summary => {
+            // מציאת SVG והסתרתו
+            const svg = summary.querySelector('svg');
+            if (svg) {
+                svg.style.display = 'none';
+                svg.style.visibility = 'hidden';
+                svg.style.width = '0';
+                svg.style.height = '0';
+            }
+        });
+    }
+    
+    // הרצה מיידית
+    fixIcons();
+    
+    // הרצה אחרי טעינת DOM
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fixIcons);
+    }
+    
+    // הרצה אחרי שינויים בדף
+    const observer = new MutationObserver(fixIcons);
+    observer.observe(document.body, { 
+        childList: true, 
+        subtree: true,
+        characterData: true
+    });
+    
+    // הרצה כל 100ms בשנייה הראשונה (לוודא שתופס את ה-RTL shift)
+    let counter = 0;
+    const interval = setInterval(() => {
+        fixIcons();
+        counter++;
+        if (counter >= 10) clearInterval(interval);
+    }, 100);
+})();
+</script>
 """
 
 
@@ -1103,6 +1165,65 @@ def get_collapsible_section_script():
     """JavaScript לטיפול בסקשנים מתקפלים"""
     return """
 <script>
+// תיקון חזק לאייקונים - רץ מיד ואחרי כל עדכון
+(function() {
+    function fixIcons() {
+        // תיקון כפתור סיידבר
+        const sidebarBtn = document.querySelector('button[data-testid="collapsedControl"]');
+        if (sidebarBtn) {
+            // הסרת כל הטקסט הפנימי
+            const textNodes = [];
+            sidebarBtn.childNodes.forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    textNodes.push(node);
+                }
+            });
+            textNodes.forEach(node => node.remove());
+            
+            // וידוא שהכפתור ריק מטקסט
+            if (sidebarBtn.textContent && sidebarBtn.textContent.trim() !== '') {
+                sidebarBtn.textContent = '';
+            }
+        }
+        
+        // תיקון expanders
+        document.querySelectorAll('[data-testid="stExpander"] summary').forEach(summary => {
+            // מציאת SVG והסתרתו
+            const svg = summary.querySelector('svg');
+            if (svg) {
+                svg.style.display = 'none';
+                svg.style.visibility = 'hidden';
+                svg.style.width = '0';
+                svg.style.height = '0';
+            }
+        });
+    }
+    
+    // הרצה מיידית
+    fixIcons();
+    
+    // הרצה אחרי טעינת DOM
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fixIcons);
+    }
+    
+    // הרצה אחרי שינויים בדף
+    const observer = new MutationObserver(fixIcons);
+    observer.observe(document.body, { 
+        childList: true, 
+        subtree: true,
+        characterData: true
+    });
+    
+    // הרצה כל 100ms בשנייה הראשונה (לוודא שתופס את ה-RTL shift)
+    let counter = 0;
+    const interval = setInterval(() => {
+        fixIcons();
+        counter++;
+        if (counter >= 10) clearInterval(interval);
+    }, 100);
+})();
+
 function toggleSection(sectionId) {
     const content = document.getElementById('content-' + sectionId);
     const icon = document.getElementById('icon-' + sectionId);
@@ -1153,4 +1274,39 @@ document.addEventListener('DOMContentLoaded', function() {
 ">
     © כל הזכויות שמורות לישי קופרמן
 </div>
+
+<script>
+// תיקון אייקוני חצים אחרי טעינת הדף
+(function() {
+    function fixIcons() {
+        // תיקון כפתור סיידבר
+        const sidebarBtn = document.querySelector('button[data-testid="collapsedControl"]');
+        if (sidebarBtn) {
+            // הסתרת כל התוכן הפנימי
+            sidebarBtn.innerHTML = '';
+            sidebarBtn.style.fontSize = '0';
+            sidebarBtn.style.textIndent = '-9999px';
+        }
+        
+        // תיקון expanders - הסתרת SVG
+        const expanders = document.querySelectorAll('[data-testid="stExpander"] svg');
+        expanders.forEach(svg => {
+            svg.style.display = 'none';
+            svg.style.visibility = 'hidden';
+        });
+    }
+    
+    // הרצה ראשונית
+    fixIcons();
+    
+    // הרצה אחרי שהדף נטען לגמרי
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fixIcons);
+    }
+    
+    // הרצה כל פעם שמשהו משתנה (למקרה ש-Streamlit מרנדר מחדש)
+    const observer = new MutationObserver(fixIcons);
+    observer.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
 """
