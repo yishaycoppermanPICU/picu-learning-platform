@@ -62,30 +62,45 @@ if 'user' not in st.session_state:
     st.session_state.user = None
 if 'user_scores' not in st.session_state:
     st.session_state.user_scores = []
+if 'auto_login_attempted' not in st.session_state:
+    st.session_state.auto_login_attempted = False
+if 'auto_login_success' not in st.session_state:
+    st.session_state.auto_login_success = False
 
 # בדיקה אם יש משתמש שמור (שחזור לאחר רענון)
-try:
-    # טעינת המייל השמור מ-cookies
-    saved_email = cookie_manager.get('user_email')
-    
-    if saved_email and not st.session_state.logged_in:
-        # Try to restore user session
-        existing_user = get_user_by_email(saved_email)
+if not st.session_state.logged_in and not st.session_state.auto_login_attempted:
+    try:
+        # טעינת המייל השמור מ-cookies
+        saved_email = cookie_manager.get('user_email')
         
-        if existing_user:
-            # Restore session
-            username = saved_email.split('@')[0].replace('.', '_').replace('-', '_')
-            st.session_state.logged_in = True
-            st.session_state.user = {
-                'username': username,
-                'full_name': existing_user.get('name', ''),
-                'email': saved_email,
-                'institution': existing_user.get('hospital', ''),
-                'institutions': {'name': existing_user.get('hospital', '')}
-            }
-            update_last_login(saved_email)
-except:
-    pass
+        if saved_email:
+            # Try to restore user session
+            existing_user = get_user_by_email(saved_email)
+            
+            if existing_user:
+                # Restore session
+                username = saved_email.split('@')[0].replace('.', '_').replace('-', '_')
+                st.session_state.logged_in = True
+                st.session_state.user = {
+                    'username': username,
+                    'full_name': existing_user.get('name', ''),
+                    'email': saved_email,
+                    'institution': existing_user.get('hospital', ''),
+                    'institutions': {'name': existing_user.get('hospital', '')}
+                }
+                update_last_login(saved_email)
+                # סימון שניסינו login אוטומטי והוא הצליח
+                st.session_state.auto_login_attempted = True
+                st.session_state.auto_login_success = True
+                # רענון הדף כדי להציג את המשתמש המחובר
+                st.rerun()
+        else:
+            # אם אין cookie, סמן שניסינו
+            st.session_state.auto_login_attempted = True
+    except Exception as e:
+        # אם יש שגיאה, סמן שניסינו ואל תנסה שוב
+        st.session_state.auto_login_attempted = True
+        pass
 
 # כותרת ראשית - לוגו ללא רקע, מיושר לימין (RTL)
 st.markdown("""
@@ -239,6 +254,7 @@ with st.sidebar:
                 institution = st.text_input("הכנס שם מוסד:")
             
             agree = st.checkbox("מאשר/ת שימוש למטרות למידה ✓")
+            remember_me = st.checkbox("💾 זכור אותי (הישאר מחובר למשך 30 יום)", value=True)
             
             # כפתור - אימוג'י בסוף
             submitted = st.form_submit_button("🔐 התחבר למערכת", type="primary", use_container_width=True)
@@ -250,11 +266,18 @@ with st.sidebar:
                     
                     username = email.split('@')[0].replace('.', '_').replace('-', '_')
                     
-                    # שמירת המייל ב-cookies (נשמר 30 ימים)
-                    try:
-                        cookie_manager.set('user_email', email, expires_at=datetime.now() + pd.Timedelta(days=30))
-                    except:
-                        pass  # אם יש בעיה עם cookies, ממשיכים בלי
+                    # שמירת המייל ב-cookies (נשמר 30 ימים) - רק אם המשתמש רוצה
+                    if remember_me:
+                        try:
+                            cookie_manager.set('user_email', email, expires_at=datetime.now() + pd.Timedelta(days=30))
+                        except:
+                            pass  # אם יש בעיה עם cookies, ממשיכים בלי
+                    else:
+                        # אם לא רוצה להישמר, מוחקים cookie אם קיים
+                        try:
+                            cookie_manager.delete('user_email')
+                        except:
+                            pass
                     
                     # עדכון session state מיידי
                     st.session_state.logged_in = True
@@ -315,17 +338,30 @@ with st.sidebar:
             st.write("- המידע נשמר לפי המייל שלך")
             st.write("- אפשרות לכניסה עם Google בקרוב")
         
-        with st.expander("✨ שמירה אוטומטית של פרטים"):
-            st.write("**המערכת זוכרת אותך!**")
-            st.write("- הזן את המייל שלך")
-            st.write("- אם התחברת בעבר, הפרטים ימולאו אוטומטית")
-            st.write("- פשוט אשר ולחץ התחבר")
-            st.write("- חוסך זמן בכל כניסה למערכת 🚀")
+        with st.expander("✨ זכור אותי - איך זה עובד?"):
+            st.write("**כשמסמנים 'זכור אותי':**")
+            st.write("- המייל שלך נשמר במכשיר למשך 30 יום")
+            st.write("- בפעם הבאה שתיכנס, תתחבר אוטומטית")
+            st.write("- לא תצטרך להזין את הפרטים מחדש")
+            st.write("- אם תלחץ 'התנתק', השמירה תימחק")
+            st.write("")
+            st.write("**אבטחה:**")
+            st.write("- המידע נשמר רק במכשיר שלך (לא בשרת)")
+            st.write("- מומלץ להשתמש רק במכשיר אישי")
+            st.write("- תמיד ניתן להתנתק ולמחוק את השמירה 🔒")
     
     else:
         # משתמש מחובר
         user = st.session_state.user
-        st.success(f"מחובר: {user.get('full_name', 'משתמש')} ✓")
+        
+        # הצגת הודעת welcome אם התחבר אוטומטית 
+        if st.session_state.get('auto_login_success'):
+            st.success(f"👋 ברוכים השבים, {user.get('full_name', 'משתמש')}!")
+            st.info("💾 התחברת אוטומטית - המערכת זכרה אותך")
+            # איפוס הדגל כדי שההודעה לא תופיע שוב
+            st.session_state.auto_login_success = False
+        else:
+            st.success(f"מחובר: {user.get('full_name', 'משתמש')} ✓")
         
         if 'institutions' in user and user['institutions']:
             st.info(f"מוסד: {user['institutions'].get('name', '')} 🏥")
@@ -334,10 +370,12 @@ with st.sidebar:
             st.switch_page("pages/3_סטטיסטיקה.py")
         
         if st.button("🚪 התנתק", use_container_width=True):
-            # מחיקת המייל מה-cookies
+            # מחיקת המייל מה-cookies כדי לא להתחבר אוטומטית בפעם הבאה
             cookie_manager.delete('user_email')
             st.session_state.logged_in = False
             st.session_state.user = None
+            st.session_state.auto_login_attempted = False
+            st.session_state.auto_login_success = False
             st.rerun()
     
     st.divider()
