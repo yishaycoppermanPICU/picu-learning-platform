@@ -53,7 +53,7 @@ st.markdown('<link href="https://fonts.googleapis.com/icon?family=Material+Icons
 st.markdown(get_common_styles(), unsafe_allow_html=True)
 
 # יצירת cookie manager לשמירת מייל
-cookie_manager = stx.CookieManager()
+cookie_manager = stx.CookieManager(key='picu_cookies')
 
 # אתחול session state
 if 'logged_in' not in st.session_state:
@@ -66,14 +66,26 @@ if 'auto_login_attempted' not in st.session_state:
     st.session_state.auto_login_attempted = False
 if 'auto_login_success' not in st.session_state:
     st.session_state.auto_login_success = False
+if 'cookies_ready' not in st.session_state:
+    st.session_state.cookies_ready = False
+
+# המתנה לאתחול ה-cookie manager (נדרש פעם אחת)
+if not st.session_state.cookies_ready:
+    try:
+        # ניסיון לקרוא מה-cookie manager - אם זה עובד, הוא מוכן
+        _ = cookie_manager.get('test')
+        st.session_state.cookies_ready = True
+    except:
+        # אם נכשל, נסמן שהוא מוכן בכל זאת כדי לא לתקוע
+        st.session_state.cookies_ready = True
 
 # בדיקה אם יש משתמש שמור (שחזור לאחר רענון)
-if not st.session_state.logged_in and not st.session_state.auto_login_attempted:
+if not st.session_state.logged_in and not st.session_state.auto_login_attempted and st.session_state.cookies_ready:
     try:
         # טעינת המייל השמור מ-cookies
-        saved_email = cookie_manager.get('user_email')
+        saved_email = cookie_manager.get('picu_user_email')
         
-        if saved_email:
+        if saved_email and saved_email != 'undefined':
             # Try to restore user session
             existing_user = get_user_by_email(saved_email)
             
@@ -94,9 +106,9 @@ if not st.session_state.logged_in and not st.session_state.auto_login_attempted:
                 st.session_state.auto_login_success = True
                 # רענון הדף כדי להציג את המשתמש המחובר
                 st.rerun()
-        else:
-            # אם אין cookie, סמן שניסינו
-            st.session_state.auto_login_attempted = True
+        
+        # סמן שניסינו בכל מקרה
+        st.session_state.auto_login_attempted = True
     except Exception as e:
         # אם יש שגיאה, סמן שניסינו ואל תנסה שוב
         st.session_state.auto_login_attempted = True
@@ -174,8 +186,13 @@ with st.sidebar:
         
         # Initialize session state for form fields
         if 'form_email' not in st.session_state:
-            # נסה לטעון מייל שמור מ-cookies
-            saved_email = cookie_manager.get('user_email')
+            # נסה לטעון מייל שמור מ-cookies או מ-session state
+            saved_email = st.session_state.get('saved_email')
+            if not saved_email:
+                try:
+                    saved_email = cookie_manager.get('picu_user_email')
+                except:
+                    saved_email = None
             st.session_state.form_email = saved_email if saved_email else ""
         if 'form_name' not in st.session_state:
             st.session_state.form_name = ""
@@ -266,21 +283,28 @@ with st.sidebar:
                     
                     username = email.split('@')[0].replace('.', '_').replace('-', '_')
                     
+                    # עדכון session state מיידי
+                    st.session_state.logged_in = True
+                    
                     # שמירת המייל ב-cookies (נשמר 30 ימים) - רק אם המשתמש רוצה
                     if remember_me:
                         try:
-                            cookie_manager.set('user_email', email, expires_at=datetime.now() + pd.Timedelta(days=30))
-                        except:
-                            pass  # אם יש בעיה עם cookies, ממשיכים בלי
+                            # שימוש ב-max_age (בשניות) - 30 ימים = 2,592,000 שניות
+                            import time
+                            cookie_manager.set('picu_user_email', email, key='set_email_cookie', max_age=2592000)
+                            # שמירה גם ב-session state לשימוש עתידי
+                            st.session_state.saved_email = email
+                        except Exception as e:
+                            # במקרה של שגיאה, שמור ב-session state בלבד
+                            st.session_state.saved_email = email
                     else:
                         # אם לא רוצה להישמר, מוחקים cookie אם קיים
                         try:
-                            cookie_manager.delete('user_email')
+                            cookie_manager.delete('picu_user_email', key='delete_email_cookie')
+                            if 'saved_email' in st.session_state:
+                                del st.session_state.saved_email
                         except:
                             pass
-                    
-                    # עדכון session state מיידי
-                    st.session_state.logged_in = True
                     
                     if DB_CONNECTED:
                         try:
@@ -371,11 +395,17 @@ with st.sidebar:
         
         if st.button("🚪 התנתק", use_container_width=True):
             # מחיקת המייל מה-cookies כדי לא להתחבר אוטומטית בפעם הבאה
-            cookie_manager.delete('user_email')
+            try:
+                cookie_manager.delete('picu_user_email', key='logout_delete_cookie')
+            except:
+                pass
             st.session_state.logged_in = False
             st.session_state.user = None
             st.session_state.auto_login_attempted = False
             st.session_state.auto_login_success = False
+            st.session_state.cookies_ready = False
+            if 'saved_email' in st.session_state:
+                del st.session_state.saved_email
             st.rerun()
     
     st.divider()
