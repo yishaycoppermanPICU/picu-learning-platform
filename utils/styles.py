@@ -287,11 +287,9 @@ def get_common_styles():
     
     /* ================= תיקון אייקוני Expander - חצים במקום טקסט ================= */
     
-    /* הסתרת כל הטקסט והאייקונים המקוריים */
+    /* הסתרה טוטאלית של SVG */
     [data-testid="stExpander"] svg,
-    [data-testid="stExpander"] details summary svg,
-    [data-testid="stExpander"] summary svg,
-    .streamlit-expanderHeader svg {
+    [data-testid="stExpander"] svg * {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
@@ -299,50 +297,58 @@ def get_common_styles():
         height: 0 !important;
     }
     
-    /* הסתרת הטקסט של streamlit עצמו */
+    /* הסתרת כל הטקסט ב-summary באמצעות קליפינג */
     [data-testid="stExpander"] summary,
-    [data-testid="stExpander"] details summary {
+    [data-testid="stExpander"] details > summary {
+        position: relative !important;
+        color: transparent !important;
         font-size: 0 !important;
-    }
-    
-    /* הצגת הטקסט שלנו */
-    [data-testid="stExpander"] summary > *:not(svg),
-    [data-testid="stExpander"] details summary > *:not(svg) {
-        font-size: 1rem !important;
-    }
-    
-    /* עיצוב החץ */
-    [data-testid="stExpander"] details summary::before,
-    [data-testid="stExpander"] summary::before,
-    details[data-testid="stExpander"] > summary::before,
-    .streamlit-expanderHeader::before {
-        font-family: Arial, sans-serif !important;
-        font-size: 1.2rem !important;
-        display: inline-block !important;
-        vertical-align: middle !important;
-        margin-left: 0.5rem !important;
-        line-height: 1 !important;
-        color: inherit !important;
-        font-weight: 700 !important;
-    }
-    
-    /* החלפת הטקסט בחץ Unicode פשוט שעובד תמיד */
-    [data-testid="stExpander"] details[open] summary::before,
-    details[data-testid="stExpander"][open] > summary::before {
-        content: "▼" !important;
-    }
-    
-    [data-testid="stExpander"] details:not([open]) summary::before,
-    details[data-testid="stExpander"]:not([open]) > summary::before {
-        content: "◀" !important;
-    }
-    
-    /* סידור מחדש של הסאמרי */
-    [data-testid="stExpander"] summary,
-    [data-testid="stExpander"] details summary {
+        line-height: 0 !important;
+        overflow: hidden !important;
         display: flex !important;
         align-items: center !important;
         direction: rtl !important;
+        padding: 0.75rem 1rem !important;
+        cursor: pointer !important;
+        height: auto !important;
+        min-height: 2.5rem !important;
+    }
+    
+    /* החזרת הטקסט של התוכן שלנו בלבד */
+    [data-testid="stExpander"] summary > div:first-child,
+    [data-testid="stExpander"] details > summary > div:first-child {
+        color: var(--navy) !important;
+        font-size: 1.05rem !important;
+        line-height: 1.5 !important;
+        font-weight: 600 !important;
+        display: block !important;
+        flex: 1 !important;
+    }
+    
+    /* החץ שלנו - משמאל */
+    [data-testid="stExpander"] summary::after,
+    [data-testid="stExpander"] details > summary::after {
+        content: "◀" !important;
+        font-family: Arial, Helvetica, sans-serif !important;
+        font-size: 1.4rem !important;
+        font-weight: 700 !important;
+        color: var(--teal) !important;
+        margin-right: 0.75rem !important;
+        margin-left: 0 !important;
+        line-height: 1 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 1.5rem !important;
+        height: 1.5rem !important;
+        transition: transform 0.2s ease !important;
+    }
+    
+    /* החץ כשפתוח */
+    [data-testid="stExpander"] details[open] > summary::after,
+    [data-testid="stExpander"][open] summary::after {
+        content: "▼" !important;
+        transform: none !important;
     }
     
     h1 {
