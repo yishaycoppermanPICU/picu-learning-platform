@@ -90,13 +90,13 @@ def get_common_styles():
     section[data-testid="stSidebar"] button span,
     section[data-testid="stSidebar"] button svg,
     button[data-testid="collapsedControl"] path,
-    button[data-testid="collapsedControl"]::after {
+    button[data-testid="collapsedControl"]::after,
+    button[kind="header"]::before,
+    section[data-testid="stSidebar"] button[kind="header"]::before {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
-        font-size: 0 !important;,
-    button[kind="header"]::before,
-    section[data-testid="stSidebar"] button[kind="header"]::before
+        font-size: 0 !important;
         width: 0 !important;
         height: 0 !important;
         position: absolute !important;
