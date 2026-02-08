@@ -8,9 +8,10 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).parent.parent))
 
-from utils.content_manager import restore_user_session
+from utils.content_manager import restore_user_session, get_topic
 from utils.database import get_topics, get_content_item
 from utils.styles import get_common_styles
+from utils.weekly_content import WEEKLY_CONTENT
 
 st.set_page_config(
     page_title="תוכן רפואי",
@@ -31,6 +32,7 @@ if not st.session_state.get('logged_in', False):
     st.stop()
 
 st.title("📖 תוכן רפואי")
+
 # בדיקה אם הגענו מהתוכן השבועי
 if st.session_state.get('view_weekly_content') and st.session_state.get('selected_topic_id'):
     weekly_topic_id = st.session_state['selected_topic_id']
@@ -48,8 +50,60 @@ if st.session_state.get('view_weekly_content') and st.session_state.get('selecte
     
     st.divider()
     
-    # טען את התוכן השבועי
-    full_topic = get_content_item(weekly_topic_id)
+    # ניסיון לטעון מ-DB, עם fallback ל-JSON
+    full_topic = None
+    try:
+        full_topic = get_content_item(weekly_topic_id)
+    except Exception as e:
+        print(f"Error loading from DB: {e}")
+    
+    # אם DB לא החזיר תוצאות, נסה למצוא את הנושא מ-JSON
+    if not full_topic:
+        # חיפוש ב-WEEKLY_CONTENT לפי topic_id
+        weekly_data = None
+        for week_num, week_content in WEEKLY_CONTENT.items():
+            if week_content.get('topic_id') == weekly_topic_id:
+                weekly_data = week_content
+                break
+        
+        # אם מצאנו, נטען מה-JSON
+        if weekly_data:
+            category = weekly_data.get('category')
+            json_file = weekly_data.get('json_file')
+            
+            if category and json_file:
+                # טעינה מ-JSON
+                full_topic = get_topic(category, json_file)
+                
+                # המרת מבנה JSON ישן למבנה חדש אם צריך
+                if full_topic and 'content' in full_topic and not 'sections' in full_topic:
+                    # המרת content ישן ל-sections חדש
+                    sections = []
+                    for idx, item in enumerate(full_topic.get('content', [])):
+                        section_type = item.get('type', 'text')
+                        section = {
+                            'title': item.get('title', item.get('name', '')),
+                            'section_type': section_type,
+                            'content': item.get('text', item.get('content', '')),
+                            'order_index': idx,
+                            'metadata': {}
+                        }
+                        
+                        # טיפול בסוגים מיוחדים
+                        if section_type == 'treatment' and 'sections' in item:
+                            # מיזוג של sub-sections
+                            content_parts = []
+                            for subsection in item.get('sections', []):
+                                if 'name' in subsection:
+                                    content_parts.append(f"### {subsection['name']}")
+                                if 'steps' in subsection:
+                                    for step in subsection['steps']:
+                                        content_parts.append(f"- {step}")
+                            section['content'] = '\n\n'.join(content_parts)
+                        
+                        sections.append(section)
+                    
+                    full_topic['sections'] = sections
     
     if full_topic:
         # Display topic header

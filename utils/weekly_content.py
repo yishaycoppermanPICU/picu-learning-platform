@@ -13,7 +13,8 @@ WEEKLY_CONTENT = {
     1: {
         "topic_id": "094309da-dbf5-498f-b41c-83d1d2aff23e",  # ספסיס ושוק ספטי
         "title": "ספסיס ושוק ספטי",
-        "category": "resuscitation",
+        "category": "infections",  # תוקן - הקובץ נמצא ב-infections
+        "json_file": "sepsis_protocol",  # שם הקובץ JSON
         "description": "למידה מעמיקה של פרוטוקול הזהב בטיפול בספסיס בילדים",
         "quiz_category": "resuscitation",
         "quiz_topic": "sepsis_protocol",
@@ -24,6 +25,7 @@ WEEKLY_CONTENT = {
         "topic_id": "96858c04-abc4-46d7-a14e-9530b3bbbda3",  # הלם/שוק היפוולמי
         "title": "הלם/שוק היפוולמי-המורגי",
         "category": "resuscitation",
+        "json_file": "hypovolemic_shock",  # שם הקובץ JSON
         "description": "זיהוי וטיפול בשוק היפובולמי-המורגי בילדים",
         "quiz_category": "resuscitation",
         "quiz_topic": "hypovolemic_shock",
@@ -34,6 +36,7 @@ WEEKLY_CONTENT = {
         "topic_id": "f7ec21b4-68f1-4a4e-987b-e80da1ca1c84",  # HLH
         "title": "HLH - המופגוציטיק לימפוהיסטיאוציטוזיס",
         "category": "hematology",
+        "json_file": "hlh_syndrome",  # שם הקובץ JSON
         "description": "המופגוציטיק לימפוהיסטיאוציטוזיס - אבחון וטיפול",
         "quiz_category": "hematology",
         "quiz_topic": "hlh_syndrome",
@@ -44,6 +47,7 @@ WEEKLY_CONTENT = {
         "topic_id": "c42fc8b6-af80-4900-b262-20268d3100b4",  # TBI - זה הנכון!
         "title": "TBI - Traumatic Brain Injury (טראומת ראש)",
         "category": "trauma",
+        "json_file": "tbi_management",  # שם הקובץ JSON
         "description": "ניהול טראומטי של פגיעות ראש בילדים",
         "quiz_category": "trauma",
         "quiz_topic": "tbi_management",
@@ -54,6 +58,7 @@ WEEKLY_CONTENT = {
         "topic_id": "95cf4af2-4f44-48d5-87e0-2029bf976d8d",  # TLS
         "title": "Tumor Lysis Syndrome - TLS",
         "category": "hematology",
+        "json_file": "tumor_lysis_syndrome",  # שם הקובץ JSON
         "description": "זיהוי מוקדם וטיפול בתסמונת תמוגת גידול",
         "quiz_category": "hematology",
         "quiz_topic": "tumor_lysis_syndrome",
@@ -64,6 +69,7 @@ WEEKLY_CONTENT = {
         "topic_id": "4080ae23-293a-4794-9a73-db3a03588d30",  # SCID
         "title": "SCID - חוסר חיסוני משולב חמור",
         "category": "immunology",
+        "json_file": "scid_management",  # שם הקובץ JSON
         "description": "חוסר חיסוני משולב חמור - טיפול מיידי",
         "quiz_category": "immunology",
         "quiz_topic": "scid_management",
@@ -74,6 +80,7 @@ WEEKLY_CONTENT = {
         "topic_id": "5ed35c74-4e2e-439f-98ca-44cdef50b360",  # HCT
         "title": "השתלת מח עצם - HCT",
         "category": "hematology",
+        "json_file": "hct_complications",  # שם הקובץ JSON
         "description": "סיבוכים וטיפול בהשתלת מח עצם",
         "quiz_category": "hematology",
         "quiz_topic": "hct_complications",
@@ -84,6 +91,7 @@ WEEKLY_CONTENT = {
         "topic_id": "74cd0d61-0b7a-480f-ad3b-a642c0348090",  # מתן מוצרי דם - ID מתוקן!
         "title": "מתן מוצרי דם",
         "category": "hematology",
+        "json_file": "blood_products_admin",  # שם הקובץ JSON
         "description": "פרוטוכולים למתן בטוח של מוצרי דם",
         "quiz_category": "hematology",
         "quiz_topic": "blood_products_admin",
