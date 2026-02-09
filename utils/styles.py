@@ -285,44 +285,50 @@ def get_common_styles():
         -webkit-font-feature-settings: 'liga';
     }
     
-    /* ================= תיקון אייקוני Expander - הסתרת הטקסט המקורי ================= */
+    /* ================= תיקון אייקוני Expander - הסתרה מוחלטת של כל התוכן המקורי ================= */
     
-    /* הסתרה טוטאלית של SVG */
+    /* הסתרה טוטאלית של SVG והאייקונים */
     [data-testid="stExpander"] svg,
-    [data-testid="stExpander"] svg * {
+    [data-testid="stExpander"] svg *,
+    [data-testid="stExpander"] span[class*="material"],
+    [data-testid="stExpander"] i[class*="material"] {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
         width: 0 !important;
         height: 0 !important;
+        font-size: 0 !important;
+        position: absolute !important;
+        left: -99999px !important;
     }
     
-    /* הסתרת כל הטקסט ב-summary באמצעות קליפינג */
+    /* הזזת כל הטקסט של summary מחוץ לתצוגה */
     [data-testid="stExpander"] summary,
     [data-testid="stExpander"] details > summary {
         position: relative !important;
-        color: transparent !important;
-        font-size: 0 !important;
-        line-height: 0 !important;
-        overflow: hidden !important;
-        display: flex !important;
-        align-items: center !important;
+        display: block !important;
         direction: rtl !important;
         padding: 0.75rem 1rem !important;
         cursor: pointer !important;
-        height: auto !important;
-        min-height: 2.5rem !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+        text-indent: -99999px !important;
     }
     
-    /* החזרת הטקסט של התוכן שלנו בלבד */
+    /* החזרת הטקסט שלנו בלבד - עם position absolute */
     [data-testid="stExpander"] summary > div:first-child,
     [data-testid="stExpander"] details > summary > div:first-child {
+        position: absolute !important;
+        right: 1rem !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
         color: var(--navy) !important;
         font-size: 1.05rem !important;
         line-height: 1.5 !important;
         font-weight: 600 !important;
-        display: block !important;
-        flex: 1 !important;
+        text-indent: 0 !important;
+        white-space: normal !important;
+        max-width: calc(100% - 2rem) !important;
     }
     
     h1 {
