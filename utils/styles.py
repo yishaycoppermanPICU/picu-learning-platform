@@ -285,13 +285,26 @@ def get_common_styles():
         -webkit-font-feature-settings: 'liga';
     }
     
-    /* ================= תיקון אייקוני Expander - הסתרת keyboard text + החזרת חיצים ================= */
+    /* ================= תיקון אייקוני Expander - הסתרה מוחלטת של כל התוכן המקורי ================= */
     
-    /* הסתרה של SVG והאייקונים המקוריים */
-    [data-testid="stExpander"] svg,
-    [data-testid="stExpander"] svg *,
-    [data-testid="stExpander"] span[class*="material"],
-    [data-testid="stExpander"] i[class*="material"] {
+    /* הסתרת כל התוכן של summary */
+    [data-testid="stExpander"] summary,
+    [data-testid="stExpander"] details > summary {
+        position: relative !important;
+        display: block !important;
+        direction: rtl !important;
+        padding: 0.75rem 1rem !important;
+        cursor: pointer !important;
+        font-size: 0 !important;
+        color: transparent !important;
+        line-height: 0 !important;
+    }
+    
+    /* הסתרת כל האלמנטים המקוריים */
+    [data-testid="stExpander"] summary *:not(div:first-child),
+    [data-testid="stExpander"] summary svg,
+    [data-testid="stExpander"] summary span,
+    [data-testid="stExpander"] summary i {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
@@ -300,25 +313,17 @@ def get_common_styles():
         font-size: 0 !important;
     }
     
-    /* כפיית פונט Heebo על summary להסתיר טקסט material icons */
-    [data-testid="stExpander"] summary,
-    [data-testid="stExpander"] details > summary {
-        position: relative !important;
-        display: block !important;
-        direction: rtl !important;
-        padding: 0.75rem 1rem !important;
-        cursor: pointer !important;
-        font-family: 'Heebo', sans-serif !important;
-    }
-    
-    /* סגנון לטקסט של ה-expander */
+    /* החזרת התצוגה רק ל-div הראשון */
     [data-testid="stExpander"] summary > div:first-child,
     [data-testid="stExpander"] details > summary > div:first-child {
+        display: block !important;
+        visibility: visible !important;
         color: var(--navy) !important;
         font-size: 1.05rem !important;
         line-height: 1.5 !important;
         font-weight: 600 !important;
         max-width: calc(100% - 2rem) !important;
+        opacity: 1 !important;
     }
     
     /* הוספת חיצים מותאמים אישית */
@@ -332,6 +337,9 @@ def get_common_styles():
         color: var(--teal) !important;
         font-family: 'Heebo', sans-serif !important;
         transition: transform 0.2s ease !important;
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
     
     [data-testid="stExpander"][open] summary::after {
