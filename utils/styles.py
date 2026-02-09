@@ -291,37 +291,28 @@ def get_common_styles():
     [data-testid="stExpander"] summary,
     [data-testid="stExpander"] details > summary {
         position: relative !important;
-        display: flex !important;
-        align-items: center !important;
+        display: block !important;
         direction: rtl !important;
         padding: 0.75rem 1rem !important;
         cursor: pointer !important;
     }
     
-    /* הסתרת האלמנטים המקוריים שיוצרים את keyboard */
-    [data-testid="stExpander"] summary svg,
-    [data-testid="stExpander"] summary span:not([data-testid="stExpander"] summary > div span),
-    [data-testid="stExpander"] summary i {
+    /* הסתרת רק SVG ו-material icons */
+    [data-testid="stExpander"] summary svg {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
         width: 0 !important;
         height: 0 !important;
-        font-size: 0 !important;
     }
     
     /* הצגת הכותרת */
-    [data-testid="stExpander"] summary > div:first-child,
-    [data-testid="stExpander"] details > summary > div:first-child {
-        display: block !important;
-        visibility: visible !important;
+    [data-testid="stExpander"] summary > div,
+    [data-testid="stExpander"] details > summary > div {
         color: var(--navy) !important;
         font-size: 1.05rem !important;
         line-height: 1.5 !important;
         font-weight: 600 !important;
-        max-width: calc(100% - 2rem) !important;
-        opacity: 1 !important;
-        flex: 1 !important;
     }
     
     /* הוספת חיצים מותאמים אישית */
