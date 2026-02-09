@@ -285,9 +285,9 @@ def get_common_styles():
         -webkit-font-feature-settings: 'liga';
     }
     
-    /* ================= תיקון אייקוני Expander - הסתרת keyboard text בלבד ================= */
+    /* ================= תיקון אייקוני Expander - הסתרת keyboard text ================= */
     
-    /* הגדרות בסיס ל-summary */
+    /* גזירת התוכן לגובה מוגבל והסתרת overflow */
     [data-testid="stExpander"] summary,
     [data-testid="stExpander"] details > summary {
         position: relative !important;
@@ -295,24 +295,29 @@ def get_common_styles():
         direction: rtl !important;
         padding: 0.75rem 1rem !important;
         cursor: pointer !important;
+        height: 3rem !important;
+        overflow: hidden !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
     }
     
-    /* הסתרת רק SVG ו-material icons */
+    /* הסתרת SVG */
     [data-testid="stExpander"] summary svg {
         display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-        width: 0 !important;
-        height: 0 !important;
     }
     
-    /* הצגת הכותרת */
+    /* מיקום מוחלט לכותרת */
     [data-testid="stExpander"] summary > div,
     [data-testid="stExpander"] details > summary > div {
+        position: absolute !important;
+        right: 1rem !important;
+        top: 0.75rem !important;
         color: var(--navy) !important;
         font-size: 1.05rem !important;
         line-height: 1.5 !important;
         font-weight: 600 !important;
+        max-width: calc(100% - 3rem) !important;
+        z-index: 10 !important;
     }
     
     /* הוספת חיצים מותאמים אישית */
