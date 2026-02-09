@@ -285,9 +285,9 @@ def get_common_styles():
         -webkit-font-feature-settings: 'liga';
     }
     
-    /* ================= תיקון אייקוני Expander - הסתרה מוחלטת של כל התוכן המקורי ================= */
+    /* ================= תיקון אייקוני Expander - הסתרת keyboard text + החזרת חיצים ================= */
     
-    /* הסתרה טוטאלית של SVG והאייקונים */
+    /* הסתרה של SVG והאייקונים המקוריים */
     [data-testid="stExpander"] svg,
     [data-testid="stExpander"] svg *,
     [data-testid="stExpander"] span[class*="material"],
@@ -298,11 +298,9 @@ def get_common_styles():
         width: 0 !important;
         height: 0 !important;
         font-size: 0 !important;
-        position: absolute !important;
-        left: -99999px !important;
     }
     
-    /* הזזת כל הטקסט של summary מחוץ לתצוגה */
+    /* כפיית פונט Heebo על summary להסתיר טקסט material icons */
     [data-testid="stExpander"] summary,
     [data-testid="stExpander"] details > summary {
         position: relative !important;
@@ -310,25 +308,35 @@ def get_common_styles():
         direction: rtl !important;
         padding: 0.75rem 1rem !important;
         cursor: pointer !important;
-        overflow: hidden !important;
-        white-space: nowrap !important;
-        text-indent: -99999px !important;
+        font-family: 'Heebo', sans-serif !important;
     }
     
-    /* החזרת הטקסט שלנו בלבד - עם position absolute */
+    /* סגנון לטקסט של ה-expander */
     [data-testid="stExpander"] summary > div:first-child,
     [data-testid="stExpander"] details > summary > div:first-child {
-        position: absolute !important;
-        right: 1rem !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
         color: var(--navy) !important;
         font-size: 1.05rem !important;
         line-height: 1.5 !important;
         font-weight: 600 !important;
-        text-indent: 0 !important;
-        white-space: normal !important;
         max-width: calc(100% - 2rem) !important;
+    }
+    
+    /* הוספת חיצים מותאמים אישית */
+    [data-testid="stExpander"] summary::after {
+        content: "◀" !important;
+        position: absolute !important;
+        left: 1rem !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        font-size: 1.2rem !important;
+        color: var(--teal) !important;
+        font-family: 'Heebo', sans-serif !important;
+        transition: transform 0.2s ease !important;
+    }
+    
+    [data-testid="stExpander"][open] summary::after {
+        content: "▼" !important;
+        transform: translateY(-50%) !important;
     }
     
     h1 {
