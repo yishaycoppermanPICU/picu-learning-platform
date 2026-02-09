@@ -285,25 +285,22 @@ def get_common_styles():
         -webkit-font-feature-settings: 'liga';
     }
     
-    /* ================= תיקון אייקוני Expander - הסתרה מוחלטת של כל התוכן המקורי ================= */
+    /* ================= תיקון אייקוני Expander - הסתרת keyboard text בלבד ================= */
     
-    /* הסתרת כל התוכן של summary */
+    /* הגדרות בסיס ל-summary */
     [data-testid="stExpander"] summary,
     [data-testid="stExpander"] details > summary {
         position: relative !important;
-        display: block !important;
+        display: flex !important;
+        align-items: center !important;
         direction: rtl !important;
         padding: 0.75rem 1rem !important;
         cursor: pointer !important;
-        font-size: 0 !important;
-        color: transparent !important;
-        line-height: 0 !important;
     }
     
-    /* הסתרת כל האלמנטים המקוריים */
-    [data-testid="stExpander"] summary *:not(div:first-child),
+    /* הסתרת האלמנטים המקוריים שיוצרים את keyboard */
     [data-testid="stExpander"] summary svg,
-    [data-testid="stExpander"] summary span,
+    [data-testid="stExpander"] summary span:not([data-testid="stExpander"] summary > div span),
     [data-testid="stExpander"] summary i {
         display: none !important;
         visibility: hidden !important;
@@ -313,7 +310,7 @@ def get_common_styles():
         font-size: 0 !important;
     }
     
-    /* החזרת התצוגה רק ל-div הראשון */
+    /* הצגת הכותרת */
     [data-testid="stExpander"] summary > div:first-child,
     [data-testid="stExpander"] details > summary > div:first-child {
         display: block !important;
@@ -324,6 +321,7 @@ def get_common_styles():
         font-weight: 600 !important;
         max-width: calc(100% - 2rem) !important;
         opacity: 1 !important;
+        flex: 1 !important;
     }
     
     /* הוספת חיצים מותאמים אישית */
