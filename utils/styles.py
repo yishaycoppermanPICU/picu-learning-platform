@@ -285,7 +285,7 @@ def get_common_styles():
         -webkit-font-feature-settings: 'liga';
     }
     
-    /* ================= תיקון אייקוני Expander - חצים במקום טקסט ================= */
+    /* ================= תיקון אייקוני Expander - הסתרת הטקסט המקורי ================= */
     
     /* הסתרה טוטאלית של SVG */
     [data-testid="stExpander"] svg,
@@ -323,32 +323,6 @@ def get_common_styles():
         font-weight: 600 !important;
         display: block !important;
         flex: 1 !important;
-    }
-    
-    /* החץ שלנו - משמאל */
-    [data-testid="stExpander"] summary::after,
-    [data-testid="stExpander"] details > summary::after {
-        content: "◀" !important;
-        font-family: Arial, Helvetica, sans-serif !important;
-        font-size: 1.4rem !important;
-        font-weight: 700 !important;
-        color: var(--teal) !important;
-        margin-right: 0.75rem !important;
-        margin-left: 0 !important;
-        line-height: 1 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 1.5rem !important;
-        height: 1.5rem !important;
-        transition: transform 0.2s ease !important;
-    }
-    
-    /* החץ כשפתוח */
-    [data-testid="stExpander"] details[open] > summary::after,
-    [data-testid="stExpander"][open] summary::after {
-        content: "▼" !important;
-        transform: none !important;
     }
     
     h1 {
